@@ -80,6 +80,23 @@ class ChatMessage(BaseModel):
                     parameters: Optional[Dict[str, Any]] = None
 
 
+                class PredictionRequest(BaseModel):
+                    model_id: str
+                    symbol: str
+                    use_cache: Optional[bool] = True
+
+
+                class BulkPredictionRequest(BaseModel):
+                    model_id: str
+                    symbols: List[str]
+
+
+                class EnsemblePredictionRequest(BaseModel):
+                    model_ids: List[str]
+                    symbol: str
+                    weights: Optional[Dict[str, float]] = None
+
+
                     # WebSocket manager
                     class ConnectionManager:
                         def __init__(self):
@@ -289,31 +306,175 @@ async def train_model(
     components: dict = Depends(get_components),
     current_user: User = Depends(get_current_user),
 ):
-    """Direct model training endpoint"""
+    """Train a model using real historical data"""
     try:
-        result = components["executor"].execute_ml_model_training(
-            request.model_id, symbol=request.symbol, data_source=request.data_source, **(request.parameters or {})
+        # Import real training components
+        from core.data_pipeline import DataPipeline
+        from core.model_trainer import ModelTrainer
+        from models.momentum_breakout_enhanced import MomentumBreakoutEnhanced
+        from models.mean_reversion_enhanced import MeanReversionEnhanced
+        from models.volatility_regime_enhanced import VolatilityRegimeEnhanced
+        
+        # Map model IDs to classes
+        model_classes = {
+            'momentum_breakout': MomentumBreakoutEnhanced,
+            'mean_reversion': MeanReversionEnhanced,
+            'volatility_regime': VolatilityRegimeEnhanced
+        }
+        
+        if request.model_id not in model_classes:
+            # Fallback to legacy executor
+            result = components["executor"].execute_ml_model_training(
+                request.model_id, symbol=request.symbol, data_source=request.data_source, **(request.parameters or {})
+            )
+            return result
+        
+        # Use real training pipeline
+        pipeline = DataPipeline()
+        trainer = ModelTrainer()
+        
+        # Fetch historical data
+        lookback_days = request.parameters.get('lookback_days', 365)
+        historical_data = pipeline.fetch_historical_data(
+            request.symbol, 
+            days=lookback_days
         )
-        return result
+        
+        if historical_data is None or len(historical_data) < 100:
+            raise HTTPException(status_code=404, detail=f"Insufficient data for {request.symbol}")
+        
+        # Train model
+        metrics = trainer.train_model(
+            model_id=f"{request.model_id}_{request.symbol}_{datetime.now().strftime('%Y%m%d')}",
+            model_class=model_classes[request.model_id],
+            data=historical_data,
+            validation_split=request.parameters.get('validation_split', 0.2),
+            params=request.parameters
+        )
+        
+        return {
+            "status": "success",
+            "model_id": request.model_id,
+            "symbol": request.symbol,
+            "metrics": metrics,
+            "training_completed": datetime.now().isoformat()
+        }
+        
     except Exception as e:
+        logger.error(f"Training failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/api/models")
 async def get_models(components: dict = Depends(get_components)):
     """Get available models"""
+    # Include real trained models
+    from core.model_trainer import ModelTrainer
+    trainer = ModelTrainer()
+    trained_models = trainer.list_models()
+    
+    # Legacy models from executor
     executor = components["executor"]
     ml_models = [name.replace("train_", "") for name in list(executor.registered_actions.keys()) if name.startswith("train_")]
     financial_models = [
         name.replace("calculate_", "") for name in list(executor.registered_actions.keys()) if name.startswith("calculate_")
     ]
+    
+    # Real model types
+    real_models = ['momentum_breakout', 'mean_reversion', 'volatility_regime']
 
     return {
         "ml_models": ml_models,
         "financial_models": financial_models,
+        "real_models": real_models,
+        "trained_models": trained_models,
         "special_actions": ["momentum_screening", "regime_detection", "portfolio_optimization"],
-        "total": len(executor.registered_actions),
+        "total": len(executor.registered_actions) + len(trained_models),
     }
+
+
+@app.post("/api/models/predict")
+async def predict(
+    request: PredictionRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """Generate prediction using a trained model"""
+    try:
+        from core.prediction_service import PredictionService
+        
+        service = PredictionService()
+        result = service.get_prediction(
+            request.model_id,
+            request.symbol,
+            use_cache=request.use_cache if hasattr(request, 'use_cache') else True
+        )
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Prediction failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/models/predict/bulk")
+async def predict_bulk(
+    request: BulkPredictionRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """Generate predictions for multiple symbols"""
+    try:
+        from core.prediction_service import PredictionService
+        
+        service = PredictionService()
+        results = service.get_bulk_predictions(
+            request.model_id,
+            request.symbols
+        )
+        
+        return {"predictions": results}
+        
+    except Exception as e:
+        logger.error(f"Bulk prediction failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/models/predict/ensemble")
+async def predict_ensemble(
+    request: EnsemblePredictionRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """Generate ensemble prediction using multiple models"""
+    try:
+        from core.prediction_service import PredictionService
+        
+        service = PredictionService()
+        result = service.get_ensemble_prediction(
+            request.model_ids,
+            request.symbol,
+            weights=request.weights if hasattr(request, 'weights') else None
+        )
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Ensemble prediction failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/models/predictions/status")
+async def get_prediction_status(
+    current_user: User = Depends(get_current_user),
+):
+    """Get status of prediction service and loaded models"""
+    try:
+        from core.prediction_service import PredictionService
+        
+        service = PredictionService()
+        return service.get_model_status()
+        
+    except Exception as e:
+        logger.error(f"Status check failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.post("/api/autonomous/start")
