@@ -7,21 +7,26 @@
 
 ## ⚠️ CRITICAL WARNING
 
-This system implements **IMMUTABLE COMPLIANCE** with different rules for AI agents and humans:
+This system implements **CONFIGURABLE COMPLIANCE** with different rules for AI agents and humans:
 
 ### For AI Agents (Cursor, GPT, Claude, etc.):
 - ❌ **NO WARNINGS** - Immediate consequences
 - ❌ **NO EXEMPTIONS** - Rules strictly enforced
-- ❌ **NO BYPASSES** - Cannot be disabled
+- ⚡ **REAL ACTIONS** - Functions disabled, processes killed
 - ❌ **PERMANENT BANS** - For severe violations
 
 ### For Human Developers:
 - ⚠️ **WARNINGS FIRST** - Chance to fix issues
 - 📝 **HELPFUL GUIDANCE** - Tips on compliance
 - 🛠️ **DEVELOPMENT MODE** - Can debug and test
-- 🚨 **EXTREME ONLY** - Consequences for malicious attempts only
+- 🔓 **OVERRIDE AVAILABLE** - Can disable for development
 
-**READ THE [COMPLIANCE DOCUMENTATION](IMMUTABLE_COMPLIANCE_V2.md) BEFORE PROCEEDING**
+### Override & Configuration:
+- 🔑 **Override Key**: `MLTRAINER_OVERRIDE_KEY=authorized_override_2024`
+- 🛠️ **Dev Mode**: `MLTRAINER_DEV_MODE=true`
+- 🚫 **Disable**: `MLTRAINER_ENFORCEMENT=false`
+
+**READ THE [CONSEQUENCES GUIDE](CONSEQUENCES_AND_OVERRIDE.md) BEFORE PROCEEDING**
 
 ## 🚀 Overview
 

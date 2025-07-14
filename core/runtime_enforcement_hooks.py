@@ -75,13 +75,18 @@ class RuntimeEnforcementHooks:
     
     def _secure_import(self, name, globals=None, locals=None, fromlist=(), level=0):
         """Validate all imports at runtime"""
+        # Skip validation if enforcement is disabled
+        if not IMMUTABLE_RULES.get_rule('enforcement_enabled'):
+            return self.original_import(name, globals, locals, fromlist, level)
+            
         # Check for prohibited patterns
         if IMMUTABLE_RULES.is_pattern_prohibited(name):
             self._report_violation(
                 "synthetic_data",
                 f"Attempted to import prohibited module: {name}"
             )
-            raise ImportError(f"Import of '{name}' is prohibited by compliance rules")
+            if IMMUTABLE_RULES.get_rule('enforcement.runtime_hooks'):
+                raise ImportError(f"Import of '{name}' is prohibited by compliance rules")
         
         # Check if module exists
         try:
