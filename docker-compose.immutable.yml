@@ -1,0 +1,117 @@
+version: '3.8'
+
+services:
+  # Main compliance validator service
+  compliance-validator:
+    build:
+      context: .
+      dockerfile: Dockerfile.immutable
+    image: mltrainer3/compliance:latest
+    container_name: mltrainer3-compliance
+    volumes:
+      - ./core:/app/core:ro
+      - ./scripts:/app/scripts:ro
+      - ./logs:/app/logs
+      - compliance-db:/var/lib/mltrainer
+    environment:
+      - PYTHONPATH=/app
+      - MLTRAINER_ENFORCEMENT_LEVEL=STRICT
+      - MLTRAINER_DOCKER_VALIDATION=true
+    healthcheck:
+      test: ["CMD", "python", "-c", "from core.immutable_rules_kernel import IMMUTABLE_RULES; assert IMMUTABLE_RULES.verify_integrity()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - mltrainer-net
+    restart: unless-stopped
+
+  # Violation monitor service
+  violation-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile.immutable
+    image: mltrainer3/compliance:latest
+    container_name: mltrainer3-monitor
+    command: ["python", "-c", "
+import time
+from core.consequence_enforcement_system import CONSEQUENCE_ENFORCER
+while True:
+    report = CONSEQUENCE_ENFORCER.get_violation_report()
+    print(f'Total Violations: {report[\"total_violations\"]}')
+    print(f'Banned Functions: {len(report[\"banned_functions\"])}')
+    print(f'Banned Users: {len(report[\"banned_users\"])}')
+    time.sleep(60)
+"]
+    volumes:
+      - ./core:/app/core:ro
+      - ./logs:/app/logs
+      - compliance-db:/var/lib/mltrainer
+    environment:
+      - PYTHONPATH=/app
+    networks:
+      - mltrainer-net
+    depends_on:
+      - compliance-validator
+    restart: unless-stopped
+
+  # Test runner for CI/CD
+  compliance-tester:
+    build:
+      context: .
+      dockerfile: Dockerfile.immutable
+    image: mltrainer3/compliance:latest
+    container_name: mltrainer3-tester
+    command: ["sh", "-c", "
+      python test_immutable_kernel.py &&
+      python scripts/activate_immutable_compliance.py --test-mode &&
+      if [ -f ./test_compliance_violations.py ]; then python test_compliance_violations.py; fi &&
+      if [ -f ./verify_compliance.py ]; then python verify_compliance.py; fi
+    "]
+    volumes:
+      - ./core:/app/core:ro
+      - ./scripts:/app/scripts:ro
+      - ./test_immutable_kernel.py:/app/test_immutable_kernel.py:ro
+      - test-logs:/app/logs
+    environment:
+      - PYTHONPATH=/app
+      - CI=true
+    networks:
+      - mltrainer-net
+    profiles:
+      - test
+
+  # Development environment with compliance
+  dev-environment:
+    build:
+      context: .
+      dockerfile: Dockerfile.immutable
+    image: mltrainer3/compliance:latest
+    container_name: mltrainer3-dev
+    command: ["bash"]
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+      - dev-compliance-db:/var/lib/mltrainer
+    environment:
+      - PYTHONPATH=/app
+      - MLTRAINER_ENFORCEMENT_LEVEL=STRICT
+      - DEVELOPMENT=true
+    networks:
+      - mltrainer-net
+    profiles:
+      - dev
+
+volumes:
+  compliance-db:
+    name: mltrainer3-compliance-db
+  test-logs:
+    name: mltrainer3-test-logs
+  dev-compliance-db:
+    name: mltrainer3-dev-compliance-db
+
+networks:
+  mltrainer-net:
+    name: mltrainer3-network
+    driver: bridge

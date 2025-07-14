@@ -1,0 +1,56 @@
+# mlTrainer3 Immutable Compliance System
+# Secure, isolated environment for validation
+
+FROM python:3.10-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libc6-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user for security
+RUN useradd -m -s /bin/bash validator && \
+    mkdir -p /var/log/mltrainer && \
+    mkdir -p /var/lib/mltrainer && \
+    mkdir -p /etc/mltrainer && \
+    chown -R validator:validator /var/log/mltrainer /var/lib/mltrainer /etc/mltrainer
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements first for better caching
+COPY requirements.txt requirements-immutable.txt ./
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r requirements-immutable.txt
+
+# Copy core compliance components
+COPY core/immutable_rules_kernel.py core/
+COPY core/runtime_enforcement_hooks.py core/
+COPY core/mandatory_execution_validator.py core/
+COPY core/consequence_enforcement_system.py core/
+COPY core/__init__.py core/
+
+# Copy scripts
+COPY scripts/activate_immutable_compliance.py scripts/
+
+# Copy test files
+COPY test_immutable_kernel.py ./
+
+# Create necessary directories
+RUN mkdir -p logs && chown validator:validator logs
+
+# Switch to non-root user
+USER validator
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV MLTRAINER_ENFORCEMENT_LEVEL=STRICT
+ENV MLTRAINER_DOCKER_VALIDATION=true
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "from core.immutable_rules_kernel import IMMUTABLE_RULES; assert IMMUTABLE_RULES.verify_integrity()"
+
+# Default command - run compliance verification
+CMD ["python", "test_immutable_kernel.py"]

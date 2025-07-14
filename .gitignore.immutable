@@ -1,0 +1,114 @@
+# mlTrainer3 Immutable Compliance System
+# Git ignore file
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+mltrainer3-venv/
+/opt/mltrainer3-venv/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.spyderproject
+.spyproject
+.ropeproject
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs and databases
+*.log
+/logs/
+/var/log/mltrainer/
+*.db
+*.sqlite
+*.sqlite3
+violations.db
+/var/lib/mltrainer/
+
+# Security and compliance
+security-report.json
+/etc/mltrainer/PERMANENTLY_BANNED
+/var/lib/mltrainer/lockouts/
+banned
+SYSTEM_LOCKOUT
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+.cache/
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Certificates and keys
+*.pem
+*.key
+*.crt
+*.cert
+
+# Test outputs
+test_report_*.json
+compliance_violations_*.log
+.coverage.*
+
+# Generated scripts
+verify_compliance.py
+test_compliance_violations.py
+mltrainer_compliance_startup.py
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+# Backup files
+*.backup
+*.old
+
+# OS generated
+Desktop.ini
+$RECYCLE.BIN/
+
+# Compliance violation evidence
+/tmp/mltrainer/
+violations_*.json
+
+# Never ignore these critical files
+!core/immutable_rules_kernel.py
+!core/runtime_enforcement_hooks.py
+!core/mandatory_execution_validator.py
+!core/consequence_enforcement_system.py
+!IMMUTABLE_COMPLIANCE_V2.md

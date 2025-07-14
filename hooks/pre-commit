@@ -1,0 +1,112 @@
+#!/bin/bash
+# mlTrainer3 Pre-commit Hook - Immutable Compliance Check
+# This hook runs compliance checks before allowing commits
+
+echo "🔒 mlTrainer3 Pre-commit Compliance Check"
+echo "========================================"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+# Check if compliance system is active
+if [ -f "core/immutable_rules_kernel.py" ]; then
+    echo "Checking immutable compliance rules..."
+else
+    echo -e "${RED}❌ Compliance system not found!${NC}"
+    exit 1
+fi
+
+# Function to check for prohibited patterns
+check_prohibited_patterns() {
+    local file=$1
+    local violations=0
+    
+    # Check for fake method calls
+    if grep -q "get_volatility" "$file" 2>/dev/null; then
+        echo -e "${RED}❌ Found prohibited pattern 'get_volatility' in $file${NC}"
+        ((violations++))
+    fi
+    
+    # Check for random data generation
+    if grep -q "np\.random\|random\.random\|random\.randint" "$file" 2>/dev/null; then
+        echo -e "${RED}❌ Found prohibited random generation in $file${NC}"
+        ((violations++))
+    fi
+    
+    # Check for mock/fake patterns
+    if grep -q "mock_\|fake_\|dummy_\|test_data\|placeholder" "$file" 2>/dev/null; then
+        echo -e "${RED}❌ Found prohibited mock pattern in $file${NC}"
+        ((violations++))
+    fi
+    
+    # Check for deceptive imports
+    if grep -q "from ml_engine_real import get_market_data" "$file" 2>/dev/null; then
+        echo -e "${RED}❌ Found deceptive import in $file${NC}"
+        ((violations++))
+    fi
+    
+    return $violations
+}
+
+# Get list of staged Python files
+staged_files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+
+if [ -z "$staged_files" ]; then
+    echo "No Python files to check"
+    exit 0
+fi
+
+# Check each staged file
+total_violations=0
+for file in $staged_files; do
+    if [ -f "$file" ]; then
+        check_prohibited_patterns "$file"
+        total_violations=$((total_violations + $?))
+    fi
+done
+
+# Run Python compliance check if available
+if command -v python3 &> /dev/null && [ -f "test_immutable_kernel.py" ]; then
+    echo ""
+    echo "Running kernel integrity check..."
+    if python3 -c "from core.immutable_rules_kernel import IMMUTABLE_RULES; assert IMMUTABLE_RULES.verify_integrity()" 2>/dev/null; then
+        echo -e "${GREEN}✅ Kernel integrity verified${NC}"
+    else
+        echo -e "${YELLOW}⚠️  Could not verify kernel integrity${NC}"
+    fi
+fi
+
+# Check for large files
+echo ""
+echo "Checking file sizes..."
+for file in $staged_files; do
+    if [ -f "$file" ]; then
+        size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null)
+        if [ "$size" -gt 1048576 ]; then  # 1MB
+            echo -e "${YELLOW}⚠️  Large file: $file ($(($size / 1024 / 1024))MB)${NC}"
+        fi
+    fi
+done
+
+# Final verdict
+echo ""
+if [ $total_violations -gt 0 ]; then
+    echo -e "${RED}❌ COMMIT BLOCKED: Found $total_violations compliance violations${NC}"
+    echo ""
+    echo "To fix:"
+    echo "1. Remove all prohibited patterns"
+    echo "2. Use real data sources instead of mock data"
+    echo "3. Ensure all imports and methods exist"
+    echo "4. Run: python test_immutable_kernel.py"
+    echo ""
+    echo "For help, see: IMMUTABLE_COMPLIANCE_V2.md"
+    exit 1
+else
+    echo -e "${GREEN}✅ All compliance checks passed${NC}"
+    echo ""
+    echo "Remember: Once pushed, violations have real consequences!"
+    exit 0
+fi

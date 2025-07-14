@@ -1,0 +1,31 @@
+# Immutable Compliance System Requirements
+# For mlTrainer3 - Unhackable Compliance
+
+# Core Python dependencies
+psutil>=5.9.0
+docker>=6.0.0
+cryptography>=41.0.0
+
+# Database
+sqlite3  # Built-in, no install needed
+
+# System monitoring
+watchdog>=3.0.0
+
+# Code analysis
+ast  # Built-in
+dis  # Built-in
+
+# Resource management
+resource  # Built-in
+
+# Additional security
+pycryptodome>=3.18.0
+
+# Testing (optional)
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Note: Some features require system-level packages:
+# - Linux: libc6-dev (for memory protection)
+# - Docker: docker.io (for isolated execution)
