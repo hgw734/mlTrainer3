@@ -1,0 +1,462 @@
+{
+  "timestamp": "2025-07-09T23:02:38.177140",
+  "components": {
+    "Environment": {
+      "check_ANTHROPIC_API_KEY": {
+        "success": false,
+        "message": "ANTHROPIC_API_KEY is not set",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.177250"
+      },
+      "check_POLYGON_API_KEY": {
+        "success": false,
+        "message": "POLYGON_API_KEY is not set",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.177354"
+      },
+      "check_FRED_API_KEY": {
+        "success": false,
+        "message": "FRED_API_KEY is not set",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.177421"
+      },
+      "check_DATABASE_URL": {
+        "success": true,
+        "message": "DATABASE_URL not set (using defaults)",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.177475"
+      },
+      "check_REDIS_URL": {
+        "success": true,
+        "message": "REDIS_URL not set (using defaults)",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.177515"
+      },
+      "check_JWT_SECRET_KEY": {
+        "success": true,
+        "message": "JWT_SECRET_KEY not set (using defaults)",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.177561"
+      }
+    },
+    "Imports": {
+      "Core_get_unified_executor": {
+        "success": false,
+        "message": "Import failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.234520"
+      },
+      "Core_get_enhanced_background_manager": {
+        "success": false,
+        "message": "Import failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.240507"
+      },
+      "Core_get_memory_manager": {
+        "success": false,
+        "message": "Import failed",
+        "error": "No module named 'core.enhanced_memory'",
+        "timestamp": "2025-07-09T23:02:38.240747"
+      },
+      "Core_get_autonomous_loop": {
+        "success": false,
+        "message": "Import failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.244754"
+      },
+      "Core_get_async_execution_engine": {
+        "success": true,
+        "message": "Import successful",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.262642"
+      },
+      "Core_get_dynamic_action_generator": {
+        "success": true,
+        "message": "Import successful",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.264723"
+      },
+      "Core_get_trial_feedback_manager": {
+        "success": true,
+        "message": "Import successful",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.270535"
+      },
+      "Backend_get_database_manager": {
+        "success": true,
+        "message": "Import successful",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.280649"
+      },
+      "Backend_get_auth_manager": {
+        "success": false,
+        "message": "Import failed",
+        "error": "No module named 'jwt'",
+        "timestamp": "2025-07-09T23:02:38.283512"
+      },
+      "Backend_get_compliance_gateway": {
+        "success": false,
+        "message": "Import failed",
+        "error": "cannot import name 'get_compliance_gateway' from 'backend.compliance_engine' (/workspace/backend/compliance_engine.py)",
+        "timestamp": "2025-07-09T23:02:38.284588"
+      },
+      "Backend_get_metrics_collector": {
+        "success": false,
+        "message": "Import failed",
+        "error": "No module named 'prometheus_client'",
+        "timestamp": "2025-07-09T23:02:38.289529"
+      },
+      "Models_get_ml_model_manager": {
+        "success": false,
+        "message": "Import failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.290075"
+      },
+      "Models_get_financial_model_manager": {
+        "success": false,
+        "message": "Import failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.290599"
+      },
+      "Integration_get_model_integration": {
+        "success": false,
+        "message": "Import failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.291057"
+      },
+      "Config_MODEL_REGISTRY": {
+        "success": true,
+        "message": "Import successful",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.303256"
+      },
+      "Utils_get_unified_memory": {
+        "success": true,
+        "message": "Import successful",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.306032"
+      },
+      "System_GoalSystem": {
+        "success": true,
+        "message": "Import successful",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.306389"
+      },
+      "AI_MLTrainerClaude": {
+        "success": true,
+        "message": "Import successful",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.524840"
+      }
+    },
+    "Configuration": {
+      "model_registry": {
+        "success": true,
+        "message": "Loaded 137 models",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.524971"
+      },
+      "load_config": {
+        "success": false,
+        "message": "Failed to load configuration",
+        "error": "'list' object has no attribute 'keys'",
+        "timestamp": "2025-07-09T23:02:38.525031"
+      }
+    },
+    "Database": {
+      "initialization": {
+        "success": true,
+        "message": "Database manager initialized",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.551889"
+      },
+      "create_trial": {
+        "success": true,
+        "message": "Trial created successfully",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.556549"
+      },
+      "get_trial": {
+        "success": true,
+        "message": "Trial retrieved: test_trial_001",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.556840"
+      },
+      "update_trial": {
+        "success": true,
+        "message": "Trial updated successfully",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.561187"
+      },
+      "save_chat_message": {
+        "success": true,
+        "message": "Chat message saved",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.565701"
+      },
+      "get_chat_history": {
+        "success": true,
+        "message": "Retrieved 1 messages",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.566366"
+      }
+    },
+    "Authentication": {
+      "system": {
+        "success": false,
+        "message": "Authentication tests failed",
+        "error": "No module named 'jwt'",
+        "timestamp": "2025-07-09T23:02:38.567271"
+      }
+    },
+    "AsyncExecution": {
+      "initialization": {
+        "success": true,
+        "message": "Engine initialized with 4 workers",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.569045"
+      },
+      "parallel_execution": {
+        "success": true,
+        "message": "Executed 0 tasks successfully",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.572550"
+      },
+      "task_status": {
+        "success": true,
+        "message": "Task status retrieved: failed",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.572602"
+      }
+    },
+    "ModelManagers": {
+      "managers": {
+        "success": false,
+        "message": "Model manager tests failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.573175"
+      }
+    },
+    "Compliance": {
+      "engine": {
+        "success": false,
+        "message": "Compliance tests failed",
+        "error": "cannot import name 'get_compliance_gateway' from 'backend.compliance_engine' (/workspace/backend/compliance_engine.py)",
+        "timestamp": "2025-07-09T23:02:38.573305"
+      }
+    },
+    "Memory": {
+      "system": {
+        "success": false,
+        "message": "Memory tests failed",
+        "error": "No module named 'core.enhanced_memory'",
+        "timestamp": "2025-07-09T23:02:38.573471"
+      }
+    },
+    "DynamicExecutor": {
+      "initialization": {
+        "success": true,
+        "message": "Action generator initialized",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.573573"
+      },
+      "generate_action": {
+        "success": true,
+        "message": "Action generated successfully",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.574572"
+      },
+      "list_actions": {
+        "success": true,
+        "message": "Generated 1 actions",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.574623"
+      }
+    },
+    "TrialFeedback": {
+      "initialization": {
+        "success": true,
+        "message": "Feedback manager initialized",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.574709"
+      },
+      "add_feedback": {
+        "success": true,
+        "message": "Feedback added successfully",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.575100"
+      },
+      "get_recommendations": {
+        "success": true,
+        "message": "Recommendations retrieved: 0 warnings",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.575153"
+      },
+      "learning_summary": {
+        "success": true,
+        "message": "Total trials tracked: 1",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.575206"
+      }
+    },
+    "Metrics": {
+      "system": {
+        "success": false,
+        "message": "Metrics tests failed",
+        "error": "No module named 'prometheus_client'",
+        "timestamp": "2025-07-09T23:02:38.575631"
+      }
+    },
+    "APIs": {
+      "anthropic_init": {
+        "success": true,
+        "message": "Claude client initialized",
+        "error": null,
+        "timestamp": "2025-07-09T23:02:38.598030"
+      },
+      "polygon_connection": {
+        "success": false,
+        "message": "Polygon connection failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.598373"
+      },
+      "fred_connection": {
+        "success": false,
+        "message": "FRED connection failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.629462"
+      }
+    },
+    "Integration": {
+      "end_to_end": {
+        "success": false,
+        "message": "Integration test failed",
+        "error": "No module named 'pandas'",
+        "timestamp": "2025-07-09T23:02:38.630659"
+      }
+    }
+  },
+  "integration_tests": {
+    "end_to_end": {
+      "success": false,
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.630653"
+    }
+  },
+  "errors": [
+    {
+      "component": "Imports",
+      "test": "Core_get_unified_executor",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.234617"
+    },
+    {
+      "component": "Imports",
+      "test": "Core_get_enhanced_background_manager",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.240585"
+    },
+    {
+      "component": "Imports",
+      "test": "Core_get_memory_manager",
+      "error": "No module named 'core.enhanced_memory'",
+      "timestamp": "2025-07-09T23:02:38.242138"
+    },
+    {
+      "component": "Imports",
+      "test": "Core_get_autonomous_loop",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.245253"
+    },
+    {
+      "component": "Imports",
+      "test": "Backend_get_auth_manager",
+      "error": "No module named 'jwt'",
+      "timestamp": "2025-07-09T23:02:38.283779"
+    },
+    {
+      "component": "Imports",
+      "test": "Backend_get_compliance_gateway",
+      "error": "cannot import name 'get_compliance_gateway' from 'backend.compliance_engine' (/workspace/backend/compliance_engine.py)",
+      "timestamp": "2025-07-09T23:02:38.284809"
+    },
+    {
+      "component": "Imports",
+      "test": "Backend_get_metrics_collector",
+      "error": "No module named 'prometheus_client'",
+      "timestamp": "2025-07-09T23:02:38.289586"
+    },
+    {
+      "component": "Imports",
+      "test": "Models_get_ml_model_manager",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.290128"
+    },
+    {
+      "component": "Imports",
+      "test": "Models_get_financial_model_manager",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.290652"
+    },
+    {
+      "component": "Imports",
+      "test": "Integration_get_model_integration",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.291109"
+    },
+    {
+      "component": "Configuration",
+      "test": "load_config",
+      "error": "'list' object has no attribute 'keys'",
+      "timestamp": "2025-07-09T23:02:38.525071"
+    },
+    {
+      "component": "Authentication",
+      "test": "system",
+      "error": "No module named 'jwt'",
+      "timestamp": "2025-07-09T23:02:38.567326"
+    },
+    {
+      "component": "ModelManagers",
+      "test": "managers",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.573225"
+    },
+    {
+      "component": "Compliance",
+      "test": "engine",
+      "error": "cannot import name 'get_compliance_gateway' from 'backend.compliance_engine' (/workspace/backend/compliance_engine.py)",
+      "timestamp": "2025-07-09T23:02:38.573355"
+    },
+    {
+      "component": "Memory",
+      "test": "system",
+      "error": "No module named 'core.enhanced_memory'",
+      "timestamp": "2025-07-09T23:02:38.573519"
+    },
+    {
+      "component": "Metrics",
+      "test": "system",
+      "error": "No module named 'prometheus_client'",
+      "timestamp": "2025-07-09T23:02:38.575679"
+    },
+    {
+      "component": "APIs",
+      "test": "polygon_connection",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.598421"
+    },
+    {
+      "component": "APIs",
+      "test": "fred_connection",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.629528"
+    },
+    {
+      "component": "Integration",
+      "test": "end_to_end",
+      "error": "No module named 'pandas'",
+      "timestamp": "2025-07-09T23:02:38.630712"
+    }
+  ]
+}

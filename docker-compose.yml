@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  mltrainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mltrainer:latest
+    container_name: mltrainer_app
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+      - ML_ENGINE_LOG_LEVEL=INFO
+      - DRIFT_PROTECTION_ENABLED=true
+      - AI_COACHING_ENABLED=true
+      - COMPLIANCE_MODE=INSTITUTIONAL
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+      - ./models:/app/models  # For model persistence
+    restart: unless-stopped
+    networks:
+      - mltrainer_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Redis for caching (uncomment if needed)
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: mltrainer_redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - mltrainer_network
+  #   restart: unless-stopped
+
+  # Optional: PostgreSQL for data storage (uncomment if needed)
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: mltrainer_db
+  #   environment:
+  #     - POSTGRES_USER=mltrainer
+  #     - POSTGRES_PASSWORD=mltrainer_secure_password
+  #     - POSTGRES_DB=mltrainer
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   networks:
+  #     - mltrainer_network
+  #   restart: unless-stopped
+
+networks:
+  mltrainer_network:
+    driver: bridge
+
+volumes:
+  # redis_data:
+  # postgres_data:

@@ -1,0 +1,31 @@
+{
+  "current_goal": {
+    "id": "2538ca022e21",
+    "text": "Test goal for system verification",
+    "components": {
+      "primary_objective": null,
+      "timeframes": [],
+      "metrics": [],
+      "constraints": [],
+      "strategies": []
+    },
+    "created_at": "2025-07-09T23:06:28.790693",
+    "created_by": "user",
+    "status": "active",
+    "validation": {
+      "valid": true,
+      "violations": [],
+      "warnings": [
+        "Consider specifying a timeframe"
+      ]
+    }
+  },
+  "components": {
+    "primary_objective": null,
+    "timeframes": [],
+    "metrics": [],
+    "constraints": [],
+    "strategies": []
+  },
+  "last_updated": "2025-07-09T23:06:28.790884"
+}

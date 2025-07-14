@@ -1,0 +1,118 @@
+🔍 mlTrainer Comprehensive Compliance Audit
+======================================================================
+Started at: 2025-07-12 22:22:55
+
+📁 Found 83 Python files to audit
+
+📦 Auditing Dependencies...
+
+⚙️  Auditing Configuration Files...
+
+======================================================================
+📊 AUDIT REPORT
+======================================================================
+
+📈 Statistics:
+   Files scanned: 83
+   Total lines: 36,958
+   Dependencies checked: 4
+
+🚨 CRITICAL VIOLATIONS (98)
+--------------------------------------------------
+
+SYNTHETIC_DATA:
+   ❌ ai_ml_coaching_interface.py:742 - Found prohibited pattern 'placeholder'
+   ❌ ai_ml_coaching_interface.py:783 - Found prohibited pattern 'placeholder'
+   ❌ ai_ml_coaching_interface.py:952 - Found prohibited pattern 'placeholder'
+   ❌ backend/metrics_exporter.py:230 - Found prohibited pattern 'placeholder'
+   ❌ backend/metrics_exporter.py:297 - Found prohibited pattern 'placeholder'
+   ❌ compliance_status_summary.py:62 - Found prohibited pattern 'placeholder'
+   ❌ compliance_status_summary.py:94 - Found prohibited pattern 'placeholder'
+   ❌ compliance_status_summary.py:179 - Found prohibited pattern 'placeholder'
+   ❌ core/governance_kernel.py:208 - Found prohibited pattern 'fake_'
+   ❌ core/governance_kernel.py:208 - Found prohibited pattern 'mock_'
+   ... and 64 more
+
+API_KEYS:
+   ❌ config/models_config.py:2363 - Potential hardcoded API key detected
+
+SECURITY:
+   ❌ config/compliance_enforcer.py - Uses potentially insecure pattern: __import__
+   ❌ core/dynamic_executor.py - Uses potentially insecure pattern: exec(
+   ❌ core/governance_enforcement.py - Uses potentially insecure pattern: __import__
+   ❌ core/governance_kernel.py - Uses potentially insecure pattern: eval(
+   ❌ core/governance_kernel.py - Uses potentially insecure pattern: exec(
+   ❌ core/governance_kernel.py - Uses potentially insecure pattern: __import__
+   ❌ core/trial_feedback_manager.py - Uses potentially insecure pattern: import pickle
+   ❌ drift_protection.py - Uses potentially insecure pattern: import pickle
+   ❌ hooks/validate_governance.py - Uses potentially insecure pattern: eval(
+   ❌ hooks/validate_governance.py - Uses potentially insecure pattern: exec(
+   ... and 13 more
+
+⚠️  OTHER VIOLATIONS
+--------------------------------------------------
+
+File Errors:
+   ⚠️  agent_governance.py: ComprehensiveAuditor._audit_dependencies() takes 1 positional argument but 4 were given
+   ⚠️  ai_ml_coaching_interface.py: ComprehensiveAuditor._audit_dependencies() takes 1 positional argument but 4 were given
+   ⚠️  backend/auth.py: ComprehensiveAuditor._audit_dependencies() takes 1 positional argument but 4 were given
+   ⚠️  backend/compliance_engine.py: ComprehensiveAuditor._audit_dependencies() takes 1 positional argument but 4 were given
+   ⚠️  backend/database.py: ComprehensiveAuditor._audit_dependencies() takes 1 positional argument but 4 were given
+   ... and 76 more
+
+Syntax Errors:
+   ⚠️  app.py: unindent does not match any outer indentation level (<unknown>, line 781)
+   ⚠️  config/models_config_backup.py: invalid syntax (<unknown>, line 3395)
+
+Error Handling:
+   ⚠️  backend/unified_api.py:93 - Empty except block (silently ignores errors)
+   ⚠️  drift_protection.py:356 - Empty except block (silently ignores errors)
+   ⚠️  drift_protection.py:413 - Empty except block (silently ignores errors)
+   ⚠️  drift_protection.py:504 - Empty except block (silently ignores errors)
+   ⚠️  drift_protection.py:523 - Empty except block (silently ignores errors)
+   ... and 21 more
+
+💡 WARNINGS (829)
+--------------------------------------------------
+
+Data Sources:
+   ℹ️  agent_governance.py - Data fetching detected without clear approved source
+   ℹ️  ai_ml_coaching_interface.py - Data fetching detected without clear approved source
+   ℹ️  config/__init__.py - Data fetching detected without clear approved source
+   ... and 3 more
+
+Error Handling:
+   ℹ️  backend/unified_api.py:93 - Bare except clause (catches all exceptions)
+   ℹ️  core/governance_kernel.py:109 - Bare except clause (catches all exceptions)
+   ℹ️  drift_protection.py:196 - Bare except clause (catches all exceptions)
+   ... and 26 more
+
+Code Quality:
+   ℹ️  backend/unified_api.py:376 - Using print() instead of logging
+   ℹ️  backend/unified_api.py:187 - Line too long (129 > 120 characters)
+   ℹ️  backend/unified_api.py:279 - Line too long (145 > 120 characters)
+   ... and 791 more
+
+✅ COMPLIANCE SUMMARY
+--------------------------------------------------
+   ❌ No Synthetic Data
+   ❌ No Hardcoded Keys
+   ❌ Secure Code
+   ❌ Proper Error Handling
+   ❌ Uses Approved Data Sources
+   ✅ Follows Governance
+
+📋 AGENT RULES COMPLIANCE
+--------------------------------------------------
+   ❌ Never use synthetic or fake data
+   ❌ Never hide information
+   ❌ Always provide complete truth
+   ❌ Data from approved sources only
+   ✅ No autonomous execution
+
+======================================================================
+❌ AUDIT FAILED - 98 critical violations must be fixed
+
+📄 Detailed report saved to: audit_report.json
+
+❌ Critical compliance violations found - please fix before deployment

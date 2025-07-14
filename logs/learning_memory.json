@@ -1,0 +1,13 @@
+{
+  "model_performance_cache": {
+    "random_forest": {
+      "latest_performance": 0.9899871523159341,
+      "timestamp": "2025-07-09 08:07:21.512613",
+      "context_signature": "30eed6a252b79923"
+    }
+  },
+  "context_mappings": {},
+  "hyperparameter_successes": {},
+  "correction_effectiveness": {},
+  "ensemble_histories": {}
+}

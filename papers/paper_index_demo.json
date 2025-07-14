@@ -1,0 +1,27 @@
+{
+  "papers": {
+    "demo_001": {
+      "id": "demo_001",
+      "source": "demo_paper.pdf",
+      "source_type": "pdf",
+      "processed_at": "2025-07-09T20:00:40.879793",
+      "extracted": {
+        "models_mentioned": [
+          "LSTM",
+          "Transformer"
+        ],
+        "metrics": {
+          "accuracy": [
+            "73.5",
+            "68.2"
+          ],
+          "sharpe": []
+        },
+        "conclusions": [
+          "The hybrid LSTM-Transformer approach significantly outperformed baseline models.\nThe LSTM excelled at capturing short-term momentum patterns while the Transformer\nbetter understood longer-term market regimes. Future work should explore\nreinforcement learning approaches."
+        ]
+      }
+    }
+  },
+  "last_updated": "2025-07-09T20:00:40.879818"
+}

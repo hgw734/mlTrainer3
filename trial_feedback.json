@@ -1,0 +1,81 @@
+{
+  "feedback_history": [
+    {
+      "trial_id": "test_trial_002",
+      "action_type": "test_action",
+      "parameters": {
+        "param1": 10
+      },
+      "outcome": "success",
+      "performance_metrics": {
+        "accuracy": 0.95
+      },
+      "execution_time": 1.5,
+      "error_details": null,
+      "context": {},
+      "timestamp": "2025-07-09T23:02:38.574765"
+    },
+    {
+      "trial_id": "test_fb_001",
+      "action_type": "test_action",
+      "parameters": {
+        "param": 1
+      },
+      "outcome": "success",
+      "performance_metrics": {
+        "accuracy": 0.95
+      },
+      "execution_time": 1.0,
+      "error_details": null,
+      "context": {},
+      "timestamp": "2025-07-09T23:06:28.786971"
+    }
+  ],
+  "action_performance": {
+    "test_action": {
+      "action_id": "test_action",
+      "success_rate": 1.0,
+      "avg_execution_time": 1.25,
+      "total_executions": 2,
+      "parameter_performance": {
+        "{\"param1\": 10}": 0.2,
+        "{\"param\": 1}": 0.2
+      },
+      "best_parameters": {
+        "param": 1
+      },
+      "recent_trend": "stable"
+    }
+  },
+  "parameter_optimization": {
+    "test_action": {
+      "parameter_ranges": {
+        "param1": {
+          "min": 10,
+          "max": 10,
+          "values": [
+            {
+              "value": 10,
+              "outcome": "success",
+              "performance": 0.0
+            }
+          ]
+        },
+        "param": {
+          "min": 1,
+          "max": 1,
+          "values": [
+            {
+              "value": 1,
+              "outcome": "success",
+              "performance": 0.0
+            }
+          ]
+        }
+      },
+      "optimal_values": {},
+      "sensitivity": {}
+    }
+  },
+  "learning_insights": []
+}

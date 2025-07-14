@@ -1,0 +1,26 @@
+# mlTrainer Chat System Requirements
+# Core functionality that's already built and tested
+
+# Chat Interface
+streamlit==1.28.0
+
+# For Claude integration (when API key is available)
+anthropic==0.7.0
+
+# PDF Processing (optional - system works without these)
+PyPDF2==3.0.0
+pdfplumber==0.9.0
+
+# URL content processing
+requests==2.31.0
+
+# Already included in Python
+# - json
+# - re
+# - pathlib
+# - datetime
+# - collections (deque)
+# - hashlib
+
+# Note: The existing mlTrainer project has its own requirements.txt
+# This file is specifically for the new chat system components

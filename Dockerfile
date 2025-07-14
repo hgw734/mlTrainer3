@@ -1,0 +1,67 @@
+# Multi-stage build for security and efficiency
+FROM python:3.10-slim as builder
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /build
+
+# Copy requirements first for better caching
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+# Production stage
+FROM python:3.10-slim
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user
+RUN useradd -m -u 1000 mltrainer
+
+# Set working directory
+WORKDIR /app
+
+# Copy Python dependencies from builder
+COPY --from=builder /root/.local /home/mltrainer/.local
+
+# Copy application code
+COPY --chown=mltrainer:mltrainer . .
+
+# Set Python path
+ENV PATH=/home/mltrainer/.local/bin:$PATH
+ENV PYTHONPATH=/app
+
+# Create necessary directories
+RUN mkdir -p /app/logs /app/data && \
+    chown -R mltrainer:mltrainer /app
+
+# Switch to non-root user
+USER mltrainer
+
+# Verify compliance system
+RUN python verify_compliance_system.py || true
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD python -c "import requests; requests.get('http://localhost:8000/health')" || exit 1
+
+# Expose ports
+EXPOSE 8000 8501
+
+# Default command
+CMD ["python", "app.py"]
+
+# Labels
+LABEL maintainer="mlTrainer Development Team <dev@mltrainer.ai>"
+LABEL version="2.0.0"
+LABEL description="mlTrainer - Institutional-Grade AI/ML Trading System"
+LABEL compliance="immutable-enforcement-enabled"

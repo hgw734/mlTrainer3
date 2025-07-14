@@ -1,0 +1,325 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mltrainer
+
+---
+# ConfigMap for environment variables
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mltrainer-config
+  namespace: mltrainer
+data:
+  DATABASE_URL: "postgresql://mltrainer:mltrainer@postgres-service:5432/mltrainer"
+  REDIS_URL: "redis://redis-service:6379"
+
+---
+# Secret for API keys
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mltrainer-secrets
+  namespace: mltrainer
+type: Opaque
+stringData:
+  ANTHROPIC_API_KEY: "your-anthropic-key"
+  POLYGON_API_KEY: "your-polygon-key"
+  FRED_API_KEY: "your-fred-key"
+
+---
+# PostgreSQL StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: mltrainer
+spec:
+  serviceName: postgres-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        env:
+        - name: POSTGRES_DB
+          value: mltrainer
+        - name: POSTGRES_USER
+          value: mltrainer
+        - name: POSTGRES_PASSWORD
+          value: mltrainer
+        ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-storage
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
+
+---
+# PostgreSQL Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+  namespace: mltrainer
+spec:
+  selector:
+    app: postgres
+  ports:
+  - port: 5432
+    targetPort: 5432
+
+---
+# Redis Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: mltrainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379
+          name: redis
+
+---
+# Redis Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: mltrainer
+spec:
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+
+---
+# Streamlit UI Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mltrainer-ui
+  namespace: mltrainer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mltrainer-ui
+  template:
+    metadata:
+      labels:
+        app: mltrainer-ui
+    spec:
+      containers:
+      - name: mltrainer-ui
+        image: mltrainer/unified:latest
+        command: ["streamlit", "run", "mltrainer_unified_chat.py"]
+        ports:
+        - containerPort: 8501
+          name: streamlit
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mltrainer-config
+              key: DATABASE_URL
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mltrainer-config
+              key: REDIS_URL
+        envFrom:
+        - secretRef:
+            name: mltrainer-secrets
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2"
+        readinessProbe:
+          httpGet:
+            path: /_stcore/health
+            port: 8501
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+---
+# Streamlit Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mltrainer-ui-service
+  namespace: mltrainer
+spec:
+  type: LoadBalancer
+  selector:
+    app: mltrainer-ui
+  ports:
+  - port: 80
+    targetPort: 8501
+    name: http
+
+---
+# FastAPI Backend Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mltrainer-api
+  namespace: mltrainer
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mltrainer-api
+  template:
+    metadata:
+      labels:
+        app: mltrainer-api
+    spec:
+      containers:
+      - name: mltrainer-api
+        image: mltrainer/unified:latest
+        command: ["uvicorn", "backend.unified_api:app", "--host", "0.0.0.0", "--port", "8000"]
+        ports:
+        - containerPort: 8000
+          name: api
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mltrainer-config
+              key: DATABASE_URL
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mltrainer-config
+              key: REDIS_URL
+        envFrom:
+        - secretRef:
+            name: mltrainer-secrets
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "1"
+          limits:
+            memory: "4Gi"
+            cpu: "4"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 10
+
+---
+# FastAPI Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mltrainer-api-service
+  namespace: mltrainer
+spec:
+  type: ClusterIP
+  selector:
+    app: mltrainer-api
+  ports:
+  - port: 8000
+    targetPort: 8000
+    name: http
+
+---
+# Ingress for external access
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mltrainer-ingress
+  namespace: mltrainer
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+  - hosts:
+    - mltrainer.yourdomain.com
+    - api.mltrainer.yourdomain.com
+    secretName: mltrainer-tls
+  rules:
+  - host: mltrainer.yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mltrainer-ui-service
+            port:
+              number: 80
+  - host: api.mltrainer.yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mltrainer-api-service
+            port:
+              number: 8000
+
+---
+# HorizontalPodAutoscaler for API
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mltrainer-api-hpa
+  namespace: mltrainer
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mltrainer-api
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80

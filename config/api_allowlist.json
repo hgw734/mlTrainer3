@@ -1,0 +1,41 @@
+{
+  "allowed_sources": ["polygon", "fred", "quiverquant"],
+  "fallback": "NA",
+  "enforce_compliance": true,
+  "max_data_age_seconds": 3600,
+  "drift_detection": {
+    "enabled": true,
+    "patterns": [
+      "for example",
+      "let's assume", 
+      "hypothetically",
+      "placeholder",
+      "sample output",
+      "test data",
+      "synthetic",
+      "simulated",
+      "suppose",
+      "imagine",
+      "pretend",
+      "mock data",
+      "fake data"
+    ]
+  },
+  "enforcement_levels": {
+    "production": "strict",
+    "staging": "normal",
+    "development": "monitoring"
+  },
+  "kill_switch": {
+    "enabled": true,
+    "violation_threshold": 5,
+    "drift_threshold": 3,
+    "auto_activate": true
+  },
+  "compliance_requirements": {
+    "data_provenance": true,
+    "source_verification": true,
+    "freshness_check": true,
+    "integrity_verification": true
+  }
+}

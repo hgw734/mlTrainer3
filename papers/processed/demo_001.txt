@@ -1,0 +1,33 @@
+
+TITLE: Deep Learning for Financial Time Series Prediction
+
+Abstract: This paper presents a comprehensive study of LSTM and Transformer models
+for stock price prediction in momentum trading strategies.
+
+1. Introduction
+Financial markets present unique challenges for machine learning due to their
+non-stationary nature and high noise-to-signal ratio.
+
+2. Methodology
+We employed a dual-model approach:
+- LSTM with attention mechanisms for short-term predictions (7-12 days)
+- Transformer architecture for medium-term predictions (50-70 days)
+
+The models were trained on 5 years of historical data with a train ratio of 0.8.
+Learning rate was set to 0.001 with adaptive scheduling.
+
+3. Results
+Our experiments yielded the following results:
+- LSTM accuracy: 73.5% for 7-12 day predictions
+- Transformer accuracy: 68.2% for 50-70 day predictions
+- Combined model Sharpe ratio: 1.92
+- Annual returns: 18.7% with maximum drawdown of 12.3%
+
+4. Conclusion
+The hybrid LSTM-Transformer approach significantly outperformed baseline models.
+The LSTM excelled at capturing short-term momentum patterns while the Transformer
+better understood longer-term market regimes. Future work should explore
+reinforcement learning approaches.
+
+References
+[1] Hochreiter, S., & Schmidhuber, J. (1997). Long short-term memory.

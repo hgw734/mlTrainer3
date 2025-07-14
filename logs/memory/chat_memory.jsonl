@@ -1,0 +1,4 @@
+{"id": "fd6b37037faf", "timestamp": "2025-07-09T23:06:28.792528", "role": "user", "content": "Test message", "topics": [], "importance": 0.6, "metadata": {}}
+{"id": "89e7ba60f3aa", "timestamp": "2025-07-09T23:06:28.793097", "role": "assistant", "content": "Test response", "topics": [], "importance": 0.5, "metadata": {}}
+{"id": "658cab6a915c", "timestamp": "2025-07-09T23:06:28.795544", "role": "user", "content": "test", "topics": [], "importance": 0.6, "metadata": {}}
+{"id": "b8756a0993a1", "timestamp": "2025-07-09T23:06:28.795809", "role": "assistant", "content": "response", "topics": [], "importance": 0.5, "metadata": {}}

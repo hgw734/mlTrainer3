@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-07-13T01:10:22.423495",
+  "type": "production_audit",
+  "statistics": {
+    "files_scanned": 68,
+    "total_lines": 29994,
+    "dependencies_checked": 0,
+    "rules_checked": 0
+  },
+  "violations": {
+    "syntax_errors": [
+      "app.py: unindent does not match any outer indentation level (<unknown>, line 781)",
+      "compliance_status_summary.py: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 113)",
+      "core/autonomous_loop.py: f-string: expecting '=', or '!', or ':', or '}' (<unknown>, line 335)",
+      "core/crypto_signing.py: ':' expected after dictionary key (<unknown>, line 116)",
+      "core/governance_kernel.py: expected an indented block after function definition on line 194 (<unknown>, line 195)",
+      "core/production_efficiency_manager.py: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 162)",
+      "demo_single_source_of_truth.py: f-string: expecting a valid expression after '{' (<unknown>, line 22)",
+      "example_governed_agent.py: '(' was never closed (<unknown>, line 168)",
+      "goal_system.py: f-string: expecting '=', or '!', or ':', or '}' (<unknown>, line 285)",
+      "hooks/check_governance_imports.py: unterminated string literal (detected at line 185) (<unknown>, line 185)",
+      "hooks/check_secrets.py: expected 'else' after 'if' expression (<unknown>, line 151)",
+      "hooks/check_synthetic_data.py: expected 'else' after 'if' expression (<unknown>, line 165)",
+      "hooks/validate_governance.py: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 175)",
+      "launch_mltrainer.py: f-string: expecting '=', or '!', or ':', or '}' (<unknown>, line 85)",
+      "mlagent_bridge.py: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 339)",
+      "mltrainer_claude_integration.py: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 220)",
+      "paper_processor.py: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 323)",
+      "paper_processor_demo.py: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 70)",
+      "session_compliance_check.py: invalid syntax. Perhaps you forgot a comma? (<unknown>, line 24)"
+    ],
+    "synthetic_data": [
+      "core/immutable_runtime_enforcer.py:42 - Found prohibited pattern 'placeholder'",
+      "core/immutable_runtime_enforcer.py:123 - Found prohibited pattern 'placeholder'",
+      "core/immutable_runtime_enforcer.py:128 - Found prohibited pattern 'placeholder'",
+      "core/immutable_runtime_enforcer.py:170 - Found prohibited pattern 'placeholder'",
+      "drift_protection.py:820 - Found prohibited pattern 'np.random'",
+      "drift_protection.py:826 - Found prohibited pattern 'np.random'",
+      "drift_protection.py:827 - Found prohibited pattern 'np.random'",
+      "mlTrainer_client_wrapper.py:140 - Found prohibited pattern 'placeholder'",
+      "mlTrainer_client_wrapper.py:153 - Found prohibited pattern 'placeholder'"
+    ],
+    "security": [
+      "verify_compliance_system.py:30 - Uses potentially insecure pattern: __import__"
+    ]
+  },
+  "summary": {
+    "critical_violations": 10,
+    "passed": false
+  }
+}

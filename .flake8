@@ -1,0 +1,108 @@
+[flake8]
+# Maximum line length
+max-line-length = 120
+
+# Exclude directories and files
+exclude = 
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    env,
+    modal_env,
+    .pytest_cache,
+    build,
+    dist,
+    *.egg-info,
+    .mypy_cache,
+    .coverage,
+    htmlcov,
+    .tox,
+    .eggs,
+    .DS_Store
+
+# Ignore specific error codes
+ignore = 
+    # Line length (handled by max-line-length)
+    E501,
+    # Line break before binary operator (PEP 8 allows both styles)
+    W503,
+    # Line break after binary operator (PEP 8 allows both styles)
+    W504,
+    # Multiple spaces before operator (handled by autopep8)
+    E225,
+    # Missing whitespace around operator (handled by autopep8)
+    E226,
+    # Missing whitespace after ',' (handled by autopep8)
+    E231,
+    # Expected 2 blank lines (too strict for this project)
+    E302,
+    # Expected 1 blank line (too strict for this project)
+    E301,
+    # Multiple imports on one line (handled by isort)
+    E401,
+    # Module level import not at top of file (some imports need to be conditional)
+    E402,
+    # Do not assign a lambda expression, use a def (sometimes lambda is clearer)
+    E731,
+    # Do not use bare except (we have specific error handling)
+    E722,
+    # Unused variable (sometimes needed for interface compatibility)
+    F841,
+    # Imported but unused (handled by autoflake)
+    F401,
+    # F-string missing placeholders (sometimes intentional for logging)
+    F541,
+    # Blank line contains whitespace (handled by autopep8)
+    W293,
+    # Trailing whitespace (handled by autopep8)
+    W291,
+    # No newline at end of file (handled by autopep8)
+    W292,
+    # Continuation line under-indented for visual indent (handled by autopep8)
+    E128,
+    # Expected 2 blank lines after class or function definition (too strict)
+    E305,
+    # Comparison to True should be 'if cond is True:' or 'if cond:' (sometimes clearer)
+    E712,
+    # Comparison to False should be 'if cond is False:' or 'if not cond:' (sometimes clearer)
+    E713
+
+# Per-file-ignores
+# Ignore specific files or patterns
+per-file-ignores =
+    # Test files can be more lenient
+    test_*.py: E302, E305, W293, W291, F541
+    *_test.py: E302, E305, W293, W291, F541
+    tests/*: E302, E305, W293, W291, F541
+    # Scripts can be more lenient
+    scripts/*: E302, E305, W293, W291, F541
+    # Configuration files
+    setup.py: E302, E305
+    # Documentation examples
+    docs/*: E302, E305, W293, W291
+
+# Show source code for each error
+show-source = True
+
+# Show the error codes
+show-pep8 = True
+
+# Count errors
+count = True
+
+# Statistics
+statistics = True
+
+# Maximum complexity (McCabe complexity)
+max-complexity = 10
+
+# Select errors and warnings
+select = 
+    E,  # pycodestyle errors
+    W,  # pycodestyle warnings
+    F,  # pyflakes
+    C   # mccabe complexity
+
+# Output format
+format = %(path)s:%(row)d:%(col)d: %(code)s %(text)s 

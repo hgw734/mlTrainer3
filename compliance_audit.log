@@ -1,0 +1,189 @@
+Compliance Audit Log - 2025-07-12 20:44:08.055573
+Overall Score: 4.5/10
+Critical Failures: 3
+Verdict: ❌ NON-COMPLIANT - Critical failures
+
+Detailed Findings:
+
+Data Authenticity:
+  Status: fail
+  Score: 0.0/10
+  Priority: critical
+  Issues:
+    - 50+ instances of synthetic data (np.random)
+    - Fake data in core ML engine
+    - Demo files use only synthetic data
+
+Security Compliance:
+  Status: fail
+  Score: 2.0/10
+  Priority: critical
+  Issues:
+    - Hardcoded API keys in source code
+    - No secure key management
+    - Keys exposed in git history
+
+Permission Protocols:
+  Status: fail
+  Score: 1.0/10
+  Priority: critical
+  Issues:
+    - No permission requests before actions
+    - Governance code exists but unused
+    - No audit trail implementation
+
+Code Completeness:
+  Status: partial
+  Score: 5.0/10
+  Priority: high
+  Issues:
+    - Multiple placeholder implementations
+    - Core ML functions return dummy values
+    - Missing real data connections
+
+Transparency:
+  Status: partial
+  Score: 6.0/10
+  Priority: medium
+  Issues:
+    - Some documentation gaps
+    - Placeholders not clearly marked
+    - Missing limitation disclosures
+
+Architecture Quality:
+  Status: pass
+  Score: 9.0/10
+  Priority: low
+  Issues:
+    - Minor: Some modules need governance integration
+
+Documentation:
+  Status: pass
+  Score: 8.5/10
+  Priority: low
+  Issues:
+    - Some docs contain mock examples
+    - Need clearer real vs. placeholder marking
+2025-07-13 16:33:41,376 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 16:33:41,390 - COMPLIANCE - ERROR - ❌ CRITICAL: 46 models have no implementation!
+2025-07-13 16:33:41,390 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 16:33:41,390 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 16:33:41,390 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 16:33:41,390 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 16:33:41,390 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 16:33:41,390 - COMPLIANCE - ERROR -   ... and 41 more
+2025-07-13 16:43:35,635 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 16:43:35,644 - COMPLIANCE - ERROR - ❌ CRITICAL: 46 models have no implementation!
+2025-07-13 16:43:35,645 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 16:43:35,645 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 16:43:35,645 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 16:43:35,645 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 16:43:35,645 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 16:43:35,645 - COMPLIANCE - ERROR -   ... and 41 more
+2025-07-13 16:45:09,528 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 16:45:09,537 - COMPLIANCE - ERROR - ❌ CRITICAL: 46 models have no implementation!
+2025-07-13 16:45:09,537 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 16:45:09,537 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 16:45:09,537 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 16:45:09,537 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 16:45:09,537 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 16:45:09,537 - COMPLIANCE - ERROR -   ... and 41 more
+2025-07-13 16:46:02,822 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 16:46:02,831 - COMPLIANCE - ERROR - ❌ CRITICAL: 46 models have no implementation!
+2025-07-13 16:46:02,831 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 16:46:02,831 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 16:46:02,831 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 16:46:02,831 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 16:46:02,831 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 16:46:02,831 - COMPLIANCE - ERROR -   ... and 41 more
+2025-07-13 16:46:50,374 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 16:46:50,383 - COMPLIANCE - ERROR - ❌ CRITICAL: 46 models have no implementation!
+2025-07-13 16:46:50,383 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 16:46:50,383 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 16:46:50,383 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 16:46:50,383 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 16:46:50,383 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 16:46:50,383 - COMPLIANCE - ERROR -   ... and 41 more
+2025-07-13 16:49:14,529 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 16:49:14,538 - COMPLIANCE - ERROR - ❌ CRITICAL: 46 models have no implementation!
+2025-07-13 16:49:14,538 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 16:49:14,538 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 16:49:14,538 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 16:49:14,538 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 16:49:14,538 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 16:49:14,538 - COMPLIANCE - ERROR -   ... and 41 more
+2025-07-13 16:49:14,539 - COMPLIANCE - INFO - FRED connector initialized
+2025-07-13 16:52:36,821 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 16:52:36,831 - COMPLIANCE - ERROR - ❌ CRITICAL: 46 models have no implementation!
+2025-07-13 16:52:36,831 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 16:52:36,831 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 16:52:36,831 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 16:52:36,831 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 16:52:36,831 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 16:52:36,831 - COMPLIANCE - ERROR -   ... and 41 more
+2025-07-13 16:53:04,770 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 16:53:05,097 - COMPLIANCE - ERROR - ❌ CRITICAL: 46 models have no implementation!
+2025-07-13 16:53:05,097 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 16:53:05,097 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 16:53:05,097 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 16:53:05,097 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 16:53:05,097 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 16:53:05,097 - COMPLIANCE - ERROR -   ... and 41 more
+2025-07-13 16:53:39,204 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 16:53:39,373 - COMPLIANCE - ERROR - ❌ CRITICAL: 46 models have no implementation!
+2025-07-13 16:53:39,374 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 16:53:39,374 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 16:53:39,374 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 16:53:39,374 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 16:53:39,374 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 16:53:39,374 - COMPLIANCE - ERROR -   ... and 41 more
+2025-07-13 18:48:23,990 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 18:48:24,651 - COMPLIANCE - ERROR - ❌ CRITICAL: 40 models have no implementation!
+2025-07-13 18:48:24,651 - COMPLIANCE - ERROR -   - rolling_mean_reversion: custom.time_series.RollingMeanReversion
+2025-07-13 18:48:24,651 - COMPLIANCE - ERROR -   - regime_aware_dqn: custom.rl.RegimeAwareDQN
+2025-07-13 18:48:24,651 - COMPLIANCE - ERROR -   - meta_learner_strategy_selector: custom.meta_learning.MetaLearnerStrategySelector
+2025-07-13 18:48:24,651 - COMPLIANCE - ERROR -   - ensemble_voting: custom.ensemble.EnsembleVoting
+2025-07-13 18:48:24,651 - COMPLIANCE - ERROR -   - meta_learner: custom.meta_learning.MetaLearner
+2025-07-13 18:48:24,651 - COMPLIANCE - ERROR -   ... and 35 more
+2025-07-13 18:48:53,362 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 18:48:53,397 - COMPLIANCE - ERROR - ❌ CRITICAL: 2 models have no implementation!
+2025-07-13 18:48:53,398 - COMPLIANCE - ERROR -   - ema_crossover_model: custom.systems.EMACrossover
+2025-07-13 18:48:53,398 - COMPLIANCE - ERROR -   - fractal_model: custom.fractal.FractalModel
+2025-07-13 18:49:49,947 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 18:49:50,596 - COMPLIANCE - ERROR - ❌ CRITICAL: 42 models have missing libraries!
+2025-07-13 18:49:50,597 - COMPLIANCE - ERROR -   - kalman_filter: requires pykalman
+2025-07-13 18:49:50,597 - COMPLIANCE - ERROR -   - xgboost: requires xgboost
+2025-07-13 18:49:50,597 - COMPLIANCE - ERROR -   - lightgbm: requires lightgbm
+2025-07-13 18:49:50,597 - COMPLIANCE - ERROR -   - catboost: requires catboost
+2025-07-13 18:49:50,597 - COMPLIANCE - ERROR -   - lstm: requires tensorflow
+2025-07-13 20:30:03,639 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 20:30:36,263 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 20:30:52,981 - COMPLIANCE - ERROR - ❌ CRITICAL: 30 models have missing libraries!
+2025-07-13 20:30:52,982 - COMPLIANCE - ERROR -   - temporal_fusion_transformer: requires pytorch_forecasting
+2025-07-13 20:30:52,982 - COMPLIANCE - ERROR -   - q_learning: requires stable_baselines3
+2025-07-13 20:30:52,982 - COMPLIANCE - ERROR -   - double_q_learning: requires stable_baselines3
+2025-07-13 20:30:52,982 - COMPLIANCE - ERROR -   - dueling_dqn: requires stable_baselines3
+2025-07-13 20:30:52,982 - COMPLIANCE - ERROR -   - dqn: requires stable_baselines3
+2025-07-13 20:32:27,934 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 20:32:35,478 - COMPLIANCE - ERROR - ❌ CRITICAL: 23 models have missing libraries!
+2025-07-13 20:32:35,479 - COMPLIANCE - ERROR -   - hidden_markov_model: requires hmmlearn
+2025-07-13 20:32:35,479 - COMPLIANCE - ERROR -   - bayesian_change_point_detection: requires ruptures
+2025-07-13 20:32:35,479 - COMPLIANCE - ERROR -   - markowitz_mean_variance_optimizer: requires pypfopt
+2025-07-13 20:32:35,479 - COMPLIANCE - ERROR -   - maximum_sharpe_ratio_optimizer: requires pypfopt
+2025-07-13 20:32:35,479 - COMPLIANCE - ERROR -   - finbert_sentiment_classifier: requires transformers
+2025-07-13 20:34:20,563 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 20:34:27,026 - COMPLIANCE - ERROR - ❌ CRITICAL: 18 models have missing libraries!
+2025-07-13 20:34:27,026 - COMPLIANCE - ERROR -   - markowitz_mean_variance_optimizer: requires pypfopt
+2025-07-13 20:34:27,027 - COMPLIANCE - ERROR -   - maximum_sharpe_ratio_optimizer: requires pypfopt
+2025-07-13 20:34:27,027 - COMPLIANCE - ERROR -   - sentence_transformer_embedding: requires sentence_transformers
+2025-07-13 20:34:27,027 - COMPLIANCE - ERROR -   - graph_neural_network: requires pytorch_geometric
+2025-07-13 20:34:27,027 - COMPLIANCE - ERROR -   - wavelet_transform_model: requires pywt
+2025-07-13 20:34:54,592 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 20:35:14,091 - COMPLIANCE - INFO - 🔍 Verifying model implementations...
+2025-07-13 20:35:19,251 - COMPLIANCE - ERROR - ❌ CRITICAL: 16 models have missing libraries!
+2025-07-13 20:35:19,251 - COMPLIANCE - ERROR -   - markowitz_mean_variance_optimizer: requires pypfopt
+2025-07-13 20:35:19,251 - COMPLIANCE - ERROR -   - maximum_sharpe_ratio_optimizer: requires pypfopt
+2025-07-13 20:35:19,251 - COMPLIANCE - ERROR -   - graph_neural_network: requires pytorch_geometric
+2025-07-13 20:35:19,251 - COMPLIANCE - ERROR -   - empirical_mode_decomposition: requires emd
+2025-07-13 20:35:19,251 - COMPLIANCE - ERROR -   - neural_ode_financial: requires torchdiffeq
+2025-07-13 20:35:40,747 - COMPLIANCE - INFO - 🔍 Verifying model implementations...

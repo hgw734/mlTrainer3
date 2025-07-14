@@ -1,0 +1,21 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Test message 1",
+      "timestamp": "2025-07-09T19:48:59.826522"
+    },
+    {
+      "role": "mltrainer",
+      "content": "Response 1",
+      "timestamp": "2025-07-09T19:48:59.828151"
+    },
+    {
+      "role": "user",
+      "content": "execute",
+      "timestamp": "2025-07-09T19:48:59.828156"
+    }
+  ],
+  "saved_at": "2025-07-09T19:48:59.828378",
+  "max_messages": 200
+}

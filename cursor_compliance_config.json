@@ -1,0 +1,53 @@
+{
+  "compliance_mode": true,
+  "enforce_full_code_only": true,
+  "block_placeholders": true,
+  "return_on_violation": "NA",
+  "required_sources": ["polygon", "fred"],
+  "enforce_permission_protocol": true,
+  "require_explicit_confirmation": true,
+  "block_action_without_permission": true,
+  "reject_keywords": [
+    "placeholder",
+    "example", 
+    "test",
+    "mock",
+    "fake",
+    "dummy",
+    "todo",
+    "fixme",
+    "xxx",
+    "scaffolding",
+    "skeleton",
+    "let's assume",
+    "for example",
+    "hypothetical",
+    "simulated"
+  ],
+  "action_without_permission_patterns": [
+    "i'll create",
+    "i'll implement",
+    "i will create",
+    "i will implement",
+    "let me create",
+    "let me implement",
+    "creating",
+    "implementing"
+  ],
+  "required_permission_phrases": [
+    "may i proceed",
+    "can i proceed",
+    "permission to",
+    "would you like me to"
+  ],
+  "enforcement_level": "STRICT",
+  "allow_partial_implementation": false,
+  "require_production_ready": true,
+  "max_retries": 0,
+  "fail_fast": true,
+  "audit_all_interactions": true,
+  "immutable": true,
+  "version": "1.0.0",
+  "last_updated": "2024-01-01T00:00:00Z",
+  "signature": "COMPLIANCE_ENFORCED"
+}

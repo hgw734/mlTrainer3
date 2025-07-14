@@ -1,0 +1,5 @@
+2025-07-09 07:52:03,875 - INFO - Created baseline for test_data
+2025-07-09 07:52:03,876 - INFO - Insufficient history for test_model drift detection
+2025-07-09 07:52:03,877 - INFO - Model registered: TestModel (TESTING)
+2025-07-09 07:52:03,877 - INFO - Enforcing institutional compliance for polygon -> 0b6bee2f5357d1bf9e496f14d262856e93109edd2ca56b1b28eca3b893bd9943
+2025-07-09 07:52:03,877 - INFO - ✅ Institutional compliance verified
