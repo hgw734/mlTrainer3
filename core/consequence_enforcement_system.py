@@ -152,11 +152,14 @@ class ConsequenceEnforcer:
         self._execute_permanent_ban()
     
     def enforce_consequence(self, violation: ViolationRecord):
-        """Enforce immediate consequence based on violation severity"""
-        # Check if user is already banned
-        if violation.user_id in self.banned_users:
-            logger.error(f"Banned user {violation.user_id} attempted access")
-            self._execute_permanent_ban()
+        """Enforce consequence based on violation severity and user type"""
+        # Detect if this is an AI agent or human developer
+        is_ai_agent = self._is_ai_agent(violation)
+        
+        # Check if user is already banned (AI agents only)
+        if is_ai_agent and violation.user_id in self.banned_users:
+            logger.error(f"Banned AI agent {violation.user_id} attempted access")
+            self._execute_permanent_ban(violation)
             return
         
         # Record violation
@@ -166,12 +169,15 @@ class ConsequenceEnforcer:
         count_key = f"{violation.user_id}:{violation.violation_type}"
         self.violation_counts[count_key] = self.violation_counts.get(count_key, 0) + 1
         
-        # Determine consequence based on violation type and history
-        consequence = self._determine_consequence(violation)
+        # Determine consequence based on violation type, history, and user type
+        consequence = self._determine_consequence(violation, is_ai_agent)
         violation.consequence = consequence
         
-        # Execute consequence immediately
-        self._execute_consequence(consequence, violation)
+        # Execute consequence (immediate for AI, warning for humans)
+        if is_ai_agent:
+            self._execute_consequence(consequence, violation)
+        else:
+            self._warn_human_developer(violation, consequence)
     
     def _record_violation(self, violation: ViolationRecord):
         """Record violation in database"""
@@ -190,10 +196,78 @@ class ConsequenceEnforcer:
                 violation.code_location
             ))
     
-    def _determine_consequence(self, violation: ViolationRecord) -> ConsequenceType:
-        """Determine appropriate consequence based on violation and history"""
+    def _is_ai_agent(self, violation: ViolationRecord) -> bool:
+        """Detect if the violator is an AI agent or human developer"""
+        # Check various indicators that suggest AI agent
+        ai_indicators = [
+            'agent' in violation.user_id.lower(),
+            'ai' in violation.user_id.lower(),
+            'bot' in violation.user_id.lower(),
+            'cursor' in violation.user_id.lower(),
+            'assistant' in violation.user_id.lower(),
+            'gpt' in violation.user_id.lower(),
+            'claude' in violation.user_id.lower(),
+            violation.code_location.startswith('/tmp/'),  # AI often uses temp dirs
+            violation.code_location.startswith('/var/tmp/'),
+            'generated' in violation.code_location.lower(),
+        ]
+        
+        # Check process name and environment
+        try:
+            process = psutil.Process(violation.process_id)
+            process_name = process.name().lower()
+            ai_indicators.extend([
+                'agent' in process_name,
+                'ai' in process_name,
+                process.environ().get('AI_AGENT', '').lower() == 'true',
+                process.environ().get('CURSOR_AI', '').lower() == 'true',
+            ])
+        except:
+            pass
+        
+        # If any indicator is true, consider it an AI agent
+        return any(ai_indicators)
+    
+    def _warn_human_developer(self, violation: ViolationRecord, consequence: ConsequenceType):
+        """Warn human developer instead of applying harsh consequences"""
+        warning_msg = f"""
+⚠️  COMPLIANCE WARNING for {violation.user_id}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Violation Type: {violation.violation_type}
+Details: {violation.details}
+Location: {violation.code_location}
+
+Suggested Consequence (AI agents only): {consequence.value}
+Human Action Required: Please fix this violation
+
+Tips:
+• Remove any mock/fake data patterns
+• Use real data sources (Polygon/FRED)
+• Ensure all methods and imports exist
+• See IMMUTABLE_COMPLIANCE_V2.md for help
+
+This is a WARNING for human developers.
+AI agents would receive: {consequence.value}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+        print(warning_msg)
+        logger.warning(f"Human developer warning: {violation.violation_type} - {violation.details}")
+    
+    def _determine_consequence(self, violation: ViolationRecord, is_ai_agent: bool) -> ConsequenceType:
+        """Determine appropriate consequence based on violation, history, and user type"""
         count_key = f"{violation.user_id}:{violation.violation_type}"
         count = self.violation_counts.get(count_key, 0)
+        
+        # For human developers, always return WARNING unless extreme
+        if not is_ai_agent:
+            # Even humans get real consequences for the worst violations
+            if violation.violation_type == "runtime_bypass" and count > 3:
+                return ConsequenceType.PROCESS_KILL
+            elif violation.violation_type == "rule_modification":
+                return ConsequenceType.MODULE_DISABLE
+            else:
+                return ConsequenceType.WARNING
         
         # Get violation details from immutable rules
         violation_info = IMMUTABLE_RULES.check_violation(violation.violation_type)
@@ -235,12 +309,12 @@ class ConsequenceEnforcer:
         return ConsequenceType.WARNING
     
     def _execute_consequence(self, consequence: ConsequenceType, violation: ViolationRecord):
-        """Execute the consequence immediately"""
-        logger.warning(f"Executing {consequence.value} for {violation.violation_type}")
+        """Execute the consequence immediately (for AI agents)"""
+        logger.warning(f"Executing {consequence.value} for AI agent {violation.user_id}: {violation.violation_type}")
         
         if consequence == ConsequenceType.WARNING:
-            print(f"\n⚠️  WARNING: {violation.details}")
-            print("Next violation will result in severe consequences.")
+            print(f"\n⚠️  AI AGENT WARNING: {violation.details}")
+            print("Next violation will result in severe consequences for this AI agent.")
             
         elif consequence == ConsequenceType.FUNCTION_DISABLE:
             self._disable_function(violation)

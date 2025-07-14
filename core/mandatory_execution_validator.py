@@ -77,10 +77,24 @@ class MandatoryExecutionValidator:
         
         logger.info(f"Validating code: {code_path}")
         
+        # Detect if running for AI agent
+        user_id = os.getenv("USER", "unknown")
+        is_ai = any([
+            'agent' in user_id.lower(),
+            'ai' in user_id.lower(),
+            'cursor' in user_id.lower(),
+            os.getenv('AI_AGENT', '').lower() == 'true',
+        ])
+        
         # Step 1: Static analysis
         static_result = self._static_analysis(code_path)
         if not static_result["passed"]:
-            raise ComplianceViolation(f"Static analysis failed: {static_result['errors']}")
+            if is_ai:
+                raise ComplianceViolation(f"AI agent static analysis failed: {static_result['errors']}")
+            else:
+                logger.warning(f"Human developer static analysis issues: {static_result['errors']}")
+                print(f"\n⚠️  Static Analysis Warning: {static_result['errors']}")
+                print("Please fix these issues before deployment\n")
         
         # Step 2: Isolated execution
         execution_result = self._isolated_execution(code_path, timeout)

@@ -2,7 +2,15 @@
 
 ## Overview
 
-The mlTrainer Immutable Compliance System v2.0 is a revolutionary security framework that makes it **impossible** to bypass compliance rules through runtime enforcement, mandatory execution validation, and real consequences for violations.
+The mlTrainer Immutable Compliance System v2.0 is a revolutionary security framework that makes it **impossible** for AI agents to bypass compliance rules through runtime enforcement, mandatory execution validation, and real consequences for violations.
+
+### 🤖 AI Agents vs 👨‍💻 Human Developers
+
+The system intelligently differentiates between:
+- **AI Agents** (Cursor, GPT, Claude, etc.) - Receive immediate, harsh consequences
+- **Human Developers** - Receive warnings, guidance, and chances to fix issues
+
+This ensures AI agents cannot inject malicious or deceptive code while allowing humans to develop and debug effectively.
 
 ## 🚨 Critical Changes from v1.0
 

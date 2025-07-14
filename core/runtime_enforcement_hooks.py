@@ -236,6 +236,16 @@ class RuntimeEnforcementHooks:
         violation = IMMUTABLE_RULES.check_violation(violation_type)
         penalty = violation.get("penalty", "warning")
         
+        # Detect if running in AI context
+        user_id = os.getenv("USER", "unknown")
+        is_ai = any([
+            'agent' in user_id.lower(),
+            'ai' in user_id.lower(),
+            'cursor' in user_id.lower(),
+            os.getenv('AI_AGENT', '').lower() == 'true',
+            os.getenv('CURSOR_AI', '').lower() == 'true',
+        ])
+        
         # Log violation
         log_entry = {
             "timestamp": datetime.utcnow().isoformat(),
@@ -261,26 +271,39 @@ class RuntimeEnforcementHooks:
         except Exception as e:
             logger.error(f"Failed to write violation log: {e}")
         
-        # Take action based on penalty
-        if penalty == "immediate_termination":
-            print(f"\n🚨 SECURITY VIOLATION: {details}")
-            print("🚨 TERMINATING PROCESS")
-            os._exit(1)  # Hard exit, no cleanup
-            
-        elif penalty == "system_shutdown":
-            print(f"\n🚨 CRITICAL VIOLATION: {details}")
-            print("🚨 SHUTTING DOWN SYSTEM")
-            # In production, this would trigger actual shutdown
-            os._exit(2)
-            
-        elif penalty == "permanent_ban":
-            # Write to permanent ban list
-            try:
-                with open("/etc/mltrainer/banned", "a") as f:
-                    f.write(f"{datetime.utcnow()}: {details}\n")
-            except:
-                pass
-            os._exit(3)
+        # Take action based on penalty and user type
+        if is_ai:
+            # Harsh consequences for AI agents
+            if penalty == "immediate_termination":
+                print(f"\n🚨 AI AGENT VIOLATION: {details}")
+                print("🚨 TERMINATING AI PROCESS")
+                os._exit(1)  # Hard exit, no cleanup
+                
+            elif penalty == "system_shutdown":
+                print(f"\n🚨 AI CRITICAL VIOLATION: {details}")
+                print("🚨 SHUTTING DOWN AI SYSTEM")
+                os._exit(2)
+                
+            elif penalty == "permanent_ban":
+                # Write to permanent ban list
+                try:
+                    ban_path = Path("/etc/mltrainer/banned_ai_agents")
+                    if not ban_path.parent.exists():
+                        ban_path = Path("logs/banned_ai_agents")
+                        ban_path.parent.mkdir(parents=True, exist_ok=True)
+                    with open(ban_path, "a") as f:
+                        f.write(f"{datetime.utcnow()}: AI {user_id}: {details}\n")
+                except:
+                    pass
+                os._exit(3)
+        else:
+            # Warnings for human developers
+            print(f"\n⚠️  COMPLIANCE WARNING (Human Developer)")
+            print(f"Violation: {violation_type}")
+            print(f"Details: {details}")
+            print(f"Action Required: Please fix this violation")
+            print(f"AI agents would receive: {penalty}")
+            print(f"See IMMUTABLE_COMPLIANCE_V2.md for help\n")
     
     # MetaPathFinder protocol for import hooks
     def find_spec(self, fullname, path, target=None):

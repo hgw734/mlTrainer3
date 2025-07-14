@@ -70,10 +70,10 @@ class MLEngine:
         if 'polygon' in self.data_sources:
             try:
                 return self.data_sources['polygon'].get_ohlcv_data(symbol, start_date, end_date)
-                                        except Exception as e:
+            except Exception as e:
                 logger.error(f"Failed to get market data: {e}")
                 return None
-                                                    else:
+        else:
             logger.error("No market data source available")
             return None
 
@@ -82,10 +82,10 @@ class MLEngine:
         if 'fred' in self.data_sources:
             try:
                 return self.data_sources['fred'].get_series_data(series_id, start_date, end_date)
-                                                                            except Exception as e:
+            except Exception as e:
                 logger.error(f"Failed to get economic data: {e}")
                 return None
-                                                                                                    else:
+        else:
             logger.error("No economic data source available")
             return None
 

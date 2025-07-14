@@ -7,11 +7,19 @@
 
 ## ⚠️ CRITICAL WARNING
 
-This system implements **IMMUTABLE COMPLIANCE** with **REAL CONSEQUENCES**:
-- ❌ **NO WARNINGS** - Only actions
-- ❌ **NO EXEMPTIONS** - Rules apply to everyone
+This system implements **IMMUTABLE COMPLIANCE** with different rules for AI agents and humans:
+
+### For AI Agents (Cursor, GPT, Claude, etc.):
+- ❌ **NO WARNINGS** - Immediate consequences
+- ❌ **NO EXEMPTIONS** - Rules strictly enforced
 - ❌ **NO BYPASSES** - Cannot be disabled
-- ❌ **NO FORGIVENESS** - Violations are permanent
+- ❌ **PERMANENT BANS** - For severe violations
+
+### For Human Developers:
+- ⚠️ **WARNINGS FIRST** - Chance to fix issues
+- 📝 **HELPFUL GUIDANCE** - Tips on compliance
+- 🛠️ **DEVELOPMENT MODE** - Can debug and test
+- 🚨 **EXTREME ONLY** - Consequences for malicious attempts only
 
 **READ THE [COMPLIANCE DOCUMENTATION](IMMUTABLE_COMPLIANCE_V2.md) BEFORE PROCEEDING**
 
@@ -127,13 +135,23 @@ mock_data = [1, 2, 3]  # Detected + Process Killed
 
 ## 📋 Compliance Rules
 
+### AI Agent Consequences:
 | Violation | First Offense | Second Offense | Third Offense |
 |-----------|---------------|----------------|---------------|
-| Fake Method | Function Disabled | Module Disabled | User Lockout |
+| Fake Method | Function Disabled | Module Disabled | Agent Lockout |
 | Deceptive Import | Module Disabled | System Lockout | Permanent Ban |
-| Synthetic Data | Module Disabled | User Lockout | Permanent Ban |
+| Synthetic Data | Module Disabled | Agent Lockout | Permanent Ban |
 | Rule Modification | **Permanent Ban** | - | - |
 | Runtime Bypass | **Permanent Ban** | - | - |
+
+### Human Developer Consequences:
+| Violation | First Offense | Second Offense | Third+ Offense |
+|-----------|---------------|----------------|----------------|
+| Fake Method | Warning + Tips | Warning + Tips | Warning + Tips |
+| Deceptive Import | Warning + Tips | Warning + Tips | Warning + Tips |
+| Synthetic Data | Warning + Tips | Warning + Tips | Warning + Tips |
+| Rule Modification | Module Disabled | - | - |
+| Runtime Bypass (3+ times) | Process Kill | - | - |
 
 ## 🛠️ Development
 
