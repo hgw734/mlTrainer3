@@ -530,13 +530,38 @@ class MLTrainerModelManager:
         return info
 
     def prepare_data(self, symbol: str = None, data_source: str = "polygon", lookback_days: int = 365) -> Tuple[np.ndarray, np.ndarray]:
-        """Prepare data from approved sources"""
+        """Prepare data from approved sources - REAL DATA ONLY"""
         try:
-            # For now, use synthetic data for testing
-            self.logger.warning(f"Using synthetic data for testing")
-            X = np.random.randn(1000, 10)  # Synthetic features
-            y = np.random.randn(1000)  # Synthetic target
+            if symbol is None:
+                raise ValueError("Symbol is required for data preparation")
+            
+            # Import the real data pipeline
+            from core.data_pipeline import DataPipeline
+            
+            # Initialize data pipeline
+            pipeline = DataPipeline()
+            
+            # Fetch real historical data
+            self.logger.info(f"Fetching {lookback_days} days of historical data for {symbol}")
+            df = pipeline.fetch_historical_data(symbol, days=lookback_days)
+            
+            if df is None or len(df) < 50:
+                raise ValueError(f"Insufficient data for {symbol}. Need at least 50 days.")
+            
+            # Create features using the pipeline
+            X = pipeline.prepare_features(df)
+            
+            # Create target (next day returns)
+            y = df['close'].pct_change().shift(-1).fillna(0).values
+            
+            # Align features and target
+            X = X[:-1]  # Remove last row to align with shifted target
+            y = y[:-1]
+            
+            self.logger.info(f"Prepared dataset with {X.shape[0]} samples and {X.shape[1]} features")
+            
             return X, y
+            
         except Exception as e:
             self.logger.error(f"Data preparation failed: {e}")
             raise
