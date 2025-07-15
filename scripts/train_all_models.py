@@ -32,6 +32,22 @@ from models.random_forest_enhanced import RandomForestEnhanced
 from models.xgboost_enhanced import XGBoostEnhanced
 from models.lstm_enhanced import LSTMEnhanced
 from models.pairs_trading_enhanced import PairsTradingEnhanced
+from models.market_regime_detector import MarketRegimeDetector
+from models.portfolio_optimizer import PortfolioOptimizer
+
+# Import new model suites
+from models.technical_indicators_enhanced import (
+    TechnicalIndicatorEnsemble, RSIModel, MACDModel, 
+    BollingerBreakoutModel, StochasticModel
+)
+from models.volume_analysis_enhanced import (
+    VolumeAnalysisEnsemble, OBVModel, VolumeSpikeModel,
+    VolumePriceAnalysisModel, VolumeWeightedPriceModel
+)
+from models.pattern_recognition_enhanced import (
+    PatternRecognitionEnsemble, CandlestickPatternsModel,
+    SupportResistanceModel, ChartPatternRecognitionModel
+)
 
 # Import backtesting
 from core.backtesting_engine import BacktestingEngine, BacktestConfig
@@ -104,6 +120,141 @@ def train_rule_based_models(data: pd.DataFrame, config: Dict[str, Any]) -> Dict[
         'signals': vol_signals,
         'params': vol_model.get_parameters()
     }
+    
+    return results
+
+def train_technical_indicator_models(data: pd.DataFrame, config: Dict[str, Any]) -> Dict[str, Any]:
+    """Train technical indicator models"""
+    logger.info("Training technical indicator models...")
+    results = {}
+    
+    # Technical Indicator Ensemble
+    logger.info("Training Technical Indicator Ensemble...")
+    tech_ensemble = TechnicalIndicatorEnsemble()
+    tech_signals = tech_ensemble.predict(data)
+    results['technical_indicators_ensemble'] = {
+        'model': tech_ensemble,
+        'signals': tech_signals,
+        'params': tech_ensemble.get_parameters()
+    }
+    
+    # Individual indicator models (for comparison)
+    if config.get('train_individual_indicators', False):
+        logger.info("Training individual technical indicators...")
+        
+        # RSI
+        rsi_model = RSIModel()
+        results['rsi'] = {
+            'model': rsi_model,
+            'signals': rsi_model.predict(data),
+            'params': rsi_model.get_parameters()
+        }
+        
+        # MACD
+        macd_model = MACDModel()
+        results['macd'] = {
+            'model': macd_model,
+            'signals': macd_model.predict(data),
+            'params': macd_model.get_parameters()
+        }
+    
+    return results
+
+def train_volume_models(data: pd.DataFrame, config: Dict[str, Any]) -> Dict[str, Any]:
+    """Train volume analysis models"""
+    logger.info("Training volume analysis models...")
+    results = {}
+    
+    # Volume Analysis Ensemble
+    logger.info("Training Volume Analysis Ensemble...")
+    volume_ensemble = VolumeAnalysisEnsemble()
+    volume_signals = volume_ensemble.predict(data)
+    results['volume_analysis_ensemble'] = {
+        'model': volume_ensemble,
+        'signals': volume_signals,
+        'params': volume_ensemble.get_parameters()
+    }
+    
+    # Individual volume models (for comparison)
+    if config.get('train_individual_volume', False):
+        logger.info("Training individual volume models...")
+        
+        # OBV
+        obv_model = OBVModel()
+        results['obv'] = {
+            'model': obv_model,
+            'signals': obv_model.predict(data),
+            'params': obv_model.get_parameters()
+        }
+        
+        # VWAP
+        vwap_model = VolumeWeightedPriceModel()
+        results['vwap'] = {
+            'model': vwap_model,
+            'signals': vwap_model.predict(data),
+            'params': vwap_model.get_parameters()
+        }
+    
+    return results
+
+def train_pattern_models(data: pd.DataFrame, config: Dict[str, Any]) -> Dict[str, Any]:
+    """Train pattern recognition models"""
+    logger.info("Training pattern recognition models...")
+    results = {}
+    
+    # Pattern Recognition Ensemble
+    logger.info("Training Pattern Recognition Ensemble...")
+    pattern_ensemble = PatternRecognitionEnsemble()
+    pattern_signals = pattern_ensemble.predict(data)
+    results['pattern_recognition_ensemble'] = {
+        'model': pattern_ensemble,
+        'signals': pattern_signals,
+        'params': pattern_ensemble.get_parameters()
+    }
+    
+    # Individual pattern models (for comparison)
+    if config.get('train_individual_patterns', False):
+        logger.info("Training individual pattern models...")
+        
+        # Candlestick
+        candle_model = CandlestickPatternsModel()
+        results['candlestick'] = {
+            'model': candle_model,
+            'signals': candle_model.predict(data),
+            'params': candle_model.get_parameters()
+        }
+        
+        # Support/Resistance
+        sr_model = SupportResistanceModel()
+        results['support_resistance'] = {
+            'model': sr_model,
+            'signals': sr_model.predict(data),
+            'params': sr_model.get_parameters()
+        }
+    
+    return results
+
+def train_advanced_models(data: pd.DataFrame, config: Dict[str, Any]) -> Dict[str, Any]:
+    """Train advanced models (market regime, portfolio optimization)"""
+    logger.info("Training advanced models...")
+    results = {}
+    
+    # Market Regime Detector
+    logger.info("Training Market Regime Detector...")
+    try:
+        regime_model = MarketRegimeDetector()
+        regime_model.fit(data)
+        regime_signals = regime_model.predict(data)
+        results['market_regime'] = {
+            'model': regime_model,
+            'signals': regime_signals,
+            'params': regime_model.get_parameters(),
+            'regimes': regime_model.get_regimes(data).to_dict()
+        }
+    except Exception as e:
+        logger.error(f"Market regime detector failed: {e}")
+    
+    # Note: Portfolio Optimizer requires multiple assets, so skipping for single asset
     
     return results
 
@@ -365,6 +516,22 @@ def main():
         rule_results = train_rule_based_models(data, config)
         all_results.update(rule_results)
         
+        # Technical indicator models
+        tech_results = train_technical_indicator_models(data, config)
+        all_results.update(tech_results)
+
+        # Volume models
+        volume_results = train_volume_models(data, config)
+        all_results.update(volume_results)
+
+        # Pattern models
+        pattern_results = train_pattern_models(data, config)
+        all_results.update(pattern_results)
+
+        # Advanced models
+        advanced_results = train_advanced_models(data, config)
+        all_results.update(advanced_results)
+
         # ML models
         if not args.skip_ml:
             ml_results = train_ml_models(data, config)
