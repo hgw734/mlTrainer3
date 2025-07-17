@@ -118,14 +118,14 @@ def print_banner():
 
                                                                                             services = []
 
-                                                                                            # Launch chat interface
-                                                                                            logger.info("Starting mlTrainer Chat# Production code implemented")
-                                                                                            chat_process = subprocess.Popen(
-                                                                                            [sys.executable, "-m", "streamlit", "run", "mltrainer_chat.py", "--server.port", "8501"],
-                                                                                            stdout=subprocess.DEVNULL,
-                                                                                            stderr=subprocess.DEVNULL,
-                                                                                            )
-                                                                                            services.append(("Chat Interface", chat_process, "http://localhost:8501"))
+                                                                                                # Launch unified chat interface
+    logger.info("Starting mlTrainer Unified Chat")
+    chat_process = subprocess.Popen(
+        [sys.executable, "-m", "streamlit", "run", "mltrainer_unified_chat.py", "--server.port", "8501"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    services.append(("Unified Chat Interface", chat_process, "http://localhost:8501"))
 
                                                                                             # Launch monitoring dashboard
                                                                                             logger.info("Starting Monitoring Dashboard# Production code implemented")

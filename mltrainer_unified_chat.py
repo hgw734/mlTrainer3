@@ -23,16 +23,22 @@ from mlagent_bridge import MLAgentBridge
 # from utils.persistent_memory import add_chat_message, get_memory_stats
 
 
+# Import recommendation system
+from recommendation_tracker import get_recommendation_tracker
+from virtual_portfolio_manager import get_virtual_portfolio_manager
+
 # Initialize components
 @st.cache_resource
 def init_components():
     """Initialize all system components"""
     return {
-    "executor": get_unified_executor(),
-    "background_manager": get_enhanced_background_manager(),
-    "claude": MLTrainerClaude(),
-    "goal_system": GoalSystem(),
-    "bridge": MLAgentBridge(),
+        "executor": get_unified_executor(),
+        "background_manager": get_enhanced_background_manager(),
+        "claude": MLTrainerClaude(),
+        "goal_system": GoalSystem(),
+        "bridge": MLAgentBridge(),
+        "recommendation_tracker": get_recommendation_tracker(),
+        "portfolio_manager": get_virtual_portfolio_manager(),
     }
 
 
@@ -207,6 +213,87 @@ def init_components():
                                                                                     st.rerun()
                                                                                     else:
                                                                                         st.info("No active trials")
+
+                                                                                        st.divider()
+
+                                                                                        # Trading Recommendations Section
+                                                                                        st.subheader("💡 Trading Recommendations")
+                                                                                        
+                                                                                        # Get active recommendations
+                                                                                        active_recs = components["recommendation_tracker"].get_active_recommendations()
+                                                                                        
+                                                                                        if active_recs:
+                                                                                            st.metric("Active Recommendations", len(active_recs))
+                                                                                            
+                                                                                            # Display top recommendations
+                                                                                            for rec in active_recs[:5]:  # Top 5
+                                                                                                with st.expander(f"{rec['symbol']} - {rec['timeframe']}", expanded=True):
+                                                                                                    col1, col2, col3 = st.columns(3)
+                                                                                                    
+                                                                                                    with col1:
+                                                                                                        st.metric("Signal Strength", f"{rec['signal_strength']:.1%}")
+                                                                                                        st.metric("Entry Price", f"${rec['entry_price']:.2f}")
+                                                                                                    
+                                                                                                    with col2:
+                                                                                                        st.metric("Profit Probability", f"{rec['profit_probability']:.1%}")
+                                                                                                        st.metric("Target Price", f"${rec['target_price']:.2f}")
+                                                                                                    
+                                                                                                    with col3:
+                                                                                                        st.metric("Confidence", f"{rec['confidence']:.1%}")
+                                                                                                        st.metric("Stop Loss", f"${rec['stop_loss']:.2f}")
+                                                                                                    
+                                                                                                    st.caption(f"Model: {rec['model_used']}")
+                                                                                                    
+                                                                                                    # Add to portfolio button
+                                                                                                    if st.button(f"Add to Watch List", key=f"watch_{rec['symbol']}_{rec['timestamp']}"):
+                                                                                                        st.success(f"Added {rec['symbol']} to watch list!")
+                                                                                        else:
+                                                                                            st.info("No active recommendations. Run a scan to generate recommendations.")
+                                                                                            
+                                                                                            if st.button("🔍 Scan S&P 500"):
+                                                                                                with st.spinner("Scanning for opportunities..."):
+                                                                                                    # Get S&P 500 symbols (simplified list for demo)
+                                                                                                    symbols = ["AAPL", "MSFT", "GOOGL", "AMZN", "META", "TSLA", "NVDA", "JPM", "JNJ", "V"]
+                                                                                                    
+                                                                                                    # Run async scan
+                                                                                                    import asyncio
+                                                                                                    recommendations = asyncio.run(
+                                                                                                        components["recommendation_tracker"].scan_for_opportunities(symbols)
+                                                                                                    )
+                                                                                                    
+                                                                                                    st.success(f"Found {len(recommendations)} recommendations!")
+                                                                                                    st.rerun()
+                                                                                        
+                                                                                        st.divider()
+                                                                                        
+                                                                                        # Virtual Portfolio Performance
+                                                                                        st.subheader("📈 Virtual Portfolio Performance")
+                                                                                        
+                                                                                        portfolio_metrics = components["portfolio_manager"].get_portfolio_metrics()
+                                                                                        
+                                                                                        col1, col2, col3, col4 = st.columns(4)
+                                                                                        
+                                                                                        with col1:
+                                                                                            st.metric("Portfolio Value", f"${portfolio_metrics['total_value']:,.2f}")
+                                                                                            st.metric("Open Positions", portfolio_metrics['open_positions'])
+                                                                                        
+                                                                                        with col2:
+                                                                                            st.metric("Total Return", f"{portfolio_metrics['total_return_pct']:+.2f}%", 
+                                                                                                     delta=f"${portfolio_metrics['total_return']:,.2f}")
+                                                                                            st.metric("Closed Trades", portfolio_metrics['closed_positions'])
+                                                                                        
+                                                                                        with col3:
+                                                                                            st.metric("Win Rate", f"{portfolio_metrics['win_rate']:.1f}%")
+                                                                                            st.metric("Avg Win", f"{portfolio_metrics['avg_win_pct']:+.2f}%")
+                                                                                        
+                                                                                        with col4:
+                                                                                            st.metric("Sharpe Ratio", f"{portfolio_metrics['sharpe_ratio']:.2f}")
+                                                                                            st.metric("Best Trade", f"{portfolio_metrics['best_trade']:+.2f}%")
+                                                                                        
+                                                                                        # Show performance report
+                                                                                        if st.button("📄 Generate Performance Report"):
+                                                                                            report = components["portfolio_manager"].generate_performance_report()
+                                                                                            st.text_area("Performance Report", report, height=300)
 
                                                                                         st.divider()
 
