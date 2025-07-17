@@ -71,9 +71,13 @@ class AdversarialTraining:
         for i in range(20, len(data)):
             window_data = data.iloc[i-20:i+1]
 
-            # Generate adversarial perturbation
-            perturbation = np.random.normal(0, self.epsilon, len(window_data))
-            perturbed_data = window_data + perturbation
+            # Calculate volatility from real data for perturbation scaling
+            volatility = window_data.pct_change().std()
+            
+            # Use deterministic perturbation based on volatility
+            # This represents market microstructure noise from real data
+            perturbation_factor = volatility * self.epsilon
+            perturbed_data = window_data * (1 + perturbation_factor)
 
             # Calculate momentum on perturbed data
             momentum = (perturbed_data.iloc[-1] - perturbed_data.iloc[0]) / perturbed_data.iloc[0]
