@@ -1,0 +1,336 @@
+{
+  "timestamp": "1752763644.1670465",
+  "model_compliance": {
+    "total_files": 39,
+    "compliant_files": 39,
+    "violations": [],
+    "data_source_usage": {
+      "custom/risk.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/interest_rate.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/binomial.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/complexity.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/information_theory.py": {
+        "polygon_connector": false,
+        "PolygonConnector": false,
+        "fred_connector": false,
+        "FREDConnector": false,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/volume_analysis.py": {
+        "polygon_connector": false,
+        "PolygonConnector": false,
+        "fred_connector": false,
+        "FREDConnector": false,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/meta_learning.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/detectors.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/financial_models.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/risk_management.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/volatility.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/volume.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/adaptive.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/stress.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/indicators.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/regime_detection.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/adversarial.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/systems.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/patterns.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/regime_ensemble.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/position_sizing.py": {
+        "polygon_connector": false,
+        "PolygonConnector": false,
+        "fred_connector": false,
+        "FREDConnector": false,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/microstructure.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/nonlinear.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/time_series.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/momentum.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/rl.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/ensemble.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/fractal.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/alternative_data.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/__init__.py": {
+        "polygon_connector": false,
+        "PolygonConnector": false,
+        "fred_connector": false,
+        "FREDConnector": false,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/optimization.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/momentum_models.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/automl.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/pairs.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/macro.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/volatility_models.py": {
+        "polygon_connector": false,
+        "PolygonConnector": false,
+        "fred_connector": false,
+        "FREDConnector": false,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/technical_analysis.py": {
+        "polygon_connector": false,
+        "PolygonConnector": false,
+        "fred_connector": false,
+        "FREDConnector": false,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/machine_learning.py": {
+        "polygon_connector": false,
+        "PolygonConnector": false,
+        "fred_connector": false,
+        "FREDConnector": false,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      },
+      "custom/elliott_wave.py": {
+        "polygon_connector": true,
+        "PolygonConnector": true,
+        "fred_connector": true,
+        "FREDConnector": true,
+        "POLYGON_API_KEY": false,
+        "FRED_API_KEY": false
+      }
+    },
+    "momentum_models_verified": true
+  },
+  "momentum_optimization": {
+    "momentum_models_exist": true,
+    "correct_timeframes": true,
+    "uses_real_data": true,
+    "no_synthetic_data": true
+  },
+  "workflow_setup": {
+    "mlagent_bridge_exists": true,
+    "mlagent_integration_exists": true,
+    "mltrainer_cannot_direct_ml": true,
+    "proper_communication_flow": true
+  },
+  "overall_compliant": true
+}
