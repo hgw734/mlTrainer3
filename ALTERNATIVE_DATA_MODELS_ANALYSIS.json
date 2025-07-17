@@ -1,0 +1,213 @@
+{
+  "timestamp": "2025-07-17T10:26:50.182181",
+  "total_models_analyzed": "approximately 140+",
+  "models_requiring_alternative_data": 27,
+  "percentage_requiring_alternative_data": "27+ models",
+  "categories_affected": {
+    "deep_learning": 2,
+    "reinforcement_learning": 5,
+    "nlp_sentiment": 3,
+    "cutting_edge_ai": 9,
+    "information_theory": 2,
+    "risk_analytics": 1,
+    "market_microstructure": 3,
+    "advanced": 2
+  },
+  "reason_types": {
+    "model type": 11,
+    "category": 20,
+    "requires financial_text": 1,
+    "requires text_data": 3,
+    "requires labeled_data": 1,
+    "requires sentence_pairs": 1,
+    "requires graph_adjacency": 1,
+    "requires binary_sequences": 1,
+    "requires port": 1,
+    "requires trade_data": 2,
+    "requires quote_data": 1,
+    "requires order_book_data": 1,
+    "requires order_book": 1
+  },
+  "models": {
+    "transformer": {
+      "reasons": [
+        "model type: transformer"
+      ],
+      "category": "deep_learning"
+    },
+    "temporal_fusion_transformer": {
+      "reasons": [
+        "model type: temporal_fusion_transformer"
+      ],
+      "category": "deep_learning"
+    },
+    "q_learning": {
+      "reasons": [
+        "category: reinforcement_learning"
+      ],
+      "category": "reinforcement_learning"
+    },
+    "double_q_learning": {
+      "reasons": [
+        "category: reinforcement_learning"
+      ],
+      "category": "reinforcement_learning"
+    },
+    "dueling_dqn": {
+      "reasons": [
+        "category: reinforcement_learning"
+      ],
+      "category": "reinforcement_learning"
+    },
+    "dqn": {
+      "reasons": [
+        "category: reinforcement_learning"
+      ],
+      "category": "reinforcement_learning"
+    },
+    "regime_aware_dqn": {
+      "reasons": [
+        "category: reinforcement_learning"
+      ],
+      "category": "reinforcement_learning"
+    },
+    "finbert_sentiment_classifier": {
+      "reasons": [
+        "requires financial_text",
+        "model type: finbert_sentiment_classifier",
+        "category: nlp_sentiment",
+        "requires text_data"
+      ],
+      "category": "nlp_sentiment"
+    },
+    "bert_classification_head": {
+      "reasons": [
+        "category: nlp_sentiment",
+        "requires labeled_data",
+        "requires text_data",
+        "model type: bert_classification_head"
+      ],
+      "category": "nlp_sentiment"
+    },
+    "sentence_transformer_embedding": {
+      "reasons": [
+        "category: nlp_sentiment",
+        "requires text_data",
+        "model type: sentence_transformer_embedding",
+        "requires sentence_pairs"
+      ],
+      "category": "nlp_sentiment"
+    },
+    "graph_neural_network": {
+      "reasons": [
+        "category: cutting_edge_ai",
+        "model type: graph_neural_network"
+      ],
+      "category": "cutting_edge_ai"
+    },
+    "adversarial_momentum_net": {
+      "reasons": [
+        "category: cutting_edge_ai"
+      ],
+      "category": "cutting_edge_ai"
+    },
+    "fractal_model": {
+      "reasons": [
+        "category: cutting_edge_ai"
+      ],
+      "category": "cutting_edge_ai"
+    },
+    "wavelet_transform_model": {
+      "reasons": [
+        "category: cutting_edge_ai"
+      ],
+      "category": "cutting_edge_ai"
+    },
+    "empirical_mode_decomposition": {
+      "reasons": [
+        "category: cutting_edge_ai"
+      ],
+      "category": "cutting_edge_ai"
+    },
+    "neural_ode_financial": {
+      "reasons": [
+        "category: cutting_edge_ai"
+      ],
+      "category": "cutting_edge_ai"
+    },
+    "model_architecture_search": {
+      "reasons": [
+        "category: cutting_edge_ai"
+      ],
+      "category": "cutting_edge_ai"
+    },
+    "hurst_exponent_fractal": {
+      "reasons": [
+        "category: cutting_edge_ai"
+      ],
+      "category": "cutting_edge_ai"
+    },
+    "threshold_autoregressive": {
+      "reasons": [
+        "category: cutting_edge_ai"
+      ],
+      "category": "cutting_edge_ai"
+    },
+    "network_topology_analysis": {
+      "reasons": [
+        "model type: network_topology_analysis",
+        "requires graph_adjacency"
+      ],
+      "category": "information_theory"
+    },
+    "lempel_ziv_complexity": {
+      "reasons": [
+        "requires binary_sequences"
+      ],
+      "category": "information_theory"
+    },
+    "market_stress_indicators": {
+      "reasons": [
+        "requires port"
+      ],
+      "category": "risk_analytics"
+    },
+    "order_flow_analysis": {
+      "reasons": [
+        "model type: order_flow_analysis",
+        "category: market_microstructure"
+      ],
+      "category": "market_microstructure"
+    },
+    "bid_ask_spread_analysis": {
+      "reasons": [
+        "requires trade_data",
+        "requires quote_data",
+        "category: market_microstructure"
+      ],
+      "category": "market_microstructure"
+    },
+    "liquidity_assessment": {
+      "reasons": [
+        "requires order_book_data",
+        "requires order_book",
+        "requires trade_data",
+        "category: market_microstructure",
+        "model type: liquidity_assessment"
+      ],
+      "category": "market_microstructure"
+    },
+    "alternative_data_model": {
+      "reasons": [
+        "model type: alternative_data_model"
+      ],
+      "category": "advanced"
+    },
+    "order_book_imbalance_model": {
+      "reasons": [
+        "model type: order_book_imbalance_model"
+      ],
+      "category": "advanced"
+    }
+  }
+}
