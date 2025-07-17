@@ -592,15 +592,3 @@ class PositionSizingModel:
                 name: model.params for name, model in self.models.items()
             }
         } 
-            # Calculate position size (e.g., inverse volatility)
-            returns = window_data.pct_change().dropna()
-            volatility = returns.std()
-            position_size = 1.0 / volatility if volatility > 0 else 0
-
-            # Simple position sizing signal
-            signals.iloc[i] = position_size
-
-        return signals
-
-    def get_parameters(self) -> Dict[str, Any]:
-        return {'sizing_window': self.sizing_window, 'is_fitted': self.is_fitted} 
