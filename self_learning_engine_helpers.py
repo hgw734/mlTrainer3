@@ -219,8 +219,20 @@ class SelfLearningEngineHelpers:
                                                                                                                             # Use existing drift detection system
                                                                                                                             from drift_protection import detect_distribution_drift, track_model_performance
 
-                                                                                                                            # Create synthetic data for drift detection (this would use real data in practice)
-                                                                                                                            synthetic_data = market_data.get_normal_returns(0, 1, 100)  # real_implementation
+                                                                                                                            # Use actual market data for drift detection
+                                                                                                                            # Get recent returns from the same symbol
+                                                                                                                            from polygon_connector import PolygonConnector
+                                                                                                                            connector = PolygonConnector()
+                                                                                                                            recent_data = connector.get_ohlcv_data(
+                                                                                                                                record.context.get('symbol', 'SPY'),
+                                                                                                                                (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d'),
+                                                                                                                                datetime.now().strftime('%Y-%m-%d')
+                                                                                                                            )
+                                                                                                                            if recent_data is not None and not recent_data.empty:
+                                                                                                                                actual_returns = recent_data['close'].pct_change().dropna().values
+                                                                                                                            else:
+                                                                                                                                # Fallback to zeros if no data available
+                                                                                                                                actual_returns = np.zeros(100)
 
                                                                                                                             # Check for data drift
                                                                                                                             data_drift = detect_distribution_drift(
