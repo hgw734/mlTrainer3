@@ -58,7 +58,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
 EXPOSE 8000 8501
 
 # Default command
-CMD ["python", "app.py"]
+CMD ["python", "run_streamlit.py"]
 
 # Labels
 LABEL maintainer="mlTrainer Development Team <dev@mltrainer.ai>"
