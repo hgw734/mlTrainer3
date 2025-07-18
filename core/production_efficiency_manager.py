@@ -255,15 +255,15 @@ class ProductionEfficiencyManager:
         """Get resource utilization metrics"""
         # In production, query Prometheus
         return {
-            'avg_cpu_utilization': self._deterministic_uniform(40, 80),
-            'avg_memory_utilization': self._deterministic_uniform(30, 70)
+            'avg_cpu_utilization': 60.0,  # TODO: Connect to real monitoring
+            'avg_memory_utilization': 50.0  # TODO: Connect to real monitoring
         }
 
     async def _get_gpu_metrics(self) -> Dict:
         """Get GPU utilization metrics"""
         # In production, query NVML
         return {
-            'avg_gpu_utilization': self._deterministic_uniform(50, 90)
+            'avg_gpu_utilization': 70.0  # TODO: Connect to real monitoring
         }
 
     def _calculate_overall_cache_hit_rate(self, cache_report: Dict) -> float:

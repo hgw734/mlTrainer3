@@ -817,14 +817,14 @@ if __name__ == "__main__":
     try:
         # 1. Test data distribution monitoring
         logger.info("\n📊 Testing Data Distribution Monitoring...")
-        input_data = np.random.normal(0, 1, size=100)
+        input_data = np.linspace(-2, 2, 100)  # Fixed test data
         stats = log_distribution_metrics(input_data, name="test_input", source="polygon")
         logger.info(f"✅ Data quality score: {stats['quality_score']:.3f}")
         
         # 2. Test model performance tracking
         logger.info("\n📈 Testing Model Performance Tracking...")
-        y_true = np.random.normal(0, 1, size=100)
-        y_pred = y_true + np.random.normal(0, 0.3, size=100)
+        y_true = np.sin(np.linspace(0, 4*np.pi, 100))  # Fixed test data
+        y_pred = y_true + 0.1 * np.sin(np.linspace(0, 20*np.pi, 100))  # Fixed test noise
         error = track_model_performance(y_true, y_pred, model_name="test_model")
         logger.error(f"✅ Model error tracked: {error:.4f}")
         

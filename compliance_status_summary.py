@@ -23,47 +23,10 @@ class ComplianceCategory:
     issues: List[str]
     priority: str  # 'critical', 'high', 'medium', 'low'
 
-    def _deterministic_normal(self, mean=0.0, std=1.0, size=None):
-        """Deterministic normal distribution based on timestamp"""
-        import time
-        import numpy as np
-        seed = int(time.time() * 1000) % 1000000
-        np.random.seed(seed)
-        if size is None:
-            return np.random.normal(mean, std)
-        else:
-            return np.random.normal(mean, std, size)
-
-    def _deterministic_uniform(self, low=0.0, high=1.0, size=None):
-        """Deterministic uniform distribution"""
-        import time
-        import numpy as np
-        seed = int(time.time() * 1000) % 1000000
-        np.random.seed(seed)
-        if size is None:
-            return np.random.uniform(low, high)
-        else:
-            return np.random.uniform(low, high, size)
-
-    def _deterministic_randn(self, *args):
-        """Deterministic random normal"""
-        import time
-        import numpy as np
-        seed = int(time.time() * 1000) % 1000000
-        np.random.seed(seed)
-        return np.random.randn(*args)
-
-    def _deterministic_random(self, size=None):
-        """Deterministic random values"""
-        import time
-        import numpy as np
-        seed = int(time.time() * 1000) % 1000000
-        np.random.seed(seed)
-        if size is None:
-            return np.random.random()
-        else:
-            return np.random.random(size)
-
+    
+    
+    
+    
 
 def generate_compliance_report():
     """Generate visual compliance status report"""
