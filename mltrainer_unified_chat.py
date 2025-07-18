@@ -288,7 +288,7 @@ def init_components():
                                                                                         
                                                                                         with col4:
                                                                                             st.metric("Sharpe Ratio", f"{portfolio_metrics['sharpe_ratio']:.2f}")
-                                                                                            st.metric("Best Trade", f"{portfolio_metrics['best_trade']:+.2f}%")
+                                                                                            st.metric("Sortino Ratio", f"{portfolio_metrics.get('sortino_ratio', 0):.2f}")
                                                                                         
                                                                                         # Show performance report
                                                                                         if st.button("📄 Generate Performance Report"):

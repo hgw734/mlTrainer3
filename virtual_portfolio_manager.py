@@ -262,10 +262,19 @@ class VirtualPortfolioManager:
             returns = [p.profit_loss_pct for p in closed]
             if len(returns) > 1:
                 sharpe = np.mean(returns) / (np.std(returns) + 1e-6) * np.sqrt(252)
+                
+                # Calculate Sortino ratio (downside deviation)
+                negative_returns = [r for r in returns if r < 0]
+                if negative_returns:
+                    downside_deviation = np.std(negative_returns)
+                    sortino = np.mean(returns) / (downside_deviation + 1e-6) * np.sqrt(252)
+                else:
+                    sortino = np.mean(returns) * np.sqrt(252) if np.mean(returns) > 0 else 0
             else:
                 sharpe = 0
+                sortino = 0
         else:
-            win_rate = avg_win = avg_loss = sharpe = 0
+            win_rate = avg_win = avg_loss = sharpe = sortino = 0
         
         return {
             'total_value': total_value,
@@ -279,6 +288,7 @@ class VirtualPortfolioManager:
             'avg_win_pct': avg_win,
             'avg_loss_pct': avg_loss,
             'sharpe_ratio': sharpe,
+            'sortino_ratio': sortino,
             'best_trade': max((p.profit_loss_pct for p in closed), default=0),
             'worst_trade': min((p.profit_loss_pct for p in closed), default=0)
         }
@@ -336,6 +346,7 @@ Trading Statistics:
 - Best Trade: {metrics['best_trade']:+.2f}%
 - Worst Trade: {metrics['worst_trade']:+.2f}%
 - Sharpe Ratio: {metrics['sharpe_ratio']:.2f}
+- Sortino Ratio: {metrics['sortino_ratio']:.2f}
 """
         return report
 
