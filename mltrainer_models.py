@@ -532,10 +532,26 @@ class MLTrainerModelManager:
     def prepare_data(self, symbol: str = None, data_source: str = "polygon", lookback_days: int = 365) -> Tuple[np.ndarray, np.ndarray]:
         """Prepare data from approved sources"""
         try:
-            # For now, use synthetic data for testing
-            self.logger.warning(f"Using synthetic data for testing")
-            X = np.random.randn(1000, 10)  # Synthetic features
-            y = np.random.randn(1000)  # Synthetic target
+            # Get real data from Polygon API
+            from data_fetcher import DataFetcher
+            fetcher = DataFetcher()
+            
+            if symbol is None:
+                symbol = "SPY"  # Default to SPY if no symbol provided
+                
+            # Fetch real market data
+            df = fetcher.fetch_stock_data(symbol, lookback_days=lookback_days)
+            
+            if df is None or df.empty:
+                raise ValueError(f"No data available for {symbol}")
+                
+            # Create features from real data
+            X = self._create_features(df)
+            
+            # Create target (next day returns)
+            y = df['close'].pct_change().shift(-1).fillna(0).values[:-1]
+            X = X[:-1]  # Align features with target
+            
             return X, y
         except Exception as e:
             self.logger.error(f"Data preparation failed: {e}")

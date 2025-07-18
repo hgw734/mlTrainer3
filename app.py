@@ -262,7 +262,8 @@ def show_drift_protection():
 
             # Sample drift monitoring chart
             dates = pd.date_range(start=datetime.now() - timedelta(days=30), end=datetime.now(), freq="D")
-            drift_scores = np.random.normal(0.1, 0.05, len(dates))
+            # Use deterministic values for UI display only - not used in actual models
+            drift_scores = [0.1 + 0.05 * np.sin(i/5) for i in range(len(dates))]
 
             fig = go.Figure()
             fig.add_trace(
