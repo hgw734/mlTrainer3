@@ -53,8 +53,8 @@ import modal
 import os
 
 app = modal.App(
-    "mltrainer-web",
-    secrets=[modal.Secret.from_name("mltrainer-secrets")],
+    "mltrainer3",
+    secrets=[modal.Secret.from_name("mltrainer3-secrets")],
 )
 
 image = (
@@ -104,12 +104,12 @@ def main():
         
         if result.returncode == 0:
             print("\n✅ Deployment successful!")
-            print("\n🌐 Your mlTrainer is now live at:")
-            print("   https://YOUR-MODAL-USERNAME--mltrainer-web.modal.run")
+            print("\n🌐 Your mlTrainer3 is now live at:")
+            print("   https://YOUR-MODAL-USERNAME--mltrainer3.modal.run")
             print("\n📱 Save this URL to your iPhone home screen!")
             print("\n⚠️  Don't forget to set up your API keys in Modal:")
             print("   1. Go to https://modal.com/secrets")
-            print("   2. Create secret 'mltrainer-secrets' with:")
+            print("   2. Create secret 'mltrainer3-secrets' with:")
             print("      - POLYGON_API_KEY")
             print("      - FRED_API_KEY")
             print("      - ANTHROPIC_API_KEY")

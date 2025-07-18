@@ -8,9 +8,9 @@ import os
 
 # Create Modal app
 app = modal.App(
-    "mltrainer-github",
+    "mltrainer3",
     secrets=[
-        modal.Secret.from_name("mltrainer-secrets"),
+        modal.Secret.from_name("mltrainer3-secrets"),
     ],
 )
 
@@ -44,7 +44,7 @@ mltrainer_image = (
 )
 
 # Persistent volume for data
-volume = modal.Volume.from_name("mltrainer-data", create_if_missing=True)
+volume = modal.Volume.from_name("mltrainer3-data", create_if_missing=True)
 
 @app.function(
     image=mltrainer_image,
@@ -65,7 +65,7 @@ def mltrainer_app():
     from fastapi.responses import RedirectResponse
     
     # Set up environment
-    secrets = modal.Secret.from_name("mltrainer-secrets").dict()
+    secrets = modal.Secret.from_name("mltrainer3-secrets").dict()
     for key, value in secrets.items():
         os.environ[key] = value
     
@@ -144,8 +144,8 @@ def deploy():
     
     # The deployment happens automatically when this script runs
     print("\n✅ Deployment complete!")
-    print(f"\n🌐 Access your mlTrainer at:")
-    print(f"   https://{os.environ.get('USER', 'your-username')}--mltrainer-github.modal.run")
+    print(f"\n🌐 Access your mlTrainer3 at:")
+    print(f"   https://{os.environ.get('USER', 'your-username')}--mltrainer3.modal.run")
     print("\n📱 Save this URL to your iPhone home screen!")
 
 if __name__ == "__main__":

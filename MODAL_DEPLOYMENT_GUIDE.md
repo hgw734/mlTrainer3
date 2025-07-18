@@ -11,7 +11,7 @@
 
 ## Step 1: Set Up Secrets in Modal
 
-Go to https://modal.com/secrets and create a new secret called `mltrainer-secrets` with:
+Go to https://modal.com/secrets and create a new secret called `mltrainer3-secrets` with:
 
 ```json
 {
