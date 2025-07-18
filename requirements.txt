@@ -11,9 +11,9 @@ xgboost==2.0.0
 lightgbm==4.1.0
 optuna==3.3.0
 
-# Deep Learning & Neural Networks
-# tensorflow==2.13.0  # Commented out - not currently used but configured
-# torch==2.0.0  # Commented out - not currently used but configured
+# Deep Learning (commented out to save resources)
+# tensorflow==2.13.0
+# torch==2.0.0
 
 # Data Visualization
 matplotlib==3.7.0
@@ -28,6 +28,7 @@ yfinance==0.2.28
 # Statistical Analysis
 scipy==1.11.0
 statsmodels==0.14.0
+arch==6.2.0  # For GARCH models
 
 # AI/LLM Integration
 anthropic==0.7.0
@@ -36,7 +37,3 @@ anthropic==0.7.0
 pyyaml==6.0.1
 joblib==1.3.0
 psutil==5.9.0
-
-# Additional dependencies for specific models
-# catboost==1.2  # Commented out - not found in actual imports
-# hmmlearn==0.3.0  # For Hidden Markov Models if needed
