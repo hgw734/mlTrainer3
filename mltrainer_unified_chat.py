@@ -335,6 +335,22 @@ def init_components():
 
                                                                                                                     # Main chat interface
                                                                                                                     st.title("🤖 mlTrainer Unified Interface")
+                                                                                                                    
+                                                                                                                    # Display update status
+                                                                                                                    if os.path.exists("/data/recommendations/last_scan_time.json"):
+                                                                                                                        try:
+                                                                                                                            with open("/data/recommendations/last_scan_time.json", "r") as f:
+                                                                                                                                last_scan = json.load(f)
+                                                                                                                                last_scan_time = datetime.fromisoformat(last_scan["timestamp"])
+                                                                                                                                time_since = datetime.now() - last_scan_time
+                                                                                                                                minutes_ago = int(time_since.total_seconds() / 60)
+                                                                                                                                
+                                                                                                                                if minutes_ago < 1:
+                                                                                                                                    st.success("🔄 Recommendations updated just now")
+                                                                                                                                else:
+                                                                                                                                    st.info(f"🕒 Last update: {minutes_ago} minutes ago")
+                                                                                                                        except:
+                                                                                                                            pass
 
                                                                                                                     # Display current goal prominently
                                                                                                                     if current_goal.get("goal"):

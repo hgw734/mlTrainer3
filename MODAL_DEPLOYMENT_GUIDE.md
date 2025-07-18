@@ -42,9 +42,9 @@ After deployment, you'll get URLs like:
 - No need to be on same WiFi
 - Automatic HTTPS/SSL
 
-### 2. **Scheduled Jobs**
-- **Every 15 minutes**: Scans for new trading recommendations
-- **Every 5 minutes**: Updates virtual portfolio positions
+### 2. **On-Demand Updates**
+- **When you access/reload the page**: Scans for new trading recommendations
+- **Rate limited**: Maximum once per 15 minutes to avoid excessive API usage
 
 ### 3. **Persistent Storage**
 - Recommendations saved to Modal volumes

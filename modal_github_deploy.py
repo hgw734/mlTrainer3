@@ -61,6 +61,9 @@ def mltrainer_app():
     """Run mlTrainer as an ASGI app"""
     import subprocess
     import sys
+    import asyncio
+    import json
+    from datetime import datetime
     from fastapi import FastAPI, Response
     from fastapi.responses import RedirectResponse
     
@@ -87,6 +90,13 @@ def mltrainer_app():
     
     @web_app.get("/")
     async def root():
+        """Main entry point - trigger updates and redirect to Streamlit"""
+        # Run recommendation scan when page is accessed
+        try:
+            await trigger_recommendation_scan()
+        except Exception as e:
+            print(f"Error running recommendation scan: {e}")
+        
         # Redirect to Streamlit
         return RedirectResponse(url="/stream/", status_code=302)
     
@@ -94,45 +104,57 @@ def mltrainer_app():
     async def health():
         return {"status": "healthy", "app": "mlTrainer"}
     
+    async def trigger_recommendation_scan():
+        """Run recommendation scan when page is accessed"""
+        # Import from the cloned repo
+        import sys
+        sys.path.append('/app')
+        from recommendation_tracker import get_recommendation_tracker
+        
+        # Check if we've scanned recently (within last 15 minutes)
+        last_scan_file = "/data/recommendations/last_scan_time.json"
+        current_time = datetime.now()
+        
+        try:
+            with open(last_scan_file, "r") as f:
+                last_scan_data = json.load(f)
+                last_scan_time = datetime.fromisoformat(last_scan_data["timestamp"])
+                
+                # If scanned within last 15 minutes, skip
+                if (current_time - last_scan_time).total_seconds() < 900:
+                    print("Skipping scan - already ran within last 15 minutes")
+                    return
+        except:
+            pass  # No previous scan file
+        
+        print("Running recommendation scan...")
+        
+        symbols = [
+            "AAPL", "MSFT", "GOOGL", "AMZN", "META",
+            "TSLA", "NVDA", "JPM", "JNJ", "V",
+            "MA", "PG", "HD", "DIS", "PYPL",
+        ]
+        
+        tracker = get_recommendation_tracker()
+        recommendations = await tracker.scan_for_opportunities(symbols)
+        
+        # Save results
+        results = {
+            "timestamp": current_time.isoformat(),
+            "count": len(recommendations),
+            "recommendations": [r.to_dict() for r in recommendations[:10]]
+        }
+        
+        with open("/data/recommendations/latest.json", "w") as f:
+            json.dump(results, f, indent=2)
+        
+        # Save scan timestamp
+        with open(last_scan_file, "w") as f:
+            json.dump({"timestamp": current_time.isoformat()}, f)
+        
+        print(f"✅ Found {len(recommendations)} recommendations")
+    
     return web_app
-
-@app.function(
-    image=mltrainer_image,
-    schedule=modal.Period(minutes=15),
-    volumes={"/data": volume},
-)
-def scan_recommendations():
-    """Scan for trading recommendations every 15 minutes"""
-    import asyncio
-    import json
-    from datetime import datetime
-    
-    # Import from the cloned repo
-    import sys
-    sys.path.append('/app')
-    from recommendation_tracker import get_recommendation_tracker
-    
-    symbols = [
-        "AAPL", "MSFT", "GOOGL", "AMZN", "META",
-        "TSLA", "NVDA", "JPM", "JNJ", "V",
-        "MA", "PG", "HD", "DIS", "PYPL",
-    ]
-    
-    tracker = get_recommendation_tracker()
-    recommendations = asyncio.run(tracker.scan_for_opportunities(symbols))
-    
-    # Save results
-    results = {
-        "timestamp": datetime.now().isoformat(),
-        "count": len(recommendations),
-        "recommendations": [r.to_dict() for r in recommendations[:10]]
-    }
-    
-    with open("/data/recommendations/latest.json", "w") as f:
-        json.dump(results, f, indent=2)
-    
-    print(f"✅ Found {len(recommendations)} recommendations")
-    return results
 
 # One-line deployment script
 @app.local_entrypoint()
@@ -147,6 +169,7 @@ def deploy():
     print(f"\n🌐 Access your mlTrainer3 at:")
     print(f"   https://{os.environ.get('USER', 'your-username')}--mltrainer3.modal.run")
     print("\n📱 Save this URL to your iPhone home screen!")
+    print("\n📌 Updates run when you access/reload the page (max once per 15 minutes)")
 
 if __name__ == "__main__":
     deploy.remote()
