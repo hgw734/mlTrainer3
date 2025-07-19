@@ -10,19 +10,4 @@ pinned: false
 ---
 
 # MLTrainer3
-
-AI-powered trading system with 140+ models for institutional-grade analysis.
-
-## Features
-- Real-time market analysis
-- Multiple trading strategies
-- Risk management
-- Portfolio optimization
-
-## Usage
-This app requires API keys to be set in the Space settings:
-- ANTHROPIC_API_KEY
-- POLYGON_API_KEY
-- FRED_API_KEY
-- TELEGRAM_BOT_TOKEN
-- TELEGRAM_CHAT_ID
+AI-powered trading system
