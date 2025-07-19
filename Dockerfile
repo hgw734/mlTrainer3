@@ -7,8 +7,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-# IMPORTANT: Unset any STREAMLIT environment variables
-ENV STREAMLIT_SERVER_PORT=""
-ENV STREAMLIT_SERVER_ADDRESS=""
-
 CMD ["python", "run_streamlit.py"]
