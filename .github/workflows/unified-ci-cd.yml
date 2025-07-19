@@ -1,3 +1,36 @@
+- name: Push to Hugging Face
+  env:
+    HF_TOKEN: ${{ secrets.HF_TOKEN }}
+  run: |
+    # Copy main file to app.py for HF
+    cp mltrainer_unified_chat.py app.py
+    
+    # Configure git
+    git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    git config --global user.name "github-actions[bot]"
+    
+    # Clone HF space
+    git clone https://huggingface.co/spaces/hgw734/mltrainer3 hf-space
+    cd hf-space
+    
+    # Copy all files
+    cp -r ../* . || true
+    
+    # Make sure app.py exists
+    cp mltrainer_unified_chat.py app.py || true
+    
+    # Configure HF auth
+    git config credential.helper store
+    echo "https://hgw734:${HF_TOKEN}@huggingface.co" > ~/.git-credentials
+    
+    # Push
+    git add .
+    git commit -m "Update from GitHub" || true
+    git push origin main
+This approach clones the HF repo first, then pushes, which often works better.
+
+write the entire code please
+Complete .github/workflows/unified-ci-cd.yml file:
 name: mlTrainer CI/CD
 
 on:
@@ -49,32 +82,41 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        # Copy main file to app.py for HF
-        cp mltrainer_unified_chat.py app.py
+        # Clone HF space
+        git clone https://huggingface.co/spaces/hgw734/mltrainer3 hf-space
+        cd hf-space
         
         # Configure git
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git config user.name "github-actions[bot]"
         
-        # Add HF remote (replace YOUR_HF_USERNAME with your actual username)
-        git remote add hf https://hgw734:$HF_TOKEN@huggingface.co/spaces/hgw734/mltrainer3 || true
+        # Configure HF auth
+        git config credential.helper store
+        echo "https://hgw734:${HF_TOKEN}@huggingface.co" > ~/.git-credentials
         
-        # Create a temporary branch for HF
-        git checkout -b hf-deploy
-        git add app.py
-        git commit -m "Rename main file for HF deployment" || true
+        # Copy all files from GitHub repo
+        cp -r ../* . 2>/dev/null || true
+        cp -r ../.streamlit . 2>/dev/null || true
         
-        # Force push to HF
-        git push hf hf-deploy:main --force
+        # Rename main file to app.py
+        cp mltrainer_unified_chat.py app.py
+        
+        # Remove files that shouldn't be in HF
+        rm -rf .git .github tests __pycache__ .pytest_cache
+        
+        # Commit and push
+        git add .
+        git commit -m "Update from GitHub - $(date)" || echo "No changes to commit"
+        git push origin main
         
         echo "✅ Deployed to Hugging Face Spaces!"
+        echo "🔗 https://huggingface.co/spaces/hgw734/mltrainer3"
         
-        # Set secrets in HF Space
-        echo "Setting environment variables in HF Space..."
-        # Note: You'll need to set these manually in HF Space settings
-        echo "Go to your HF Space settings and add these secrets:"
-        echo "- ANTHROPIC_API_KEY"
-        echo "- POLYGON_API_KEY"
-        echo "- FRED_API_KEY"
-        echo "- TELEGRAM_BOT_TOKEN"
-        echo "- TELEGRAM_CHAT_ID"
+        # Reminder about secrets
+        echo ""
+        echo "⚠️ Remember to set these secrets in your HF Space settings:"
+        echo "   - ANTHROPIC_API_KEY"
+        echo "   - POLYGON_API_KEY"
+        echo "   - FRED_API_KEY"
+        echo "   - TELEGRAM_BOT_TOKEN"
+        echo "   - TELEGRAM_CHAT_ID"
