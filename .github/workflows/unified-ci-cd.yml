@@ -1,4 +1,4 @@
-ame: mlTrainer CI/CD
+name: mlTrainer CI/CD
 
 on:
   push:
@@ -43,6 +43,11 @@ jobs:
     - name: Push to Hugging Face
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
         # Copy main file to app.py for HF
         cp mltrainer_unified_chat.py app.py
@@ -63,3 +68,13 @@ jobs:
         git push hf hf-deploy:main --force
         
         echo "✅ Deployed to Hugging Face Spaces!"
+        
+        # Set secrets in HF Space
+        echo "Setting environment variables in HF Space..."
+        # Note: You'll need to set these manually in HF Space settings
+        echo "Go to your HF Space settings and add these secrets:"
+        echo "- ANTHROPIC_API_KEY"
+        echo "- POLYGON_API_KEY"
+        echo "- FRED_API_KEY"
+        echo "- TELEGRAM_BOT_TOKEN"
+        echo "- TELEGRAM_CHAT_ID"
