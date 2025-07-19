@@ -1,0 +1,53 @@
+{
+  "training_session": {
+    "timestamp": "2025-07-04T23:21:52.794942",
+    "environment": "pure_python_clean",
+    "python_path": "/tmp/clean_python_install/python/bin/python3",
+    "contamination_status": "CLEAN - No Nix contamination",
+    "models_trained": 2,
+    "data_samples": 1000,
+    "data_features": 15
+  },
+  "model_results": {
+    "LinearRegression": {
+      "model_type": "LinearRegression",
+      "weights": [
+        -0.033143808076513515,
+        0.10889757297705918,
+        -0.192278752285356,
+        0.14880287139517354,
+        -0.09370909505167349
+      ],
+      "mse": 0.0013735417706809746,
+      "r2_score": 0,
+      "predictions_sample": [
+        -0.0316811729876051,
+        -0.031104891022889825,
+        -0.024149378443239063,
+        -0.02869560122863419,
+        -0.03661309001173496
+      ],
+      "training_time": 0.3607,
+      "environment": "pure_python",
+      "contamination_free": true,
+      "trained_at": "2025-07-04T23:21:52.765971"
+    },
+    "RandomForest": {
+      "model_type": "RandomForest",
+      "n_trees": 10,
+      "mse": 0.00016881271864718777,
+      "r2_score": 0.3414452416000766,
+      "predictions_sample": [
+        0.0019362465779507547,
+        0.004275004158504537,
+        -0.006350737926085584,
+        0.004513207627809594,
+        -0.0011989159369060558
+      ],
+      "training_time": 0.028344,
+      "environment": "pure_python",
+      "contamination_free": true,
+      "trained_at": "2025-07-04T23:21:52.794754"
+    }
+  }
+}

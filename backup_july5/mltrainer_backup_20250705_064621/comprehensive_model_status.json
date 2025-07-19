@@ -1,0 +1,729 @@
+{
+  "summary": {
+    "total_models_in_registry": 121,
+    "trained_models": 10,
+    "ready_for_training": 30,
+    "framework_defined": 81,
+    "completion_percentage": 8.264462809917356
+  },
+  "status_breakdown": {
+    "trained": 10,
+    "ready": 30,
+    "framework": 81
+  },
+  "category_breakdown": {
+    "Linear Models": 11,
+    "Tree-Based": 6,
+    "Gradient Boosting": 3,
+    "Instance-Based": 1,
+    "Support Vector": 3,
+    "Neural Networks": 1,
+    "Gaussian Process": 1,
+    "Ensemble": 2,
+    "Clustering": 3,
+    "Outlier Detection": 3,
+    "Classification": 3,
+    "Ranking": 3,
+    "Time Series": 4,
+    "Deep Learning Time Series": 4,
+    "Deep Learning": 6,
+    "NLP": 1,
+    "Financial NLP": 1,
+    "Reinforcement Learning": 5,
+    "Financial Engineering": 2,
+    "Risk Management": 1,
+    "Volatility Modeling": 1,
+    "State Space": 1,
+    "Portfolio Optimization": 1,
+    "Asset Pricing": 1,
+    "Factor Models": 1,
+    "Meta-Learning": 2,
+    "Hyperparameter Optimization": 1,
+    "Automated ML": 1,
+    "AutoML": 1,
+    "Regime Detection": 2,
+    "Advanced Clustering": 2,
+    "Probabilistic Clustering": 1,
+    "Technical Indicators": 6,
+    "Momentum": 3,
+    "Trend": 3,
+    "Volume Analysis": 5,
+    "Pattern Recognition": 5,
+    "Alternative Data": 5,
+    "Econometrics": 5,
+    "Bayesian Methods": 2,
+    "Advanced Statistics": 3,
+    "Cross-Sectional": 3,
+    "Dimensionality Reduction": 2
+  },
+  "trained_model_details": {
+    "RandomForest": {
+      "path": "models/sklearn/RandomForest_20250704_205727.joblib",
+      "timestamp": "20250704",
+      "size_kb": 424.75,
+      "status": "trained"
+    },
+    "XGBoost": {
+      "path": "models/sklearn/XGBoost_20250704_205729.joblib",
+      "timestamp": "20250704",
+      "size_kb": 89.19,
+      "status": "trained"
+    },
+    "LightGBM": {
+      "path": "models/sklearn/LightGBM_20250704_205730.joblib",
+      "timestamp": "20250704",
+      "size_kb": 37.99,
+      "status": "trained"
+    },
+    "CatBoost": {
+      "path": "models/sklearn/CatBoost_20250704_205730.joblib",
+      "timestamp": "20250704",
+      "size_kb": 113.67,
+      "status": "trained"
+    },
+    "KNearestNeighbors": {
+      "path": "models/sklearn/KNearestNeighbors_20250704_205730.joblib",
+      "timestamp": "20250704",
+      "size_kb": 11.47,
+      "status": "trained"
+    },
+    "SVR": {
+      "path": "models/sklearn/SVR_20250704_205730.joblib",
+      "timestamp": "20250704",
+      "size_kb": 1.83,
+      "status": "trained"
+    },
+    "LinearRegression": {
+      "path": "models/sklearn/LinearRegression_20250704_205730.joblib",
+      "timestamp": "20250704",
+      "size_kb": 1.5,
+      "status": "trained"
+    },
+    "Ridge": {
+      "path": "models/sklearn/Ridge_20250704_205730.joblib",
+      "timestamp": "20250704",
+      "size_kb": 1.28,
+      "status": "trained"
+    },
+    "Lasso": {
+      "path": "models/sklearn/Lasso_20250704_205730.joblib",
+      "timestamp": "20250704",
+      "size_kb": 1.36,
+      "status": "trained"
+    },
+    "ElasticNet": {
+      "path": "models/sklearn/ElasticNet_20250704_205730.joblib",
+      "timestamp": "20250704",
+      "size_kb": 1.36,
+      "status": "trained"
+    }
+  },
+  "full_registry": {
+    "LinearRegression": {
+      "category": "Linear Models",
+      "status": "trained",
+      "complexity": "simple"
+    },
+    "Ridge": {
+      "category": "Linear Models",
+      "status": "trained",
+      "complexity": "simple"
+    },
+    "Lasso": {
+      "category": "Linear Models",
+      "status": "trained",
+      "complexity": "simple"
+    },
+    "ElasticNet": {
+      "category": "Linear Models",
+      "status": "trained",
+      "complexity": "simple"
+    },
+    "RandomForest": {
+      "category": "Tree-Based",
+      "status": "trained",
+      "complexity": "medium"
+    },
+    "XGBoost": {
+      "category": "Gradient Boosting",
+      "status": "trained",
+      "complexity": "high"
+    },
+    "LightGBM": {
+      "category": "Gradient Boosting",
+      "status": "trained",
+      "complexity": "high"
+    },
+    "CatBoost": {
+      "category": "Gradient Boosting",
+      "status": "trained",
+      "complexity": "high"
+    },
+    "KNearestNeighbors": {
+      "category": "Instance-Based",
+      "status": "trained",
+      "complexity": "simple"
+    },
+    "SVR": {
+      "category": "Support Vector",
+      "status": "trained",
+      "complexity": "medium"
+    },
+    "LogisticRegression": {
+      "category": "Linear Models",
+      "status": "ready",
+      "complexity": "simple"
+    },
+    "BayesianRidge": {
+      "category": "Linear Models",
+      "status": "ready",
+      "complexity": "simple"
+    },
+    "ARDRegression": {
+      "category": "Linear Models",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "PassiveAggressiveRegressor": {
+      "category": "Linear Models",
+      "status": "ready",
+      "complexity": "simple"
+    },
+    "TheilSenRegressor": {
+      "category": "Linear Models",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "HuberRegressor": {
+      "category": "Linear Models",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "SGDRegressor": {
+      "category": "Linear Models",
+      "status": "ready",
+      "complexity": "simple"
+    },
+    "ExtraTreesRegressor": {
+      "category": "Tree-Based",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "GradientBoostingRegressor": {
+      "category": "Tree-Based",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "AdaBoostRegressor": {
+      "category": "Tree-Based",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "DecisionTreeRegressor": {
+      "category": "Tree-Based",
+      "status": "ready",
+      "complexity": "simple"
+    },
+    "HistGradientBoostingRegressor": {
+      "category": "Tree-Based",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "NuSVR": {
+      "category": "Support Vector",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "LinearSVR": {
+      "category": "Support Vector",
+      "status": "ready",
+      "complexity": "simple"
+    },
+    "MLPRegressor": {
+      "category": "Neural Networks",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "GaussianProcessRegressor": {
+      "category": "Gaussian Process",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "VotingRegressor": {
+      "category": "Ensemble",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "BaggingRegressor": {
+      "category": "Ensemble",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "KMeans": {
+      "category": "Clustering",
+      "status": "ready",
+      "complexity": "simple"
+    },
+    "DBSCAN": {
+      "category": "Clustering",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "AgglomerativeClustering": {
+      "category": "Clustering",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "IsolationForest": {
+      "category": "Outlier Detection",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "OneClassSVM": {
+      "category": "Outlier Detection",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "LocalOutlierFactor": {
+      "category": "Outlier Detection",
+      "status": "ready",
+      "complexity": "medium"
+    },
+    "XGBClassifier": {
+      "category": "Classification",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "LGBMClassifier": {
+      "category": "Classification",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "CatBoostClassifier": {
+      "category": "Classification",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "XGBRanker": {
+      "category": "Ranking",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "LGBMRanker": {
+      "category": "Ranking",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "CatBoostRanker": {
+      "category": "Ranking",
+      "status": "ready",
+      "complexity": "high"
+    },
+    "ARIMA": {
+      "category": "Time Series",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "SARIMA": {
+      "category": "Time Series",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "Prophet": {
+      "category": "Time Series",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "ExponentialSmoothing": {
+      "category": "Time Series",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "LSTM": {
+      "category": "Deep Learning Time Series",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "GRU": {
+      "category": "Deep Learning Time Series",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "Transformer": {
+      "category": "Deep Learning Time Series",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "TemporalFusionTransformer": {
+      "category": "Deep Learning Time Series",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "FeedforwardNN": {
+      "category": "Deep Learning",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "ConvolutionalNN": {
+      "category": "Deep Learning",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "RecurrentNN": {
+      "category": "Deep Learning",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "AutoEncoder": {
+      "category": "Deep Learning",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "VariationalAutoEncoder": {
+      "category": "Deep Learning",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "GAN": {
+      "category": "Deep Learning",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "BERT": {
+      "category": "NLP",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "FinBERT": {
+      "category": "Financial NLP",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "DQN": {
+      "category": "Reinforcement Learning",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "DoubleDQN": {
+      "category": "Reinforcement Learning",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "DuelingDQN": {
+      "category": "Reinforcement Learning",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "PolicyGradient": {
+      "category": "Reinforcement Learning",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "ActorCritic": {
+      "category": "Reinforcement Learning",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "BlackScholes": {
+      "category": "Financial Engineering",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "MonteCarloSimulation": {
+      "category": "Financial Engineering",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "VaR": {
+      "category": "Risk Management",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "GARCH": {
+      "category": "Volatility Modeling",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "KalmanFilter": {
+      "category": "State Space",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "MarkowitzOptimization": {
+      "category": "Portfolio Optimization",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "CapitalAssetPricing": {
+      "category": "Asset Pricing",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "FamaFrenchModel": {
+      "category": "Factor Models",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "StackingEnsemble": {
+      "category": "Meta-Learning",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "BlendingEnsemble": {
+      "category": "Meta-Learning",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "BayesianOptimization": {
+      "category": "Hyperparameter Optimization",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "AutoML": {
+      "category": "Automated ML",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "NeuralArchitectureSearch": {
+      "category": "AutoML",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "HiddenMarkovModel": {
+      "category": "Regime Detection",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "ChangePointDetection": {
+      "category": "Regime Detection",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "SpectralClustering": {
+      "category": "Advanced Clustering",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "HierarchicalClustering": {
+      "category": "Advanced Clustering",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "GaussianMixture": {
+      "category": "Probabilistic Clustering",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "RSIModel": {
+      "category": "Technical Indicators",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "MACDModel": {
+      "category": "Technical Indicators",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "BollingerBandsModel": {
+      "category": "Technical Indicators",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "StochasticOscillator": {
+      "category": "Technical Indicators",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "WilliamsR": {
+      "category": "Technical Indicators",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "CCIModel": {
+      "category": "Technical Indicators",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "ROCModel": {
+      "category": "Momentum",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "MomentumModel": {
+      "category": "Momentum",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "PriceRateOfChange": {
+      "category": "Momentum",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "AverageDirectionalIndex": {
+      "category": "Trend",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "ParabolicSAR": {
+      "category": "Trend",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "IchimokuCloud": {
+      "category": "Trend",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "OnBalanceVolume": {
+      "category": "Volume Analysis",
+      "status": "framework",
+      "complexity": "simple"
+    },
+    "VolumeWeightedAveragePrice": {
+      "category": "Volume Analysis",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "AccumulationDistribution": {
+      "category": "Volume Analysis",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "ChaikinMoneyFlow": {
+      "category": "Volume Analysis",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "VolumePriceAnalysis": {
+      "category": "Volume Analysis",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "CandlestickPatterns": {
+      "category": "Pattern Recognition",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "ChartPatterns": {
+      "category": "Pattern Recognition",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "SupportResistance": {
+      "category": "Pattern Recognition",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "BreakoutDetection": {
+      "category": "Pattern Recognition",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "TrendlineAnalysis": {
+      "category": "Pattern Recognition",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "SentimentAnalysis": {
+      "category": "Alternative Data",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "NewsAnalysis": {
+      "category": "Alternative Data",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "SocialMediaSentiment": {
+      "category": "Alternative Data",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "EarningsCallAnalysis": {
+      "category": "Alternative Data",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "InsiderTradingAnalysis": {
+      "category": "Alternative Data",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "VectorAutoRegression": {
+      "category": "Econometrics",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "CointegrationModel": {
+      "category": "Econometrics",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "ErrorCorrectionModel": {
+      "category": "Econometrics",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "StructuralBreakTest": {
+      "category": "Econometrics",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "GrangerCausality": {
+      "category": "Econometrics",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "BayesianInference": {
+      "category": "Bayesian Methods",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "MarkovChainMonteCarlo": {
+      "category": "Bayesian Methods",
+      "status": "framework",
+      "complexity": "very_high"
+    },
+    "SurvivalAnalysis": {
+      "category": "Advanced Statistics",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "ExtremeValueTheory": {
+      "category": "Advanced Statistics",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "CausalInference": {
+      "category": "Advanced Statistics",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "PairsTradingModel": {
+      "category": "Cross-Sectional",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "StatisticalArbitrage": {
+      "category": "Cross-Sectional",
+      "status": "framework",
+      "complexity": "high"
+    },
+    "FactorModel": {
+      "category": "Cross-Sectional",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "PrincipalComponentAnalysis": {
+      "category": "Dimensionality Reduction",
+      "status": "framework",
+      "complexity": "medium"
+    },
+    "IndependentComponentAnalysis": {
+      "category": "Dimensionality Reduction",
+      "status": "framework",
+      "complexity": "medium"
+    }
+  },
+  "generated_at": "2025-07-04T21:22:38.759282"
+}

@@ -1,0 +1,68 @@
+{
+  "strategic_focus_framework": {
+    "description": "Pure infrastructure configuration for mlTrainer strategic implementation",
+    "version": "1.0",
+    "last_updated": "2025-07-04",
+    "editor_note": "This is technical infrastructure only. mlTrainer interprets and implements all strategy.",
+    
+    "technical_capabilities": {
+      "verified_data_sources": ["polygon", "fred"],
+      "total_models_available": 32,
+      "model_categories": {
+        "machine_learning": ["RandomForest", "XGBoost", "LightGBM", "CatBoost", "SVM", "AdaBoost", "GradientBoosting", "ExtraTrees"],
+        "deep_learning": ["LSTM", "GRU", "Transformer", "CNN-LSTM", "BiLSTM", "Autoencoder", "RNN"],
+        "time_series": ["ARIMA", "Prophet", "GARCH", "VAR", "Exponential_Smoothing"],
+        "ensemble": ["Voting", "Stacking", "Bagging", "Blending"],
+        "statistical": ["Linear_Regression", "Ridge", "Lasso", "Elastic_Net", "Logistic_Regression"],
+        "advanced": ["Isolation_Forest", "One_Class_SVM", "Local_Outlier_Factor"]
+      },
+      
+      "execution_infrastructure": {
+        "walk_forward_testing": true,
+        "paper_trading": true,
+        "real_time_data": true,
+        "results_storage": true,
+        "performance_tracking": true
+      }
+    },
+    
+    "strategic_implementation_access": {
+      "model_selection_api": "/api/facilitator/models",
+      "data_access_api": "/api/facilitator/data-sources",
+      "execution_api": "/api/facilitator/execute-model",
+      "results_save_api": "/api/facilitator/save-results",
+      "results_load_api": "/api/facilitator/load-results",
+      "system_status_api": "/api/facilitator/system-status"
+    },
+    
+    "compliance_framework": {
+      "data_verification": "mandatory",
+      "synthetic_data_policy": "zero_tolerance",
+      "authorized_sources_only": true,
+      "unknown_response_required": "I don't know. But based on the data, I would suggest..."
+    },
+    
+    "operational_notes": {
+      "role_separation": {
+        "editor": "Technical infrastructure monitoring only",
+        "mltrainer": "All strategy development, implementation, and results interpretation",
+        "user": "Strategic direction and oversight"
+      },
+      
+      "strategy_development_process": {
+        "method": "Independent trial-based learning",
+        "data_requirement": "Verified sources only",
+        "approach": "Walk-forward testing and paper trading",
+        "documentation": "mlTrainer maintains own strategy records"
+      }
+    }
+  },
+  
+  "infrastructure_status": {
+    "last_health_check": "2025-07-04T08:12:00Z",
+    "api_endpoints_active": true,
+    "data_sources_verified": true,
+    "models_accessible": true,
+    "ready_for_strategy_implementation": true
+  }
+}

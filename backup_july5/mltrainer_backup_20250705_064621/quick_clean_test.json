@@ -1,0 +1,8 @@
+{
+  "model": "RandomForest",
+  "mse": 0.1866309640026701,
+  "samples": 100,
+  "features": 5,
+  "environment": "clean_portable_python",
+  "contamination_free": true
+}

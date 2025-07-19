@@ -1,0 +1,92 @@
+mlTrainer - OFFICIAL SYSTEM BRIEF (v2025.06)
+I. CORE PHILOSOPHY & PURPOSE
+-----------------------------
+mlTrainer is a fully self-learning, regime-aware, auto-research trading intelligence system with zero simulation, full
+real-time verified data usage, and rigorous 100% compliance enforcement. The system is built for short- to mid-term
+momentum-based investing (a few days to 9 months), capable of producing novel insights, adapting to changing
+regimes, and self-healing when errors arise.
+II. COMPLIANCE ENFORCEMENT (MANDATORY)
+---------------------------------------
+- No simulated, placeholder, or synthetic data of any kind
+- 100% of all data must be live or verified (Polygon, FRED, QuiverQuant)
+- All AI output must be grounded in verifiable data; if not, response must be:
+"I don't know. But based on the data, I would suggest..."
+- System-wide Compliance Toggle:
+- OFF: red warning banner on every dashboard page
+- ON: full synthetic data purge, compliance scan immutable compliance gateway that filters any data not from the api’s in the API config file
+III. DASHBOARDS
+---------------
+RECOMMENDATIONS PAGE:
+- Upper Table: Auto-populated with stocks scoring >80
+Columns: Score, Confidence %, Expected Profit %, Max Entry Price, Target Price, Stop Loss, Timeframe
+Features: Add to Portfolio (checkbox), Real-time data updates, Compliance-filtered
+- Lower Table (Holding):
+Manual selection from upper table
+Static data on entry; live-updated progress-to-target
+Features: Remove from Portfolio (checkbox), Real-time monitoring, Notifications
+mlTrainer PAGE:
+- Dual components:
+Chat Interface: Verified answers only or "I don't know..." with data-backed suggestions
+Commentary Field: Live learning commentary (regime shifts, accuracy, model updates)
+ANALYTICS & STATS PAGES:
+- Regime Band Visualizer
+- Strategy Selection Dashboard
+- Walk-forward Accuracy and Confidence Dashboards
+- Alert Monitor (7 triggers)
+IV. MACHINE LEARNING SYSTEM
+----------------------------
+Modular, Self-Evolving ML Pipeline:
+- Models:
+LSTM
+Transformer
+Reinforcement Learning (RL)
+Ensemble Meta-Learning
+Quantum-prepared (e.g. HQNN-FSP, QGAF+CNN) - activated only if self-assessed accuracy improves significantly
+- Self-Aware:
+Identifies underperforming regime bandsRetrains weak spots
+Adjusts thresholds dynamically
+Learns from peer-reviewed research (ScholarGPT-style ingestion)
+V. REAL-TIME + HISTORICAL DATA
+-------------------------------
+Polygon (15-min delayed) for live training & inference
+FRED (VIX, interest rates, macro indicators) for regime classification
+QuiverQuant (insider activity, congressional trades, news sentiment, etc.)
+Historical Walk-Forward Training:
+- 4-year Polygon data (S&P 100 stocks)
+- Full regime labeling
+- Adaptive training strategy: dynamically selects which regime/models need more training
+- Walk-forward dashboards for diagnostics
+VI. STRATEGY ENGINE
+--------------------
+Dynamic Regime Detection (spectrum-based score 0-100)
+Strategy Selector:
+- Picks optimal model + parameters based on regime
+- Uses statistical confidence banding
+- Adapts based on results
+VII. NOTIFICATIONS (7 TYPES)
+-----------------------------
+1. Regime Change Detected
+2. Entry Signal Strength Spiked
+3. Exit Signal Triggered
+4. Stop-Loss Hit
+5. Target Reached
+6. Confidence Drop Warning
+7. Portfolio Deviation from Optimal Path
+VIII. AI COACH - MODULAR INTELLIGENCE
+--------------------------------------
+- Deployed using Claude 4.0 Sonnet (Replit)
+- Fully swappable with ChatGPT, Gemini, LLaMA, etc.
+- Capable of ingesting system logs, user input, and real-time data
+- All answers must follow strict compliance rules
+IX. SELF-MONITORING + SELF-HEALING
+-----------------------------------
+- ML model self-assesses variance across regimes
+- Repairs socket/data issues, retrains failing models, fixes code/syntax
+- Monitors API limits (Polygon: 100 req/min) and manages retries
+- Issues auto-alerts when systemic issues arise
+X. FINAL DELIVERY FORMAT
+-------------------------
+Entire project delivered as .tar.gz
+Includes all code, config, and modules
+README & implementation instructionsCode includes "Why & Purpose" documentation for each module
+Fully agent-executable in Replit

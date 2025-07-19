@@ -1,0 +1,44 @@
+
+{
+  "stable_conditions": {
+    "ARIMA": 0.35,
+    "Prophet": 0.35,
+    "RandomForest": 0.30
+  },
+  "trending_conditions": {
+    "LSTM": 0.30,
+    "XGBoost": 0.25,
+    "LightGBM": 0.25,
+    "CatBoost": 0.20
+  },
+  "high_vol": {
+    "Transformer": 0.40,
+    "GRU": 0.30,
+    "CNN_LSTM": 0.20,
+    "DQN": 0.10
+  },
+  "crisis_vol": {
+    "Autoencoder": 0.40,
+    "XGBoost": 0.30,
+    "MetaLearner": 0.20,
+    "GRU": 0.10
+  },
+  "transition_conditions": {
+    "MetaLearner": 0.50,
+    "Autoencoder": 0.30,
+    "LSTM": 0.20
+  },
+  "balanced_conditions": {
+    "LSTM": 0.25,
+    "XGBoost": 0.25,
+    "LightGBM": 0.20,
+    "RandomForest": 0.15,
+    "EnsembleVoting": 0.15
+  },
+  "default": {
+    "LSTM": 0.30,
+    "XGBoost": 0.30,
+    "EnsembleVoting": 0.25,
+    "RandomForest": 0.15
+  }
+}

@@ -1,0 +1,55 @@
+mlTrainer FULL System Backup
+Created: Wed Jul  2 10:21:04 PM UTC 2025
+Timestamp: 20250702_222104
+
+DIRECTORIES BACKED UP:
+✅ core
+✅ ml
+✅ monitoring
+✅ data_sources
+✅ feature_engineering
+✅ finance
+✅ strategy
+✅ signals
+✅ utils
+✅ pages
+✅ routes
+✅ tests
+✅ uploads
+✅ static
+✅ logs
+✅ .streamlit
+✅ config
+✅ data_ingestion
+
+FILES BACKED UP:
+✅ ai_config.json
+✅ app_combined.py
+✅ chat_memory.json
+✅ ensemble_weights.json
+✅ index.py
+✅ interactive_app.py
+✅ main.py
+✅ model_activation.py
+✅ model_router_dashboard.py
+✅ model_router.py
+✅ model_routing.yaml
+✅ port_socket_repair.py
+✅ reommendations.py
+✅ system_structure.txt
+✅ .replit
+✅ requirements.txt
+✅ pyproject.toml
+✅ port_config.json
+
+BACKUP STATISTICS:
+Total size: 22M
+Total files: 140
+Total directories: 31
+
+RESTORATION INSTRUCTIONS:
+1. Extract: tar -xzf mlTrainer_full_backup_20250702_222104.tar.gz
+2. Copy contents: cp -r mlTrainer_full_backup_20250702_222104/* .
+3. Fix permissions: chmod +x *.sh
+4. Run diagnostics: python3 startup_diagnostics.py
+5. Start system: bash start_system.sh

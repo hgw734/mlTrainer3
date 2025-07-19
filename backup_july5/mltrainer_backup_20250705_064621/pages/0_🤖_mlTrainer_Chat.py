@@ -1,0 +1,519 @@
+"""
+mlTrainer - Mobile-Optimized Chat Interface
+==========================================
+
+Purpose: Clean, responsive chat interface optimized for mobile devices.
+Focus on essential chat functionality with auto-scroll to latest messages.
+"""
+
+import streamlit as st
+import requests
+import json
+import os
+from datetime import datetime
+import sys
+
+# Add project root to path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+try:
+    from utils.session_manager import get_session_manager, add_chat_message, get_recent_chat_messages
+    SESSION_MANAGER_AVAILABLE = True
+except ImportError:
+    SESSION_MANAGER_AVAILABLE = False
+
+try:
+    from core.mltrainer_executor import MLTrainerExecutor
+    from core.background_trial_manager import get_background_trial_manager
+    EXECUTOR_AVAILABLE = True
+except ImportError:
+    EXECUTOR_AVAILABLE = False
+
+# Page configuration
+st.set_page_config(
+    page_title="🤖 mlTrainer Chat",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="auto"
+)
+
+# Clean minimal CSS with sidebar access
+st.markdown("""
+<style>
+/* Hide unnecessary Streamlit elements but keep sidebar */
+.stDeployButton {display: none;}
+.stDecoration {display: none;}
+
+/* Make chat input sticky at bottom */
+.stChatInput {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: white;
+    padding: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Ensure chat messages are visible and add bottom padding for input */
+.stChatMessage {
+    margin: 0.5rem 1rem;
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Add bottom padding to content so last message isn't hidden behind input */
+.stAppViewContainer .main .block-container {
+    padding-bottom: 100px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .stChatInput {
+        padding: 0.5rem;
+    }
+    
+    .stChatMessage {
+        margin: 0.25rem 0.5rem;
+    }
+    
+    .stAppViewContainer .main .block-container {
+        padding-bottom: 80px;
+    }
+}
+
+/* Auto-scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+
+<script>
+// Auto-scroll to bottom on page load and after content changes
+function scrollToBottom() {
+    setTimeout(function() {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
+    }, 200);
+}
+
+// Scroll on page load
+document.addEventListener('DOMContentLoaded', scrollToBottom);
+
+// Scroll when new content is added
+const observer = new MutationObserver(scrollToBottom);
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
+
+// Scroll when page becomes visible (mobile app switching)
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        scrollToBottom();
+    }
+});
+</script>
+""", unsafe_allow_html=True)
+
+# Initialize session state
+if "chat_messages" not in st.session_state:
+    if SESSION_MANAGER_AVAILABLE:
+        recent_messages = get_recent_chat_messages(50)
+        st.session_state.chat_messages = []
+        for msg in recent_messages:
+            st.session_state.chat_messages.append({
+                "role": "user",
+                "content": msg.get("user_message", ""),
+                "timestamp": msg.get("timestamp", "")
+            })
+            if msg.get("mltrainer_response"):
+                st.session_state.chat_messages.append({
+                    "role": "assistant",
+                    "content": msg.get("mltrainer_response", ""),
+                    "timestamp": msg.get("timestamp", "")
+                })
+    else:
+        st.session_state.chat_messages = []
+
+def get_backend_url():
+    """Get backend API URL"""
+    return "http://127.0.0.1:8000"
+
+def send_message_to_mltrainer(message):
+    """Send message to mlTrainer backend"""
+    try:
+        response = requests.post(
+            f"{get_backend_url()}/api/chat",
+            json={"message": message},
+            headers={"Content-Type": "application/json"},
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            data = response.json()
+            return {
+                "success": True,
+                "response": data.get("response", "No response received")
+            }
+        else:
+            return {
+                "success": False,
+                "error": f"Backend returned status {response.status_code}"
+            }
+    except requests.exceptions.Timeout:
+        return {
+            "success": False,
+            "error": "Request timed out. mlTrainer is processing analysis."
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": f"Connection error: {str(e)}"
+        }
+
+def display_chat_messages():
+    """Display chat messages using Streamlit chat elements"""
+    for message in st.session_state.chat_messages:
+        if message["role"] == "user":
+            with st.chat_message("user"):
+                st.write(message["content"])
+        else:
+            with st.chat_message("assistant"):
+                st.write(message["content"])
+    
+    # Auto-scroll to bottom after messages are displayed
+    st.markdown("""
+    <script>
+    setTimeout(function() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }, 100);
+    </script>
+    """, unsafe_allow_html=True)
+
+def main():
+    # Initialize executor and background trial manager
+    if EXECUTOR_AVAILABLE:
+        if "executor" not in st.session_state:
+            from core.dynamic_executor import enhance_executor_with_dynamic_capabilities
+            # Create executor with dynamic action generation capabilities
+            executor = MLTrainerExecutor()
+            st.session_state.executor = enhance_executor_with_dynamic_capabilities(executor)
+        
+        if "background_trial_manager" not in st.session_state:
+            # We'll need to get AI client - for now initialize as None
+            st.session_state.background_trial_manager = None
+        
+        if "active_trial_id" not in st.session_state:
+            st.session_state.active_trial_id = None
+    
+    # Check for background trial notifications
+    if (EXECUTOR_AVAILABLE and 
+        st.session_state.get("background_trial_manager") and 
+        st.session_state.get("active_trial_id")):
+        
+        trial_manager = st.session_state.background_trial_manager
+        trial_id = st.session_state.active_trial_id
+        
+        # Get new notifications without cluttering chat
+        notifications = trial_manager.get_trial_notifications(trial_id)
+        if notifications:
+            # Show notifications in sidebar or as status
+            with st.sidebar:
+                st.subheader("🔬 Background Trial")
+                for notification in notifications[-3:]:  # Show last 3
+                    st.caption(notification)
+    
+    # Display chat messages only
+    display_chat_messages()
+    
+    # Chat input at bottom
+    user_message = st.chat_input("Message mlTrainer...")
+    
+    if user_message:
+        # Add user message to session
+        timestamp = datetime.now().strftime("%H:%M")
+        st.session_state.chat_messages.append({
+            "role": "user",
+            "content": user_message,
+            "timestamp": timestamp
+        })
+        
+        # Send to mlTrainer backend
+        with st.spinner("mlTrainer is analyzing..."):
+            response_data = send_message_to_mltrainer(user_message)
+            
+            if response_data["success"]:
+                mltrainer_response = response_data["response"]
+                
+                # Add mlTrainer response
+                st.session_state.chat_messages.append({
+                    "role": "assistant",
+                    "content": mltrainer_response,
+                    "timestamp": timestamp
+                })
+                
+                # Check if user is commanding execution (ONLY user input, not mlTrainer responses)
+                user_input = user_message.lower().strip()
+                
+                # Handle execution commands - all trigger background communication automatically  
+                execution_keywords = ['yes', 'execute', 'proceed', 'go', 'run', 'approve']
+                is_execution_command = user_input in execution_keywords
+                
+
+                
+                # CRITICAL SECURITY: Only process "execute" command from USER input, never from mlTrainer responses
+                # This prevents mlTrainer from triggering executions by mentioning "execute" in its text
+                if user_input == 'execute':
+                    # Find most recent mlTrainer suggestion to auto-parse
+                    recent_mltrainer_msg = None
+                    for msg in reversed(st.session_state.chat_messages[:-1]):
+                        if msg.get("role") == "assistant" and not msg.get("execution_ready"):
+                            recent_mltrainer_msg = msg
+                            break
+                    
+                    if recent_mltrainer_msg and EXECUTOR_AVAILABLE and "executor" in st.session_state:
+                        # Parse the recent mlTrainer response for executable actions
+                        # IMPORTANT: Only scan for action patterns, ignore any "execute" mentions in mlTrainer text
+                        executor = st.session_state.executor
+                        suggestions = executor.parse_mltrainer_response(recent_mltrainer_msg["content"])
+                        
+                        if suggestions['executable']:
+                            # Auto-start background trial with mlTrainer ↔ ML agent communication
+                            objective = "Momentum stock identification"
+                            if 'momentum_screening' in suggestions['actions']:
+                                objective = "7-day momentum screening analysis"
+                            elif 'regime_detection' in suggestions['actions']:
+                                objective = "Market regime detection analysis"
+                            
+                            # Initialize background trial manager if needed
+                            if not st.session_state.background_trial_manager:
+                                try:
+                                    from core.ai_client import AIClient
+                                    ai_client = AIClient()
+                                    st.session_state.background_trial_manager = get_background_trial_manager(
+                                        st.session_state.executor, 
+                                        ai_client
+                                    )
+                                except Exception as e:
+                                    st.error(f"Failed to initialize background trial manager: {e}")
+                                    st.session_state.background_trial_manager = None
+                            
+                            # SIMPLIFIED EXECUTION: Always use immediate execution for reliability
+                            st.session_state.chat_messages.append({
+                                "role": "assistant",
+                                "content": f"🔍 **Auto-detected trial from previous suggestion**\n\nActions: {', '.join(suggestions['actions'])}\n\nExecuting immediately...",
+                                "timestamp": datetime.now().strftime("%H:%M")
+                            })
+                            
+                            # Execute the trial using enhanced dynamic executor with progress feedback
+                            progress_placeholder = st.empty()
+                            
+                            # Setup feedback callback for real-time updates
+                            feedback_messages = []
+                            def feedback_callback(feedback):
+                                feedback_messages.append(feedback)
+                                if feedback.get('type') == 'progress_update':
+                                    data = feedback.get('data', {})
+                                    message = data.get('message', 'Processing...')
+                                    progress_placeholder.info(f"🔧 {message}")
+                            
+                            # Register feedback callback
+                            from core.trial_feedback_manager import get_feedback_manager
+                            feedback_manager = get_feedback_manager()
+                            feedback_manager.register_feedback_callback(feedback_callback)
+                            
+                            with st.spinner("Executing detected trial..."):
+                                try:
+                                    # Use the enhanced execute_suggestion method that handles dynamic actions
+                                    execution_result = executor.execute_suggestion(
+                                        recent_mltrainer_msg["content"], 
+                                        user_approved=True
+                                    )
+                                    
+                                    if execution_result.get("success"):
+                                        results = execution_result.get("results", [])
+                                        execution_success = all(r.get("result", {}).get("success", False) for r in results)
+                                    else:
+                                        results = []
+                                        execution_success = False
+                                        
+                                except Exception as e:
+                                    results = [{"action": "execution_error", "result": {"success": False, "error": str(e)}}]
+                                    execution_success = False
+                                
+                                # Generate execution results message
+                                if results:
+                                    if execution_success:
+                                        result_msg = "✅ **Trial Executed Successfully**\n\n"
+                                    else:
+                                        result_msg = "⚠️ **Trial Executed with Issues**\n\n"
+                                    
+                                    for result in results:
+                                        result_msg += f"**{result['action']}:** "
+                                        if result['result'].get('success'):
+                                            result_msg += "Completed ✓\n"
+                                            if 'data' in result['result']:
+                                                result_msg += f"Data received: {len(str(result['result']['data']))} characters\n"
+                                        else:
+                                            result_msg += f"Failed - {result['result'].get('error', 'Unknown error')}\n"
+                                        result_msg += "\n"
+                                    
+                                    # Add call to action for mlTrainer
+                                    result_msg += "**Next:** Ask mlTrainer to analyze these results and suggest the next action."
+                                else:
+                                    result_msg = "⚠️ No actions were executed"
+                                
+                                st.session_state.chat_messages.append({
+                                        "role": "assistant",
+                                        "content": result_msg,
+                                        "timestamp": datetime.now().strftime("%H:%M")
+                                    })
+                            
+                            # Save to session
+                            if SESSION_MANAGER_AVAILABLE:
+                                add_chat_message("user", user_message)
+                                add_chat_message("assistant", result_msg)
+                            
+                            st.rerun()
+                            return
+                        else:
+                            # No executable actions found in recent messages
+                            st.session_state.chat_messages.append({
+                                "role": "assistant",
+                                "content": "❌ No executable trial suggestions found in recent messages. Ask mlTrainer to suggest a specific trial first.",
+                                "timestamp": datetime.now().strftime("%H:%M")
+                            })
+                            st.rerun()
+                            return
+                
+                if is_execution_command:
+                    if EXECUTOR_AVAILABLE and "executor" in st.session_state:
+                        # Find the last executable suggestion
+                        last_executable = None
+                        for msg in reversed(st.session_state.chat_messages[:-1]):
+                            if msg.get("execution_ready"):
+                                last_executable = msg
+                                break
+                        
+                        if last_executable:
+                            suggestions = last_executable["suggestions"]
+                            
+                            # All executions now automatically start background autonomous communication
+                            objective = "Momentum stock identification"
+                            if 'momentum_screening' in suggestions['actions']:
+                                objective = "7-day momentum screening analysis"
+                            elif 'regime_detection' in suggestions['actions']:
+                                objective = "Market regime detection analysis"
+                            
+                            # Initialize background trial manager if needed
+                            if not st.session_state.background_trial_manager:
+                                try:
+                                    from core.ai_client import AIClient
+                                    ai_client = AIClient()
+                                    st.session_state.background_trial_manager = get_background_trial_manager(
+                                        st.session_state.executor, 
+                                        ai_client
+                                    )
+                                except Exception as e:
+                                    st.error(f"Failed to initialize background trial manager: {e}")
+                                    st.session_state.background_trial_manager = None
+                            
+                            if st.session_state.background_trial_manager:
+                                # Start autonomous background trial
+                                trial_id = st.session_state.background_trial_manager.start_background_trial(
+                                    objective=objective,
+                                    initial_action=suggestions['actions'][0]
+                                )
+                                
+                                st.session_state.active_trial_id = trial_id
+                                
+                                result_msg = f"🚀 **Trial Initiated - Background Communication Active**\n\n"
+                                result_msg += f"**Objective:** {objective}\n"
+                                result_msg += f"**Initial Action:** {suggestions['actions'][0]}\n"
+                                result_msg += f"**Mode:** Autonomous mlTrainer ↔ ML Agent communication\n\n"
+                                result_msg += "*mlTrainer now has full command authority and will communicate directly "
+                                result_msg += "with the ML system. Progress updates will appear in the sidebar."
+                                
+                                st.session_state.chat_messages.append({
+                                    "role": "assistant",
+                                    "content": result_msg,
+                                    "timestamp": datetime.now().strftime("%H:%M")
+                                })
+                            else:
+                                # Fallback to immediate execution if background manager unavailable
+                                with st.spinner("Executing ML trial..."):
+                                    executor = st.session_state.executor
+                                    
+                                    # Execute based on detected actions
+                                    results = []
+                                    if 'momentum_screening' in suggestions['actions']:
+                                        result = executor.execute_momentum_screening(suggestions['models_mentioned'])
+                                        results.append({"action": "momentum_screening", "result": result})
+                                    
+                                    if 'regime_detection' in suggestions['actions']:
+                                        result = executor.execute_regime_detection()
+                                        results.append({"action": "regime_detection", "result": result})
+                                    
+                                    # Add execution result
+                                    if results:
+                                        result_msg = "✅ **Trial Executed**\n\n"
+                                        for result in results:
+                                            result_msg += f"**{result['action']}:** "
+                                            if result['result']['success']:
+                                                result_msg += "Completed ✓\n"
+                                                if 'data' in result['result']:
+                                                    result_msg += f"Data received: {len(str(result['result']['data']))} characters\n"
+                                            else:
+                                                result_msg += f"Failed - {result['result']['error']}\n"
+                                    else:
+                                        result_msg = "⚠️ No executable actions found"
+                                    
+                                    st.session_state.chat_messages.append({
+                                        "role": "assistant",
+                                        "content": result_msg,
+                                        "timestamp": datetime.now().strftime("%H:%M")
+                                    })
+                
+                # Check if mlTrainer suggested executable actions
+                elif EXECUTOR_AVAILABLE and "executor" in st.session_state:
+                    executor = st.session_state.executor
+                    suggestions = executor.parse_mltrainer_response(mltrainer_response)
+                    
+                    if suggestions['executable']:
+                        # Add simple execution prompt - all executions now automatically start background communication
+                        execution_prompt = "\n\n**🔧 Executable Actions Detected:**\n"
+                        execution_prompt += f"- Actions: {', '.join(suggestions['actions'])}\n"
+                        if suggestions['models_mentioned']:
+                            execution_prompt += f"- Models: {', '.join(suggestions['models_mentioned'])}\n"
+                        execution_prompt += "\n**Type 'execute' to start trial with autonomous mlTrainer ↔ ML Agent communication**"
+                        
+                        st.session_state.chat_messages.append({
+                            "role": "assistant",
+                            "content": execution_prompt,
+                            "timestamp": timestamp,
+                            "execution_ready": True,
+                            "suggestions": suggestions
+                        })
+                
+                # Save to persistent storage
+                if SESSION_MANAGER_AVAILABLE:
+                    add_chat_message("user", user_message)
+                    add_chat_message("assistant", mltrainer_response)
+                    
+            else:
+                error_msg = f"Connection error: {response_data['error']}"
+                st.session_state.chat_messages.append({
+                    "role": "assistant",
+                    "content": error_msg,
+                    "timestamp": timestamp
+                })
+        
+        # Rerun to show new messages
+        st.rerun()
+
+if __name__ == "__main__":
+    main()

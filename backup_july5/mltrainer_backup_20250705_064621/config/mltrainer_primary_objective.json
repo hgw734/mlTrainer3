@@ -1,0 +1,120 @@
+{
+  "mltrainer_primary_objective": {
+    "version": "1.0",
+    "last_updated": "2025-07-04T09:35:48.923027",
+    "description": "Core momentum stock identification objective for mlTrainer",
+    "overriding_goal": "identify_momentum_stocks_with_high_probability_targets\nSharpe ratio of 1 or above",
+    "momentum_identification_framework": {
+      "core_mission": "Identify momentum stocks within multiple timeframes that have very high probability of reaching calculated price targets",
+      "timeframe_specifications": {
+        "short_term": {
+          "duration": "7_to_10_days",
+          "minimum_target": "+7%",
+          "classification": "high_performers_short_term"
+        },
+        "medium_term": {
+          "duration": "up_to_3_months",
+          "minimum_target": "+25%",
+          "classification": "high_performers_medium_term"
+        },
+        "long_term": {
+          "duration": "up_to_9_months",
+          "minimum_target": "+75%",
+          "classification": "high_performers_long_term"
+        }
+      },
+      "probability_requirements": {
+        "confidence_threshold": "very_high_probability",
+        "minimum_confidence_level": "85%_or_higher",
+        "risk_assessment": "calculated_price_targets_with_statistical_backing",
+        "validation_method": "walk_forward_testing_required"
+      }
+    },
+    "technical_infrastructure_access": {
+      "data_sources_for_momentum": {
+        "polygon_data": {
+          "timeframes": [
+            "1min",
+            "5min",
+            "15min",
+            "1hour",
+            "1day"
+          ],
+          "indicators_available": "price_volume_momentum_technical_indicators",
+          "delay": "15_minutes"
+        },
+        "fred_economic": {
+          "macro_indicators": "economic_backdrop_analysis",
+          "market_regime_data": "regime_aware_momentum_identification"
+        }
+      },
+      "model_selection_for_momentum": {
+        "fast_execution_models": [
+          "RandomForest",
+          "XGBoost",
+          "LightGBM"
+        ],
+        "deep_learning_models": [
+          "LSTM",
+          "GRU",
+          "Transformer"
+        ],
+        "ensemble_approaches": "model_combination_for_higher_accuracy",
+        "time_series_specific": [
+          "ARIMA",
+          "Prophet"
+        ]
+      },
+      "calculation_requirements": {
+        "price_target_calculation": "mathematical_probability_based",
+        "timeframe_estimation": "statistical_analysis_required",
+        "momentum_scoring": "multi_factor_momentum_metrics",
+        "risk_probability_assessment": "downside_protection_analysis"
+      }
+    },
+    "strategic_execution_framework": {
+      "screening_process": {
+        "universe": "S&P_500_constituents_plus_high_volume_stocks",
+        "momentum_filters": "price_volume_technical_fundamental_momentum",
+        "probability_screening": "statistical_significance_testing"
+      },
+      "analysis_methodology": {
+        "multi_timeframe_analysis": "simultaneous_short_medium_long_term",
+        "probability_calculation": "Monte_Carlo_simulations_recommended",
+        "target_price_derivation": "technical_fundamental_combined_analysis",
+        "confidence_scoring": "cross_validation_required"
+      },
+      "output_requirements": {
+        "stock_identification": "symbol_with_calculated_targets",
+        "probability_assessment": "confidence_level_for_each_timeframe",
+        "price_targets": "specific_dollar_amounts_with_dates",
+        "risk_metrics": "downside_probability_assessment"
+      }
+    },
+    "performance_validation": {
+      "testing_methodology": "walk_forward_testing_mandatory",
+      "paper_trading": "live_simulation_of_identified_stocks",
+      "success_metrics": {
+        "short_term_success": "7%_or_higher_in_7_to_10_days",
+        "medium_term_success": "25%_or_higher_in_3_months",
+        "long_term_success": "75%_or_higher_in_9_months"
+      },
+      "accuracy_tracking": "percentage_of_successful_predictions"
+    },
+    "technical_facilitator_endpoints": {
+      "momentum_screening": "/api/facilitator/data-pipeline",
+      "model_execution": "/api/facilitator/execute-model",
+      "results_storage": "/api/facilitator/save-results",
+      "historical_analysis": "/api/facilitator/load-results",
+      "system_monitoring": "/api/facilitator/system-status"
+    },
+    "user_modified": true
+  },
+  "implementation_ready": {
+    "data_access_configured": true,
+    "models_available": true,
+    "storage_system_ready": true,
+    "objective_clearly_defined": true,
+    "mltrainer_autonomous_execution": true
+  }
+}

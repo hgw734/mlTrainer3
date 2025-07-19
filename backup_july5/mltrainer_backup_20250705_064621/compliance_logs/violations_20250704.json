@@ -1,0 +1,17 @@
+[
+  {
+    "timestamp": "2025-07-04T22:58:26.571728",
+    "violation_type": "UNAUTHORIZED_DATA_SOURCE",
+    "source": "unauthorized_source",
+    "stack_trace": "  File \"/home/runner/workspace/strict_compliance_enforcer.py\", line 223, in <module>\n    result = enforcer.force_compliance_check(\"test_operation\", fake_data, \"unauthorized_source\")\n  File \"/home/runner/workspace/strict_compliance_enforcer.py\", line 165, in force_compliance_check\n    if source and not self.validate_data_source(source, data):\n  File \"/home/runner/workspace/strict_compliance_enforcer.py\", line 33, in validate_data_source\n    'stack_trace': ''.join(traceback.format_stack()),\n",
+    "blocked": true
+  },
+  {
+    "timestamp": "2025-07-04T22:58:26.576710",
+    "violation_type": "MANUAL_IMPLEMENTATION_BLOCKED",
+    "function": "manual_training_function",
+    "args": "[]",
+    "stack_trace": "  File \"/home/runner/workspace/strict_compliance_enforcer.py\", line 227, in <module>\n    result = enforcer.block_manual_implementations(\"manual_training_function\", [])\n  File \"/home/runner/workspace/strict_compliance_enforcer.py\", line 95, in block_manual_implementations\n    'stack_trace': ''.join(traceback.format_stack()),\n",
+    "blocked": true
+  }
+]

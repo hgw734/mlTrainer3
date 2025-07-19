@@ -1,0 +1,285 @@
+# mlTrainer System Configuration - Single Source of Truth
+# =====================================================
+# All system parameters, data sources, and configuration in one place
+# No hard coding anywhere in the system - everything references this file
+
+version: "2025.07.04"
+system_name: "mlTrainer"
+system_description: "Trading Intelligence System with ML Capabilities"
+
+# ===================
+# CORE SYSTEM SETTINGS
+# ===================
+core:
+  max_training_samples: 1000
+  min_training_samples: 20
+  default_training_days: 90
+  confidence_threshold: 0.85
+  cpu_allocation:
+    ml_training: 6
+    system_operations: 2
+  memory_limits:
+    max_model_size_mb: 500
+    training_buffer_mb: 1024
+
+# ===================
+# TRADING OBJECTIVES
+# ===================
+trading:
+  objectives:
+    primary: "momentum_stock_identification"
+    timeframes:
+      short_term:
+        days: "7-10"
+        target_return: 0.07  # 7%
+      medium_term:
+        days: 90  # 3 months
+        target_return: 0.25  # 25%
+      long_term:
+        days: 270  # 9 months
+        target_return: 0.75  # 75%
+  universe:
+    primary: "sp500"
+    total_tickers: 507
+    default_test_tickers: ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"]
+    sectors_covered: "all"
+
+# ===================
+# DATA SOURCES & APIs
+# ===================
+data_sources:
+  verified_sources:
+    - "polygon"
+    - "alpha_vantage" 
+    - "fred"
+    - "bea"
+    - "quiverquant"
+  
+  primary_market_data: "polygon"
+  primary_economic_data: "fred"
+  
+  polygon:
+    name: "Polygon.io"
+    type: "market_data"
+    rate_limit_rps: 50
+    dropout_threshold: 0.15
+    base_url: "https://api.polygon.io"
+    
+  fred:
+    name: "Federal Reserve Economic Data"
+    type: "economic_data"
+    base_url: "https://api.stlouisfed.org/fred"
+    
+  alpha_vantage:
+    name: "Alpha Vantage"
+    type: "market_data"
+    base_url: "https://www.alphavantage.co"
+    
+  quiverquant:
+    name: "QuiverQuant"
+    type: "sentiment_data"
+    base_url: "https://api.quiverquant.com"
+
+# ===================
+# AI PROVIDERS
+# ===================
+ai_providers:
+  primary: "anthropic"
+  
+  anthropic:
+    name: "Anthropic Claude"
+    model: "claude-sonnet-4-20250514"
+    provider_id: "anthropic"
+    
+  openai:
+    name: "OpenAI GPT"
+    model: "gpt-4-turbo"
+    provider_id: "openai"
+
+# ===================
+# MODEL CONFIGURATION
+# ===================
+models:
+  total_registry_count: 120
+  categories: 20
+  
+  authentic_implementations:
+    traditional_ml:
+      - "RandomForest"
+      - "XGBoost" 
+      - "LightGBM"
+      - "CatBoost"
+      - "LinearRegression"
+      - "Ridge"
+      - "Lasso"
+      - "ElasticNet"
+      - "SVR"
+      - "KNearestNeighbors"
+      - "GradientBoosting"
+      - "ExtraTrees"
+      - "AdaBoost"
+      - "DecisionTree"
+      - "NaiveBayes"
+      
+    ensemble_methods:
+      - "VotingClassifier"
+      - "Bagging"
+      - "Stacking"
+      
+  blocked_categories:
+    - "NLP & Sentiment"
+    - "Reinforcement Learning"
+    - "Deep Learning"
+    - "Time Series"
+    - "Volume Analysis"
+    - "Risk Analytics"
+    - "System Intelligence"
+    
+  training_parameters:
+    random_state: 42
+    test_size: 0.2
+    n_estimators: 100
+    cross_validation_folds: 5
+
+# ===================
+# COMPLIANCE SETTINGS
+# ===================
+compliance:
+  zero_tolerance_policy: true
+  universal_data_interceptor: true
+  
+  blocked_data_indicators:
+    - "mock"
+    - "fake" 
+    - "synthetic"
+    - "placeholder"
+    - "dummy"
+    - "test_data"
+    - "simulated"
+    
+  exempted_patterns:
+    - "chat_history"
+    - "mltrainer_chat"
+    - "chat_memory"
+    - "makenzie_"
+    - "user_chat"
+    - "mltrainer_"
+    
+  audit_schedule:
+    times: ["06:00", "18:00"]
+    backup_retention_days: 30
+    
+  data_quality_standards:
+    minimum_data_points: 252
+    completeness_threshold: 0.95
+    api_success_rate: 0.85
+    minimum_coverage_days: 7
+
+# ===================
+# INFRASTRUCTURE
+# ===================
+infrastructure:
+  ports:
+    streamlit: 5000
+    flask_backend: 8000
+    
+  directories:
+    models: "models"
+    config: "config"
+    data: "data"
+    logs: "logs"
+    backups: "data/compliance_backups"
+    
+  file_patterns:
+    model_save: "{model_name}_{timestamp}.joblib"
+    backup_pattern: "backup_{timestamp}.json"
+    log_pattern: "{component}_{date}.log"
+
+# ===================
+# FEATURE ENGINEERING
+# ===================
+features:
+  technical_indicators:
+    - "SMA"
+    - "EMA" 
+    - "MACD"
+    - "RSI"
+    - "BollingerBands"
+    - "Volume"
+    - "VWAP"
+    
+  fundamental_data:
+    - "market_cap"
+    - "pe_ratio"
+    - "revenue_growth"
+    - "profit_margin"
+    
+  derived_features:
+    - "price_momentum"
+    - "volume_momentum"
+    - "volatility"
+    - "trend_strength"
+
+# ===================
+# MONITORING & ALERTS
+# ===================
+monitoring:
+  alert_types:
+    - "regime_change"
+    - "entry_signal"
+    - "exit_signal"  
+    - "stop_loss_hit"
+    - "target_reached"
+    - "confidence_drop"
+    - "portfolio_deviation"
+    
+  performance_metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "sharpe_ratio"
+    - "max_drawdown"
+    - "total_return"
+    
+  system_health:
+    - "api_response_time"
+    - "data_quality_score"
+    - "model_performance"
+    - "compliance_status"
+
+# ===================
+# REGIME DETECTION
+# ===================
+regime:
+  score_range: [0, 100]
+  volatility_levels: ["low", "medium", "high"]
+  macro_signals: ["neutral", "trending", "irregular", "shock", "macro_shift"]
+  
+  thresholds:
+    low_volatility: 25
+    high_volatility: 75
+    regime_change: 20
+    confidence_minimum: 0.7
+
+# ===================
+# VALIDATION RULES
+# ===================
+validation:
+  data_freshness_hours: 24
+  model_performance_window_days: 30
+  minimum_accuracy_threshold: 0.60
+  maximum_correlation_threshold: 0.95
+  
+  trial_validation:
+    critical_checks:
+      - "data_completeness"
+      - "api_connectivity"
+      - "model_availability"
+    important_checks:
+      - "data_freshness" 
+      - "feature_quality"
+      - "performance_history"
+    recommended_checks:
+      - "market_conditions"
+      - "sector_coverage"
+      - "regime_stability"

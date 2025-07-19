@@ -1,0 +1,43 @@
+{
+  "cpu_configuration": {
+    "total_cpus": 8,
+    "allocated_for_ml_trials": 6,
+    "reserved_for_system": 2,
+    "description": "6 CPUs allocated for ML training and trials, 2 reserved for system operations",
+    "last_updated": "2025-07-04T11:19:00Z"
+  },
+  "memory_configuration": {
+    "total_memory_gb": 62,
+    "available_memory_gb": 20,
+    "ml_memory_limit_gb": 16,
+    "system_memory_reserve_gb": 4
+  },
+  "parallel_execution_limits": {
+    "max_concurrent_models": 6,
+    "max_background_trials": 3,
+    "training_threads_per_model": 1,
+    "data_processing_workers": 4
+  },
+  "model_specific_configs": {
+    "RandomForest": {
+      "n_jobs": 6,
+      "max_features": "sqrt",
+      "threading_backend": "prefer_threads"
+    },
+    "XGBoost": {
+      "n_jobs": 6,
+      "tree_method": "hist",
+      "threading_backend": "prefer_threads"
+    },
+    "LightGBM": {
+      "n_jobs": 6,
+      "num_threads": 6,
+      "threading_backend": "prefer_threads"
+    },
+    "StackingEnsemble": {
+      "base_model_n_jobs": 6,
+      "meta_learner_n_jobs": 6,
+      "parallel_cv": true
+    }
+  }
+}

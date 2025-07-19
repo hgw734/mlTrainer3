@@ -1,0 +1,119 @@
+=== mlTrainer Project Backup Manifest ===
+Date: Sat Jul  5 06:46:43 AM UTC 2025
+Total Files: 179
+Total Size: 40M
+
+=== Directory Structure ===
+total 1148
+drwxr-xr-x 1 runner runner   2282 Jul  5 06:46 .
+drwxrwxrwx 1 runner runner     82 Jul  5 06:46 ..
+-rw-r--r-- 1 runner runner   5383 Jul  5 06:46 absolute_data_lockdown.py
+-rw-r--r-- 1 runner runner   8597 Jul  5 06:46 app.py
+drwxr-xr-x 1 runner runner   3070 Jul  5 06:46 attached_assets
+drwxr-xr-x 1 runner runner    118 Jul  5 06:46 backend
+-rw-r--r-- 1 runner runner    142 Jul  5 06:46 BACKUP_MANIFEST.txt
+-rw-r--r-- 1 runner runner   4117 Jul  5 06:46 bootstrap_clean_python.py
+drwxr-xr-x 1 runner runner    116 Jul  5 06:46 catboost_info
+-rw-r--r-- 1 runner runner   9903 Jul  5 06:46 clean_model_trainer.py
+-rw-r--r-- 1 runner runner  49432 Jul  5 06:46 complete_105_models_trainer.py
+-rw-r--r-- 1 runner runner  26167 Jul  5 06:46 COMPLETE_APP_OUTLINE.md
+-rw-r--r-- 1 runner runner   1954 Jul  5 06:46 complete_decontamination.py
+-rw-r--r-- 1 runner runner  51247 Jul  5 06:46 COMPLETE_DETAILED_OUTLINE_WITH_WORKFLOWS.md
+-rw-r--r-- 1 runner runner  12593 Jul  5 06:46 complete_remaining_models.py
+drwxr-xr-x 1 runner runner    102 Jul  5 06:46 compliance_logs
+-rw-r--r-- 1 runner runner  18376 Jul  5 06:46 comprehensive_model_status.json
+-rw-r--r-- 1 runner runner  17696 Jul  5 06:46 comprehensive_model_status.py
+-rw-r--r-- 1 runner runner  37354 Jul  5 06:46 comprehensive_pure_trainer.py
+-rw-r--r-- 1 runner runner   7261 Jul  5 06:46 comprehensive_pure_training_results.json
+-rw-r--r-- 1 runner runner  33177 Jul  5 06:46 comprehensive_trainer_all.py
+-rw-r--r-- 1 runner runner  25109 Jul  5 06:46 comprehensive_training_results_all.json
+drwxr-xr-x 1 runner runner    462 Jul  5 06:46 config
+drwxr-xr-x 1 runner runner    878 Jul  5 06:46 core
+drwxr-xr-x 1 runner runner    276 Jul  5 06:46 data
+-rw-r--r-- 1 runner runner  13056 Jul  5 06:46 direct_trainer.py
+-rw-r--r-- 1 runner runner   2226 Jul  5 06:46 direct_training_results.json
+drwxr-xr-x 1 runner runner    294 Jul  5 06:46 docs
+-rw-r--r-- 1 runner runner  16901 Jul  5 06:46 efficient_105_trainer.py
+-rw-r--r-- 1 runner runner  18608 Jul  5 06:46 efficient_105_training_results.json
+-rw-r--r-- 1 runner runner   4906 Jul  5 06:46 final_completion_report.json
+-rw-r--r-- 1 runner runner  26148 Jul  5 06:46 FINAL_TRAINING_SUMMARY.json
+-rw-r--r-- 1 runner runner   8333 Jul  5 06:46 final_training_summary.py
+-rw-r--r-- 1 runner runner   5888 Jul  5 06:46 final_two_models.py
+-rw-r--r-- 1 runner runner   1478 Jul  5 06:46 fix_ai_client.py
+-rw-r--r-- 1 runner runner   9647 Jul  5 06:46 main.py
+-rw-r--r-- 1 runner runner  11360 Jul  5 06:46 minimal_trainer.py
+-rw-r--r-- 1 runner runner   1782 Jul  5 06:46 minimal_training_results.json
+-rw-r--r-- 1 runner runner  30731 Jul  5 06:46 model_router.py
+-rw-r--r-- 1 runner runner  13418 Jul  5 06:46 model_routing.yaml
+drwxr-xr-x 1 runner runner     80 Jul  5 06:46 models
+drwxr-xr-x 1 runner runner    520 Jul  5 06:46 pages
+-rw-r--r-- 1 runner runner   8457 Jul  5 06:46 pure_backend.py
+-rw-r--r-- 1 runner runner  10694 Jul  5 06:46 pure_model_trainer.py
+-rw-r--r-- 1 runner runner   1493 Jul  5 06:46 pure_training_results.json
+-rw-r--r-- 1 runner runner  91034 Jul  5 06:46 pyproject.toml
+-rw-r--r-- 1 runner runner    165 Jul  5 06:46 quick_clean_test.json
+-rw-r--r-- 1 runner runner   9378 Jul  5 06:46 rebuild_pure_system.py
+-rw-r--r-- 1 runner runner  36608 Jul  5 06:46 replit.md
+drwxr-xr-x 1 runner runner     84 Jul  5 06:46 research_analysis
+-rw-r--r-- 1 runner runner  13375 Jul  5 06:46 sequential_trainer.py
+-rw-r--r-- 1 runner runner   6709 Jul  5 06:46 simple_trainer.py
+-rw-r--r-- 1 runner runner  19363 Jul  5 06:46 standalone_trainer.py
+-rw-r--r-- 1 runner runner   8855 Jul  5 06:46 strict_compliance_enforcer.py
+-rwxr-xr-x 1 runner runner  29144 Jul  5 06:46 test_cpp
+-rw-r--r-- 1 runner runner    280 Jul  5 06:46 test_cpp.cpp
+-rw-r--r-- 1 runner runner    280 Jul  5 06:46 training_log.txt
+-rw-r--r-- 1 runner runner    731 Jul  5 06:46 ultimate_completion_report.json
+drwxr-xr-x 1 runner runner    304 Jul  5 06:46 utils
+-rw-r--r-- 1 runner runner 339892 Jul  5 06:46 uv.lock
+
+=== Core Application Files ===
+- main.py (Streamlit app entry point)
+- app.py (Flask backend)
+- pure_backend.py (Pure Python backend)
+- replit.md (Project documentation)
+- pyproject.toml (Dependencies)
+- uv.lock (Dependency lock file)
+
+=== Documentation ===
+- COMPLETE_APP_OUTLINE.md
+- COMPLETE_DETAILED_OUTLINE_WITH_WORKFLOWS.md
+- FINAL_TRAINING_SUMMARY.json
+
+=== Model Training Scripts ===
+clean_model_trainer.py
+complete_105_models_trainer.py
+comprehensive_pure_trainer.py
+comprehensive_trainer_all.py
+direct_trainer.py
+efficient_105_trainer.py
+minimal_trainer.py
+pure_model_trainer.py
+sequential_trainer.py
+simple_trainer.py
+standalone_trainer.py
+
+=== Training Results ===
+comprehensive_pure_training_results.json
+comprehensive_training_results_all.json
+direct_training_results.json
+efficient_105_training_results.json
+minimal_training_results.json
+pure_training_results.json
+
+=== Directories ===
+- backend/ (Flask API components)
+- core/ (ML pipeline and models)
+- pages/ (Streamlit UI pages)
+- utils/ (Utility functions)
+- config/ (Configuration files)
+- data/ (Data management)
+- models/ (Trained model storage)
+- attached_assets/ (Project assets)
+
+=== Key Features ===
+✅ Pure Python Environment Support
+✅ 125 Mathematical Models Available
+✅ Polygon & FRED API Integration
+✅ Universal Compliance System
+✅ Complete Documentation
+✅ Training Results Archive

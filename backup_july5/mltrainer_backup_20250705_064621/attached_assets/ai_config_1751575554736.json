@@ -1,0 +1,16 @@
+
+{
+  "polygon": {
+    "api_key": "ENV:POLYGON_API_KEY",
+    "description": "Financial market data API"
+  },
+  "fred": {
+    "api_key": "ENV:FRED_API_KEY", 
+    "description": "Federal Reserve Economic Data API"
+  },
+  "anthropic": {
+    "api_key": "ENV:ANTHROPIC_API_KEY",
+    "model": "claude-3-5-sonnet-20241022",
+    "description": "Anthropic Claude AI API"
+  }
+}

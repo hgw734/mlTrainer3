@@ -1,0 +1,6 @@
+{
+  "flask_port": 8502,
+  "streamlit_port": 8501,
+  "main_interface_port": 8501,
+  "backend_api": 8502
+}

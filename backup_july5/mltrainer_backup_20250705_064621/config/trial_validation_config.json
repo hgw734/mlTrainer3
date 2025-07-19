@@ -1,0 +1,174 @@
+{
+  "mltrainer_validation_standards": {
+    "minimum_data_requirements": {
+      "min_data_points_per_symbol": 252,
+      "min_trading_days": 252,
+      "min_timeframe_coverage_hours": 6240,
+      "description": "Minimum 252 trading days (1 year) for statistical significance"
+    },
+    
+    "data_completeness_thresholds": {
+      "required_completeness_percentage": 95.0,
+      "maximum_dropout_rate": 5.0,
+      "maximum_missing_data_gaps": 3,
+      "max_consecutive_missing_days": 2,
+      "description": "95% completeness required with max 5% dropout rate"
+    },
+    
+    "data_quality_standards": {
+      "price_data_validation": {
+        "min_price_variance": 0.001,
+        "max_daily_change_threshold": 0.20,
+        "volume_completeness_required": 90.0,
+        "require_ohlc_consistency": true,
+        "zero_volume_days_max": 5
+      },
+      "timestamp_validation": {
+        "require_chronological_order": true,
+        "max_timestamp_gaps_hours": 72,
+        "weekend_data_handling": "exclude",
+        "timezone_consistency_required": true
+      }
+    },
+    
+    "statistical_validation": {
+      "minimum_volatility_threshold": 0.005,
+      "correlation_check_symbols": ["SPY", "QQQ"],
+      "outlier_detection_sigma": 4.0,
+      "trend_validation_periods": [5, 20, 50],
+      "description": "Statistical measures to ensure data reliability"
+    },
+    
+    "api_health_requirements": {
+      "polygon_api": {
+        "max_response_time_seconds": 3.0,
+        "min_success_rate_percentage": 95.0,
+        "max_circuit_breaker_duration_minutes": 30,
+        "required_rate_limit_headroom": 0.8
+      },
+      "fred_api": {
+        "max_response_time_seconds": 5.0,
+        "min_success_rate_percentage": 90.0,
+        "data_freshness_hours": 24
+      }
+    },
+    
+    "model_training_prerequisites": {
+      "feature_engineering": {
+        "min_technical_indicators": 8,
+        "require_volume_indicators": true,
+        "require_momentum_indicators": true,
+        "require_volatility_indicators": true
+      },
+      "data_preprocessing": {
+        "outlier_removal_required": true,
+        "normalization_required": true,
+        "feature_scaling_required": true,
+        "null_handling_strategy": "interpolation"
+      }
+    }
+  },
+  
+  "validation_levels": {
+    "critical": {
+      "description": "Must pass for any ML training",
+      "validations": [
+        "minimum_data_requirements",
+        "data_completeness_thresholds",
+        "api_health_requirements"
+      ]
+    },
+    "important": {
+      "description": "Should pass for reliable results",
+      "validations": [
+        "data_quality_standards",
+        "statistical_validation"
+      ]
+    },
+    "recommended": {
+      "description": "Optimal for best performance",
+      "validations": [
+        "model_training_prerequisites"
+      ]
+    }
+  },
+  
+  "failure_handling": {
+    "critical_failure_actions": [
+      "halt_trial_execution",
+      "notify_data_quality_issues",
+      "suggest_data_source_alternatives",
+      "log_validation_failures"
+    ],
+    "important_failure_actions": [
+      "warn_reduced_reliability",
+      "log_quality_concerns",
+      "continue_with_caution"
+    ],
+    "recommended_failure_actions": [
+      "log_optimization_opportunities",
+      "suggest_improvements"
+    ]
+  },
+  
+  "auto_recovery": {
+    "retry_strategies": {
+      "api_failures": {
+        "max_retries": 3,
+        "exponential_backoff": true,
+        "base_delay_seconds": 2.0
+      },
+      "data_quality_issues": {
+        "alternative_timeframes": ["1h", "4h", "1d"],
+        "fallback_symbols": ["SPY", "QQQ", "IWM"],
+        "quality_recheck_interval_minutes": 15
+      }
+    }
+  },
+  
+  "monitoring_and_alerting": {
+    "real_time_monitoring": {
+      "validation_check_frequency_minutes": 5,
+      "quality_degradation_threshold": 0.10,
+      "alert_on_consecutive_failures": 3
+    },
+    "performance_tracking": {
+      "track_validation_duration": true,
+      "log_validation_success_rates": true,
+      "monitor_data_source_performance": true
+    }
+  },
+  
+  "mltrainer_specific_requirements": {
+    "momentum_stock_identification": {
+      "price_momentum_lookback_days": 90,
+      "volume_momentum_required": true,
+      "relative_strength_validation": true,
+      "sector_performance_context": true
+    },
+    "confidence_thresholds": {
+      "minimum_prediction_confidence": 85.0,
+      "ensemble_agreement_threshold": 0.75,
+      "cross_validation_score_minimum": 0.80
+    },
+    "target_validation": {
+      "short_term_7_10_days": {
+        "min_historical_accuracy": 0.75,
+        "required_sample_size": 100
+      },
+      "medium_term_3_months": {
+        "min_historical_accuracy": 0.70,
+        "required_sample_size": 50
+      },
+      "long_term_9_months": {
+        "min_historical_accuracy": 0.65,
+        "required_sample_size": 25
+      }
+    }
+  },
+  
+  "last_updated": "2025-07-04T11:25:00Z",
+  "version": "1.0.0",
+  "created_by": "mlTrainer_system",
+  "validation_authority": "mlTrainer_requirements"
+}

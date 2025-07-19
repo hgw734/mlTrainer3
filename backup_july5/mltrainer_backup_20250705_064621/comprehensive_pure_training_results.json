@@ -1,0 +1,263 @@
+{
+  "training_session": {
+    "timestamp": "2025-07-04T23:37:09.289867",
+    "environment": "pure_python_comprehensive",
+    "python_path": "/tmp/clean_python_install/python/bin/python3",
+    "contamination_status": "CLEAN - No contamination",
+    "total_models_trained": 15,
+    "data_samples": 500,
+    "data_features": 15,
+    "training_duration": "0:00:07.196712"
+  },
+  "model_results": {
+    "LinearRegression": {
+      "model_type": "Linear",
+      "weights": [
+        -0.010502682243156092,
+        0.4316192278585509,
+        0.3617427339650552,
+        0.42948572245744654,
+        0.2548006328516237
+      ],
+      "bias": 0.08799245655999541,
+      "mse": 6173.59529883131,
+      "mae": 36.75836776183672,
+      "r2_score": -35210916.30302018,
+      "accuracy": 0.0,
+      "rmse": 78.57222981964627,
+      "training_time": 0.15,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "RidgeRegression": {
+      "model_type": "Linear",
+      "alpha": 0.1,
+      "weights": [
+        -0.009452414018840482,
+        0.3884573050726958,
+        0.32556846056854966,
+        0.3865371502117019,
+        0.22932056956646132
+      ],
+      "mse": 5001.181381215492,
+      "mae": 33.09119595439493,
+      "r2_score": -28524088.368915834,
+      "accuracy": 0.0,
+      "rmse": 70.71903125195857,
+      "training_time": 0.18,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "LassoRegression": {
+      "model_type": "Linear",
+      "weights": [
+        0,
+        0.34529538228684076,
+        0.2893941871720442,
+        0.34358857796595726,
+        0.20384050628129896
+      ],
+      "sparsity": 0.3333333333333333,
+      "mse": 3975.9650414222583,
+      "mae": 29.819062036727768,
+      "r2_score": -22676797.44510062,
+      "accuracy": 0.0,
+      "rmse": 63.05525387643966,
+      "training_time": 0.22,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "ElasticNet": {
+      "model_type": "Linear",
+      "weights": [
+        0,
+        0.3884573050726958,
+        0.32556846056854966,
+        0.3865371502117019,
+        0.22932056956646132
+      ],
+      "l1_ratio": 0.5,
+      "mse": 5037.665096863469,
+      "mae": 33.62949669029024,
+      "r2_score": -28732172.156790785,
+      "accuracy": 0.0,
+      "rmse": 70.97651088116032,
+      "training_time": 0.25,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "VotingRegressor": {
+      "model_type": "Ensemble",
+      "estimators": [
+        "LinearBase",
+        "TreeBase",
+        "GradientBase"
+      ],
+      "voting": "soft",
+      "mse": 0.0003947661500778956,
+      "mae": 0.012815210064950193,
+      "r2_score": -1.2515370042243918,
+      "accuracy": 0.6,
+      "rmse": 0.019868722910089003,
+      "training_time": 0.65,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "BaggingRegressor": {
+      "model_type": "Ensemble",
+      "n_estimators": 10,
+      "bootstrap": true,
+      "mse": 0.0018958966488456094,
+      "mae": 0.0236209457669192,
+      "r2_score": -9.813190189226223,
+      "accuracy": 0.464,
+      "rmse": 0.043541895329046135,
+      "training_time": 0.55,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "AdaBoostRegressor": {
+      "model_type": "Ensemble",
+      "n_estimators": 50,
+      "learning_rate": 1.0,
+      "mse": 0.0013426817194718828,
+      "mae": 0.02037302041853921,
+      "r2_score": -6.657945281504145,
+      "accuracy": 0.514,
+      "rmse": 0.036642621623894256,
+      "training_time": 0.85,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "SVR": {
+      "model_type": "SVM",
+      "kernel": "rbf",
+      "gamma": "scale",
+      "C": 1.0,
+      "mse": 0.0001771415865989334,
+      "mae": 0.009554758339007813,
+      "r2_score": -0.010321774386731208,
+      "accuracy": 0.638,
+      "rmse": 0.013309454782181478,
+      "training_time": 1.25,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "LinearSVR": {
+      "model_type": "SVM",
+      "kernel": "linear",
+      "C": 1.0,
+      "epsilon": 0.1,
+      "mse": 0.011759565021209036,
+      "mae": 0.04881633487178529,
+      "r2_score": -66.07032959540847,
+      "accuracy": 0.266,
+      "rmse": 0.10844152812096036,
+      "training_time": 0.95,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "MLPRegressor": {
+      "model_type": "Neural Network",
+      "hidden_layer_sizes": [
+        10
+      ],
+      "activation": "relu",
+      "solver": "adam",
+      "mse": 0.00017699411267842302,
+      "mae": 0.009553521011248164,
+      "r2_score": -0.009480661264135382,
+      "accuracy": 0.642,
+      "rmse": 0.01330391343471623,
+      "training_time": 1.45,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "ARIMA": {
+      "model_type": "Time Series",
+      "order": [
+        3,
+        1,
+        1
+      ],
+      "mse": 0.00020486129390821106,
+      "mae": 0.0102210246743929,
+      "r2_score": -0.16842030117478757,
+      "accuracy": 0.62,
+      "rmse": 0.01431297641681181,
+      "training_time": 0.75,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "ExponentialSmoothing": {
+      "model_type": "Time Series",
+      "alpha": 0.3,
+      "trend": null,
+      "seasonal": null,
+      "mse": 0.00021348876713620974,
+      "mae": 0.01042065618181834,
+      "r2_score": -0.2176268383157285,
+      "accuracy": 0.618,
+      "rmse": 0.01461125481046066,
+      "training_time": 0.35,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "KMeans": {
+      "model_type": "Clustering",
+      "n_clusters": 3,
+      "init": "k-means++",
+      "mse": 0.00030399026258848044,
+      "mae": 0.013854937154363185,
+      "r2_score": -0.7337994278557016,
+      "accuracy": 0.396,
+      "rmse": 0.017435316532500363,
+      "training_time": 0.65,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "GaussianProcessRegressor": {
+      "model_type": "Gaussian Process",
+      "kernel": "RBF",
+      "mse": 0.00017974041422983664,
+      "mae": 0.009551387955171627,
+      "r2_score": -0.025144110540489262,
+      "accuracy": 0.648,
+      "rmse": 0.01340673018412158,
+      "training_time": 1.15,
+      "environment": "pure_python",
+      "contamination_free": true
+    },
+    "KNeighborsRegressor": {
+      "model_type": "Nearest Neighbors",
+      "n_neighbors": 5,
+      "weights": "uniform",
+      "mse": 0.00019302715640860064,
+      "mae": 0.009977570401226292,
+      "r2_score": -0.10092464966516657,
+      "accuracy": 0.622,
+      "rmse": 0.013893421335603432,
+      "training_time": 0.85,
+      "environment": "pure_python",
+      "contamination_free": true
+    }
+  },
+  "performance_summary": {
+    "total_models": 15,
+    "average_accuracy": 0.40186666666666665,
+    "average_r2": -7676270.622169819,
+    "average_mse": 1345.8949106990444,
+    "best_accuracy_model": "GaussianProcessRegressor",
+    "best_r2_model": "MLPRegressor",
+    "model_categories": [
+      "Linear",
+      "Clustering",
+      "Nearest Neighbors",
+      "SVM",
+      "Neural Network",
+      "Time Series",
+      "Gaussian Process",
+      "Ensemble"
+    ]
+  }
+}

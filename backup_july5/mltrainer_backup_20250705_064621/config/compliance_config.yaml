@@ -1,0 +1,239 @@
+# mlTrainer Compliance Configuration
+# Strict data verification and compliance enforcement settings
+
+# Core compliance settings
+strict_mode: true
+verified_sources: 
+  - "polygon"
+  - "fred"
+  - "quiverquant"
+max_data_age_hours: 24
+require_timestamps: true
+allow_synthetic_data: false
+
+# Response templates for uncertain data
+response_template: "I don't know. But based on the data, I would suggest {suggestion}."
+fallback_responses:
+  no_data: "I don't know. But based on the data, I would suggest checking data connectivity and trying again."
+  stale_data: "I don't know. But based on the data, I would suggest waiting for updated market information."
+  insufficient_confidence: "I don't know. But based on the data, I would suggest considering this analysis with caution due to limited confidence."
+  validation_failed: "I don't know. But based on the data, I would suggest verifying the data sources before proceeding."
+
+# Data validation rules
+data_validation:
+  check_source_verification: true
+  check_timestamp_freshness: true
+  check_data_completeness: true
+  check_data_consistency: true
+  
+  # Freshness thresholds
+  freshness:
+    market_data_max_age_minutes: 30
+    macro_data_max_age_hours: 24
+    sentiment_data_max_age_hours: 2
+    recommendation_max_age_hours: 4
+    
+  # Completeness requirements
+  completeness:
+    min_data_points: 5
+    required_fields_ratio: 0.8
+    allow_null_percentage: 0.1
+    
+  # Quality thresholds
+  quality:
+    outlier_threshold_std: 3.0
+    duplicate_threshold: 0.05
+    consistency_threshold: 0.9
+
+# Source-specific compliance rules
+source_compliance:
+  polygon:
+    require_api_key: true
+    verify_ssl: true
+    check_rate_limits: true
+    validate_response_schema: true
+    delay_acknowledgment: 15  # minutes
+    
+  fred:
+    require_api_key: true
+    verify_government_source: true
+    check_series_validity: true
+    validate_economic_data: true
+    
+  quiverquant:
+    require_api_key: true
+    verify_alternative_data: true
+    check_sentiment_bounds: true
+    validate_social_data: true
+    
+  anthropic:
+    require_api_key: true
+    validate_ai_responses: true
+    check_response_relevance: true
+    enforce_response_template: true
+
+# AI response compliance
+ai_compliance:
+  enforce_uncertainty_responses: true
+  require_data_backing: true
+  prohibit_speculation: true
+  mandate_source_citation: true
+  
+  # Response validation
+  response_validation:
+    check_factual_claims: true
+    verify_data_references: true
+    validate_recommendation_logic: true
+    ensure_compliance_phrases: true
+    
+  # Prohibited content
+  prohibited:
+    - "guaranteed returns"
+    - "risk-free investment"
+    - "always profitable"
+    - "certain outcome"
+    - speculative_language: true
+    - unsubstantiated_claims: true
+
+# Monitoring and alerting
+monitoring:
+  log_compliance_violations: true
+  alert_on_violations: true
+  track_compliance_score: true
+  generate_compliance_reports: true
+  
+  # Violation thresholds
+  thresholds:
+    minor_violation_limit: 5
+    major_violation_limit: 2
+    critical_violation_limit: 1
+    
+  # Alert levels
+  alerts:
+    minor: "warning"
+    major: "error"
+    critical: "immediate"
+
+# Audit and reporting
+audit:
+  enabled: true
+  log_all_data_access: true
+  track_data_lineage: true
+  record_compliance_decisions: true
+  
+  # Retention policies
+  retention:
+    audit_logs_days: 90
+    compliance_reports_days: 365
+    violation_records_days: 180
+    
+  # Report generation
+  reports:
+    daily_compliance_summary: true
+    weekly_violation_analysis: true
+    monthly_compliance_score: true
+    quarterly_audit_report: true
+
+# Data handling policies
+data_handling:
+  # Data classification
+  classification:
+    public: ["macro_indicators", "market_indices"]
+    internal: ["model_predictions", "portfolio_data"]
+    confidential: ["api_keys", "user_data"]
+    
+  # Access controls
+  access_control:
+    require_authentication: true
+    role_based_access: true
+    audit_data_access: true
+    
+  # Data lifecycle
+  lifecycle:
+    automatic_expiration: true
+    secure_deletion: true
+    backup_compliance: true
+
+# Regulatory compliance
+regulatory:
+  # Financial regulations
+  financial:
+    no_investment_advice: true
+    disclosure_requirements: true
+    risk_warnings: true
+    fiduciary_standards: false  # Not a fiduciary
+    
+  # Data protection
+  data_protection:
+    privacy_by_design: true
+    minimal_data_collection: true
+    secure_processing: true
+    user_consent: true
+    
+  # Algorithmic transparency
+  algorithmic:
+    model_explainability: true
+    bias_detection: true
+    fairness_assessment: true
+    performance_monitoring: true
+
+# Emergency procedures
+emergency:
+  # Compliance shutdown
+  shutdown_triggers:
+    - "critical_violation"
+    - "data_breach"
+    - "unauthorized_access"
+    - "regulatory_notice"
+    
+  # Emergency responses
+  responses:
+    immediate_data_purge: true
+    suspend_ai_responses: true
+    activate_safe_mode: true
+    notify_administrators: true
+    
+  # Recovery procedures
+  recovery:
+    compliance_verification: true
+    system_validation: true
+    gradual_reactivation: true
+    continuous_monitoring: true
+
+# Integration settings
+integration:
+  # Backend systems
+  backend:
+    validate_all_inputs: true
+    sanitize_outputs: true
+    log_all_transactions: true
+    
+  # Frontend displays
+  frontend:
+    compliance_banners: true
+    warning_messages: true
+    data_source_disclosure: true
+    uncertainty_indicators: true
+    
+  # External APIs
+  external:
+    verify_before_use: true
+    validate_responses: true
+    handle_failures_gracefully: true
+    maintain_audit_trail: true
+
+# Performance impact
+performance:
+  # Acceptable overhead
+  max_validation_overhead_ms: 100
+  max_compliance_check_time_ms: 50
+  
+  # Optimization
+  cache_validation_results: true
+  batch_compliance_checks: true
+  async_audit_logging: true
+  
+  # Monitoring
+  track_performance_impact: true
+  alert_on_slow_compliance: true
+  optimize_validation_rules: true

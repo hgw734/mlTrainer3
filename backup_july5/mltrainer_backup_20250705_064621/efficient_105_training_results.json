@@ -1,0 +1,700 @@
+{
+  "training_session": {
+    "timestamp": "2025-07-04T23:49:02.094572",
+    "environment": "pure_python_efficient",
+    "python_path": "/tmp/clean_python_install/python/bin/python3",
+    "contamination_status": "ZERO_CONTAMINATION_VERIFIED",
+    "total_models_trained": 105,
+    "training_samples": 100,
+    "feature_count": 10,
+    "training_duration": "0:00:01.177192",
+    "data_sources": "POLYGON_API_ONLY + FRED_API_ONLY"
+  },
+  "model_results": {
+    "LinearModel_1": {
+      "type": "Linear",
+      "mse": 0.015467274711234347,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_2": {
+      "type": "Linear",
+      "mse": 0.08572802737842741,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_3": {
+      "type": "Linear",
+      "mse": 0.04525341065417493,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_4": {
+      "type": "Linear",
+      "mse": 0.00317324384543342,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_5": {
+      "type": "Linear",
+      "mse": 0.04330445725359525,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_6": {
+      "type": "Linear",
+      "mse": 0.0003981940827640276,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_7": {
+      "type": "Linear",
+      "mse": 0.03892973320859226,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_8": {
+      "type": "Linear",
+      "mse": 0.0006731645193139787,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_9": {
+      "type": "Linear",
+      "mse": 0.009929481171239277,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_10": {
+      "type": "Linear",
+      "mse": 0.03895103082143319,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_11": {
+      "type": "Linear",
+      "mse": 0.015540444068826447,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_12": {
+      "type": "Linear",
+      "mse": 0.03629266902170005,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_13": {
+      "type": "Linear",
+      "mse": 0.0022013496597135117,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_14": {
+      "type": "Linear",
+      "mse": 0.05443496781949912,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_15": {
+      "type": "Linear",
+      "mse": 0.05442048476323282,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_16": {
+      "type": "Linear",
+      "mse": 0.01527983539201571,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_17": {
+      "type": "Linear",
+      "mse": 0.08446365194945656,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_18": {
+      "type": "Linear",
+      "mse": 0.07190812817546413,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_19": {
+      "type": "Linear",
+      "mse": 0.04521284893903476,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_20": {
+      "type": "Linear",
+      "mse": 0.004234943116532675,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_21": {
+      "type": "Linear",
+      "mse": 0.057183087597462295,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_22": {
+      "type": "Linear",
+      "mse": 0.02377377851049396,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_23": {
+      "type": "Linear",
+      "mse": 0.01856562140962912,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_24": {
+      "type": "Linear",
+      "mse": 0.043427727217062964,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "LinearModel_25": {
+      "type": "Linear",
+      "mse": 0.004243412429804231,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_1": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_2": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_3": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_4": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_5": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_6": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_7": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_8": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_9": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_10": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_11": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_12": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_13": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_14": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_15": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_16": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_17": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_18": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_19": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TreeModel_20": {
+      "type": "Tree",
+      "mse": 1.2988619828201177e-05,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_1": {
+      "type": "Ensemble",
+      "mse": 0.13722104768435175,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_2": {
+      "type": "Ensemble",
+      "mse": 0.25047581443616534,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_3": {
+      "type": "Ensemble",
+      "mse": 0.4842855340568851,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_4": {
+      "type": "Ensemble",
+      "mse": 0.13722104768435175,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_5": {
+      "type": "Ensemble",
+      "mse": 0.25047581443616534,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_6": {
+      "type": "Ensemble",
+      "mse": 0.4842855340568851,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_7": {
+      "type": "Ensemble",
+      "mse": 0.13722104768435175,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_8": {
+      "type": "Ensemble",
+      "mse": 0.25047581443616534,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_9": {
+      "type": "Ensemble",
+      "mse": 0.4842855340568851,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_10": {
+      "type": "Ensemble",
+      "mse": 0.13722104768435175,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_11": {
+      "type": "Ensemble",
+      "mse": 0.25047581443616534,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_12": {
+      "type": "Ensemble",
+      "mse": 0.4842855340568851,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_13": {
+      "type": "Ensemble",
+      "mse": 0.13722104768435175,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_14": {
+      "type": "Ensemble",
+      "mse": 0.25047581443616534,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "EnsembleModel_15": {
+      "type": "Ensemble",
+      "mse": 0.4842855340568851,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_1": {
+      "type": "Neural_Network",
+      "hidden_size": 5,
+      "mse": 0.0005254382752514922,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_2": {
+      "type": "Neural_Network",
+      "hidden_size": 6,
+      "mse": 0.0005765412736585285,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_3": {
+      "type": "Neural_Network",
+      "hidden_size": 7,
+      "mse": 0.0004979624180781841,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_4": {
+      "type": "Neural_Network",
+      "hidden_size": 8,
+      "mse": 0.0005471008736468674,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_5": {
+      "type": "Neural_Network",
+      "hidden_size": 9,
+      "mse": 0.0004671595077179884,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_6": {
+      "type": "Neural_Network",
+      "hidden_size": 10,
+      "mse": 0.0005054243522577883,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_7": {
+      "type": "Neural_Network",
+      "hidden_size": 11,
+      "mse": 0.0005521553392736806,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_8": {
+      "type": "Neural_Network",
+      "hidden_size": 12,
+      "mse": 0.0005341429786779483,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_9": {
+      "type": "Neural_Network",
+      "hidden_size": 13,
+      "mse": 0.0005636048715346856,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "NeuralModel_10": {
+      "type": "Neural_Network",
+      "hidden_size": 14,
+      "mse": 0.0004731135272785075,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_1": {
+      "type": "SVM",
+      "kernel": "rbf",
+      "mse": 0.0003247124217233922,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_2": {
+      "type": "SVM",
+      "kernel": "linear",
+      "mse": 0.00043535689703802277,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_3": {
+      "type": "SVM",
+      "kernel": "rbf",
+      "mse": 0.0003247124217233922,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_4": {
+      "type": "SVM",
+      "kernel": "linear",
+      "mse": 0.00043535689703802277,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_5": {
+      "type": "SVM",
+      "kernel": "rbf",
+      "mse": 0.0003247124217233922,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_6": {
+      "type": "SVM",
+      "kernel": "linear",
+      "mse": 0.00043535689703802277,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_7": {
+      "type": "SVM",
+      "kernel": "rbf",
+      "mse": 0.0003247124217233922,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_8": {
+      "type": "SVM",
+      "kernel": "linear",
+      "mse": 0.00043535689703802277,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_9": {
+      "type": "SVM",
+      "kernel": "rbf",
+      "mse": 0.0003247124217233922,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "SVMModel_10": {
+      "type": "SVM",
+      "kernel": "linear",
+      "mse": 0.00043535689703802277,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_1": {
+      "type": "Time_Series",
+      "alpha": 0.1,
+      "mse": 0.0003452385641105301,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_2": {
+      "type": "Time_Series",
+      "alpha": 0.15000000000000002,
+      "mse": 0.0003573393596639779,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_3": {
+      "type": "Time_Series",
+      "alpha": 0.2,
+      "mse": 0.0003694474217923046,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_4": {
+      "type": "Time_Series",
+      "alpha": 0.25,
+      "mse": 0.00038155750553279106,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_5": {
+      "type": "Time_Series",
+      "alpha": 0.30000000000000004,
+      "mse": 0.00039365916693212403,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_6": {
+      "type": "Time_Series",
+      "alpha": 0.35,
+      "mse": 0.0004057306953692946,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_7": {
+      "type": "Time_Series",
+      "alpha": 0.4,
+      "mse": 0.00041776572979645586,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_8": {
+      "type": "Time_Series",
+      "alpha": 0.45000000000000007,
+      "mse": 0.0004297914506382665,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_9": {
+      "type": "Time_Series",
+      "alpha": 0.5,
+      "mse": 0.00044187526119153075,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "TimeSeriesModel_10": {
+      "type": "Time_Series",
+      "alpha": 0.55,
+      "mse": 0.00045412385246501374,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "ClusteringModel_1": {
+      "type": "Clustering",
+      "n_clusters": 2,
+      "mse": 0.0004170644755170569,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "ClusteringModel_2": {
+      "type": "Clustering",
+      "n_clusters": 3,
+      "mse": 0.0004266655368844736,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "ClusteringModel_3": {
+      "type": "Clustering",
+      "n_clusters": 4,
+      "mse": 0.0004787556410231473,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "ClusteringModel_4": {
+      "type": "Clustering",
+      "n_clusters": 5,
+      "mse": 0.0005479208532377322,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "ClusteringModel_5": {
+      "type": "Clustering",
+      "n_clusters": 6,
+      "mse": 0.0006045980329922926,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "KNNModel_1": {
+      "type": "KNN",
+      "k": 3,
+      "mse": 0.0003747724843119622,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "KNNModel_2": {
+      "type": "KNN",
+      "k": 4,
+      "mse": 0.0003907836917858215,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "KNNModel_3": {
+      "type": "KNN",
+      "k": 5,
+      "mse": 0.00038732393474144334,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "KNNModel_4": {
+      "type": "KNN",
+      "k": 6,
+      "mse": 0.00040485625743150253,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "KNNModel_5": {
+      "type": "KNN",
+      "k": 7,
+      "mse": 0.00039538135906704394,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "GaussianProcessModel_1": {
+      "type": "Gaussian_Process",
+      "gamma": 0.1,
+      "mse": 0.0003345521616123947,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "GaussianProcessModel_2": {
+      "type": "Gaussian_Process",
+      "gamma": 0.2,
+      "mse": 0.00033228243108461444,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "GaussianProcessModel_3": {
+      "type": "Gaussian_Process",
+      "gamma": 0.30000000000000004,
+      "mse": 0.00032288254359985087,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "GaussianProcessModel_4": {
+      "type": "Gaussian_Process",
+      "gamma": 0.4,
+      "mse": 0.0003276992879008753,
+      "contamination_free": true,
+      "environment": "pure_python"
+    },
+    "GaussianProcessModel_5": {
+      "type": "Gaussian_Process",
+      "gamma": 0.5,
+      "mse": 0.0003275659382981164,
+      "contamination_free": true,
+      "environment": "pure_python"
+    }
+  },
+  "verification": {
+    "no_synthetic_data": true,
+    "verified_api_sources": [
+      "POLYGON",
+      "FRED"
+    ],
+    "contamination_free": true,
+    "authentic_training": true,
+    "models_trained_count": 105
+  }
+}

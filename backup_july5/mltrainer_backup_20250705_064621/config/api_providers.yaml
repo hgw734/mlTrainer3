@@ -1,0 +1,324 @@
+# mlTrainer API Provider Configuration
+# Centralized API configuration for AI models and data sources
+# No hardcoded API keys - all keys loaded from environment variables
+
+# =============================================
+# AI MODEL PROVIDERS
+# =============================================
+ai_providers:
+  # Current active AI provider
+  active_provider: "anthropic"
+  
+  # Available AI providers
+  providers:
+    anthropic:
+      name: "Anthropic Claude"
+      service_type: "ai_chat"
+      api_key_env: "ANTHROPIC_API_KEY"
+      base_url: "https://api.anthropic.com"
+      models:
+        default: "claude-sonnet-4-20250514"
+        available:
+          - "claude-sonnet-4-20250514"
+          - "claude-3-7-sonnet-20250219"
+          - "claude-3-5-sonnet-20241022"
+      limits:
+        max_tokens: 4096
+        requests_per_minute: 60
+        context_window: 200000
+      capabilities:
+        - "chat"
+        - "analysis"
+        - "reasoning"
+        - "code_generation"
+      compliance:
+        data_verification: true
+        audit_logging: true
+    
+    openai:
+      name: "OpenAI GPT"
+      service_type: "ai_chat"
+      api_key_env: "OPENAI_API_KEY"
+      base_url: "https://api.openai.com/v1"
+      models:
+        default: "gpt-4"
+        available:
+          - "gpt-4"
+          - "gpt-4-turbo"
+          - "gpt-3.5-turbo"
+      limits:
+        max_tokens: 4096
+        requests_per_minute: 40
+        context_window: 128000
+      capabilities:
+        - "chat"
+        - "analysis"
+        - "reasoning"
+        - "code_generation"
+      compliance:
+        data_verification: true
+        audit_logging: true
+
+# =============================================
+# DATA SOURCE PROVIDERS
+# =============================================
+data_providers:
+  # Market data providers
+  market_data:
+    active_provider: "polygon"
+    
+    providers:
+      polygon:
+        name: "Polygon.io"
+        service_type: "market_data"
+        api_key_env: "POLYGON_API_KEY"
+        base_url: "https://api.polygon.io"
+        endpoints:
+          stocks: "/v2/aggs/ticker/{symbol}/range/{multiplier}/{timespan}/{from}/{to}"
+          quotes: "/v1/last_quote/stocks/{symbol}"
+          trades: "/v1/last/stocks/{symbol}"
+          financials: "/vX/reference/financials"
+        limits:
+          requests_per_minute: 100
+          requests_per_day: 10000
+        capabilities:
+          - "real_time_quotes"
+          - "historical_data"
+          - "options_data"
+          - "forex_data"
+          - "crypto_data"
+        compliance:
+          verified_source: true
+          data_quality: "institutional"
+          regulatory_approved: true
+      
+      alpha_vantage:
+        name: "Alpha Vantage"
+        service_type: "market_data"
+        api_key_env: "ALPHA_VANTAGE_API_KEY"
+        base_url: "https://www.alphavantage.co/query"
+        endpoints:
+          daily: "?function=TIME_SERIES_DAILY&symbol={symbol}"
+          intraday: "?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval={interval}"
+        limits:
+          requests_per_minute: 5
+          requests_per_day: 500
+        capabilities:
+          - "historical_data"
+          - "technical_indicators"
+        compliance:
+          verified_source: true
+          data_quality: "retail"
+  
+  # Economic data providers
+  economic_data:
+    active_provider: "fred"
+    
+    providers:
+      fred:
+        name: "Federal Reserve Economic Data"
+        service_type: "economic_data"
+        api_key_env: "FRED_API_KEY"
+        base_url: "https://api.stlouisfed.org/fred"
+        endpoints:
+          series: "/series/observations"
+          categories: "/category/series"
+          releases: "/releases"
+        limits:
+          requests_per_minute: 120
+          requests_per_day: 100000
+        capabilities:
+          - "economic_indicators"
+          - "interest_rates"
+          - "inflation_data"
+          - "employment_data"
+        compliance:
+          verified_source: true
+          data_quality: "government"
+          regulatory_approved: true
+      
+      bea:
+        name: "Bureau of Economic Analysis"
+        service_type: "economic_data"
+        api_key_env: "BEA_API_KEY"
+        base_url: "https://apps.bea.gov/api/data"
+        limits:
+          requests_per_minute: 100
+          requests_per_day: 10000
+        capabilities:
+          - "gdp_data"
+          - "trade_data"
+          - "regional_data"
+        compliance:
+          verified_source: true
+          data_quality: "government"
+  
+  # Alternative data providers (disabled for now)
+  alternative_data:
+    active_provider: null  # Disabled - QuiverQuant excluded per user request
+    
+    providers:
+      quiverquant:
+        name: "QuiverQuant"
+        service_type: "alternative_data"
+        api_key_env: "QUIVER_API_KEY"
+        base_url: "https://api.quiverquant.com"
+        enabled: false  # Disabled per user request
+        capabilities:
+          - "insider_trading"
+          - "congress_trading"
+          - "reddit_sentiment"
+        compliance:
+          verified_source: true
+          data_quality: "alternative"
+
+# =============================================
+# PROVIDER SELECTION RULES
+# =============================================
+selection_rules:
+  # AI Provider selection logic
+  ai_provider_selection:
+    primary: "anthropic"
+    fallback: "openai"
+    selection_criteria:
+      - "api_key_availability"
+      - "service_health"
+      - "rate_limit_status"
+  
+  # Data provider selection logic
+  data_provider_selection:
+    market_data:
+      primary: "polygon"
+      fallback: "alpha_vantage"
+    economic_data:
+      primary: "fred"
+      fallback: "bea"
+    alternative_data:
+      primary: null  # Disabled
+      fallback: null
+  
+  # Health check configuration
+  health_checks:
+    enabled: true
+    check_interval_minutes: 5
+    timeout_seconds: 30
+    retry_attempts: 3
+    fallback_on_failure: true
+
+# =============================================
+# COMPLIANCE CONFIGURATION
+# =============================================
+compliance_config:
+  # Data source verification
+  data_verification:
+    require_verified_sources: true
+    allowed_source_types:
+      - "government"
+      - "institutional"
+      - "retail"  # With additional validation
+    blocked_source_types:
+      - "synthetic"
+      - "mock"
+      - "test"
+  
+  # API usage tracking
+  usage_tracking:
+    enabled: true
+    log_all_requests: true
+    track_data_lineage: true
+    audit_responses: true
+  
+  # Rate limiting compliance
+  rate_limiting:
+    enforce_provider_limits: true
+    buffer_percentage: 20  # Stay 20% below limits
+    queue_overflow_requests: true
+
+# =============================================
+# MONITORING AND ALERTING
+# =============================================
+monitoring:
+  # API health monitoring
+  api_health:
+    check_frequency_minutes: 2
+    alert_on_failure: true
+    alert_threshold_failures: 3
+  
+  # Usage monitoring
+  usage_monitoring:
+    track_request_counts: true
+    track_response_times: true
+    alert_on_rate_limit_approach: true
+    rate_limit_warning_threshold: 80  # Alert at 80% of limit
+  
+  # Performance monitoring
+  performance:
+    track_latency: true
+    track_error_rates: true
+    alert_on_degradation: true
+
+# =============================================
+# CACHING CONFIGURATION
+# =============================================
+caching:
+  # Response caching
+  response_cache:
+    enabled: true
+    ttl_minutes:
+      market_data: 1     # 1 minute for market data
+      economic_data: 60  # 1 hour for economic data
+      ai_responses: 30   # 30 minutes for AI responses
+  
+  # Request deduplication
+  deduplication:
+    enabled: true
+    window_minutes: 5
+
+# =============================================
+# ERROR HANDLING
+# =============================================
+error_handling:
+  # Retry configuration
+  retries:
+    max_attempts: 3
+    backoff_strategy: "exponential"
+    base_delay_seconds: 1
+    max_delay_seconds: 60
+  
+  # Fallback behavior
+  fallbacks:
+    enable_provider_fallback: true
+    enable_cached_responses: true
+    enable_degraded_mode: true
+  
+  # Error response templates
+  error_responses:
+    api_unavailable: "I don't know. But based on the data, I would suggest checking the {provider} API status and connectivity."
+    rate_limited: "I don't know. But based on the data, I would suggest waiting before making additional requests to {provider}."
+    invalid_response: "I don't know. But based on the data, I would suggest verifying the data source and trying again."
+
+# =============================================
+# DEVELOPMENT AND TESTING
+# =============================================
+development:
+  # Testing configuration
+  testing:
+    mock_responses: false  # Never use mock data per compliance
+    test_api_keys: false   # Use real API keys only
+    validate_responses: true
+  
+  # Development mode settings
+  dev_mode:
+    verbose_logging: true
+    debug_api_calls: true
+    bypass_rate_limits: false  # Always respect rate limits
+
+# =============================================
+# METADATA
+# =============================================
+metadata:
+  version: "1.0"
+  created_date: "2025-07-03"
+  last_modified: "2025-07-03"
+  description: "Centralized API provider configuration for mlTrainer system"
+  schema_version: "1.0"

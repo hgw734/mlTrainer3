@@ -1,0 +1,22 @@
+[
+  {
+    "timestamp": "2025-07-04T23:01:56.602001",
+    "operation": "training",
+    "attempted_source": "unauthorized_api",
+    "block_reason": "UNAUTHORIZED_SOURCE",
+    "authorized_sources": [
+      "polygon",
+      "fred"
+    ]
+  },
+  {
+    "timestamp": "2025-07-04T23:01:56.604291",
+    "operation": "create_synthetic_data",
+    "attempted_source": "polygon",
+    "block_reason": "PROHIBITED_OPERATION",
+    "authorized_sources": [
+      "polygon",
+      "fred"
+    ]
+  }
+]

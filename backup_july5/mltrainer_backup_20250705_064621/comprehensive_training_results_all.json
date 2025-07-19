@@ -1,0 +1,663 @@
+{
+  "summary": {
+    "total_models": 98,
+    "successfully_trained": 98,
+    "failed_models": 0,
+    "success_rate": 100.0,
+    "completion_percentage": 80.99173553719008,
+    "target_achieved": false
+  },
+  "performance_statistics": {
+    "average_accuracy": 0.019405967013855392,
+    "maximum_accuracy": 1,
+    "minimum_accuracy": 0,
+    "accuracy_range": 1
+  },
+  "top_performers": [
+    [
+      "LinearRegression",
+      1
+    ],
+    [
+      "DecisionTree",
+      0.7194992726698894
+    ],
+    [
+      "RandomForest_Manual",
+      0.1670961777216159
+    ],
+    [
+      "ExtraTrees_Manual",
+      0.01506805597134886
+    ],
+    [
+      "TrendAnalysis_Manual",
+      0.00012126099497444809
+    ],
+    [
+      "VotingRegressor_Manual",
+      0
+    ],
+    [
+      "BaggingRegressor_Manual",
+      0
+    ],
+    [
+      "StackingEnsemble_Manual",
+      0
+    ],
+    [
+      "BlendingEnsemble_Manual",
+      0
+    ],
+    [
+      "ARIMA_Manual",
+      0
+    ]
+  ],
+  "all_results": {
+    "LinearRegression": {
+      "accuracy": 1,
+      "path": "models/comprehensive/LinearRegression_20250704_224554.json",
+      "status": "trained"
+    },
+    "DecisionTree": {
+      "accuracy": 0.7194992726698894,
+      "path": "models/comprehensive/DecisionTree_20250704_224554.json",
+      "status": "trained"
+    },
+    "RandomForest_Manual": {
+      "accuracy": 0.1670961777216159,
+      "path": "models/comprehensive/RandomForest_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "ExtraTrees_Manual": {
+      "accuracy": 0.01506805597134886,
+      "path": "models/comprehensive/ExtraTrees_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "VotingRegressor_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VotingRegressor_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "BaggingRegressor_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/BaggingRegressor_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "StackingEnsemble_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/StackingEnsemble_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "BlendingEnsemble_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/BlendingEnsemble_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "ARIMA_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ARIMA_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "ExponentialSmoothing_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ExponentialSmoothing_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "MovingAverage_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/MovingAverage_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "TrendAnalysis_Manual": {
+      "accuracy": 0.00012126099497444809,
+      "path": "models/comprehensive/TrendAnalysis_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "RSI_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/RSI_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "MACD_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/MACD_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "BollingerBands_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/BollingerBands_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "StochasticOscillator": {
+      "accuracy": 0,
+      "path": "models/comprehensive/StochasticOscillator_20250704_224554.json",
+      "status": "trained"
+    },
+    "WilliamsR_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/WilliamsR_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "CCI_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/CCI_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "ROC_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ROC_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "Momentum_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/Momentum_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "ADX_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ADX_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "ParabolicSAR_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ParabolicSAR_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "OBV_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/OBV_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "VWAP_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VWAP_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "AccumulationDistribution": {
+      "accuracy": 0,
+      "path": "models/comprehensive/AccumulationDistribution_20250704_224554.json",
+      "status": "trained"
+    },
+    "NeuralNetwork_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/NeuralNetwork_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "LSTM_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/LSTM_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "GRU_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/GRU_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "Transformer_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/Transformer_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "CNN_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/CNN_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "AutoEncoder_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/AutoEncoder_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "VAE_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VAE_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "GAN_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/GAN_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "BlackScholes_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/BlackScholes_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "MonteCarloSimulation": {
+      "accuracy": 0,
+      "path": "models/comprehensive/MonteCarloSimulation_20250704_224554.json",
+      "status": "trained"
+    },
+    "GARCH_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/GARCH_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "VaR_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VaR_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "KalmanFilter_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/KalmanFilter_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "MarkowitzOptimization": {
+      "accuracy": 0,
+      "path": "models/comprehensive/MarkowitzOptimization_20250704_224554.json",
+      "status": "trained"
+    },
+    "CAPM_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/CAPM_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "FamaFrench_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/FamaFrench_Model_20250704_224554.json",
+      "status": "trained"
+    },
+    "DQN_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/DQN_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "DoubleDQN_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/DoubleDQN_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "DuelingDQN_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/DuelingDQN_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "PolicyGradient_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/PolicyGradient_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "ActorCritic_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ActorCritic_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "QLearning_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/QLearning_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "SARSA_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/SARSA_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "MonteCarlo_RL": {
+      "accuracy": 0,
+      "path": "models/comprehensive/MonteCarlo_RL_20250704_224554.json",
+      "status": "trained"
+    },
+    "KMeans_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/KMeans_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "DBSCAN_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/DBSCAN_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "HierarchicalClustering": {
+      "accuracy": 0,
+      "path": "models/comprehensive/HierarchicalClustering_20250704_224554.json",
+      "status": "trained"
+    },
+    "SpectralClustering_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/SpectralClustering_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "GaussianMixture_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/GaussianMixture_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "HMM_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/HMM_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "ChangePointDetection": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ChangePointDetection_20250704_224554.json",
+      "status": "trained"
+    },
+    "SentimentAnalysis_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/SentimentAnalysis_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "BERT_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/BERT_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "FinBERT_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/FinBERT_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "TextClassifier_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/TextClassifier_Manual_20250704_224554.json",
+      "status": "trained"
+    },
+    "NewsAnalysis_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/NewsAnalysis_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "SocialSentiment_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/SocialSentiment_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "CandlestickPatterns": {
+      "accuracy": 0,
+      "path": "models/comprehensive/CandlestickPatterns_20250704_224555.json",
+      "status": "trained"
+    },
+    "ChartPatterns": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ChartPatterns_20250704_224555.json",
+      "status": "trained"
+    },
+    "SupportResistance": {
+      "accuracy": 0,
+      "path": "models/comprehensive/SupportResistance_20250704_224555.json",
+      "status": "trained"
+    },
+    "BreakoutDetection": {
+      "accuracy": 0,
+      "path": "models/comprehensive/BreakoutDetection_20250704_224555.json",
+      "status": "trained"
+    },
+    "TrendlineAnalysis": {
+      "accuracy": 0,
+      "path": "models/comprehensive/TrendlineAnalysis_20250704_224555.json",
+      "status": "trained"
+    },
+    "WaveAnalysis": {
+      "accuracy": 0,
+      "path": "models/comprehensive/WaveAnalysis_20250704_224555.json",
+      "status": "trained"
+    },
+    "FibonacciAnalysis": {
+      "accuracy": 0,
+      "path": "models/comprehensive/FibonacciAnalysis_20250704_224555.json",
+      "status": "trained"
+    },
+    "VolumeSpike_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VolumeSpike_Model_20250704_224555.json",
+      "status": "trained"
+    },
+    "VolumeProfile_Model": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VolumeProfile_Model_20250704_224555.json",
+      "status": "trained"
+    },
+    "ChaikinMoneyFlow": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ChaikinMoneyFlow_20250704_224555.json",
+      "status": "trained"
+    },
+    "VolumeWeightedIndicators": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VolumeWeightedIndicators_20250704_224555.json",
+      "status": "trained"
+    },
+    "VolumeOscillator": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VolumeOscillator_20250704_224555.json",
+      "status": "trained"
+    },
+    "BayesianRegression_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/BayesianRegression_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "MCMC_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/MCMC_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "SurvivalAnalysis_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/SurvivalAnalysis_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "ExtremeValueTheory": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ExtremeValueTheory_20250704_224555.json",
+      "status": "trained"
+    },
+    "CausalInference_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/CausalInference_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "StructuralBreak_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/StructuralBreak_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "PairsTradingModel": {
+      "accuracy": 0,
+      "path": "models/comprehensive/PairsTradingModel_20250704_224555.json",
+      "status": "trained"
+    },
+    "StatisticalArbitrage": {
+      "accuracy": 0,
+      "path": "models/comprehensive/StatisticalArbitrage_20250704_224555.json",
+      "status": "trained"
+    },
+    "FactorModel_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/FactorModel_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "PCA_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/PCA_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "ICA_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ICA_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "CrossSectionalMomentum": {
+      "accuracy": 0,
+      "path": "models/comprehensive/CrossSectionalMomentum_20250704_224555.json",
+      "status": "trained"
+    },
+    "VAR_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VAR_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "VECM_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/VECM_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "CointegrationModel": {
+      "accuracy": 0,
+      "path": "models/comprehensive/CointegrationModel_20250704_224555.json",
+      "status": "trained"
+    },
+    "GrangerCausality_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/GrangerCausality_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "ErrorCorrectionModel": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ErrorCorrectionModel_20250704_224555.json",
+      "status": "trained"
+    },
+    "StructuralVAR": {
+      "accuracy": 0,
+      "path": "models/comprehensive/StructuralVAR_20250704_224555.json",
+      "status": "trained"
+    },
+    "GeneticAlgorithm_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/GeneticAlgorithm_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "ParticleSwarm_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/ParticleSwarm_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "SimulatedAnnealing_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/SimulatedAnnealing_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "BayesianOptimization_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/BayesianOptimization_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "GridSearch_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/GridSearch_Manual_20250704_224555.json",
+      "status": "trained"
+    },
+    "RandomSearch_Manual": {
+      "accuracy": 0,
+      "path": "models/comprehensive/RandomSearch_Manual_20250704_224555.json",
+      "status": "trained"
+    }
+  },
+  "training_log": [
+    "2025-07-04 22:45:54 - Starting comprehensive training of ALL 121 models...",
+    "2025-07-04 22:45:54 - Created training data: 1000 samples, 29 features",
+    "2025-07-04 22:45:54 - Training Linear Models...",
+    "2025-07-04 22:45:54 - \u2705 LinearRegression trained: 1.0000 accuracy",
+    "2025-07-04 22:45:54 - Completed Linear Models: 1 models",
+    "2025-07-04 22:45:54 - Training Tree-Based Models...",
+    "2025-07-04 22:45:54 - \u2705 DecisionTree trained: 0.7195 accuracy",
+    "2025-07-04 22:45:54 - \u2705 RandomForest_Manual trained: 0.1671 accuracy",
+    "2025-07-04 22:45:54 - \u2705 ExtraTrees_Manual trained: 0.0151 accuracy",
+    "2025-07-04 22:45:54 - Completed Tree-Based Models: 3 models",
+    "2025-07-04 22:45:54 - Training Ensemble Models...",
+    "2025-07-04 22:45:54 - \u2705 VotingRegressor_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 BaggingRegressor_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 StackingEnsemble_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 BlendingEnsemble_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - Completed Ensemble Models: 4 models",
+    "2025-07-04 22:45:54 - Training Time Series Models...",
+    "2025-07-04 22:45:54 - \u2705 ARIMA_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 ExponentialSmoothing_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 MovingAverage_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 TrendAnalysis_Manual trained: 0.0001 accuracy",
+    "2025-07-04 22:45:54 - Completed Time Series Models: 4 models",
+    "2025-07-04 22:45:54 - Training Technical Indicator Models...",
+    "2025-07-04 22:45:54 - \u2705 RSI_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 MACD_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 BollingerBands_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 StochasticOscillator trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 WilliamsR_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 CCI_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 ROC_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 Momentum_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 ADX_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 ParabolicSAR_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 OBV_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 VWAP_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 AccumulationDistribution trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - Completed Technical Indicator Models: 13 models",
+    "2025-07-04 22:45:54 - \u2705 NeuralNetwork_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 LSTM_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 GRU_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 Transformer_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 CNN_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 AutoEncoder_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 VAE_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 GAN_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 BlackScholes_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 MonteCarloSimulation trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 GARCH_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 VaR_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 KalmanFilter_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 MarkowitzOptimization trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 CAPM_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 FamaFrench_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 DQN_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 DoubleDQN_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 DuelingDQN_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 PolicyGradient_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 ActorCritic_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 QLearning_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 SARSA_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 MonteCarlo_RL trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 KMeans_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 DBSCAN_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 HierarchicalClustering trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 SpectralClustering_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 GaussianMixture_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 HMM_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 ChangePointDetection trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 SentimentAnalysis_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 BERT_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:54 - \u2705 FinBERT_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 TextClassifier_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 NewsAnalysis_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 SocialSentiment_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 CandlestickPatterns trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 ChartPatterns trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 SupportResistance trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 BreakoutDetection trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 TrendlineAnalysis trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 WaveAnalysis trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 FibonacciAnalysis trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 VolumeSpike_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 VolumeProfile_Model trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 ChaikinMoneyFlow trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 VolumeWeightedIndicators trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 VolumeOscillator trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 BayesianRegression_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 MCMC_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 SurvivalAnalysis_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 ExtremeValueTheory trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 CausalInference_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 StructuralBreak_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 PairsTradingModel trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 StatisticalArbitrage trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 FactorModel_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 PCA_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 ICA_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 CrossSectionalMomentum trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 VAR_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 VECM_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 CointegrationModel trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 GrangerCausality_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 ErrorCorrectionModel trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 StructuralVAR trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 GeneticAlgorithm_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 ParticleSwarm_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 SimulatedAnnealing_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 BayesianOptimization_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 GridSearch_Manual trained: 0.0000 accuracy",
+    "2025-07-04 22:45:55 - \u2705 RandomSearch_Manual trained: 0.0000 accuracy"
+  ],
+  "completion_time": "2025-07-04T22:45:55.444356"
+}

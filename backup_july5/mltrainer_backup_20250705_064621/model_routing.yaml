@@ -1,0 +1,472 @@
+# mlTrainer Advanced Model Routing Configuration
+# Multi-dimensional regime analysis with dynamic model selection and weighting
+
+# =============================================
+# REGIME DEFINITIONS
+# =============================================
+regimes:
+  # Low volatility, stable market conditions
+  stable_low_volatility:
+    volatility: low
+    macro_signal: neutral
+    score_range: [0, 30]
+    models: [RandomForest, Prophet, LinearRegression, ARIMA]
+    description: "Stable market with low volatility - traditional models excel"
+    confidence_multiplier: 1.2
+    model_priority:
+      RandomForest: 1
+      Prophet: 2
+      LinearRegression: 3
+      ARIMA: 4
+    performance_weight: 0.8
+    
+  # Trending market with moderate volatility
+  trending_medium_volatility:
+    volatility: medium
+    macro_signal: trending
+    score_range: [25, 65]
+    models: [LSTM, XGBoost, LightGBM, CatBoost, GradientBoosting]
+    description: "Trending market with moderate volatility - ML models optimal"
+    confidence_multiplier: 1.0
+    model_priority:
+      LSTM: 1
+      XGBoost: 2
+      LightGBM: 3
+      CatBoost: 4
+      GradientBoosting: 5
+    performance_weight: 1.0
+    
+  # High volatility shock conditions
+  volatile_shock_conditions:
+    volatility: high
+    macro_signal: [shock, irregular]
+    score_range: [60, 100]
+    models: [GRU, CNN_LSTM, Transformer, DQN, AdaptiveEnsemble]
+    description: "High volatility shock conditions - advanced models required"
+    confidence_multiplier: 0.8
+    model_priority:
+      Transformer: 1
+      GRU: 2
+      CNN_LSTM: 3
+      DQN: 4
+      AdaptiveEnsemble: 5
+    performance_weight: 1.2
+    
+  # Market regime transition phase
+  regime_transition:
+    volatility: high
+    macro_signal: macro_shift
+    score_range: [50, 90]
+    models: [Autoencoder, MetaLearner, AdaptiveEnsemble, Transformer]
+    description: "Market regime transition - adaptive models for changing patterns"
+    confidence_multiplier: 0.6
+    model_priority:
+      MetaLearner: 1
+      Autoencoder: 2
+      AdaptiveEnsemble: 3
+      Transformer: 4
+    performance_weight: 0.9
+    
+  # High volatility trending market
+  volatile_trending:
+    volatility: high
+    macro_signal: trending
+    score_range: [45, 80]
+    models: [LSTM, GRU, Transformer, XGBoost, AdaptiveEnsemble]
+    description: "High volatility trending market - robust trend models"
+    confidence_multiplier: 0.9
+    model_priority:
+      GRU: 1
+      LSTM: 2
+      Transformer: 3
+      XGBoost: 4
+      AdaptiveEnsemble: 5
+    performance_weight: 1.1
+    
+  # Low volatility with macro uncertainty
+  stable_macro_uncertainty:
+    volatility: low
+    macro_signal: [macro_shift, irregular]
+    score_range: [20, 55]
+    models: [RandomForest, XGBoost, EnsembleVoting, MetaLearner]
+    description: "Stable prices but macro uncertainty - diversified approach"
+    confidence_multiplier: 0.7
+    model_priority:
+      EnsembleVoting: 1
+      RandomForest: 2
+      XGBoost: 3
+      MetaLearner: 4
+    performance_weight: 0.9
+    
+  # Always active models for robustness
+  always_active:
+    models: [EnsembleVoting, MetaLearner]
+    description: "Always-on models for baseline robustness and meta-learning"
+    weight_factor: 0.3
+    confidence_multiplier: 1.0
+    performance_weight: 0.7
+
+# =============================================
+# MODEL CHARACTERISTICS
+# =============================================
+model_characteristics:
+  # Traditional Statistical Models
+  ARIMA:
+    regime_preference: [stable]
+    volatility_tolerance: low
+    complexity: low
+    interpretability: high
+    training_speed: fast
+    inference_speed: very_fast
+    memory_requirements: low
+    suitable_regimes: [stable_low_volatility]
+    
+  Prophet:
+    regime_preference: [stable, trending]
+    volatility_tolerance: low
+    complexity: medium
+    interpretability: high
+    training_speed: medium
+    inference_speed: fast
+    memory_requirements: medium
+    suitable_regimes: [stable_low_volatility, trending_medium_volatility]
+    
+  LinearRegression:
+    regime_preference: [stable]
+    volatility_tolerance: very_low
+    complexity: very_low
+    interpretability: very_high
+    training_speed: very_fast
+    inference_speed: very_fast
+    memory_requirements: very_low
+    suitable_regimes: [stable_low_volatility]
+    
+  # Tree-based Models
+  RandomForest:
+    regime_preference: [stable, trending]
+    volatility_tolerance: medium
+    complexity: medium
+    interpretability: high
+    training_speed: fast
+    inference_speed: fast
+    memory_requirements: medium
+    suitable_regimes: [stable_low_volatility, stable_macro_uncertainty]
+    
+  XGBoost:
+    regime_preference: [trending, volatile]
+    volatility_tolerance: high
+    complexity: high
+    interpretability: medium
+    training_speed: medium
+    inference_speed: fast
+    memory_requirements: medium
+    suitable_regimes: [trending_medium_volatility, volatile_trending, stable_macro_uncertainty]
+    
+  LightGBM:
+    regime_preference: [trending, volatile]
+    volatility_tolerance: high
+    complexity: high
+    interpretability: medium
+    training_speed: fast
+    inference_speed: very_fast
+    memory_requirements: low
+    suitable_regimes: [trending_medium_volatility, volatile_trending]
+    
+  CatBoost:
+    regime_preference: [trending, volatile]
+    volatility_tolerance: high
+    complexity: high
+    interpretability: medium
+    training_speed: slow
+    inference_speed: fast
+    memory_requirements: medium
+    suitable_regimes: [trending_medium_volatility]
+    
+  GradientBoosting:
+    regime_preference: [trending]
+    volatility_tolerance: medium
+    complexity: high
+    interpretability: low
+    training_speed: slow
+    inference_speed: medium
+    memory_requirements: medium
+    suitable_regimes: [trending_medium_volatility]
+    
+  # Deep Learning Models
+  LSTM:
+    regime_preference: [trending, volatile]
+    volatility_tolerance: high
+    complexity: very_high
+    interpretability: low
+    training_speed: slow
+    inference_speed: medium
+    memory_requirements: high
+    suitable_regimes: [trending_medium_volatility, volatile_trending]
+    
+  GRU:
+    regime_preference: [volatile, transition]
+    volatility_tolerance: very_high
+    complexity: very_high
+    interpretability: low
+    training_speed: medium
+    inference_speed: fast
+    memory_requirements: high
+    suitable_regimes: [volatile_shock_conditions, volatile_trending]
+    
+  CNN_LSTM:
+    regime_preference: [volatile, transition]
+    volatility_tolerance: very_high
+    complexity: very_high
+    interpretability: very_low
+    training_speed: very_slow
+    inference_speed: medium
+    memory_requirements: very_high
+    suitable_regimes: [volatile_shock_conditions]
+    
+  Transformer:
+    regime_preference: [volatile, transition, complex]
+    volatility_tolerance: extremely_high
+    complexity: extremely_high
+    interpretability: very_low
+    training_speed: very_slow
+    inference_speed: slow
+    memory_requirements: extremely_high
+    suitable_regimes: [volatile_shock_conditions, regime_transition, volatile_trending]
+    
+  # Reinforcement Learning
+  DQN:
+    regime_preference: [volatile, crisis]
+    volatility_tolerance: extremely_high
+    complexity: extremely_high
+    interpretability: very_low
+    training_speed: extremely_slow
+    inference_speed: fast
+    memory_requirements: very_high
+    suitable_regimes: [volatile_shock_conditions]
+    
+  # Meta and Ensemble Models
+  EnsembleVoting:
+    regime_preference: [all]
+    volatility_tolerance: adaptive
+    complexity: medium
+    interpretability: medium
+    training_speed: medium
+    inference_speed: medium
+    memory_requirements: medium
+    suitable_regimes: [always_active, stable_macro_uncertainty]
+    
+  MetaLearner:
+    regime_preference: [transition, uncertain]
+    volatility_tolerance: adaptive
+    complexity: very_high
+    interpretability: low
+    training_speed: slow
+    inference_speed: medium
+    memory_requirements: high
+    suitable_regimes: [regime_transition, always_active, stable_macro_uncertainty]
+    
+  AdaptiveEnsemble:
+    regime_preference: [volatile, transition]
+    volatility_tolerance: extremely_high
+    complexity: very_high
+    interpretability: low
+    training_speed: slow
+    inference_speed: medium
+    memory_requirements: high
+    suitable_regimes: [volatile_shock_conditions, regime_transition, volatile_trending]
+    
+  Autoencoder:
+    regime_preference: [transition, anomaly]
+    volatility_tolerance: high
+    complexity: very_high
+    interpretability: very_low
+    training_speed: slow
+    inference_speed: fast
+    memory_requirements: high
+    suitable_regimes: [regime_transition]
+
+# =============================================
+# ROUTING RULES AND PARAMETERS
+# =============================================
+routing_rules:
+  # Selection criteria
+  min_confidence_threshold: 0.6
+  max_models_per_prediction: 5
+  min_models_per_prediction: 2
+  
+  # Ensemble configuration
+  ensemble_weight_normalization: true
+  adaptive_weighting: true
+  performance_based_selection: true
+  dynamic_weight_adjustment: true
+  
+  # Performance tracking
+  performance_window_days: 30
+  model_performance_threshold: 0.65
+  regime_stability_threshold: 0.8
+  
+  # Routing optimization
+  optimize_for_accuracy: true
+  optimize_for_speed: false
+  optimize_for_interpretability: false
+  balance_complexity_performance: true
+  
+  # Risk management
+  diversification_bonus: 0.1
+  correlation_penalty: 0.05
+  overfitting_penalty: 0.1
+  
+  # Dynamic adjustment parameters
+  weight_adaptation_rate: 0.1
+  confidence_decay_rate: 0.05
+  performance_memory_factor: 0.8
+
+# =============================================
+# ADVANCED ROUTING FEATURES
+# =============================================
+advanced_features:
+  # Multi-objective optimization
+  multi_objective:
+    enabled: true
+    objectives:
+      accuracy: 0.5
+      speed: 0.2
+      interpretability: 0.2
+      robustness: 0.1
+      
+  # Regime transition detection
+  transition_detection:
+    enabled: true
+    lookback_periods: [5, 10, 20]
+    stability_threshold: 0.8
+    transition_models: [MetaLearner, Autoencoder, AdaptiveEnsemble]
+    
+  # Model correlation analysis
+  correlation_analysis:
+    enabled: true
+    max_correlation_threshold: 0.8
+    diversification_bonus: 0.1
+    
+  # Adaptive thresholds
+  adaptive_thresholds:
+    enabled: true
+    confidence_adaptation: true
+    performance_adaptation: true
+    regime_adaptation: true
+    
+  # Online learning integration
+  online_learning:
+    enabled: true
+    update_frequency: daily
+    learning_rate_decay: 0.95
+    batch_size: 100
+
+# =============================================
+# PERFORMANCE OPTIMIZATION
+# =============================================
+performance_optimization:
+  # Caching
+  cache_predictions: true
+  cache_model_outputs: true
+  cache_ensemble_weights: true
+  cache_ttl_minutes: 60
+  
+  # Parallel processing
+  parallel_model_execution: true
+  max_parallel_models: 3
+  async_weight_calculation: true
+  
+  # Memory management
+  lazy_model_loading: true
+  model_memory_limit_gb: 4
+  automatic_model_unloading: true
+  
+  # Speed optimizations
+  fast_ensemble_approximation: false
+  prediction_shortcuts: true
+  early_stopping_ensemble: true
+
+# =============================================
+# MONITORING AND LOGGING
+# =============================================
+monitoring:
+  # Performance tracking
+  track_model_performance: true
+  track_ensemble_performance: true
+  track_regime_accuracy: true
+  
+  # Logging configuration
+  log_routing_decisions: true
+  log_performance_metrics: true
+  log_weight_adjustments: true
+  log_level: INFO
+  
+  # Alerting
+  alert_on_performance_drop: true
+  alert_threshold: 0.1
+  alert_on_routing_failures: true
+  
+  # Metrics collection
+  collect_timing_metrics: true
+  collect_memory_metrics: true
+  collect_accuracy_metrics: true
+
+# =============================================
+# FALLBACK AND ERROR HANDLING
+# =============================================
+fallback_configuration:
+  # Default models when routing fails
+  default_models: [RandomForest, XGBoost, EnsembleVoting]
+  
+  # Default weights when weight calculation fails
+  default_weights:
+    RandomForest: 0.4
+    XGBoost: 0.4
+    EnsembleVoting: 0.2
+    
+  # Error handling
+  max_retries: 3
+  retry_delay_seconds: 1
+  graceful_degradation: true
+  
+  # Fallback regimes
+  fallback_regime: default
+  emergency_models: [RandomForest, EnsembleVoting]
+
+# =============================================
+# EXPERIMENTAL FEATURES
+# =============================================
+experimental:
+  # Quantum-inspired routing (future)
+  quantum_routing:
+    enabled: false
+    quantum_annealing: false
+    
+  # Neuromorphic computing integration
+  neuromorphic:
+    enabled: false
+    spike_based_routing: false
+    
+  # Federated learning coordination
+  federated_learning:
+    enabled: false
+    peer_model_sharing: false
+    
+  # Explainable AI integration
+  explainable_ai:
+    enabled: true
+    shap_values: true
+    lime_explanations: false
+    model_agnostic_explanations: true
+
+# =============================================
+# VERSION AND METADATA
+# =============================================
+metadata:
+  version: "2.0"
+  created_date: "2025-01-03"
+  last_modified: "2025-01-03"
+  author: "mlTrainer System"
+  description: "Advanced multi-dimensional regime-aware model routing configuration"
+  compatible_versions: ["2.0", "2.1"]
+  schema_version: "1.0"

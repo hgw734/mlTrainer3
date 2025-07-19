@@ -1,0 +1,80 @@
+🧠 Machine Learning Models
+Deep Learning Models
+LSTM (Long Short-Term Memory) - Time series prediction with sequence memory
+Transformer - Attention-based model for complex pattern recognition
+GRU - Gated Recurrent Unit (referenced in model activation)
+CNN-LSTM - Convolutional + LSTM hybrid
+Autoencoder - Dimensionality reduction and anomaly detection
+Tree-Based Ensemble Models
+XGBoost - Extreme Gradient Boosting
+Random Forest - Bootstrap aggregated decision trees
+Gradient Boosting - Sequential weak learner enhancement
+CatBoost - Categorical boosting algorithm
+Decision Tree - Single tree regressor
+LightGBM - (Referenced but disabled due to dependencies)
+Traditional ML Models
+Linear Regression - Basic linear relationship modeling
+Ridge Regression - L2 regularized linear regression
+Lasso Regression - L1 regularized linear regression
+Support Vector Regression (SVR) - Non-linear regression with kernels
+Meta-Learning Models
+Ensemble Voting - Weighted combination of multiple models
+Meta-Learner - Model that learns from other models' predictions
+MAML (Model-Agnostic Meta-Learning) - Cross-market generalization
+🤖 Advanced AI Models
+Reinforcement Learning
+Deep Q-Network (DQN) - Action-value function approximation
+Regime-Aware DQN - RL with built-in regime detection
+Multi-Head Attention - Self-attention mechanism in transformers
+Time Series Specific
+ARIMA - Autoregressive Integrated Moving Average
+Prophet - Facebook's time series forecasting
+📊 Financial Mathematical Models
+Options Pricing Models
+Black-Scholes Model - European option pricing
+Monte Carlo Simulation - Stochastic path simulation for options
+Greeks Calculation (Delta, Gamma, Theta, Vega, Rho)
+Risk Management Models
+Value at Risk (VaR) - Historical, Parametric, Monte Carlo methods
+Expected Shortfall (Conditional VaR) - Tail risk measurement
+Maximum Drawdown - Peak-to-trough loss calculation
+Stress Testing - Scenario-based risk analysis
+Risk Attribution - Portfolio component risk decomposition
+Advanced Financial Models
+Regime-Switching GARCH - Volatility modeling with regime changes
+Markov-Switching Models - State-dependent parameter models
+Gaussian Mixture Models - Regime identification
+Efficient Market Hypothesis Tests - Weak/Semi-strong/Strong form tests
+Variance Ratio Tests - Random walk hypothesis testing
+Ljung-Box Tests - Serial correlation detection
+Runs Tests - Sequence randomness testing
+Portfolio Optimization
+Mean-Variance Optimization - Markowitz portfolio theory
+Risk Parity Models - Equal risk contribution
+Black-Litterman Model - Bayesian portfolio optimization
+🔬 Statistical & Econometric Models
+Regime Detection Models
+Transition Matrix Calculation - Regime persistence analysis
+Regime Persistence Models - Duration analysis
+Volatility Clustering Models - GARCH-type volatility
+Feature Engineering Models
+Technical Indicators - Moving averages, RSI, MACD
+Momentum Models - Price and volume momentum
+Mean Reversion Models - Statistical arbitrage
+🎯 Model Routing & Selection
+Adaptive Model Selection
+Multi-dimensional Regime Router - Dynamic model activation
+Volatility-based Selection - Models chosen by market volatility
+Macro Signal Classification - Economic condition-based routing
+Explainable AI Models
+SHAP (SHapley Additive exPlanations) - Feature importance
+LIME (Local Interpretable Model-agnostic Explanations) - Local explanations
+Feature Attribution Models - Model decision explanation
+📈 Ensemble & Meta-Models
+Stacking Models
+Linear Meta-Model - Combines LSTM, XGBoost, Transformer
+Weighted Ensemble - Dynamic weight allocation
+Multi-Model Fusion - Cross-validation based combination
+Walk-Forward Models
+Rolling Window Training - Time-aware model updating
+Out-of-sample Testing - Forward-looking validation

@@ -1,0 +1,118 @@
+# mlTrainer API Configuration
+# Real-time data source configurations with compliance verification
+
+polygon:
+  base_url: "https://api.polygon.io"
+  api_key_env: "POLYGON_API_KEY"
+  rate_limit: 100  # requests per minute
+  timeout: 15
+  endpoints:
+    market_status: "/v1/marketstatus/now"
+    aggregates: "/v2/aggs/ticker/{symbol}/range/{multiplier}/{timespan}/{from}/{to}"
+    quotes: "/v2/quotes/{symbol}"
+    trades: "/v3/trades/{symbol}"
+  default_params:
+    adjusted: true
+    sort: "desc"
+    limit: 100
+  compliance:
+    verified_source: true
+    data_delay_minutes: 15
+    require_timestamps: true
+
+fred:
+  base_url: "https://api.stlouisfed.org/fred"
+  api_key_env: "FRED_API_KEY"
+  rate_limit: 120  # requests per minute
+  timeout: 15
+  endpoints:
+    series: "/series"
+    observations: "/series/observations"
+    categories: "/category"
+  default_params:
+    file_type: "json"
+    sort_order: "desc"
+  series_ids:
+    vix: "VIXCLS"          # VIX Volatility Index
+    treasury_10y: "DGS10"  # 10-Year Treasury Rate
+    unemployment: "UNRATE" # Unemployment Rate
+    cpi: "CPIAUCSL"       # Consumer Price Index
+    gdp: "GDP"            # Gross Domestic Product
+    fed_funds: "FEDFUNDS" # Federal Funds Rate
+  compliance:
+    verified_source: true
+    government_data: true
+    require_timestamps: true
+
+quiverquant:
+  base_url: "https://api.quiverquant.com"
+  api_key_env: "QUIVERQUANT_API_KEY"
+  rate_limit: 60  # requests per minute
+  timeout: 15
+  endpoints:
+    wallstreetbets: "/beta/live/wallstreetbets"
+    insider_trading: "/beta/historical/insidertrading/{symbol}"
+    congressional_trading: "/beta/live/congresstrading"
+    options_flow: "/beta/live/optionsflow"
+    twitter_sentiment: "/beta/live/twitter"
+  headers:
+    Authorization: "Bearer {api_key}"
+  compliance:
+    verified_source: true
+    alternative_data: true
+    require_timestamps: true
+
+anthropic:
+  api_key_env: "ANTHROPIC_API_KEY"
+  model: "claude-sonnet-4-20250514"
+  base_url: "https://api.anthropic.com"
+  max_tokens: 1000
+  temperature: 0.1
+  timeout: 30
+  compliance:
+    verified_source: true
+    ai_service: true
+    response_validation: true
+
+# Global API settings
+global:
+  retry_attempts: 3
+  retry_delay: 1  # seconds
+  verify_ssl: true
+  user_agent: "mlTrainer/1.0"
+  request_timeout: 15
+  
+# Rate limiting configuration
+rate_limiting:
+  enabled: true
+  window_size: 60  # seconds
+  burst_allowance: 1.2  # 20% burst above rate limit
+  backoff_strategy: "exponential"
+  max_backoff: 300  # 5 minutes
+  
+# Monitoring and alerting
+monitoring:
+  log_all_requests: true
+  track_response_times: true
+  alert_on_failures: true
+  failure_threshold: 5  # consecutive failures
+  health_check_interval: 300  # 5 minutes
+  
+# Compliance and security
+security:
+  mask_api_keys_in_logs: true
+  validate_ssl_certificates: true
+  allowed_domains:
+    - "api.polygon.io"
+    - "api.stlouisfed.org"
+    - "api.quiverquant.com"
+    - "api.anthropic.com"
+  blocked_domains: []
+  
+# Data validation
+validation:
+  require_source_header: true
+  verify_response_schema: true
+  check_data_freshness: true
+  max_data_age_hours: 24
+  validate_numeric_ranges: true
