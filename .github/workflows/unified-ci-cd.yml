@@ -49,17 +49,17 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        # Clone HF space
-        git clone https://huggingface.co/spaces/hgw734/mltrainer3 hf-space
+        # Configure git with HF token
+        git config --global credential.helper store
+        echo "https://hgw734:${HF_TOKEN}@huggingface.co" > ~/.git-credentials
+        
+        # Clone HF space with token in URL
+        git clone https://hgw734:${HF_TOKEN}@huggingface.co/spaces/hgw734/mltrainer3 hf-space
         cd hf-space
         
-        # Configure git
+        # Configure git identity
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git config user.name "github-actions[bot]"
-        
-        # Configure HF auth
-        git config credential.helper store
-        echo "https://hgw734:${HF_TOKEN}@huggingface.co" > ~/.git-credentials
         
         # Copy all files from GitHub repo
         cp -r ../* . 2>/dev/null || true
