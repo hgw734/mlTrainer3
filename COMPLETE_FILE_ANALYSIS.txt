@@ -1,0 +1,675 @@
+# DETAILED ANALYSIS OF ALL 68 FAILED FILES
+
+====================================================================================================
+
+## AUTHENTICATION & API (5 files)
+----------------------------------------------------------------------------------------------------
+
+### fix_security_api_keys.py
+**Error**: invalid syntax at line 55
+**Issues Found**:
+  - ERROR LINE 55: 24 space indent
+**Problem Code**: `else:`
+
+### telegram_notifier.py
+**Error**: invalid syntax at line 101
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 200 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 243
+  - COMMENT CORRUPTION: 4 comments breaking code flow
+  - ERROR LINE 101: 48 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 200 spaces (should be ≤16)
+
+### fred_connector.py
+**Error**: invalid syntax at line 66
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 104 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 113
+  - COMMENT CORRUPTION: 4 comments breaking code flow
+  - ERROR LINE 66: 28 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 104 spaces (should be ≤16)
+
+### test_api_keys.py
+**Error**: invalid syntax at line 28
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 104
+  - COMMENT CORRUPTION: 7 comments breaking code flow
+  - ERROR LINE 28: 16 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### polygon_connector.py
+**Error**: invalid syntax at line 86
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 109
+  - COMMENT CORRUPTION: 7 comments breaking code flow
+  - ERROR LINE 86: 32 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+## FINANCIAL MODELS (19 files)
+----------------------------------------------------------------------------------------------------
+
+### custom/meta_learning.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 33
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### custom/financial_models.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 84 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 34
+  - COMMENT CORRUPTION: 2 comments breaking code flow
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 84 spaces (should be ≤16)
+
+### custom/momentum_models.py
+**Error**: unexpected indent at line 509
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 33
+  - NOT IMPLEMENTED: 1 methods not implemented
+  - ERROR LINE 509: 16 space indent
+**Problem Code**: `def _get_real_economic_data(self, series_id: str, start_date: str, end_date: str...`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### custom/stress.py
+**Error**: invalid syntax at line 22
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 56 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 9
+  - ERROR LINE 22: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 56 spaces (should be ≤16)
+
+### custom/optimization.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 36
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### custom/information_theory.py
+**Error**: invalid syntax at line 43
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 192 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 176
+  - ERROR LINE 43: 24 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 192 spaces (should be ≤16)
+
+### custom/time_series.py
+**Error**: invalid syntax at line 29
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 112 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 68
+  - ERROR LINE 29: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 112 spaces (should be ≤16)
+
+### custom/macro.py
+**Error**: invalid syntax at line 23
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 112 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 45
+  - ERROR LINE 23: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 112 spaces (should be ≤16)
+
+### custom/pairs.py
+**Error**: invalid syntax at line 23
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 56 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 9
+  - ERROR LINE 23: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 56 spaces (should be ≤16)
+
+### custom/interest_rate.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 84 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 33
+  - COMMENT CORRUPTION: 2 comments breaking code flow
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 84 spaces (should be ≤16)
+
+### custom/binomial.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 84 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 34
+  - COMMENT CORRUPTION: 2 comments breaking code flow
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 84 spaces (should be ≤16)
+
+### custom/elliott_wave.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 34
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### custom/microstructure.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 33
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### custom/adaptive.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 38
+  - COMMENT CORRUPTION: 1 comments breaking code flow
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### custom/position_sizing.py
+**Error**: unexpected indent at line 596
+**Issues Found**:
+  - SPLIT STATEMENTS: 3 statements split across lines
+  - NOT IMPLEMENTED: 1 methods not implemented
+  - ERROR LINE 596: 12 space indent
+**Problem Code**: `returns = window_data.pct_change().dropna()`
+
+### custom/regime_ensemble.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 33
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### custom/rl.py
+**Error**: invalid syntax at line 37
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 128 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 92
+  - COMMENT CORRUPTION: 2 comments breaking code flow
+  - ERROR LINE 37: 16 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 128 spaces (should be ≤16)
+
+### custom/alternative_data.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 32
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### custom/ensemble.py
+**Error**: invalid syntax at line 24
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 140 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 71
+  - ERROR LINE 24: 12 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 140 spaces (should be ≤16)
+
+## TESTING (8 files)
+----------------------------------------------------------------------------------------------------
+
+### test_simple_system.py
+**Error**: invalid syntax at line 27
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 108 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 170
+  - SPLIT STATEMENTS: 1 statements split across lines
+  - COMMENT CORRUPTION: 23 comments breaking code flow
+  - ERROR LINE 27: 4 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 108 spaces (should be ≤16)
+
+### test_data_connections.py
+**Error**: invalid syntax at line 37
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 90
+  - COMMENT CORRUPTION: 3 comments breaking code flow
+  - ERROR LINE 37: 12 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### test_model_integration.py
+**Error**: invalid syntax at line 50
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 132 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 179
+  - COMMENT CORRUPTION: 8 comments breaking code flow
+  - ERROR LINE 50: 20 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 132 spaces (should be ≤16)
+
+### test_unified_architecture.py
+**Error**: invalid syntax at line 273
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 84 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 90
+  - COMMENT CORRUPTION: 3 comments breaking code flow
+  - ERROR LINE 273: 56 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 84 spaces (should be ≤16)
+
+### test_phase1_config.py
+**Error**: invalid syntax at line 44
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 88 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 97
+  - COMMENT CORRUPTION: 13 comments breaking code flow
+  - ERROR LINE 44: 28 space indent
+**Problem Code**: `except Exception:`
+**Indentation**: Maximum 88 spaces (should be ≤16)
+
+### test_self_learning_engine.py
+**Error**: invalid syntax at line 37
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 164 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 356
+  - COMMENT CORRUPTION: 51 comments breaking code flow
+  - ERROR LINE 37: 8 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 164 spaces (should be ≤16)
+
+### test_model_verification.py
+**Error**: invalid syntax at line 50
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 68 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 36
+  - ERROR LINE 50: 16 space indent
+**Problem Code**: `except ImportError as e:`
+**Indentation**: Maximum 68 spaces (should be ≤16)
+
+### test_chat_persistence.py
+**Error**: invalid syntax at line 58
+**Issues Found**:
+  - ERROR LINE 58: 8 space indent
+**Problem Code**: `else:`
+
+## SCRIPTS & AUTOMATION (8 files)
+----------------------------------------------------------------------------------------------------
+
+### scripts/fix_remaining_violations.py
+**Error**: invalid syntax at line 31
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 208 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 191
+  - COMMENT CORRUPTION: 9 comments breaking code flow
+  - ERROR LINE 31: 12 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 208 spaces (should be ≤16)
+
+### scripts/production_audit_final.py
+**Error**: unexpected indent at line 19
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 224 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 18
+  - SPLIT STATEMENTS: 8 statements split across lines
+  - ERROR LINE 19: 44 space indent
+**Problem Code**: `def __init__(self):`
+**Indentation**: Maximum 224 spaces (should be ≤16)
+
+### scripts/final_compliance_check.py
+**Error**: invalid syntax at line 74
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 424 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 402
+  - COMMENT CORRUPTION: 9 comments breaking code flow
+  - ERROR LINE 74: 40 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 424 spaces (should be ≤16)
+
+### scripts/fix_critical_violations.py
+**Error**: unterminated string literal (detected at line 2) at line 2
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 232 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 199
+  - COMMENT CORRUPTION: 13 comments breaking code flow
+  - ERROR LINE 2: 0 space indent
+**Problem Code**: `"import logging`
+**Indentation**: Maximum 232 spaces (should be ≤16)
+
+### scripts/production_audit.py
+**Error**: unterminated string literal (detected at line 8) at line 8
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 300 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 300
+  - COMMENT CORRUPTION: 17 comments breaking code flow
+  - ERROR LINE 8: 0 space indent
+**Problem Code**: `""""`
+**Indentation**: Maximum 300 spaces (should be ≤16)
+
+### scripts/fix_all_violations.py
+**Error**: unterminated string literal (detected at line 2) at line 2
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 444 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 402
+  - COMMENT CORRUPTION: 31 comments breaking code flow
+  - ERROR LINE 2: 0 space indent
+**Problem Code**: `"import logging`
+**Indentation**: Maximum 444 spaces (should be ≤16)
+
+### scripts/fix_final_violations.py
+**Error**: invalid syntax at line 30
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 256 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 208
+  - COMMENT CORRUPTION: 12 comments breaking code flow
+  - ERROR LINE 30: 12 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 256 spaces (should be ≤16)
+
+### scripts/comprehensive_audit.py
+**Error**: invalid syntax at line 40
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 660 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 600
+  - COMMENT CORRUPTION: 16 comments breaking code flow
+  - ERROR LINE 40: 12 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 660 spaces (should be ≤16)
+
+## HOOKS & SECURITY (4 files)
+----------------------------------------------------------------------------------------------------
+
+### hooks/check_governance_imports.py
+**Error**: invalid syntax at line 54
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 156 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 106
+  - ERROR LINE 54: 28 space indent
+**Problem Code**: `elif isinstance(node, ast.ImportFrom):`
+**Indentation**: Maximum 156 spaces (should be ≤16)
+
+### hooks/check_secrets.py
+**Error**: invalid syntax at line 105
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 100 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 56
+  - COMMENT CORRUPTION: 3 comments breaking code flow
+  - ERROR LINE 105: 52 space indent
+**Problem Code**: `except:`
+**Indentation**: Maximum 100 spaces (should be ≤16)
+
+### hooks/validate_governance.py
+**Error**: invalid syntax at line 71
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 196 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 146
+  - COMMENT CORRUPTION: 1 comments breaking code flow
+  - ERROR LINE 71: 60 space indent
+**Problem Code**: `elif node.func.attr in ["_audit", "log_action"]:`
+**Indentation**: Maximum 196 spaces (should be ≤16)
+
+### hooks/check_synthetic_data.py
+**Error**: invalid syntax at line 91
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 132 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 82
+  - ERROR LINE 91: 60 space indent
+**Problem Code**: `elif isinstance(node.func, ast.Name):`
+**Indentation**: Maximum 132 spaces (should be ≤16)
+
+## UI & CHAT (4 files)
+----------------------------------------------------------------------------------------------------
+
+### mltrainer_unified_chat_backup.py
+**Error**: unexpected indent at line 252
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 212 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 443
+  - COMMENT CORRUPTION: 80 comments breaking code flow
+  - ERROR LINE 252: 61 space indent
+**Problem Code**: `st.subheader(`
+**Indentation**: Maximum 212 spaces (should be ≤16)
+
+### mltrainer_chat.py
+**Error**: invalid syntax at line 40
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 264 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 421
+  - COMMENT CORRUPTION: 86 comments breaking code flow
+  - ERROR LINE 40: 24 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 264 spaces (should be ≤16)
+
+### mltrainer_unified_chat_fixed.py
+**Error**: unexpected indent at line 268
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 212 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 443
+  - COMMENT CORRUPTION: 80 comments breaking code flow
+  - ERROR LINE 268: 68 space indent
+**Problem Code**: `for rec in active_recs[:5]:`
+**Indentation**: Maximum 212 spaces (should be ≤16)
+
+### mltrainer_unified_chat_intelligent_fix.py
+**Error**: invalid syntax at line 469
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 288 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 423
+  - COMMENT CORRUPTION: 79 comments breaking code flow
+  - ERROR LINE 469: 176 space indent
+**Problem Code**: `except BaseException:`
+**Indentation**: Maximum 288 spaces (should be ≤16)
+
+## INFRASTRUCTURE (20 files)
+----------------------------------------------------------------------------------------------------
+
+### paper_processor.py
+**Error**: invalid syntax at line 69
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 228 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 360
+  - COMMENT CORRUPTION: 75 comments breaking code flow
+  - ERROR LINE 69: 28 space indent
+**Problem Code**: `except BaseException:`
+**Indentation**: Maximum 228 spaces (should be ≤16)
+
+### mlagent_bridge.py
+**Error**: invalid syntax at line 120
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 196 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 295
+  - COMMENT CORRUPTION: 34 comments breaking code flow
+  - ERROR LINE 120: 40 space indent
+**Problem Code**: `except BaseException:`
+**Indentation**: Maximum 196 spaces (should be ≤16)
+
+### mlTrainer_client_wrapper.py
+**Error**: invalid syntax at line 109
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 140 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 216
+  - COMMENT CORRUPTION: 36 comments breaking code flow
+  - ERROR LINE 109: 32 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 140 spaces (should be ≤16)
+
+### mlagent_model_integration.py
+**Error**: invalid syntax at line 76
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 308 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 418
+  - COMMENT CORRUPTION: 63 comments breaking code flow
+  - ERROR LINE 76: 24 space indent
+**Problem Code**: `elif any(term in mltrainer_response.lower() for term in ["black-scholes", "portf...`
+**Indentation**: Maximum 308 spaces (should be ≤16)
+
+### diagnose_mltrainer_location.py
+**Error**: invalid syntax at line 50
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 104
+  - COMMENT CORRUPTION: 5 comments breaking code flow
+  - ERROR LINE 50: 28 space indent
+**Problem Code**: `except PermissionError:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### fix_indentation_errors.py
+**Error**: invalid syntax at line 69
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 64 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 24
+  - ERROR LINE 69: 20 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 64 spaces (should be ≤16)
+
+### scientific_paper_processor.py
+**Error**: invalid syntax at line 48
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 584 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 1240
+  - COMMENT CORRUPTION: 239 comments breaking code flow
+  - ERROR LINE 48: 4 space indent
+**Problem Code**: `except ImportError as e:`
+**Indentation**: Maximum 584 spaces (should be ≤16)
+
+### paper_processor_demo.py
+**Error**: unterminated string literal (detected at line 2) at line 2
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 48 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 15
+  - ERROR LINE 2: 0 space indent
+**Problem Code**: `"`
+**Indentation**: Maximum 48 spaces (should be ≤16)
+
+### mltrainer_financial_models.py
+**Error**: invalid syntax at line 112
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 480 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 1041
+  - COMMENT CORRUPTION: 95 comments breaking code flow
+  - ERROR LINE 112: 36 space indent
+**Problem Code**: `else:  # put`
+**Indentation**: Maximum 480 spaces (should be ≤16)
+
+### self_learning_engine_helpers.py
+**Error**: invalid syntax at line 31
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 296 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 544
+  - COMMENT CORRUPTION: 103 comments breaking code flow
+  - ERROR LINE 31: 20 space indent
+**Problem Code**: `except Exception as e:`
+**Indentation**: Maximum 296 spaces (should be ≤16)
+
+### mltrainer_claude_integration.py
+**Error**: invalid syntax at line 77
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 92 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 152
+  - SPLIT STATEMENTS: 2 statements split across lines
+  - COMMENT CORRUPTION: 16 comments breaking code flow
+  - ERROR LINE 77: 24 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 92 spaces (should be ≤16)
+
+### verify_compliance_system.py
+**Error**: invalid syntax at line 34
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 72 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 58
+  - COMMENT CORRUPTION: 1 comments breaking code flow
+  - ERROR LINE 34: 12 space indent
+**Problem Code**: `except ImportError as e:`
+**Indentation**: Maximum 72 spaces (should be ≤16)
+
+### modal_app_optimized.py
+**Error**: expected an indented block after 'if' statement on line 71 at line 72
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 72 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 54
+  - COMMENT CORRUPTION: 1 comments breaking code flow
+  - ERROR LINE 72: 4 space indent
+**Problem Code**: `if 9 <= current_hour <= 16:  # Market hours`
+**Indentation**: Maximum 72 spaces (should be ≤16)
+
+### launch_mltrainer.py
+**Error**: invalid syntax at line 49
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 96 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 54
+  - SPLIT STATEMENTS: 1 statements split across lines
+  - COMMENT CORRUPTION: 6 comments breaking code flow
+  - ERROR LINE 49: 12 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 96 spaces (should be ≤16)
+
+### verify_compliance_enforcement.py
+**Error**: invalid syntax at line 32
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 64 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 40
+  - COMMENT CORRUPTION: 3 comments breaking code flow
+  - ERROR LINE 32: 12 space indent
+**Problem Code**: `except ValueError as e:`
+**Indentation**: Maximum 64 spaces (should be ≤16)
+
+### list_missing_models.py
+**Error**: invalid syntax at line 50
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 60 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 21
+  - ERROR LINE 50: 40 space indent
+**Problem Code**: `except ImportError:`
+**Indentation**: Maximum 60 spaces (should be ≤16)
+
+### walk_forward_trial_launcher.py
+**Error**: invalid syntax at line 122
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 204 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 521
+  - COMMENT CORRUPTION: 81 comments breaking code flow
+  - ERROR LINE 122: 28 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 204 spaces (should be ≤16)
+
+### modal_monitoring_dashboard.py
+**Error**: invalid syntax at line 418
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 604 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 1065
+  - COMMENT CORRUPTION: 234 comments breaking code flow
+  - ERROR LINE 418: 152 space indent
+**Problem Code**: `else:`
+**Indentation**: Maximum 604 spaces (should be ≤16)
+
+### run_cursor_agent.py
+**Error**: invalid syntax at line 25
+**Issues Found**:
+  - EXTREME INDENTATION: Up to 48 spaces (normal max: 12-16)
+  - Lines with 40+ spaces: 7
+  - COMMENT CORRUPTION: 1 comments breaking code flow
+  - ERROR LINE 25: 8 space indent
+**Problem Code**: `except SystemExit as e:`
+**Indentation**: Maximum 48 spaces (should be ≤16)
+
+### session_compliance_check.py
+**Error**: unterminated string literal (detected at line 2) at line 2
+**Issues Found**:
+  - ERROR LINE 2: 0 space indent
+**Problem Code**: `"import logging`
