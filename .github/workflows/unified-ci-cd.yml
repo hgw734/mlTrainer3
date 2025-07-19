@@ -1,5 +1,4 @@
-name: mlTrainer 
-CI/CD
+name: mlTrainer CI/CD
 
 on:
   push:
