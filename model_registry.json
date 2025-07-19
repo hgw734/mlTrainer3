@@ -1,0 +1,3574 @@
+{
+  "version": "1.0",
+  "created": "2025-07-19T15:10:27.687761",
+  "total_models": 180,
+  "categories": {
+    "ml": "Machine Learning",
+    "risk": "Risk Management",
+    "volatility": "Volatility Models",
+    "portfolio": "Portfolio Optimization",
+    "technical": "Technical Analysis",
+    "sentiment": "Sentiment Analysis",
+    "regime": "Market Regime Detection",
+    "options": "Options Pricing",
+    "forecast": "Time Series Forecasting",
+    "ensemble": "Ensemble Methods"
+  },
+  "models": {
+    "BaseVolatilityModel_volatility_models": {
+      "name": "BaseVolatilityModel",
+      "type": "class",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit the volatility model"
+        },
+        {
+          "name": "calculate_volatility",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate volatility metrics"
+        }
+      ],
+      "parameters": [],
+      "docstring": "Base class for volatility models"
+    },
+    "SimpleVolatilityModel_volatility_models": {
+      "name": "SimpleVolatilityModel",
+      "type": "class",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "annualization_factor"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_volatility",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate simple volatility metrics"
+        },
+        {
+          "name": "_classify_volatility_regime",
+          "parameters": [
+            "volatility"
+          ],
+          "docstring": "Classify volatility regime"
+        },
+        {
+          "name": "_calculate_volatility_confidence",
+          "parameters": [
+            "rolling_vol"
+          ],
+          "docstring": "Calculate volatility confidence level"
+        }
+      ],
+      "parameters": [
+        "window",
+        "annualization_factor"
+      ],
+      "docstring": "Simple volatility calculation model"
+    },
+    "GARCHVolatilityModel_volatility_models": {
+      "name": "GARCHVolatilityModel",
+      "type": "class",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "p",
+            "q",
+            "window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_volatility",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate GARCH volatility"
+        },
+        {
+          "name": "_fit_garch_model",
+          "parameters": [
+            "returns"
+          ],
+          "docstring": "Fit GARCH model to returns"
+        },
+        {
+          "name": "_forecast_volatility",
+          "parameters": [
+            "garch_model"
+          ],
+          "docstring": "Forecast volatility using GARCH model"
+        },
+        {
+          "name": "_calculate_garch_confidence",
+          "parameters": [
+            "garch_model"
+          ],
+          "docstring": "Calculate GARCH model confidence"
+        }
+      ],
+      "parameters": [
+        "p",
+        "q",
+        "window"
+      ],
+      "docstring": "GARCH volatility model"
+    },
+    "RealizedVolatilityModel_volatility_models": {
+      "name": "RealizedVolatilityModel",
+      "type": "class",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "frequency"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_volatility",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate realized volatility"
+        },
+        {
+          "name": "_calculate_realized_confidence",
+          "parameters": [
+            "realized_vol"
+          ],
+          "docstring": "Calculate realized volatility confidence"
+        }
+      ],
+      "parameters": [
+        "window",
+        "frequency"
+      ],
+      "docstring": "Realized volatility model"
+    },
+    "VolatilityClusteringModel_volatility_models": {
+      "name": "VolatilityClusteringModel",
+      "type": "class",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "cluster_window",
+            "n_clusters"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_volatility",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate volatility clustering"
+        }
+      ],
+      "parameters": [
+        "cluster_window",
+        "n_clusters"
+      ],
+      "docstring": "Volatility clustering model"
+    },
+    "VolatilityForecastingModel_volatility_models": {
+      "name": "VolatilityForecastingModel",
+      "type": "class",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "forecast_horizon",
+            "model_type"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_volatility",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate volatility with forecasting"
+        },
+        {
+          "name": "_forecast_volatility",
+          "parameters": [
+            "rolling_vol"
+          ],
+          "docstring": "Forecast volatility"
+        },
+        {
+          "name": "_calculate_forecast_confidence",
+          "parameters": [
+            "rolling_vol"
+          ],
+          "docstring": "Calculate forecast confidence"
+        }
+      ],
+      "parameters": [
+        "forecast_horizon",
+        "model_type"
+      ],
+      "docstring": "Volatility forecasting model"
+    },
+    "VolatilityRegimeDetectionModel_volatility_models": {
+      "name": "VolatilityRegimeDetectionModel",
+      "type": "class",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "regime_window",
+            "n_regimes"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_volatility",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate volatility with regime detection"
+        },
+        {
+          "name": "_detect_volatility_regime",
+          "parameters": [
+            "rolling_vol"
+          ],
+          "docstring": "Detect volatility regime"
+        },
+        {
+          "name": "_forecast_regime_volatility",
+          "parameters": [
+            "rolling_vol",
+            "regime"
+          ],
+          "docstring": "Forecast volatility based on regime"
+        },
+        {
+          "name": "_calculate_regime_confidence",
+          "parameters": [
+            "rolling_vol",
+            "regime"
+          ],
+          "docstring": "Calculate regime confidence"
+        }
+      ],
+      "parameters": [
+        "regime_window",
+        "n_regimes"
+      ],
+      "docstring": "Volatility regime detection model"
+    },
+    "VolatilityModel_volatility_models": {
+      "name": "VolatilityModel",
+      "type": "class",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "volatility_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_initialize_models",
+          "parameters": [],
+          "docstring": "Initialize all volatility models"
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit all volatility models"
+        },
+        {
+          "name": "calculate_volatility",
+          "parameters": [
+            "data",
+            "model_name"
+          ],
+          "docstring": "Calculate volatility metrics"
+        },
+        {
+          "name": "get_available_models",
+          "parameters": [],
+          "docstring": "Get list of available volatility models"
+        },
+        {
+          "name": "get_model_parameters",
+          "parameters": [
+            "model_name"
+          ],
+          "docstring": "Get parameters for a specific model"
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": "Get all model parameters"
+        }
+      ],
+      "parameters": [
+        "volatility_window"
+      ],
+      "docstring": "Comprehensive volatility model for S&P 500 trading"
+    },
+    "fit_volatility_models": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "Fit all volatility models"
+    },
+    "_fit_garch_model_volatility_models": {
+      "name": "_fit_garch_model",
+      "type": "function",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self",
+        "returns"
+      ],
+      "docstring": "Fit GARCH model to returns"
+    },
+    "_forecast_volatility_volatility_models": {
+      "name": "_forecast_volatility",
+      "type": "function",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self",
+        "rolling_vol"
+      ],
+      "docstring": "Forecast volatility"
+    },
+    "_calculate_forecast_confidence_volatility_models": {
+      "name": "_calculate_forecast_confidence",
+      "type": "function",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self",
+        "rolling_vol"
+      ],
+      "docstring": "Calculate forecast confidence"
+    },
+    "_forecast_regime_volatility_volatility_models": {
+      "name": "_forecast_regime_volatility",
+      "type": "function",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self",
+        "rolling_vol",
+        "regime"
+      ],
+      "docstring": "Forecast volatility based on regime"
+    },
+    "_initialize_models_volatility_models": {
+      "name": "_initialize_models",
+      "type": "function",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Initialize all volatility models"
+    },
+    "get_available_models_volatility_models": {
+      "name": "get_available_models",
+      "type": "function",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Get list of available volatility models"
+    },
+    "get_model_parameters_volatility_models": {
+      "name": "get_model_parameters",
+      "type": "function",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self",
+        "model_name"
+      ],
+      "docstring": "Get parameters for a specific model"
+    },
+    "MockGARCHModel_volatility_models": {
+      "name": "MockGARCHModel",
+      "type": "class",
+      "file": "custom/volatility_models.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "conditional_volatility"
+          ],
+          "docstring": null
+        }
+      ],
+      "parameters": [
+        "conditional_volatility"
+      ],
+      "docstring": "No description available"
+    },
+    "FractalModel_fractal": {
+      "name": "FractalModel",
+      "type": "class",
+      "file": "custom/fractal.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "fractal_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": null
+        }
+      ],
+      "parameters": [
+        "fractal_window"
+      ],
+      "docstring": "Fractal Model"
+    },
+    "fit_fractal": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/fractal.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_fractal": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/fractal.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "BaseVolumeModel_volume": {
+      "name": "BaseVolumeModel",
+      "type": "class",
+      "file": "custom/volume.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "__init__",
+          "parameters": [],
+          "docstring": null
+        }
+      ],
+      "parameters": [],
+      "docstring": "Base class for volume analysis models"
+    },
+    "BaseMLModel_machine_learning": {
+      "name": "BaseMLModel",
+      "type": "class",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_engineer_features",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Engineer features for machine learning"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data",
+            "target"
+          ],
+          "docstring": "Fit the machine learning model"
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Make machine learning prediction"
+        },
+        {
+          "name": "_calculate_confidence",
+          "parameters": [
+            "X_scaled"
+          ],
+          "docstring": "Calculate prediction confidence"
+        },
+        {
+          "name": "_get_feature_importance",
+          "parameters": [],
+          "docstring": "Get feature importance"
+        }
+      ],
+      "parameters": [],
+      "docstring": "Base class for machine learning models"
+    },
+    "EnsembleMLModel_machine_learning": {
+      "name": "EnsembleMLModel",
+      "type": "class",
+      "file": "custom/machine_learning.py",
+      "category": "Ensemble Methods",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "n_estimators",
+            "max_depth",
+            "learning_rate"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data",
+            "target"
+          ],
+          "docstring": "Fit ensemble model"
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Make ensemble prediction"
+        },
+        {
+          "name": "_calculate_ensemble_confidence",
+          "parameters": [
+            "predictions",
+            "probabilities"
+          ],
+          "docstring": "Calculate ensemble confidence"
+        },
+        {
+          "name": "_get_ensemble_feature_importance",
+          "parameters": [],
+          "docstring": "Get ensemble feature importance"
+        }
+      ],
+      "parameters": [
+        "n_estimators",
+        "max_depth",
+        "learning_rate"
+      ],
+      "docstring": "Ensemble machine learning model"
+    },
+    "DeepLearningModel_machine_learning": {
+      "name": "DeepLearningModel",
+      "type": "class",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "hidden_layers",
+            "dropout_rate"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_engineer_deep_features",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Engineer features for deep learning"
+        },
+        {
+          "name": "_calculate_adx",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate Average Directional Index"
+        },
+        {
+          "name": "_calculate_cci",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate Commodity Channel Index"
+        },
+        {
+          "name": "_calculate_williams_r",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate Williams %R"
+        },
+        {
+          "name": "_calculate_jarque_bera",
+          "parameters": [
+            "returns"
+          ],
+          "docstring": "Calculate Jarque-Bera statistic"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data",
+            "target"
+          ],
+          "docstring": "Fit deep learning model"
+        }
+      ],
+      "parameters": [
+        "hidden_layers",
+        "dropout_rate"
+      ],
+      "docstring": "Deep learning model"
+    },
+    "ReinforcementLearningModel_machine_learning": {
+      "name": "ReinforcementLearningModel",
+      "type": "class",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "learning_rate",
+            "discount_factor"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_discretize_state",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Discretize state for Q-learning"
+        },
+        {
+          "name": "_get_action",
+          "parameters": [
+            "state"
+          ],
+          "docstring": "Get action for current state"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data",
+            "target"
+          ],
+          "docstring": "Fit reinforcement learning model"
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Make reinforcement learning prediction"
+        }
+      ],
+      "parameters": [
+        "learning_rate",
+        "discount_factor"
+      ],
+      "docstring": "Reinforcement learning model"
+    },
+    "MachineLearningModel_machine_learning": {
+      "name": "MachineLearningModel",
+      "type": "class",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "ml_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_initialize_models",
+          "parameters": [],
+          "docstring": "Initialize all machine learning models"
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data",
+            "target"
+          ],
+          "docstring": "Fit all machine learning models"
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data",
+            "model_name"
+          ],
+          "docstring": "Make machine learning prediction"
+        },
+        {
+          "name": "get_available_models",
+          "parameters": [],
+          "docstring": "Get list of available machine learning models"
+        },
+        {
+          "name": "get_model_parameters",
+          "parameters": [
+            "model_name"
+          ],
+          "docstring": "Get parameters for a specific model"
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": "Get all model parameters"
+        },
+        {
+          "name": "save_model",
+          "parameters": [
+            "model_name",
+            "filepath"
+          ],
+          "docstring": "Save trained model"
+        },
+        {
+          "name": "load_model",
+          "parameters": [
+            "model_name",
+            "filepath"
+          ],
+          "docstring": "Load trained model"
+        }
+      ],
+      "parameters": [
+        "ml_window"
+      ],
+      "docstring": "Comprehensive machine learning model for S&P 500 trading"
+    },
+    "fit_machine_learning": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data",
+        "target"
+      ],
+      "docstring": "Fit all machine learning models"
+    },
+    "predict_machine_learning": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data",
+        "model_name"
+      ],
+      "docstring": "Make machine learning prediction"
+    },
+    "_initialize_models_machine_learning": {
+      "name": "_initialize_models",
+      "type": "function",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Initialize all machine learning models"
+    },
+    "get_available_models_machine_learning": {
+      "name": "get_available_models",
+      "type": "function",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Get list of available machine learning models"
+    },
+    "get_model_parameters_machine_learning": {
+      "name": "get_model_parameters",
+      "type": "function",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "model_name"
+      ],
+      "docstring": "Get parameters for a specific model"
+    },
+    "save_model_machine_learning": {
+      "name": "save_model",
+      "type": "function",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "model_name",
+        "filepath"
+      ],
+      "docstring": "Save trained model"
+    },
+    "load_model_machine_learning": {
+      "name": "load_model",
+      "type": "function",
+      "file": "custom/machine_learning.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "model_name",
+        "filepath"
+      ],
+      "docstring": "Load trained model"
+    },
+    "PatternsModel_patterns": {
+      "name": "PatternsModel",
+      "type": "class",
+      "file": "custom/patterns.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "pattern_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": null
+        }
+      ],
+      "parameters": [
+        "pattern_window"
+      ],
+      "docstring": "Patterns Model"
+    },
+    "fit_patterns": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/patterns.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_patterns": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/patterns.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "CCIEnsemble_indicators": {
+      "name": "CCIEnsemble",
+      "type": "class",
+      "file": "custom/indicators.py",
+      "category": "Ensemble Methods",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "periods",
+            "threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        }
+      ],
+      "parameters": [
+        "periods",
+        "threshold"
+      ],
+      "docstring": "Commodity Channel Index Ensemble"
+    },
+    "fit_systems": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/systems.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_systems": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/systems.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "BaseRegimeModel_regime_detection": {
+      "name": "BaseRegimeModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit the regime detection model"
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect regimes"
+        }
+      ],
+      "parameters": [],
+      "docstring": "Base class for regime detection models"
+    },
+    "VolatilityRegimeModel_regime_detection": {
+      "name": "VolatilityRegimeModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "n_regimes",
+            "volatility_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect volatility regimes"
+        }
+      ],
+      "parameters": [
+        "window",
+        "n_regimes",
+        "volatility_threshold"
+      ],
+      "docstring": "Volatility-based regime detection"
+    },
+    "ClusteringRegimeModel_regime_detection": {
+      "name": "ClusteringRegimeModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "n_regimes",
+            "features"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect regimes using clustering"
+        }
+      ],
+      "parameters": [
+        "window",
+        "n_regimes",
+        "features"
+      ],
+      "docstring": "Clustering-based regime detection"
+    },
+    "GaussianMixtureRegimeModel_regime_detection": {
+      "name": "GaussianMixtureRegimeModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "n_regimes"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect regimes using Gaussian Mixture Model"
+        }
+      ],
+      "parameters": [
+        "window",
+        "n_regimes"
+      ],
+      "docstring": "Gaussian Mixture Model for regime detection"
+    },
+    "ChangePointRegimeModel_regime_detection": {
+      "name": "ChangePointRegimeModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "change_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect regime changes using change point detection"
+        }
+      ],
+      "parameters": [
+        "window",
+        "change_threshold"
+      ],
+      "docstring": "Change point detection for regime identification"
+    },
+    "MarketConditionRegimeModel_regime_detection": {
+      "name": "MarketConditionRegimeModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "condition_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Classify market conditions"
+        }
+      ],
+      "parameters": [
+        "window",
+        "condition_threshold"
+      ],
+      "docstring": "Market condition classifier"
+    },
+    "RegimeSwitchingModel_regime_detection": {
+      "name": "RegimeSwitchingModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "n_regimes",
+            "transition_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit regime switching model"
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Predict regimes with switching logic"
+        }
+      ],
+      "parameters": [
+        "window",
+        "n_regimes",
+        "transition_threshold"
+      ],
+      "docstring": "Regime switching model with transition probabilities"
+    },
+    "PerformanceBasedRegimeModel_regime_detection": {
+      "name": "PerformanceBasedRegimeModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "performance_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect regimes based on performance"
+        },
+        {
+          "name": "_calculate_max_drawdown",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate maximum drawdown"
+        }
+      ],
+      "parameters": [
+        "window",
+        "performance_threshold"
+      ],
+      "docstring": "Performance-based regime detection with reweighting"
+    },
+    "EnsembleRegimeModel_regime_detection": {
+      "name": "EnsembleRegimeModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "models"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit all ensemble models"
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Predict regimes using ensemble"
+        }
+      ],
+      "parameters": [
+        "models"
+      ],
+      "docstring": "Ensemble regime detection model"
+    },
+    "RegimeDetectionModel_regime_detection": {
+      "name": "RegimeDetectionModel",
+      "type": "class",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "regime_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_initialize_models",
+          "parameters": [],
+          "docstring": "Initialize all regime detection models"
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit all regime detection models"
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data",
+            "model_name"
+          ],
+          "docstring": "Detect regimes"
+        },
+        {
+          "name": "get_available_models",
+          "parameters": [],
+          "docstring": "Get list of available regime detection models"
+        },
+        {
+          "name": "get_model_parameters",
+          "parameters": [
+            "model_name"
+          ],
+          "docstring": "Get parameters for a specific model"
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": "Get all model parameters"
+        }
+      ],
+      "parameters": [
+        "regime_window"
+      ],
+      "docstring": "Comprehensive regime detection model for S&P 500 trading"
+    },
+    "fit_regime_detection": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "Fit all regime detection models"
+    },
+    "predict_regime_detection": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "parameters": [
+        "self",
+        "data",
+        "model_name"
+      ],
+      "docstring": "Detect regimes"
+    },
+    "_initialize_models_regime_detection": {
+      "name": "_initialize_models",
+      "type": "function",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Initialize all regime detection models"
+    },
+    "get_available_models_regime_detection": {
+      "name": "get_available_models",
+      "type": "function",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Get list of available regime detection models"
+    },
+    "get_model_parameters_regime_detection": {
+      "name": "get_model_parameters",
+      "type": "function",
+      "file": "custom/regime_detection.py",
+      "category": "Market Regime Detection",
+      "parameters": [
+        "self",
+        "model_name"
+      ],
+      "docstring": "Get parameters for a specific model"
+    },
+    "NonlinearModel_nonlinear": {
+      "name": "NonlinearModel",
+      "type": "class",
+      "file": "custom/nonlinear.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "nonlinear_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": null
+        }
+      ],
+      "parameters": [
+        "nonlinear_window"
+      ],
+      "docstring": "Nonlinear Model"
+    },
+    "fit_nonlinear": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/nonlinear.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_nonlinear": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/nonlinear.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "BaseVolumeModel_volume_analysis": {
+      "name": "BaseVolumeModel",
+      "type": "class",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Fit the volume analysis model"
+        },
+        {
+          "name": "analyze_volume",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Analyze volume patterns"
+        }
+      ],
+      "parameters": [],
+      "docstring": "Base class for volume analysis models"
+    },
+    "VolumeWeightedModel_volume_analysis": {
+      "name": "VolumeWeightedModel",
+      "type": "class",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "volume_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "analyze_volume",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Analyze volume-weighted patterns"
+        },
+        {
+          "name": "_calculate_volume_divergence",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Calculate volume-price divergence"
+        },
+        {
+          "name": "_calculate_volume_signal",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Calculate volume-based trading signal"
+        },
+        {
+          "name": "_calculate_volume_confidence",
+          "parameters": [
+            "volume_data"
+          ],
+          "docstring": "Calculate volume confidence level"
+        },
+        {
+          "name": "_calculate_volume_profile",
+          "parameters": [
+            "volume_data"
+          ],
+          "docstring": "Calculate volume profile metrics"
+        }
+      ],
+      "parameters": [
+        "window",
+        "volume_threshold"
+      ],
+      "docstring": "Volume-weighted analysis model"
+    },
+    "VolumePriceRelationshipModel_volume_analysis": {
+      "name": "VolumePriceRelationshipModel",
+      "type": "class",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "relationship_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "analyze_volume",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Analyze volume-price relationships"
+        },
+        {
+          "name": "_calculate_relationship_signal",
+          "parameters": [
+            "data",
+            "volume_data",
+            "correlation"
+          ],
+          "docstring": "Calculate signal based on volume-price relationship"
+        }
+      ],
+      "parameters": [
+        "window",
+        "relationship_threshold"
+      ],
+      "docstring": "Volume-price relationship analysis model"
+    },
+    "VolumeMomentumModel_volume_analysis": {
+      "name": "VolumeMomentumModel",
+      "type": "class",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "short_window",
+            "long_window",
+            "momentum_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "analyze_volume",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Analyze volume momentum patterns"
+        },
+        {
+          "name": "_calculate_momentum_signal",
+          "parameters": [
+            "volume_momentum",
+            "price_momentum"
+          ],
+          "docstring": "Calculate signal based on volume momentum"
+        }
+      ],
+      "parameters": [
+        "short_window",
+        "long_window",
+        "momentum_threshold"
+      ],
+      "docstring": "Volume momentum analysis model"
+    },
+    "VolumeDivergenceModel_volume_analysis": {
+      "name": "VolumeDivergenceModel",
+      "type": "class",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "divergence_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "analyze_volume",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Analyze volume divergence patterns"
+        },
+        {
+          "name": "_calculate_divergence_signal",
+          "parameters": [
+            "price_trend",
+            "volume_trend"
+          ],
+          "docstring": "Calculate signal based on volume divergence"
+        }
+      ],
+      "parameters": [
+        "window",
+        "divergence_threshold"
+      ],
+      "docstring": "Volume divergence detection model"
+    },
+    "VolumeClusteringModel_volume_analysis": {
+      "name": "VolumeClusteringModel",
+      "type": "class",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "n_clusters",
+            "window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "analyze_volume",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Analyze volume clustering patterns"
+        },
+        {
+          "name": "_calculate_cluster_signal",
+          "parameters": [
+            "cluster_center"
+          ],
+          "docstring": "Calculate signal based on cluster characteristics"
+        }
+      ],
+      "parameters": [
+        "n_clusters",
+        "window"
+      ],
+      "docstring": "Volume clustering analysis model"
+    },
+    "VolumeAnalysisModel_volume_analysis": {
+      "name": "VolumeAnalysisModel",
+      "type": "class",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "analysis_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_initialize_models",
+          "parameters": [],
+          "docstring": "Initialize all volume analysis models"
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data",
+            "volume_data"
+          ],
+          "docstring": "Fit all volume analysis models"
+        },
+        {
+          "name": "analyze_volume",
+          "parameters": [
+            "data",
+            "volume_data",
+            "model_name"
+          ],
+          "docstring": "Analyze volume patterns"
+        },
+        {
+          "name": "get_available_models",
+          "parameters": [],
+          "docstring": "Get list of available volume analysis models"
+        },
+        {
+          "name": "get_model_parameters",
+          "parameters": [
+            "model_name"
+          ],
+          "docstring": "Get parameters for a specific model"
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": "Get all model parameters"
+        }
+      ],
+      "parameters": [
+        "analysis_window"
+      ],
+      "docstring": "Comprehensive volume analysis model for S&P 500 trading"
+    },
+    "fit_volume_analysis": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data",
+        "volume_data"
+      ],
+      "docstring": "Fit all volume analysis models"
+    },
+    "_initialize_models_volume_analysis": {
+      "name": "_initialize_models",
+      "type": "function",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Initialize all volume analysis models"
+    },
+    "get_available_models_volume_analysis": {
+      "name": "get_available_models",
+      "type": "function",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Get list of available volume analysis models"
+    },
+    "get_model_parameters_volume_analysis": {
+      "name": "get_model_parameters",
+      "type": "function",
+      "file": "custom/volume_analysis.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "model_name"
+      ],
+      "docstring": "Get parameters for a specific model"
+    },
+    "BaseRiskModel_risk": {
+      "name": "BaseRiskModel",
+      "type": "class",
+      "file": "custom/risk.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "__init__",
+          "parameters": [],
+          "docstring": null
+        },
+        {
+          "name": "calculate",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        }
+      ],
+      "parameters": [],
+      "docstring": "Base class for risk management models"
+    },
+    "fit_risk": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/risk.py",
+      "category": "Risk Management",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_risk": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/risk.py",
+      "category": "Risk Management",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "BaseTechnicalModel_technical_analysis": {
+      "name": "BaseTechnicalModel",
+      "type": "class",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit the technical analysis model"
+        },
+        {
+          "name": "analyze_technical",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Perform technical analysis"
+        }
+      ],
+      "parameters": [],
+      "docstring": "Base class for technical analysis models"
+    },
+    "TrendAnalysisModel_technical_analysis": {
+      "name": "TrendAnalysisModel",
+      "type": "class",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "short_window",
+            "long_window",
+            "trend_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "analyze_technical",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Analyze trend patterns"
+        },
+        {
+          "name": "_find_support_levels",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Find support levels"
+        },
+        {
+          "name": "_find_resistance_levels",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Find resistance levels"
+        },
+        {
+          "name": "_detect_patterns",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect chart patterns"
+        },
+        {
+          "name": "_calculate_oscillators",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate oscillator signals"
+        }
+      ],
+      "parameters": [
+        "short_window",
+        "long_window",
+        "trend_threshold"
+      ],
+      "docstring": "Trend analysis model"
+    },
+    "SupportResistanceModel_technical_analysis": {
+      "name": "SupportResistanceModel",
+      "type": "class",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "window",
+            "level_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "analyze_technical",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Analyze support and resistance levels"
+        },
+        {
+          "name": "_find_dynamic_support_levels",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Find dynamic support levels"
+        },
+        {
+          "name": "_find_dynamic_resistance_levels",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Find dynamic resistance levels"
+        },
+        {
+          "name": "_calculate_trend_strength",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate trend strength"
+        },
+        {
+          "name": "_detect_support_resistance_patterns",
+          "parameters": [
+            "data",
+            "support_levels",
+            "resistance_levels"
+          ],
+          "docstring": "Detect patterns based on support and resistance"
+        },
+        {
+          "name": "_calculate_support_resistance_oscillators",
+          "parameters": [
+            "data",
+            "support_levels",
+            "resistance_levels"
+          ],
+          "docstring": "Calculate oscillators based on support and resistance"
+        },
+        {
+          "name": "_calculate_level_confidence",
+          "parameters": [
+            "data",
+            "support_levels",
+            "resistance_levels"
+          ],
+          "docstring": "Calculate confidence in support and resistance levels"
+        }
+      ],
+      "parameters": [
+        "window",
+        "level_threshold"
+      ],
+      "docstring": "Support and resistance level model"
+    },
+    "PatternRecognitionModel_technical_analysis": {
+      "name": "PatternRecognitionModel",
+      "type": "class",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "pattern_window",
+            "pattern_threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "analyze_technical",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Analyze chart patterns"
+        },
+        {
+          "name": "_detect_advanced_patterns",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect advanced chart patterns"
+        },
+        {
+          "name": "_pattern_to_trend_direction",
+          "parameters": [
+            "pattern"
+          ],
+          "docstring": "Convert pattern to trend direction"
+        },
+        {
+          "name": "_calculate_pattern_strength",
+          "parameters": [
+            "data",
+            "pattern"
+          ],
+          "docstring": "Calculate pattern strength"
+        },
+        {
+          "name": "_find_pattern_support_levels",
+          "parameters": [
+            "data",
+            "pattern"
+          ],
+          "docstring": "Find support levels based on pattern"
+        },
+        {
+          "name": "_find_pattern_resistance_levels",
+          "parameters": [
+            "data",
+            "pattern"
+          ],
+          "docstring": "Find resistance levels based on pattern"
+        },
+        {
+          "name": "_calculate_pattern_oscillators",
+          "parameters": [
+            "data",
+            "pattern"
+          ],
+          "docstring": "Calculate oscillators based on pattern"
+        },
+        {
+          "name": "_calculate_pattern_confidence",
+          "parameters": [
+            "data",
+            "pattern"
+          ],
+          "docstring": "Calculate pattern confidence"
+        }
+      ],
+      "parameters": [
+        "pattern_window",
+        "pattern_threshold"
+      ],
+      "docstring": "Pattern recognition model"
+    },
+    "OscillatorModel_technical_analysis": {
+      "name": "OscillatorModel",
+      "type": "class",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "rsi_period",
+            "macd_fast",
+            "macd_slow"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "analyze_technical",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Analyze oscillator signals"
+        },
+        {
+          "name": "_calculate_all_oscillators",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate all oscillator signals"
+        },
+        {
+          "name": "_oscillator_to_trend_direction",
+          "parameters": [
+            "oscillators"
+          ],
+          "docstring": "Convert oscillator signals to trend direction"
+        },
+        {
+          "name": "_calculate_oscillator_strength",
+          "parameters": [
+            "oscillators"
+          ],
+          "docstring": "Calculate oscillator strength"
+        },
+        {
+          "name": "_find_oscillator_support_levels",
+          "parameters": [
+            "data",
+            "oscillators"
+          ],
+          "docstring": "Find support levels based on oscillators"
+        },
+        {
+          "name": "_find_oscillator_resistance_levels",
+          "parameters": [
+            "data",
+            "oscillators"
+          ],
+          "docstring": "Find resistance levels based on oscillators"
+        },
+        {
+          "name": "_detect_oscillator_patterns",
+          "parameters": [
+            "oscillators"
+          ],
+          "docstring": "Detect patterns based on oscillators"
+        },
+        {
+          "name": "_calculate_oscillator_confidence",
+          "parameters": [
+            "oscillators"
+          ],
+          "docstring": "Calculate oscillator confidence"
+        }
+      ],
+      "parameters": [
+        "rsi_period",
+        "macd_fast",
+        "macd_slow"
+      ],
+      "docstring": "Oscillator analysis model"
+    },
+    "TechnicalAnalysisModel_technical_analysis": {
+      "name": "TechnicalAnalysisModel",
+      "type": "class",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "analysis_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_initialize_models",
+          "parameters": [],
+          "docstring": "Initialize all technical analysis models"
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit all technical analysis models"
+        },
+        {
+          "name": "analyze_technical",
+          "parameters": [
+            "data",
+            "model_name"
+          ],
+          "docstring": "Perform technical analysis"
+        },
+        {
+          "name": "get_available_models",
+          "parameters": [],
+          "docstring": "Get list of available technical analysis models"
+        },
+        {
+          "name": "get_model_parameters",
+          "parameters": [
+            "model_name"
+          ],
+          "docstring": "Get parameters for a specific model"
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": "Get all model parameters"
+        }
+      ],
+      "parameters": [
+        "analysis_window"
+      ],
+      "docstring": "Comprehensive technical analysis model for S&P 500 trading"
+    },
+    "fit_technical_analysis": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "Fit all technical analysis models"
+    },
+    "_initialize_models_technical_analysis": {
+      "name": "_initialize_models",
+      "type": "function",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Initialize all technical analysis models"
+    },
+    "get_available_models_technical_analysis": {
+      "name": "get_available_models",
+      "type": "function",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Get list of available technical analysis models"
+    },
+    "get_model_parameters_technical_analysis": {
+      "name": "get_model_parameters",
+      "type": "function",
+      "file": "custom/technical_analysis.py",
+      "category": "Technical Analysis",
+      "parameters": [
+        "self",
+        "model_name"
+      ],
+      "docstring": "Get parameters for a specific model"
+    },
+    "CCIEnsemble_momentum": {
+      "name": "CCIEnsemble",
+      "type": "class",
+      "file": "custom/momentum.py",
+      "category": "Ensemble Methods",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": null
+        }
+      ],
+      "parameters": [
+        "window"
+      ],
+      "docstring": "Commodity Channel Index Ensemble"
+    },
+    "fit_momentum": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/momentum.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_momentum": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/momentum.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "fit_adversarial": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/adversarial.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_adversarial": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/adversarial.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "BaseRiskModel_risk_management": {
+      "name": "BaseRiskModel",
+      "type": "class",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit the risk model"
+        },
+        {
+          "name": "calculate_risk_metrics",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate comprehensive risk metrics"
+        }
+      ],
+      "parameters": [],
+      "docstring": "Base class for risk management models"
+    },
+    "VaRModel_risk_management": {
+      "name": "VaRModel",
+      "type": "class",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "confidence_level",
+            "window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_risk_metrics",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate VaR and other risk metrics"
+        }
+      ],
+      "parameters": [
+        "confidence_level",
+        "window"
+      ],
+      "docstring": "Value at Risk (VaR) calculation model"
+    },
+    "PortfolioRiskModel_risk_management": {
+      "name": "PortfolioRiskModel",
+      "type": "class",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "risk_free_rate",
+            "target_volatility"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_portfolio_risk",
+          "parameters": [
+            "returns",
+            "weights"
+          ],
+          "docstring": "Calculate portfolio risk metrics"
+        },
+        {
+          "name": "optimize_portfolio",
+          "parameters": [
+            "returns",
+            "method"
+          ],
+          "docstring": "Optimize portfolio weights"
+        }
+      ],
+      "parameters": [
+        "risk_free_rate",
+        "target_volatility"
+      ],
+      "docstring": "Portfolio risk management model"
+    },
+    "StressTestingModel_risk_management": {
+      "name": "StressTestingModel",
+      "type": "class",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "stress_scenarios"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "stress_test_portfolio",
+          "parameters": [
+            "returns",
+            "weights"
+          ],
+          "docstring": "Perform stress testing on portfolio"
+        }
+      ],
+      "parameters": [
+        "stress_scenarios"
+      ],
+      "docstring": "Stress testing model"
+    },
+    "DynamicRiskAdjustmentModel_risk_management": {
+      "name": "DynamicRiskAdjustmentModel",
+      "type": "class",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "base_volatility",
+            "adjustment_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_dynamic_weights",
+          "parameters": [
+            "returns",
+            "target_volatility"
+          ],
+          "docstring": "Calculate dynamically adjusted portfolio weights"
+        },
+        {
+          "name": "calculate_risk_metrics",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate risk metrics with dynamic adjustment"
+        }
+      ],
+      "parameters": [
+        "base_volatility",
+        "adjustment_window"
+      ],
+      "docstring": "Dynamic risk adjustment model"
+    },
+    "RiskParityModel_risk_management": {
+      "name": "RiskParityModel",
+      "type": "class",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "target_volatility"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_risk_parity_weights",
+          "parameters": [
+            "returns"
+          ],
+          "docstring": "Calculate risk parity weights"
+        }
+      ],
+      "parameters": [
+        "target_volatility"
+      ],
+      "docstring": "Risk parity model"
+    },
+    "MaximumDrawdownProtectionModel_risk_management": {
+      "name": "MaximumDrawdownProtectionModel",
+      "type": "class",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "max_drawdown_threshold",
+            "protection_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_protection_signal",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate drawdown protection signals"
+        }
+      ],
+      "parameters": [
+        "max_drawdown_threshold",
+        "protection_window"
+      ],
+      "docstring": "Maximum drawdown protection model"
+    },
+    "VolatilityTargetingModel_risk_management": {
+      "name": "VolatilityTargetingModel",
+      "type": "class",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "target_volatility",
+            "rebalance_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "calculate_volatility_adjustment",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Calculate volatility targeting adjustments"
+        }
+      ],
+      "parameters": [
+        "target_volatility",
+        "rebalance_window"
+      ],
+      "docstring": "Volatility targeting model"
+    },
+    "RiskManagementModel_risk_management": {
+      "name": "RiskManagementModel",
+      "type": "class",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "methods": [
+        {
+          "name": "__init__",
+          "parameters": [
+            "risk_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_initialize_models",
+          "parameters": [],
+          "docstring": "Initialize all risk management models"
+        },
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Fit all risk management models"
+        },
+        {
+          "name": "calculate_risk_metrics",
+          "parameters": [
+            "data",
+            "model_name"
+          ],
+          "docstring": "Calculate comprehensive risk metrics"
+        },
+        {
+          "name": "get_available_models",
+          "parameters": [],
+          "docstring": "Get list of available risk management models"
+        },
+        {
+          "name": "get_model_parameters",
+          "parameters": [
+            "model_name"
+          ],
+          "docstring": "Get parameters for a specific model"
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": "Get all model parameters"
+        }
+      ],
+      "parameters": [
+        "risk_window"
+      ],
+      "docstring": "Comprehensive risk management model for S&P 500 trading"
+    },
+    "fit_risk_management": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "Fit all risk management models"
+    },
+    "_initialize_models_risk_management": {
+      "name": "_initialize_models",
+      "type": "function",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Initialize all risk management models"
+    },
+    "get_available_models_risk_management": {
+      "name": "get_available_models",
+      "type": "function",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "parameters": [
+        "self"
+      ],
+      "docstring": "Get list of available risk management models"
+    },
+    "get_model_parameters_risk_management": {
+      "name": "get_model_parameters",
+      "type": "function",
+      "file": "custom/risk_management.py",
+      "category": "Risk Management",
+      "parameters": [
+        "self",
+        "model_name"
+      ],
+      "docstring": "Get parameters for a specific model"
+    },
+    "BaseVolatilityModel_volatility": {
+      "name": "BaseVolatilityModel",
+      "type": "class",
+      "file": "custom/volatility.py",
+      "category": "Volatility Models",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "__init__",
+          "parameters": [],
+          "docstring": null
+        },
+        {
+          "name": "fit_predict",
+          "parameters": [
+            "returns"
+          ],
+          "docstring": null
+        }
+      ],
+      "parameters": [],
+      "docstring": "Base class for volatility models"
+    },
+    "fit_predict_volatility": {
+      "name": "fit_predict",
+      "type": "function",
+      "file": "custom/volatility.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self",
+        "high",
+        "low",
+        "close"
+      ],
+      "docstring": "No description available"
+    },
+    "fit_volatility": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/volatility.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_volatility": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/volatility.py",
+      "category": "Volatility Models",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "AnomalyDetector_detectors": {
+      "name": "AnomalyDetector",
+      "type": "class",
+      "file": "custom/detectors.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "threshold"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "detect",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect anomalies using z-score"
+        }
+      ],
+      "parameters": [
+        "threshold"
+      ],
+      "docstring": "Anomaly Detection for Trading Signals"
+    },
+    "RegimeDetector_detectors": {
+      "name": "RegimeDetector",
+      "type": "class",
+      "file": "custom/detectors.py",
+      "category": "Market Regime Detection",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "lookback"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "detect",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Detect current market regime"
+        }
+      ],
+      "parameters": [
+        "lookback"
+      ],
+      "docstring": "Market Regime Detection"
+    },
+    "fit_detectors": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/detectors.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_detectors": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/detectors.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "ComplexityModel_complexity": {
+      "name": "ComplexityModel",
+      "type": "class",
+      "file": "custom/complexity.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "complexity_window"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": null
+        }
+      ],
+      "parameters": [
+        "complexity_window"
+      ],
+      "docstring": "Complexity Model"
+    },
+    "fit_complexity": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/complexity.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_complexity": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/complexity.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "ModelArchitectureSearch_automl": {
+      "name": "ModelArchitectureSearch",
+      "type": "class",
+      "file": "custom/automl.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "max_models",
+            "search_iterations"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "get_parameters",
+          "parameters": [],
+          "docstring": null
+        }
+      ],
+      "parameters": [
+        "max_models",
+        "search_iterations"
+      ],
+      "docstring": "Model Architecture Search"
+    },
+    "AutoMLEnsemble_automl": {
+      "name": "AutoMLEnsemble",
+      "type": "class",
+      "file": "custom/automl.py",
+      "category": "Machine Learning",
+      "methods": [
+        {
+          "name": "_get_real_market_data",
+          "parameters": [
+            "symbol",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real market data from Polygon API"
+        },
+        {
+          "name": "_get_real_economic_data",
+          "parameters": [
+            "series_id",
+            "start_date",
+            "end_date"
+          ],
+          "docstring": "Get real economic data from FRED API"
+        },
+        {
+          "name": "_get_real_alternative_data",
+          "parameters": [
+            "data_type"
+          ],
+          "docstring": "Get real alternative data from approved sources"
+        },
+        {
+          "name": "__init__",
+          "parameters": [
+            "n_models"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "fit_predict",
+          "parameters": [
+            "data"
+          ],
+          "docstring": "Simplified ensemble - returns mean"
+        }
+      ],
+      "parameters": [
+        "n_models"
+      ],
+      "docstring": "Automatic Ensemble Model Selection"
+    },
+    "fit_automl": {
+      "name": "fit",
+      "type": "function",
+      "file": "custom/automl.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "predict_automl": {
+      "name": "predict",
+      "type": "function",
+      "file": "custom/automl.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "No description available"
+    },
+    "fit_predict_automl": {
+      "name": "fit_predict",
+      "type": "function",
+      "file": "custom/automl.py",
+      "category": "Machine Learning",
+      "parameters": [
+        "self",
+        "data"
+      ],
+      "docstring": "Simplified ensemble - returns mean"
+    }
+  },
+  "statistics": {
+    "by_category": {
+      "Volatility Models": 21,
+      "Machine Learning": 49,
+      "Ensemble Methods": 3,
+      "Market Regime Detection": 16,
+      "Risk Management": 16,
+      "Technical Analysis": 10
+    },
+    "by_type": {
+      "class": 59,
+      "function": 56
+    },
+    "files_scanned": 19
+  }
+}
