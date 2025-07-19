@@ -21,7 +21,7 @@ jobs:
         cp mltrainer_unified_chat.py app.py
         
         # Add HF Space as remote
-        git remote add space https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/HF_USERNAME/mltrainer3
+        git remote add space https://hgw734:$HF_TOKEN@huggingface.co/spaces/HF_USERNAME/mltrainer3
         
         # Push to HF
         git push space main:main --force
