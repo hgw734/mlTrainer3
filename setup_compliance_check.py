@@ -13,7 +13,10 @@ def check_basic_compliance():
     print(("-" * 30))
 
     # Check core compliance files exist
-    required_files = ["core/compliance_mode.py", "config/compliance_enforcer.py", "verify_compliance_enforcement.py"]
+    required_files = [
+        "core/compliance_mode.py",
+        "config/compliance_enforcer.py",
+        "verify_compliance_enforcement.py"]
 
     for file_path in required_files:
         if os.path.exists(file_path):
@@ -35,11 +38,12 @@ def check_basic_compliance():
                             print("✅ Basic compliance check passed")
                             return True
 
-
                             if __name__ == "__main__":
                                 success = check_basic_compliance()
                                 if success:
-                                    print("\n🎉 Environment is ready for development!")
+                                    print(
+                                        "\n🎉 Environment is ready for development!")
                                     else:
-                                        print("\n⚠️ Please fix the issues above before proceeding.")
+                                        print(
+                                            "\n⚠️ Please fix the issues above before proceeding.")
                                         sys.exit(1)

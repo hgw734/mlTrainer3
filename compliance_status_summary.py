@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+from datetime import datetime
+from dataclasses import dataclass
+from typing import Dict, List
 import logging
 
 logger = logging.getLogger(__name__)
-
 
 
 """
@@ -11,9 +13,6 @@ Compliance Status Summary
 Visual representation of mlTrainer compliance audit results
 """
 
-from typing import Dict, List
-from dataclasses import dataclass
-from datetime import datetime
 
 @dataclass
 class ComplianceCategory:
@@ -23,10 +22,6 @@ class ComplianceCategory:
     issues: List[str]
     priority: str  # 'critical', 'high', 'medium', 'low'
 
-    
-    
-    
-    
 
 def generate_compliance_report():
     """Generate visual compliance status report"""
@@ -116,7 +111,8 @@ def generate_compliance_report():
     logger.info("🔍 MLTRAINER COMPLIANCE STATUS SUMMARY")
     logger.info("=" * 80)
     logger.info(f"\nGenerated: {datetime.now()}")
-    logger.info(f"\nOVERALL COMPLIANCE SCORE: {total_score:.1f}/10 {'❌' if total_score < 7 else '✅'}")
+    logger.info(
+        f"\nOVERALL COMPLIANCE SCORE: {total_score:.1f}/10 {'❌' if total_score < 7 else '✅'}")
     logger.info("\n" + "=" * 80)
 
     # Status symbols
@@ -136,26 +132,35 @@ def generate_compliance_report():
     }
 
     # Critical issues summary
-    critical_count = sum(1 for cat in categories if cat.priority == 'critical' and cat.status == 'fail')
+    critical_count = sum(
+        1 for cat in categories if cat.priority == 'critical' and cat.status == 'fail')
     if critical_count > 0:
-        logger.error(f"\n{priority_colors['critical']}⚠️  CRITICAL ISSUES: {critical_count} categories failing{priority_colors['reset']}")
+        logger.error(
+            f"\n{priority_colors['critical']}⚠️  CRITICAL ISSUES: {critical_count} categories failing{priority_colors['reset']}")
 
     # Category breakdown
     logger.info("\nCATEGORY BREAKDOWN:")
     logger.info("-" * 80)
-    logger.info(f"{'Category':<25} {'Status':<10} {'Score':<10} {'Priority':<10} {'Issues'}")
+    logger.info(
+        f"{'Category':<25} {'Status':<10} {'Score':<10} {'Priority':<10} {'Issues'}")
     logger.info("-" * 80)
 
-    for cat in sorted(categories, key=lambda x: (x.priority == 'critical', x.score)):
+    for cat in sorted(
+        categories,
+        key=lambda x: (
+            x.priority == 'critical',
+            x.score)):
         status_icon = status_symbols[cat.status]
         color = priority_colors[cat.priority]
 
-        print(f"{cat.name:<25} {status_icon:<10} {cat.score:>6.1f}/10  "
-              f"{color}{cat.priority:<10}{priority_colors['reset']} {len(cat.issues)} issues")
+        print(
+            f"{cat.name:<25} {status_icon:<10} {cat.score:>6.1f}/10  "
+            f"{color}{cat.priority:<10}{priority_colors['reset']} {len(cat.issues)} issues")
 
         # Show first issue for each category
         if cat.issues:
-            logger.info(f"{'':>48} └─ {cat.issues[0][:60]}# Production code implemented")
+            logger.info(
+                f"{'':>48} └─ {cat.issues[0][:60]}# Production code implemented")
 
     # Summary statistics
     logger.info("\n" + "=" * 80)
@@ -174,7 +179,8 @@ def generate_compliance_report():
     logger.info("\nBY PRIORITY:")
     for priority in ['critical', 'high', 'medium', 'low']:
         count = sum(1 for cat in categories if cat.priority == priority)
-        failing = sum(1 for cat in categories if cat.priority == priority and cat.status == 'fail')
+        failing = sum(1 for cat in categories if cat.priority ==
+                      priority and cat.status == 'fail')
         color = priority_colors[priority]
         logger.error(f"{color}{priority.upper()}")
 
@@ -216,7 +222,8 @@ def generate_compliance_report():
     logger.info("\n" + "=" * 80)
     logger.info("RISK ASSESSMENT:")
     logger.info("-" * 80)
-    logger.info(f"Current Risk Level: {'HIGH' if total_score < 7 else 'MEDIUM'}")
+    logger.info(
+        f"Current Risk Level: {'HIGH' if total_score < 7 else 'MEDIUM'}")
     logger.info(f"Security Risk: CRITICAL (exposed API keys)")
     logger.info(f"Data Integrity Risk: CRITICAL (synthetic data)")
     logger.info(f"Operational Risk: HIGH (no governance enforcement)")

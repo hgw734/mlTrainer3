@@ -53,8 +53,10 @@ class PolygonRateLimiter:
     """Advanced rate limiter with data quality monitoring for Polygon API"""
 
     def __init__(
-        self, max_requests_per_second: int = 50, dropout_threshold: float = 0.15, circuit_breaker_threshold: int = 5
-    ):
+            self,
+            max_requests_per_second: int = 50,
+            dropout_threshold: float = 0.15,
+            circuit_breaker_threshold: int = 5):
         # Rate limiting configuration
         self.max_rps = max_requests_per_second  # Stay well below 100 RPS limit
         self.request_window = 1.0  # 1 second window
@@ -85,7 +87,8 @@ class PolygonRateLimiter:
     def _cleanup_old_requests(self):
         """Remove request times older than the window"""
         current_time = time.time()
-        while self.request_times and current_time - self.request_times[0] > self.request_window:
+        while self.request_times and current_time - \
+                self.request_times[0] > self.request_window:
             self.request_times.popleft()
 
     def _wait_for_rate_limit(self):
@@ -95,9 +98,11 @@ class PolygonRateLimiter:
 
             if len(self.request_times) >= self.max_rps:
                 # Calculate wait time to next available slot
-                wait_time = self.request_window - (time.time() - self.request_times[0])
+                wait_time = self.request_window - \
+                    (time.time() - self.request_times[0])
                 if wait_time > 0:
-                    logger.debug(f"Rate limit reached, waiting {wait_time:.2f} seconds")
+                    logger.debug(
+                        f"Rate limit reached, waiting {wait_time:.2f} seconds")
                     time.sleep(wait_time)
                     self._cleanup_old_requests()
 
@@ -107,12 +112,14 @@ class PolygonRateLimiter:
     def _check_circuit_breaker(self):
         """Check if circuit breaker should open or close"""
         if self.circuit_open:
-            if self.circuit_open_time and time.time() - self.circuit_open_time > self.circuit_cooldown:
+            if self.circuit_open_time and time.time(
+            ) - self.circuit_open_time > self.circuit_cooldown:
                 self.circuit_open = False
                 self.consecutive_failures = 0
                 logger.info("Circuit breaker closed - resuming API calls")
             else:
-                raise Exception("Circuit breaker OPEN - API temporarily disabled due to consecutive failures")
+                raise Exception(
+                    "Circuit breaker OPEN - API temporarily disabled due to consecutive failures")
 
     def _record_success(self, response_time: float):
         """Record successful API call"""
@@ -123,12 +130,14 @@ class PolygonRateLimiter:
 
         # Update average response time
         if self.response_times:
-            self.metrics.avg_response_time = statistics.mean(self.response_times)
+            self.metrics.avg_response_time = statistics.mean(
+                self.response_times)
 
         # Update dropout rate
         self.metrics.dropout_rate = self.metrics.failure_rate
 
-        logger.debug(f"API success recorded: {response_time:.3f}s response time")
+        logger.debug(
+            f"API success recorded: {response_time:.3f}s response time")
 
     def _record_failure(self, error: str):
         """Record failed API call"""
@@ -143,7 +152,8 @@ class PolygonRateLimiter:
         if self.consecutive_failures >= self.circuit_breaker_threshold:
             self.circuit_open = True
             self.circuit_open_time = time.time()
-            logger.error(f"Circuit breaker OPENED after {self.consecutive_failures} consecutive failures")
+            logger.error(
+                f"Circuit breaker OPENED after {self.consecutive_failures} consecutive failures")
 
         logger.warning(f"API failure recorded: {error}")
 
@@ -173,7 +183,8 @@ class PolygonRateLimiter:
 
         # Check response times
         if self.metrics.avg_response_time > 10.0:  # 10 second threshold
-            issues.append(f"High response times: {self.metrics.avg_response_time:.1f}s average")
+            issues.append(
+                f"High response times: {self.metrics.avg_response_time:.1f}s average")
 
         quality_report = {
             "is_valid": is_valid,
@@ -190,9 +201,14 @@ class PolygonRateLimiter:
 
         return is_valid, quality_report
 
-    def make_request(
-        self, url: str, headers: Dict[str, str] = None, params: Dict[str, Any] = None, timeout: int = 30
-    ) -> Dict[str, Any]:
+    def make_request(self,
+                     url: str,
+                     headers: Dict[str,
+                                   str] = None,
+                     params: Dict[str,
+                                  Any] = None,
+                     timeout: int = 30) -> Dict[str,
+                                                Any]:
         """
         Make rate-limited API request with automatic retries and quality monitoring
 
@@ -211,7 +227,10 @@ class PolygonRateLimiter:
         # Validate data quality before making request
         is_valid, quality_report = self.validate_data_quality()
         if not is_valid and self.circuit_open:
-            return {"success": False, "error": "Data quality validation failed", "quality_report": quality_report}
+            return {
+                "success": False,
+                "error": "Data quality validation failed",
+                "quality_report": quality_report}
 
         for attempt in range(self.max_retries + 1):
             try:
@@ -220,7 +239,8 @@ class PolygonRateLimiter:
 
                 # Make API request
                 start_time = time.time()
-                response = requests.get(url, headers=headers, params=params, timeout=timeout)
+                response = requests.get(
+                    url, headers=headers, params=params, timeout=timeout)
                 response_time = time.time() - start_time
 
                 if response.status_code == 200:
@@ -232,7 +252,8 @@ class PolygonRateLimiter:
                         "quality_metrics": self.get_quality_summary(),
                     }
                 elif response.status_code == 429:  # Rate limited
-                    logger.warning(f"Rate limited by Polygon API, attempt {attempt + 1}")
+                    logger.warning(
+                        f"Rate limited by Polygon API, attempt {attempt + 1}")
                     if attempt < self.max_retries:
                         delay = self._exponential_backoff(attempt + 1)
                         logger.info(f"Retrying after {delay:.1f} seconds")
@@ -247,17 +268,22 @@ class PolygonRateLimiter:
                             time.sleep(delay)
                             continue
                         else:
-                            return {"success": False, "error": error_msg, "quality_metrics": self.get_quality_summary()}
+                            return {
+                                "success": False,
+                                "error": error_msg,
+                                "quality_metrics": self.get_quality_summary()}
             except requests.exceptions.Timeout:
                 error_msg = f"Request timeout after {timeout} seconds"
                 self._record_failure(error_msg)
                 if attempt < self.max_retries:
                     delay = self._exponential_backoff(attempt)
-                    logger.info(f"Timeout - retrying after {delay:.1f} seconds")
+                    logger.info(
+                        f"Timeout - retrying after {delay:.1f} seconds")
                     time.sleep(delay)
                     continue
                 else:
-                    return {"success": False, "error": error_msg, "quality_metrics": self.get_quality_summary()}
+                    return {"success": False, "error": error_msg,
+                            "quality_metrics": self.get_quality_summary()}
             except Exception as e:
                 error_msg = f"Request failed: {str(e)}"
                 self._record_failure(error_msg)
@@ -267,7 +293,8 @@ class PolygonRateLimiter:
                     time.sleep(delay)
                     continue
                 else:
-                    return {"success": False, "error": error_msg, "quality_metrics": self.get_quality_summary()}
+                    return {"success": False, "error": error_msg,
+                            "quality_metrics": self.get_quality_summary()}
 
         # All retries exhausted
         return {
@@ -284,7 +311,8 @@ class PolygonRateLimiter:
             "avg_response_time": self.metrics.avg_response_time,
             "total_requests": self.metrics.total_requests,
             "circuit_open": self.circuit_open,
-            "rate_limit_active": len(self.request_times) >= self.max_rps * 0.8,  # 80% of limit
+            # 80% of limit
+            "rate_limit_active": len(self.request_times) >= self.max_rps * 0.8,
         }
 
     def reset_metrics(self):

@@ -16,9 +16,11 @@ def fix_file_indentation(filepath):
             content = f.read()
 
             # Fix the common pattern of _deterministic_* methods being nested inside other methods
-            # This pattern appears in many files where methods are incorrectly indented
+            # This pattern appears in many files where methods are incorrectly
+            # indented
 
-            # Pattern 1: Fix methods that are indented too much (nested inside other methods)
+            # Pattern 1: Fix methods that are indented too much (nested inside
+            # other methods)
             lines = content.split("\n")
             fixed_lines = []
             in_class = False
@@ -68,53 +70,53 @@ def fix_file_indentation(filepath):
                         print(f"❌ Error fixing {filepath}: {e}")
                         return False
 
-
                         def main():
                             """Fix all files with indentation errors"""
 
-                            # List of files that failed to format (from the error output)
+                            # List of files that failed to format (from the
+                            # error output)
                             files_to_fix = [
-                            "app.py",
-                            "compliance_status_summary.py",
-                            "config/immutable_compliance_gateway.py",
-                            "core/governance_kernel.py",
-                            "custom/adversarial.py",
-                            "custom/alternative_data.py",
-                            "custom/automl.py",
-                            "custom/adaptive.py",
-                            "custom/binomial.py",
-                            "custom/complexity.py",
-                            "custom/detectors.py",
-                            "custom/elliott_wave.py",
-                            "custom/financial_models.py",
-                            "custom/ensemble.py",
-                            "custom/indicators.py",
-                            "custom/fractal.py",
-                            "custom/macro.py",
-                            "custom/interest_rate.py",
-                            "custom/momentum_models.py",
-                            "custom/momentum.py",
-                            "custom/meta_learning.py",
-                            "custom/microstructure.py",
-                            "custom/optimization.py",
-                            "custom/nonlinear.py",
-                            "custom/pairs.py",
-                            "custom/regime_detection.py",
-                            "custom/patterns.py",
-                            "custom/regime_ensemble.py",
-                            "custom/position_sizing.py",
-                            "custom/risk.py",
-                            "custom/risk_management.py",
-                            "custom/rl.py",
-                            "custom/stress.py",
-                            "custom/time_series.py",
-                            "custom/volatility.py",
-                            "custom/systems.py",
-                            "custom/volume.py",
-                            "example_governed_agent.py",
-                            "drift_protection.py",
-                            "scripts/comprehensive_audit_v2.py",
-                            "scripts/production_audit_final.py",
+                                "app.py",
+                                "compliance_status_summary.py",
+                                "config/immutable_compliance_gateway.py",
+                                "core/governance_kernel.py",
+                                "custom/adversarial.py",
+                                "custom/alternative_data.py",
+                                "custom/automl.py",
+                                "custom/adaptive.py",
+                                "custom/binomial.py",
+                                "custom/complexity.py",
+                                "custom/detectors.py",
+                                "custom/elliott_wave.py",
+                                "custom/financial_models.py",
+                                "custom/ensemble.py",
+                                "custom/indicators.py",
+                                "custom/fractal.py",
+                                "custom/macro.py",
+                                "custom/interest_rate.py",
+                                "custom/momentum_models.py",
+                                "custom/momentum.py",
+                                "custom/meta_learning.py",
+                                "custom/microstructure.py",
+                                "custom/optimization.py",
+                                "custom/nonlinear.py",
+                                "custom/pairs.py",
+                                "custom/regime_detection.py",
+                                "custom/patterns.py",
+                                "custom/regime_ensemble.py",
+                                "custom/position_sizing.py",
+                                "custom/risk.py",
+                                "custom/risk_management.py",
+                                "custom/rl.py",
+                                "custom/stress.py",
+                                "custom/time_series.py",
+                                "custom/volatility.py",
+                                "custom/systems.py",
+                                "custom/volume.py",
+                                "example_governed_agent.py",
+                                "drift_protection.py",
+                                "scripts/comprehensive_audit_v2.py",
+                                "scripts/production_audit_final.py",
                             ]
 
                             print("🔧 Fixing indentation errors in Python files...")
@@ -128,25 +130,31 @@ def fix_file_indentation(filepath):
                                     if fix_file_indentation(filepath):
                                         fixed_count += 1
                                         else:
-                                            print(f"⚠️  File not found: {filepath}")
+                                            print(
+                                                f"⚠️  File not found: {filepath}")
 
                                             print(("=" * 60))
-                                            print(f"✅ Fixed {fixed_count}/{total_count} files")
+                                            print(
+                                                f"✅ Fixed {fixed_count}/{total_count} files")
 
                                             # Now try to format with black
-                                            print("\n🎨 Running Black formatter...")
+                                            print(
+                                                "\n🎨 Running Black formatter...")
                                             import subprocess
 
                                             try:
-                                                result = subprocess.run(["python3", "-m", "black", ".", "--line-length", "120"], capture_output=True, text=True)
+                                                result = subprocess.run(
+                                                    ["python3", "-m", "black", ".", "--line-length", "120"], capture_output=True, text=True)
                                                 if result.returncode == 0:
-                                                    print("✅ Black formatting completed successfully!")
+                                                    print(
+                                                        "✅ Black formatting completed successfully!")
                                                     else:
-                                                        print("⚠️  Some files still have issues:")
+                                                        print(
+                                                            "⚠️  Some files still have issues:")
                                                         print((result.stderr))
                                                         except Exception as e:
-                                                            print(f"❌ Error running Black: {e}")
-
+                                                            print(
+                                                                f"❌ Error running Black: {e}")
 
                                                             if __name__ == "__main__":
                                                                 main()

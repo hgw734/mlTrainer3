@@ -30,7 +30,8 @@ class AgentGovernance:
         try:
             with open(self.rules_file, "r") as f:
                 rules = yaml.safe_load(f)
-                logger.info(f"Loaded agent rules v{rules.get('version', 'unknown')}")
+                logger.info(
+                    f"Loaded agent rules v{rules.get('version', 'unknown')}")
                 return rules
         except Exception as e:
             logger.error(f"Failed to load agent rules: {e}")
@@ -42,9 +43,14 @@ class AgentGovernance:
         return {
             "version": "2.0.0",
             "enforcement_level": "strict",
-            "permission_protocol": {"require_explicit_permission": True, "ask_before_any_change": True},
-            "data_authenticity": {"use_only_real_data": True, "no_synthetic_data": True},
-            "transparency": {"no_omissions": True},
+            "permission_protocol": {
+                "require_explicit_permission": True,
+                "ask_before_any_change": True},
+            "data_authenticity": {
+                "use_only_real_data": True,
+                "no_synthetic_data": True},
+            "transparency": {
+                "no_omissions": True},
         }
 
     def check_permission_required(self, action: str) -> bool:
@@ -52,11 +58,20 @@ class AgentGovernance:
         protocol = self.rules.get("permission_protocol", {})
         return protocol.get("require_explicit_permission", True)
 
-    def format_permission_request(self, action: str, impact: str, files: List[str]) -> str:
+    def format_permission_request(
+            self,
+            action: str,
+            impact: str,
+            files: List[str]) -> str:
         """Format a permission request according to rules"""
         protocol = self.rules.get("permission_protocol", {})
-        template = protocol.get("permission_template", "May I {action}? This will {impact} files: {files}")
-        return template.format(action=action, impact=impact, files=", ".join(files) if files else "none")
+        template = protocol.get(
+            "permission_template",
+            "May I {action}? This will {impact} files: {files}")
+        return template.format(
+            action=action,
+            impact=impact,
+            files=", ".join(files) if files else "none")
 
     def is_permission_granted(self, response: str) -> bool:
         """Check if user response grants permission"""
@@ -79,9 +94,13 @@ class AgentGovernance:
     def validate_data_source(self, source: str) -> bool:
         """Check if a data source is allowed"""
         data_rules = self.rules.get("data_authenticity", {})
-        if not data_rules.get("required_data_sources", {}).get("whitelist_only"):
+        if not data_rules.get(
+            "required_data_sources",
+                {}).get("whitelist_only"):
             return True
-        allowed = data_rules.get("required_data_sources", {}).get("allowed_sources", [])
+        allowed = data_rules.get(
+            "required_data_sources", {}).get(
+            "allowed_sources", [])
         return any(source in allowed_source for allowed_source in allowed)
 
     def format_transparent_response(
@@ -110,7 +129,8 @@ class AgentGovernance:
             parts.append(f"Potential Issues: {', '.join(issues)}")
         return "\n".join(parts)
 
-    def check_scope_drift(self, requested: str, planned: str) -> Tuple[bool, str]:
+    def check_scope_drift(self, requested: str,
+                          planned: str) -> Tuple[bool, str]:
         """
         Check if planned action drifts from request
         Returns (is_drift, reason)
@@ -135,13 +155,21 @@ class AgentGovernance:
 
     def log_action(self, action: str, details: Dict[str, Any]):
         """Log an action for audit trail"""
-        if not self.rules.get("operational_boundaries", {}).get("audit_trail", {}).get("log_all_actions"):
+        if not self.rules.get(
+                "operational_boundaries",
+                {}).get(
+                "audit_trail",
+                {}).get("log_all_actions"):
             return
-        entry = {"timestamp": datetime.now().isoformat(), "action": action, "details": details}
+        entry = {
+            "timestamp": datetime.now().isoformat(),
+            "action": action,
+            "details": details}
         self.audit_log.append(entry)
         logger.info(f"Action logged: {action}")
 
-    def get_verification_checklist(self, phase: str = "before_any_response") -> List[str]:
+    def get_verification_checklist(
+            self, phase: str = "before_any_response") -> List[str]:
         """Get verification checklist for a phase"""
         verification = self.rules.get("verification", {})
         return verification.get(phase, [])
@@ -158,7 +186,8 @@ class AgentGovernance:
         """Get current enforcement level"""
         return self.rules.get("enforcement", {}).get("mode", "strict")
 
-    def validate_action(self, action_type: str, context: Dict[str, Any]) -> Tuple[bool, str]:
+    def validate_action(self, action_type: str,
+                        context: Dict[str, Any]) -> Tuple[bool, str]:
         """
         Comprehensive validation of an action
         Returns (is_allowed, reason)
@@ -174,11 +203,15 @@ class AgentGovernance:
                 return False, reason
         # Check scope drift
         if "requested" in context and "planned" in context:
-            drift, reason = self.check_scope_drift(context["requested"], context["planned"])
+            drift, reason = self.check_scope_drift(
+                context["requested"], context["planned"])
             if drift:
                 return False, reason
         # Log the validation attempt
-        self.log_action("validation", {"action_type": action_type, "result": "allowed", "context": context})
+        self.log_action("validation",
+                        {"action_type": action_type,
+                         "result": "allowed",
+                         "context": context})
         return True, "Action validated successfully"
 
     def get_compliance_report(self) -> str:
@@ -220,18 +253,24 @@ def governed_action(action_type: str):
             governance = get_governance()
 
             # Build context from function arguments
-            context = {"function": func.__name__, "args": args, "kwargs": kwargs}
+            context = {
+                "function": func.__name__,
+                "args": args,
+                "kwargs": kwargs}
 
             # Validate action
             allowed, reason = governance.validate_action(action_type, context)
             if not allowed:
-                raise PermissionError(f"Action blocked by governance: {reason}")
+                raise PermissionError(
+                    f"Action blocked by governance: {reason}")
 
             # Execute function
             result = func(*args, **kwargs)
 
             # Log completion
-            governance.log_action(f"{action_type}_completed", {"function": func.__name__, "success": True})
+            governance.log_action(
+                f"{action_type}_completed", {
+                    "function": func.__name__, "success": True})
 
             return result
 

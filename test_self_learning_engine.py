@@ -17,18 +17,18 @@ def test_imports():
         print("🔄 Testing imports...")
 
         from self_learning_engine import (
-        SelfLearningEngine,
-        AdaptiveEnsemble,
-        ModelPerformanceRecord,
-        LearningContext,
-        MetaKnowledge,
-        initialize_self_learning_engine,
+            SelfLearningEngine,
+            AdaptiveEnsemble,
+            ModelPerformanceRecord,
+            LearningContext,
+            MetaKnowledge,
+            initialize_self_learning_engine,
         )
 
         from self_learning_engine_helpers import (
-        SelfLearningEngineHelpers,
-        create_learning_context,
-        analyze_model_compatibility,
+            SelfLearningEngineHelpers,
+            create_learning_context,
+            analyze_model_compatibility,
         )
 
         print("✅ All imports successful!")
@@ -38,7 +38,6 @@ def test_imports():
             print(f"❌ Import failed: {e}")
             traceback.print_exc()
             return False
-
 
             def test_engine_initialization():
                 """Test self-learning engine initialization"""
@@ -62,7 +61,8 @@ def test_imports():
 
                     print(f"✅ Engine initialized successfully!")
                     print(f"   Models in system: {status['models_in_system']}")
-                    print(f"   Engine health: {status['learning_engine_health']}")
+                    print(
+                        f"   Engine health: {status['learning_engine_health']}")
 
                     return engine
 
@@ -70,7 +70,6 @@ def test_imports():
                         print(f"❌ Engine initialization failed: {e}")
                         traceback.print_exc()
                         return None
-
 
                         def test_learning_context():
                             """Test learning context creation and usage"""
@@ -80,8 +79,10 @@ def test_imports():
                                 from self_learning_engine_helpers import create_learning_context
 
                                 context = create_learning_context(
-                                market_regime="volatile", volatility_level="high", data_quality_score=0.85, prediction_horizon=120
-                                )
+                                    market_regime="volatile",
+                                    volatility_level="high",
+                                    data_quality_score=0.85,
+                                    prediction_horizon=120)
 
                                 assert context.market_regime == "volatile"
                                 assert context.volatility_level == "high"
@@ -92,54 +93,71 @@ def test_imports():
                                 return context
 
                                 except Exception as e:
-                                    print(f"❌ Learning context creation failed: {e}")
+                                    print(
+                                        f"❌ Learning context creation failed: {e}")
                                     traceback.print_exc()
                                     return None
 
-
-                                    def test_adaptive_model_selection(engine, context):
+                                    def test_adaptive_model_selection(
+                                            engine, context):
                                         """Test adaptive model selection capability"""
                                         try:
-                                            print("\n🔄 Testing adaptive model selection...")
+                                            print(
+                                                "\n🔄 Testing adaptive model selection...")
 
                                             # Create synthetic data
                                             X = np.random.randn(100, 5)
 
                                             # Test model selection
-                                            selection_result = engine.adaptive_model_selection(X, context)
+                                            selection_result = engine.adaptive_model_selection(
+                                                X, context)
 
                                             assert "strategy" in selection_result
-                                            assert selection_result["strategy"] in ["single_model", "ensemble"]
+                                            assert selection_result["strategy"] in [
+                                                "single_model", "ensemble"]
 
                                             if selection_result["strategy"] == "ensemble":
                                                 assert "models" in selection_result
                                                 assert "selection_confidence" in selection_result
-                                                print(f"✅ Ensemble strategy selected with {len(selection_result['models'])} models")
+                                                print(
+                                                    f"✅ Ensemble strategy selected with {len(selection_result['models'])} models")
                                                 else:
                                                     assert "model" in selection_result
                                                     assert "confidence" in selection_result
-                                                    print(f"✅ Single model selected: {selection_result['model']}")
+                                                    print(
+                                                        f"✅ Single model selected: {selection_result['model']}")
 
                                                     return selection_result
 
                                                     except Exception as e:
-                                                        print(f"❌ Adaptive model selection failed: {e}")
+                                                        print(
+                                                            f"❌ Adaptive model selection failed: {e}")
                                                         traceback.print_exc()
                                                         return None
 
-
-                                                        def test_learning_from_prediction(engine, context):
+                                                        def test_learning_from_prediction(
+                                                                engine, context):
                                                             """Test learning from prediction feedback"""
                                                             try:
-                                                                print("\n🔄 Testing learning from prediction...")
+                                                                print(
+                                                                    "\n🔄 Testing learning from prediction...")
 
-                                                                # Create synthetic prediction data
-                                                                X = np.random.randn(50, 4)
-                                                                y_true = np.random.randn(50)
-                                                                y_pred = y_true + np.random.normal(0, 0.1, 50)  # Add some noise
+                                                                # Create
+                                                                # synthetic
+                                                                # prediction
+                                                                # data
+                                                                X = np.random.randn(
+                                                                    50, 4)
+                                                                y_true = np.random.randn(
+                                                                    50)
+                                                                # Add some
+                                                                # noise
+                                                                y_pred = y_true + \
+                                                                    np.random.normal(0, 0.1, 50)
 
                                                                 # Test learning
-                                                                learning_result = engine.learn_from_prediction(X, y_true, y_pred, model_name="random_forest", context=context)
+                                                                learning_result = engine.learn_from_prediction(
+                                                                    X, y_true, y_pred, model_name="random_forest", context=context)
 
                                                                 assert "performance_record" in learning_result
                                                                 assert "learning_iteration" in learning_result
@@ -147,234 +165,365 @@ def test_imports():
 
                                                                 record = learning_result["performance_record"]
                                                                 assert record.model_name == "random_forest"
-                                                                assert isinstance(record.prediction_accuracy, float)
+                                                                assert isinstance(
+                                                                    record.prediction_accuracy, float)
 
-                                                                print(f"✅ Learning completed successfully!")
-                                                                print(f"   Prediction accuracy: {record.prediction_accuracy:.4f}")
-                                                                print(f"   Learning iteration: {learning_result['learning_iteration']}")
+                                                                print(
+                                                                    f"✅ Learning completed successfully!")
+                                                                print(
+                                                                    f"   Prediction accuracy: {record.prediction_accuracy:.4f}")
+                                                                print(
+                                                                    f"   Learning iteration: {learning_result['learning_iteration']}")
 
                                                                 return learning_result
 
                                                                 except Exception as e:
-                                                                    print(f"❌ Learning from prediction failed: {e}")
+                                                                    print(
+                                                                        f"❌ Learning from prediction failed: {e}")
                                                                     traceback.print_exc()
                                                                     return None
 
-
-                                                                    def test_self_correction(engine, context):
+                                                                    def test_self_correction(
+                                                                            engine, context):
                                                                         """Test self-correction mechanism"""
                                                                         try:
-                                                                            print("\n🔄 Testing self-correction...")
+                                                                            print(
+                                                                                "\n🔄 Testing self-correction...")
 
-                                                                            # Create declining performance history
+                                                                            # Create
+                                                                            # declining
+                                                                            # performance
+                                                                            # history
                                                                             performance_history = [
-                                                                            {"accuracy": 0.85, "timestamp": "2024-01-01"},
-                                                                            {"accuracy": 0.80, "timestamp": "2024-01-02"},
-                                                                            {"accuracy": 0.75, "timestamp": "2024-01-03"},
-                                                                            {"accuracy": 0.70, "timestamp": "2024-01-04"},
-                                                                            {"accuracy": 0.65, "timestamp": "2024-01-05"},
+                                                                                {"accuracy": 0.85, "timestamp": "2024-01-01"},
+                                                                                {"accuracy": 0.80, "timestamp": "2024-01-02"},
+                                                                                {"accuracy": 0.75, "timestamp": "2024-01-03"},
+                                                                                {"accuracy": 0.70, "timestamp": "2024-01-04"},
+                                                                                {"accuracy": 0.65, "timestamp": "2024-01-05"},
                                                                             ]
 
-                                                                            # Test self-correction
-                                                                            correction_result = engine.self_correct_performance(performance_history, context)
+                                                                            # Test
+                                                                            # self-correction
+                                                                            correction_result = engine.self_correct_performance(
+                                                                                performance_history, context)
 
                                                                             assert "corrections_applied" in correction_result
                                                                             assert "correction_count" in correction_result
                                                                             assert "expected_improvement" in correction_result
 
-                                                                            print(f"✅ Self-correction completed!")
-                                                                            print(f"   Corrections applied: {correction_result['correction_count']}")
-                                                                            print(f"   Expected improvement: {correction_result['expected_improvement']:.2%}")
+                                                                            print(
+                                                                                f"✅ Self-correction completed!")
+                                                                            print(
+                                                                                f"   Corrections applied: {correction_result['correction_count']}")
+                                                                            print(
+                                                                                f"   Expected improvement: {correction_result['expected_improvement']:.2%}")
 
                                                                             return correction_result
 
                                                                             except Exception as e:
-                                                                                print(f"❌ Self-correction failed: {e}")
+                                                                                print(
+                                                                                    f"❌ Self-correction failed: {e}")
                                                                                 traceback.print_exc()
                                                                                 return None
 
-
-                                                                                def test_hyperparameter_evolution(engine, context):
+                                                                                def test_hyperparameter_evolution(
+                                                                                        engine, context):
                                                                                     """Test hyperparameter evolution capability"""
                                                                                     try:
-                                                                                        print("\n🔄 Testing hyperparameter evolution...")
+                                                                                        print(
+                                                                                            "\n🔄 Testing hyperparameter evolution...")
 
-                                                                                        # Create synthetic data
-                                                                                        X = np.random.randn(100, 6)
-                                                                                        y = np.random.randn(100)
+                                                                                        # Create
+                                                                                        # synthetic
+                                                                                        # data
+                                                                                        X = np.random.randn(
+                                                                                            100, 6)
+                                                                                        y = np.random.randn(
+                                                                                            100)
 
-                                                                                        # Test hyperparameter evolution (with limited trials for testing)
-                                                                                        evolution_result = engine.evolve_hyperparameters("ridge_regression", X, y, context)
+                                                                                        # Test
+                                                                                        # hyperparameter
+                                                                                        # evolution
+                                                                                        # (with
+                                                                                        # limited
+                                                                                        # trials
+                                                                                        # for
+                                                                                        # testing)
+                                                                                        evolution_result = engine.evolve_hyperparameters(
+                                                                                            "ridge_regression", X, y, context)
 
                                                                                         assert "best_parameters" in evolution_result
                                                                                         assert "best_score" in evolution_result
                                                                                         assert "improvement" in evolution_result
 
-                                                                                        print(f"✅ Hyperparameter evolution completed!")
-                                                                                        print(f"   Best score: {evolution_result['best_score']:.4f}")
-                                                                                        print(f"   Improvement: {evolution_result['improvement']:.4f}")
-                                                                                        print(f"   Best parameters: {evolution_result['best_parameters']}")
+                                                                                        print(
+                                                                                            f"✅ Hyperparameter evolution completed!")
+                                                                                        print(
+                                                                                            f"   Best score: {evolution_result['best_score']:.4f}")
+                                                                                        print(
+                                                                                            f"   Improvement: {evolution_result['improvement']:.4f}")
+                                                                                        print(
+                                                                                            f"   Best parameters: {evolution_result['best_parameters']}")
 
                                                                                         return evolution_result
 
                                                                                         except Exception as e:
-                                                                                            print(f"❌ Hyperparameter evolution failed: {e}")
+                                                                                            print(
+                                                                                                f"❌ Hyperparameter evolution failed: {e}")
                                                                                             traceback.print_exc()
                                                                                             return None
 
-
-                                                                                            def test_ensemble_creation(engine, context):
+                                                                                            def test_ensemble_creation(
+                                                                                                    engine, context):
                                                                                                 """Test adaptive ensemble creation"""
                                                                                                 try:
-                                                                                                    print("\n🔄 Testing ensemble creation...")
+                                                                                                    print(
+                                                                                                        "\n🔄 Testing ensemble creation...")
 
-                                                                                                    # Create synthetic data
-                                                                                                    X = np.random.randn(150, 8)
-                                                                                                    y = np.random.randn(150)
+                                                                                                    # Create
+                                                                                                    # synthetic
+                                                                                                    # data
+                                                                                                    X = np.random.randn(
+                                                                                                        150, 8)
+                                                                                                    y = np.random.randn(
+                                                                                                        150)
 
-                                                                                                    # Test ensemble creation
-                                                                                                    ensemble_result = engine.create_adaptive_ensemble(X, y, context)
+                                                                                                    # Test
+                                                                                                    # ensemble
+                                                                                                    # creation
+                                                                                                    ensemble_result = engine.create_adaptive_ensemble(
+                                                                                                        X, y, context)
 
                                                                                                     assert "ensemble" in ensemble_result
                                                                                                     assert "models" in ensemble_result
                                                                                                     assert "weights" in ensemble_result
                                                                                                     assert "individual_performances" in ensemble_result
 
-                                                                                                    ensemble = ensemble_result["ensemble"]
+                                                                                                    ensemble = ensemble_result[
+                                                                                                        "ensemble"]
 
-                                                                                                    # Test ensemble prediction
-                                                                                                    X_test = np.random.randn(10, 8)
-                                                                                                    predictions = ensemble.predict(X_test)
+                                                                                                    # Test
+                                                                                                    # ensemble
+                                                                                                    # prediction
+                                                                                                    X_test = np.random.randn(
+                                                                                                        10, 8)
+                                                                                                    predictions = ensemble.predict(
+                                                                                                        X_test)
 
-                                                                                                    assert len(predictions) == 10
-                                                                                                    assert isinstance(predictions[0], (int, float, np.number))
+                                                                                                    assert len(
+                                                                                                        predictions) == 10
+                                                                                                    assert isinstance(
+                                                                                                        predictions[0], (int, float, np.number))
 
-                                                                                                    print(f"✅ Ensemble creation completed!")
-                                                                                                    print(f"   Ensemble size: {ensemble_result['ensemble_size']}")
-                                                                                                    print(f"   Models: {ensemble_result['models']}")
-                                                                                                    print(f"   Weights: {ensemble_result['weights']}")
+                                                                                                    print(
+                                                                                                        f"✅ Ensemble creation completed!")
+                                                                                                    print(
+                                                                                                        f"   Ensemble size: {ensemble_result['ensemble_size']}")
+                                                                                                    print(
+                                                                                                        f"   Models: {ensemble_result['models']}")
+                                                                                                    print(
+                                                                                                        f"   Weights: {ensemble_result['weights']}")
 
                                                                                                     return ensemble_result
 
                                                                                                     except Exception as e:
-                                                                                                        print(f"❌ Ensemble creation failed: {e}")
+                                                                                                        print(
+                                                                                                            f"❌ Ensemble creation failed: {e}")
                                                                                                         traceback.print_exc()
                                                                                                         return None
-
 
                                                                                                         def test_model_compatibility():
                                                                                                             """Test model compatibility analysis"""
                                                                                                             try:
-                                                                                                                print("\n🔄 Testing model compatibility...")
+                                                                                                                print(
+                                                                                                                    "\n🔄 Testing model compatibility...")
 
                                                                                                                 from self_learning_engine_helpers import create_learning_context, analyze_model_compatibility
 
-                                                                                                                context = create_learning_context(data_quality_score=0.9, prediction_horizon=60)
+                                                                                                                context = create_learning_context(
+                                                                                                                    data_quality_score=0.9, prediction_horizon=60)
 
-                                                                                                                # Test compatibility for different models
-                                                                                                                models_to_test = ["linear_regression", "random_forest", "xgboost"]
+                                                                                                                # Test
+                                                                                                                # compatibility
+                                                                                                                # for
+                                                                                                                # different
+                                                                                                                # models
+                                                                                                                models_to_test = [
+                                                                                                                    "linear_regression", "random_forest", "xgboost"]
 
                                                                                                                 for model_name in models_to_test:
-                                                                                                                    compatibility = analyze_model_compatibility(model_name, context)
+                                                                                                                    compatibility = analyze_model_compatibility(
+                                                                                                                        model_name, context)
 
                                                                                                                     assert "compatible" in compatibility
 
-                                                                                                                    status = "✅ Compatible" if compatibility["compatible"] else "❌ Not Compatible"
-                                                                                                                    print(f"   {model_name}: {status}")
+                                                                                                                    status = "✅ Compatible" if compatibility[
+                                                                                                                        "compatible"] else "❌ Not Compatible"
+                                                                                                                    print(
+                                                                                                                        f"   {model_name}: {status}")
 
-                                                                                                                    print("✅ Model compatibility analysis completed!")
+                                                                                                                    print(
+                                                                                                                        "✅ Model compatibility analysis completed!")
                                                                                                                     return True
 
                                                                                                                     except Exception as e:
-                                                                                                                        print(f"❌ Model compatibility analysis failed: {e}")
+                                                                                                                        print(
+                                                                                                                            f"❌ Model compatibility analysis failed: {e}")
                                                                                                                         traceback.print_exc()
                                                                                                                         return False
 
-
                                                                                                                         def run_comprehensive_test():
                                                                                                                             """Run comprehensive test suite"""
-                                                                                                                            print("🧠 COMPREHENSIVE SELF-LEARNING ENGINE TEST SUITE")
-                                                                                                                            print(("=" * 60))
-                                                                                                                            print(f"Test started at: {datetime.now()}")
+                                                                                                                            print(
+                                                                                                                                "🧠 COMPREHENSIVE SELF-LEARNING ENGINE TEST SUITE")
+                                                                                                                            print(
+                                                                                                                                ("=" * 60))
+                                                                                                                            print(
+                                                                                                                                f"Test started at: {datetime.now()}")
 
-                                                                                                                            # Track test results
+                                                                                                                            # Track
+                                                                                                                            # test
+                                                                                                                            # results
                                                                                                                             test_results = {}
 
-                                                                                                                            # Test 1: Imports
-                                                                                                                            test_results["imports"] = test_imports()
+                                                                                                                            # Test
+                                                                                                                            # 1:
+                                                                                                                            # Imports
+                                                                                                                            test_results["imports"] = test_imports(
+                                                                                                                            )
 
-                                                                                                                            if not test_results["imports"]:
-                                                                                                                                print("\n❌ CRITICAL FAILURE: Cannot proceed without successful imports")
+                                                                                                                            if not test_results[
+                                                                                                                                    "imports"]:
+                                                                                                                                print(
+                                                                                                                                    "\n❌ CRITICAL FAILURE: Cannot proceed without successful imports")
                                                                                                                                 return test_results
 
-                                                                                                                                # Test 2: Engine initialization
+                                                                                                                                # Test
+                                                                                                                                # 2:
+                                                                                                                                # Engine
+                                                                                                                                # initialization
                                                                                                                                 engine = test_engine_initialization()
-                                                                                                                                test_results["initialization"] = engine is not None
+                                                                                                                                test_results[
+                                                                                                                                    "initialization"] = engine is not None
 
-                                                                                                                                if not test_results["initialization"]:
-                                                                                                                                    print("\n❌ CRITICAL FAILURE: Cannot proceed without engine initialization")
+                                                                                                                                if not test_results[
+                                                                                                                                        "initialization"]:
+                                                                                                                                    print(
+                                                                                                                                        "\n❌ CRITICAL FAILURE: Cannot proceed without engine initialization")
                                                                                                                                     return test_results
 
-                                                                                                                                    # Test 3: Learning context
+                                                                                                                                    # Test
+                                                                                                                                    # 3:
+                                                                                                                                    # Learning
+                                                                                                                                    # context
                                                                                                                                     context = test_learning_context()
-                                                                                                                                    test_results["learning_context"] = context is not None
+                                                                                                                                    test_results[
+                                                                                                                                        "learning_context"] = context is not None
 
-                                                                                                                                    if not test_results["learning_context"]:
-                                                                                                                                        print("\n❌ Cannot proceed without learning context")
+                                                                                                                                    if not test_results[
+                                                                                                                                            "learning_context"]:
+                                                                                                                                        print(
+                                                                                                                                            "\n❌ Cannot proceed without learning context")
                                                                                                                                         return test_results
 
-                                                                                                                                        # Test 4: Adaptive model selection
-                                                                                                                                        selection_result = test_adaptive_model_selection(engine, context)
-                                                                                                                                        test_results["adaptive_model_selection"] = selection_result is not None
+                                                                                                                                        # Test
+                                                                                                                                        # 4:
+                                                                                                                                        # Adaptive
+                                                                                                                                        # model
+                                                                                                                                        # selection
+                                                                                                                                        selection_result = test_adaptive_model_selection(
+                                                                                                                                            engine, context)
+                                                                                                                                        test_results[
+                                                                                                                                            "adaptive_model_selection"] = selection_result is not None
 
-                                                                                                                                        # Test 5: Learning from prediction
-                                                                                                                                        learning_result = test_learning_from_prediction(engine, context)
-                                                                                                                                        test_results["learning_from_prediction"] = learning_result is not None
+                                                                                                                                        # Test
+                                                                                                                                        # 5:
+                                                                                                                                        # Learning
+                                                                                                                                        # from
+                                                                                                                                        # prediction
+                                                                                                                                        learning_result = test_learning_from_prediction(
+                                                                                                                                            engine, context)
+                                                                                                                                        test_results[
+                                                                                                                                            "learning_from_prediction"] = learning_result is not None
 
-                                                                                                                                        # Test 6: Self-correction
-                                                                                                                                        correction_result = test_self_correction(engine, context)
-                                                                                                                                        test_results["self_correction"] = correction_result is not None
+                                                                                                                                        # Test
+                                                                                                                                        # 6:
+                                                                                                                                        # Self-correction
+                                                                                                                                        correction_result = test_self_correction(
+                                                                                                                                            engine, context)
+                                                                                                                                        test_results[
+                                                                                                                                            "self_correction"] = correction_result is not None
 
-                                                                                                                                        # Test 7: Hyperparameter evolution
-                                                                                                                                        evolution_result = test_hyperparameter_evolution(engine, context)
-                                                                                                                                        test_results["hyperparameter_evolution"] = evolution_result is not None
+                                                                                                                                        # Test
+                                                                                                                                        # 7:
+                                                                                                                                        # Hyperparameter
+                                                                                                                                        # evolution
+                                                                                                                                        evolution_result = test_hyperparameter_evolution(
+                                                                                                                                            engine, context)
+                                                                                                                                        test_results[
+                                                                                                                                            "hyperparameter_evolution"] = evolution_result is not None
 
-                                                                                                                                        # Test 8: Ensemble creation
-                                                                                                                                        ensemble_result = test_ensemble_creation(engine, context)
-                                                                                                                                        test_results["ensemble_creation"] = ensemble_result is not None
+                                                                                                                                        # Test
+                                                                                                                                        # 8:
+                                                                                                                                        # Ensemble
+                                                                                                                                        # creation
+                                                                                                                                        ensemble_result = test_ensemble_creation(
+                                                                                                                                            engine, context)
+                                                                                                                                        test_results[
+                                                                                                                                            "ensemble_creation"] = ensemble_result is not None
 
-                                                                                                                                        # Test 9: Model compatibility
-                                                                                                                                        test_results["model_compatibility"] = test_model_compatibility()
+                                                                                                                                        # Test
+                                                                                                                                        # 9:
+                                                                                                                                        # Model
+                                                                                                                                        # compatibility
+                                                                                                                                        test_results["model_compatibility"] = test_model_compatibility(
+                                                                                                                                        )
 
                                                                                                                                         # Summary
-                                                                                                                                        print(("\n" + "=" * 60))
-                                                                                                                                        print("📊 TEST SUMMARY")
-                                                                                                                                        print(("=" * 60))
+                                                                                                                                        print(
+                                                                                                                                            ("\n" + "=" * 60))
+                                                                                                                                        print(
+                                                                                                                                            "📊 TEST SUMMARY")
+                                                                                                                                        print(
+                                                                                                                                            ("=" * 60))
 
-                                                                                                                                        passed = sum(test_results.values())
-                                                                                                                                        total = len(test_results)
+                                                                                                                                        passed = sum(
+                                                                                                                                            test_results.values())
+                                                                                                                                        total = len(
+                                                                                                                                            test_results)
 
-                                                                                                                                        for test_name, result in list(test_results.items()):
+                                                                                                                                        for test_name, result in list(
+                                                                                                                                                test_results.items()):
                                                                                                                                             status = "✅ PASS" if result else "❌ FAIL"
-                                                                                                                                            print(f"{test_name:.<40} {status}")
+                                                                                                                                            print(
+                                                                                                                                                f"{test_name:.<40} {status}")
 
-                                                                                                                                            print(f"\nOverall Result: {passed}/{total} tests passed")
+                                                                                                                                            print(
+                                                                                                                                                f"\nOverall Result: {passed}/{total} tests passed")
 
                                                                                                                                             if passed == total:
-                                                                                                                                                print("🎉 ALL TESTS PASSED! Self-Learning Engine is fully functional!")
+                                                                                                                                                print(
+                                                                                                                                                    "🎉 ALL TESTS PASSED! Self-Learning Engine is fully functional!")
                                                                                                                                                 else:
-                                                                                                                                                    print(f"⚠️  {total - passed} tests failed. Please review the errors above.")
+                                                                                                                                                    print(
+                                                                                                                                                        f"⚠️  {total - passed} tests failed. Please review the errors above.")
 
-                                                                                                                                                    print(f"\nTest completed at: {datetime.now()}")
+                                                                                                                                                    print(
+                                                                                                                                                        f"\nTest completed at: {datetime.now()}")
 
                                                                                                                                                     return test_results
-
 
                                                                                                                                                     if __name__ == "__main__":
                                                                                                                                                         results = run_comprehensive_test()
 
-                                                                                                                                                        # Exit with appropriate code
-                                                                                                                                                        if all(results.values()):
-                                                                                                                                                            sys.exit(0)
+                                                                                                                                                        # Exit
+                                                                                                                                                        # with
+                                                                                                                                                        # appropriate
+                                                                                                                                                        # code
+                                                                                                                                                        if all(
+                                                                                                                                                                results.values()):
+                                                                                                                                                            sys.exit(
+                                                                                                                                                                0)
                                                                                                                                                             else:
-                                                                                                                                                                sys.exit(1)
+                                                                                                                                                                sys.exit(
+                                                                                                                                                                    1)

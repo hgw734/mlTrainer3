@@ -40,7 +40,6 @@ class MarketData:
     timestamp: datetime
     source: str = "polygon"
 
-
     @dataclass
     class HistoricalData:
         """Historical data structure"""
@@ -51,7 +50,6 @@ class MarketData:
         start_date: datetime
         end_date: datetime
         source: str = "polygon"
-
 
         class PolygonConnector:
             """Polygon API connector with rate limiting"""
@@ -64,9 +62,13 @@ class MarketData:
                 if not self.api_key:
                     raise ValueError("Polygon API key not configured")
 
-                    logger.info("Polygon connector initialized with rate limiting")
+                    logger.info(
+                        "Polygon connector initialized with rate limiting")
 
-                    def _make_request(self, endpoint: str, params: Optional[Dict] = None) -> Optional[Dict]:
+                    def _make_request(
+                            self,
+                            endpoint: str,
+                            params: Optional[Dict] = None) -> Optional[Dict]:
                         """Make rate-limited API request"""
                         url = f"{self.base_url}{endpoint}"
 
@@ -76,19 +78,23 @@ class MarketData:
                             params["apikey"] = self.api_key
 
                             # Use rate limiter
-                            result = self.rate_limiter.make_request(url, params=params)
+                            result = self.rate_limiter.make_request(
+                                url, params=params)
 
                             if result["success"]:
                                 return result["data"]
                                 else:
-                                    logger.error(f"API request failed: {result['error']}")
+                                    logger.error(
+                                        f"API request failed: {result['error']}")
                                     return None
 
-                                    def get_quote(self, symbol: str) -> Optional[MarketData]:
+                                    def get_quote(
+                                            self, symbol: str) -> Optional[MarketData]:
                                         """Get real-time quote for a symbol"""
                                         try:
                                             # Get previous close
-                                            prev_data = self._make_request(f"/v2/aggs/ticker/{symbol}/prev")
+                                            prev_data = self._make_request(
+                                                f"/v2/aggs/ticker/{symbol}/prev")
                                             if not prev_data or "results" not in prev_data:
                                                 return None
 
@@ -97,11 +103,15 @@ class MarketData:
                                                 # Get current data
                                                 today = datetime.now().strftime("%Y-%m-%d")
                                                 agg_data = self._make_request(
-                                                f"/v2/aggs/ticker/{symbol}/range/1/minute/{today}/{today}", params={"limit": 1, "sort": "desc"}
-                                                )
+                                                    f"/v2/aggs/ticker/{symbol}/range/1/minute/{today}/{today}",
+                                                    params={
+                                                        "limit": 1,
+                                                        "sort": "desc"})
 
-                                                if not agg_data or "results" not in agg_data or not agg_data["results"]:
-                                                    # Fallback to previous day's data
+                                                if not agg_data or "results" not in agg_data or not agg_data[
+                                                        "results"]:
+                                                    # Fallback to previous
+                                                    # day's data
                                                     current_price = prev_close
                                                     volume = 0
                                                     high = low = open_price = prev_close
@@ -115,73 +125,91 @@ class MarketData:
 
                                                         # Calculate change
                                                         change = current_price - prev_close
-                                                        change_percent = (change / prev_close) * 100 if prev_close > 0 else 0
+                                                        change_percent = (
+                                                            change / prev_close) * 100 if prev_close > 0 else 0
 
                                                         return MarketData(
-                                                        symbol=symbol.upper(),
-                                                        price=current_price,
-                                                        change=change,
-                                                        change_percent=change_percent,
-                                                        volume=volume,
-                                                        high=high,
-                                                        low=low,
-                                                        open=open_price,
-                                                        previous_close=prev_close,
-                                                        timestamp=datetime.now(),
+                                                            symbol=symbol.upper(),
+                                                            price=current_price,
+                                                            change=change,
+                                                            change_percent=change_percent,
+                                                            volume=volume,
+                                                            high=high,
+                                                            low=low,
+                                                            open=open_price,
+                                                            previous_close=prev_close,
+                                                            timestamp=datetime.now(),
                                                         )
 
                                                         except Exception as e:
-                                                            logger.error(f"Error getting quote for {symbol}: {e}")
+                                                            logger.error(
+                                                                f"Error getting quote for {symbol}: {e}")
                                                             return None
 
-                                                            def get_historical_data(self, symbol: str, days: int = 365, timespan: str = "day") -> Optional[HistoricalData]:
+                                                            def get_historical_data(
+                                                                    self, symbol: str, days: int = 365, timespan: str = "day") -> Optional[HistoricalData]:
                                                                 """Get historical data for a symbol"""
                                                                 try:
                                                                     end_date = datetime.now().strftime("%Y-%m-%d")
-                                                                    start_date = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+                                                                    start_date = (
+                                                                        datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
 
                                                                     data = self._make_request(
-                                                                    f"/v2/aggs/ticker/{symbol}/range/1/{timespan}/{start_date}/{end_date}",
-                                                                    params={"adjusted": "true", "sort": "asc", "limit": 50000},
+                                                                        f"/v2/aggs/ticker/{symbol}/range/1/{timespan}/{start_date}/{end_date}",
+                                                                        params={"adjusted": "true", "sort": "asc", "limit": 50000},
                                                                     )
 
                                                                     if not data or "results" not in data:
                                                                         return None
 
-                                                                        # Convert to DataFrame
-                                                                        df = pd.DataFrame(data["results"])
+                                                                        # Convert
+                                                                        # to
+                                                                        # DataFrame
+                                                                        df = pd.DataFrame(
+                                                                            data["results"])
                                                                         if df.empty:
                                                                             return None
 
-                                                                            # Rename columns
+                                                                            # Rename
+                                                                            # columns
                                                                             df = df.rename(
-                                                                            columns={"t": "timestamp", "o": "open", "h": "high", "l": "low", "c": "close", "v": "volume"}
-                                                                            )
+                                                                                columns={
+                                                                                    "t": "timestamp",
+                                                                                    "o": "open",
+                                                                                    "h": "high",
+                                                                                    "l": "low",
+                                                                                    "c": "close",
+                                                                                    "v": "volume"})
 
-                                                                            # Convert timestamp
-                                                                            df["datetime"] = pd.to_datetime(df["timestamp"], unit="ms")
-                                                                            df = df.set_index("datetime")
+                                                                            # Convert
+                                                                            # timestamp
+                                                                            df["datetime"] = pd.to_datetime(
+                                                                                df["timestamp"], unit="ms")
+                                                                            df = df.set_index(
+                                                                                "datetime")
 
                                                                             return HistoricalData(
-                                                                            symbol=symbol.upper(),
-                                                                            data=df,
-                                                                            timeframe=timespan,
-                                                                            start_date=datetime.strptime(start_date, "%Y-%m-%d"),
-                                                                            end_date=datetime.strptime(end_date, "%Y-%m-%d"),
+                                                                                symbol=symbol.upper(),
+                                                                                data=df,
+                                                                                timeframe=timespan,
+                                                                                start_date=datetime.strptime(start_date, "%Y-%m-%d"),
+                                                                                end_date=datetime.strptime(end_date, "%Y-%m-%d"),
                                                                             )
 
                                                                             except Exception as e:
-                                                                                logger.error(f"Error getting historical data for {symbol}: {e}")
+                                                                                logger.error(
+                                                                                    f"Error getting historical data for {symbol}: {e}")
                                                                                 return None
 
-                                                                                def get_quality_metrics(self) -> Dict[str, Any]:
+                                                                                def get_quality_metrics(
+                                                                                        self) -> Dict[str, Any]:
                                                                                     """Get current API quality metrics"""
                                                                                     return self.rate_limiter.get_quality_summary()
 
-
-                                                                                    # Global connector instance
+                                                                                    # Global
+                                                                                    # connector
+                                                                                    # instance
                                                                                     _polygon_connector = None
-
 
                                                                                     def get_polygon_connector() -> PolygonConnector:
                                                                                         """Get global Polygon connector instance"""

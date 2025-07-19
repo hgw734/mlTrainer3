@@ -162,14 +162,16 @@ class AIMLCoachingInterface:
 
         logger.info("🤝 AI-ML Coaching Interface initialized")
 
-    def register_ai_coach(self, coach_id: str, coach_config: Dict[str, Any]) -> bool:
+    def register_ai_coach(self, coach_id: str,
+                          coach_config: Dict[str, Any]) -> bool:
         """Register an AI coach with the interface"""
         try:
             self.registered_ai_coaches[coach_id] = {
                 "config": coach_config,
                 "permissions": coach_config.get("permissions", []),
                 "specializations": coach_config.get("specializations", []),
-                "trust_level": coach_config.get("trust_level", 5),  # 1-10 scale
+                # 1-10 scale
+                "trust_level": coach_config.get("trust_level", 5),
                 "registration_time": datetime.now(),
                 "commands_executed": 0,
                 "success_rate": 0.0,
@@ -190,11 +192,13 @@ class AIMLCoachingInterface:
         self.communication_active = True
 
         # Start command processing thread
-        self.command_processing_thread = threading.Thread(target=self._process_ai_commands, daemon=True)
+        self.command_processing_thread = threading.Thread(
+            target=self._process_ai_commands, daemon=True)
         self.command_processing_thread.start()
 
         # Start feedback processing thread
-        self.feedback_processing_thread = threading.Thread(target=self._process_ml_feedback, daemon=True)
+        self.feedback_processing_thread = threading.Thread(
+            target=self._process_ml_feedback, daemon=True)
         self.feedback_processing_thread.start()
 
         logger.info("🔄 AI-ML communication channels activated")
@@ -220,7 +224,8 @@ class AIMLCoachingInterface:
                 }
 
             # Validate command structure
-            if command.validation_required and not self._validate_command(command):
+            if command.validation_required and not self._validate_command(
+                    command):
                 return {
                     "status": "VALIDATION_FAILED",
                     "error": "Command validation failed",
@@ -249,9 +254,16 @@ class AIMLCoachingInterface:
 
         except Exception as e:
             logger.error(f"AI command execution failed: {e}")
-            return {"status": "EXECUTION_ERROR", "error": str(e), "command_id": command.command_id}
+            return {
+                "status": "EXECUTION_ERROR",
+                "error": str(e),
+                "command_id": command.command_id}
 
-    def ai_teach_methodology(self, ai_coach_id: str, methodology_data: Dict[str, Any]) -> Dict[str, Any]:
+    def ai_teach_methodology(self,
+                             ai_coach_id: str,
+                             methodology_data: Dict[str,
+                                                    Any]) -> Dict[str,
+                                                                  Any]:
         """AI teaches new methodology to ML engine"""
         command = AICommand(
             command_id=f"teach_{int(time.time())}",
@@ -261,9 +273,15 @@ class AIMLCoachingInterface:
                 "methodology_name": methodology_data["name"],
                 "description": methodology_data["description"],
                 "parameters": methodology_data["parameters"],
-                "applicability": methodology_data.get("applicability", {}),
-                "expected_performance": methodology_data.get("performance", {}),
-                "implementation_code": methodology_data.get("code", None),
+                "applicability": methodology_data.get(
+                    "applicability",
+                    {}),
+                "expected_performance": methodology_data.get(
+                    "performance",
+                    {}),
+                "implementation_code": methodology_data.get(
+                    "code",
+                    None),
             },
             execution_priority=2,
             ai_source=ai_coach_id,
@@ -271,18 +289,21 @@ class AIMLCoachingInterface:
 
         return self.execute_ai_command(command)
 
-    def ai_real_time_coach(self, ai_coach_id: str, coaching_data: Dict[str, Any]) -> Dict[str, Any]:
+    def ai_real_time_coach(self, ai_coach_id: str,
+                           coaching_data: Dict[str, Any]) -> Dict[str, Any]:
         """AI provides real-time coaching during ML engine operation"""
         command = AICommand(
             command_id=f"coach_{int(time.time())}",
             command_type=AICommandType.REAL_TIME_COACH,
             target_component="performance_tracker",
             parameters={
-                "coaching_type": coaching_data["type"],  # 'parameter_adjustment', 'model_guidance', etc.
+                # 'parameter_adjustment', 'model_guidance', etc.
+                "coaching_type": coaching_data["type"],
                 "recommendations": coaching_data["recommendations"],
                 "target_metrics": coaching_data.get("target_metrics", {}),
                 "adjustment_magnitude": coaching_data.get("magnitude", 0.1),
-                "coaching_duration": coaching_data.get("duration", 300),  # seconds
+                # seconds
+                "coaching_duration": coaching_data.get("duration", 300),
             },
             execution_priority=1,  # High priority for real-time coaching
             ai_source=ai_coach_id,
@@ -290,7 +311,8 @@ class AIMLCoachingInterface:
 
         return self.execute_ai_command(command)
 
-    def ai_override_model_selection(self, ai_coach_id: str, override_data: Dict[str, Any]) -> Dict[str, Any]:
+    def ai_override_model_selection(
+            self, ai_coach_id: str, override_data: Dict[str, Any]) -> Dict[str, Any]:
         """AI overrides ML engine's model selection"""
         command = AICommand(
             command_id=f"override_{int(time.time())}",
@@ -299,9 +321,15 @@ class AIMLCoachingInterface:
             parameters={
                 "forced_model": override_data["model_name"],
                 "override_reason": override_data["reason"],
-                "expected_improvement": override_data.get("expected_improvement", 0.0),
-                "override_duration": override_data.get("duration", "single_prediction"),
-                "parameters": override_data.get("parameters", {}),
+                "expected_improvement": override_data.get(
+                    "expected_improvement",
+                    0.0),
+                "override_duration": override_data.get(
+                    "duration",
+                    "single_prediction"),
+                "parameters": override_data.get(
+                    "parameters",
+                    {}),
             },
             execution_priority=1,
             ai_source=ai_coach_id,
@@ -309,14 +337,16 @@ class AIMLCoachingInterface:
 
         return self.execute_ai_command(command)
 
-    def ai_inject_knowledge(self, ai_coach_id: str, knowledge_data: Dict[str, Any]) -> Dict[str, Any]:
+    def ai_inject_knowledge(self, ai_coach_id: str,
+                            knowledge_data: Dict[str, Any]) -> Dict[str, Any]:
         """AI injects new knowledge directly into ML engine"""
         command = AICommand(
             command_id=f"inject_{int(time.time())}",
             command_type=AICommandType.INJECT_KNOWLEDGE,
             target_component="meta_knowledge",
             parameters={
-                "knowledge_type": knowledge_data["type"],  # 'pattern', 'rule', 'relationship'
+                # 'pattern', 'rule', 'relationship'
+                "knowledge_type": knowledge_data["type"],
                 "knowledge_content": knowledge_data["content"],
                 "confidence_level": knowledge_data.get("confidence", 0.8),
                 "source_research": knowledge_data.get("source", "AI_analysis"),
@@ -332,7 +362,11 @@ class AIMLCoachingInterface:
     # ML FEEDBACK INTERFACE
     # ================================
 
-    def request_ai_guidance(self, component: str, guidance_request: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def request_ai_guidance(self,
+                            component: str,
+                            guidance_request: Dict[str,
+                                                   Any]) -> Optional[Dict[str,
+                                                                          Any]]:
         """ML engine requests guidance from AI coaches"""
         feedback = MLFeedback(
             feedback_id=f"request_{int(time.time())}",
@@ -376,9 +410,15 @@ class AIMLCoachingInterface:
             data={
                 "decision_type": decision_data["type"],
                 "decision_rationale": decision_data["rationale"],
-                "alternatives_considered": decision_data.get("alternatives", []),
-                "confidence_level": decision_data.get("confidence", 0.0),
-                "expected_outcome": decision_data.get("expected_outcome", {}),
+                "alternatives_considered": decision_data.get(
+                    "alternatives",
+                    []),
+                "confidence_level": decision_data.get(
+                    "confidence",
+                    0.0),
+                "expected_outcome": decision_data.get(
+                    "expected_outcome",
+                    {}),
             },
             requires_ai_response=False,
         )
@@ -451,7 +491,8 @@ class AIMLCoachingInterface:
             "adaptive_learning": self._ai_teach_adaptive_behavior,
         }
 
-    def _ai_teach_by_demonstration(self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
+    def _ai_teach_by_demonstration(
+            self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
         """AI teaches ML engine by demonstrating optimal behavior"""
         # AI provides examples of optimal decisions
         demonstrations = teaching_data["demonstrations"]
@@ -471,9 +512,11 @@ class AIMLCoachingInterface:
                 "source": "AI_demonstration",
             }
 
-        return {"status": "SUCCESS", "demonstrations_learned": len(demonstrations), "teaching_method": "demonstration"}
+        return {"status": "SUCCESS", "demonstrations_learned": len(
+            demonstrations), "teaching_method": "demonstration"}
 
-    def _ai_teach_parameter_optimization(self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
+    def _ai_teach_parameter_optimization(
+            self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
         """AI teaches optimal parameter selection"""
         parameter_guidance = teaching_data["parameter_guidance"]
 
@@ -482,15 +525,14 @@ class AIMLCoachingInterface:
             context_signature = param_data.get("context", "general")
 
             if model_name not in self.ml_engine.meta_knowledge.hyperparameter_memory:
-                self.ml_engine.meta_knowledge.hyperparameter_memory[model_name] = {}
+                self.ml_engine.meta_knowledge.hyperparameter_memory[model_name] = {
+                }
 
             self.ml_engine.meta_knowledge.hyperparameter_memory[model_name][context_signature] = {
-                "parameters": param_data["optimal_parameters"],
-                "score": param_data.get("expected_score", 0.8),
-                "timestamp": str(datetime.now()),
-                "source": "AI_teaching",
-                "confidence": param_data.get("confidence", 0.9),
-            }
+                "parameters": param_data["optimal_parameters"], "score": param_data.get(
+                    "expected_score", 0.8), "timestamp": str(
+                    datetime.now()), "source": "AI_teaching", "confidence": param_data.get(
+                    "confidence", 0.9), }
 
         return {
             "status": "SUCCESS",
@@ -498,7 +540,8 @@ class AIMLCoachingInterface:
             "teaching_method": "parameter_optimization",
         }
 
-    def _ai_teach_strategy_injection(self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
+    def _ai_teach_strategy_injection(
+            self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
         """AI injects new strategies into ML engine"""
         strategies = teaching_data["strategies"]
 
@@ -515,9 +558,11 @@ class AIMLCoachingInterface:
 
             self.ml_engine.meta_knowledge.adaptation_rules.append(new_rule)
 
-        return {"status": "SUCCESS", "strategies_injected": len(strategies), "teaching_method": "strategy_injection"}
+        return {"status": "SUCCESS", "strategies_injected": len(
+            strategies), "teaching_method": "strategy_injection"}
 
-    def _ai_teach_performance_improvement(self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
+    def _ai_teach_performance_improvement(
+            self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
         """AI teaches performance improvement strategies"""
         improvements = teaching_data["improvements"]
 
@@ -541,7 +586,8 @@ class AIMLCoachingInterface:
             "teaching_method": "performance_improvement",
         }
 
-    def _ai_teach_adaptive_behavior(self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
+    def _ai_teach_adaptive_behavior(
+            self, teaching_data: Dict[str, Any]) -> Dict[str, Any]:
         """AI teaches adaptive behavior patterns"""
         behaviors = teaching_data["behaviors"]
 
@@ -559,7 +605,8 @@ class AIMLCoachingInterface:
                 "confidence": behavior.get("confidence", 0.8),
             }
 
-        return {"status": "SUCCESS", "behaviors_taught": len(behaviors), "teaching_method": "adaptive_behavior"}
+        return {"status": "SUCCESS", "behaviors_taught": len(
+            behaviors), "teaching_method": "adaptive_behavior"}
 
     # ================================
     # COMMAND PROCESSING
@@ -639,8 +686,12 @@ class AIMLCoachingInterface:
 
             # Parameter validation based on command type
             if command.command_type == AICommandType.TEACH_METHODOLOGY:
-                required_params = ["methodology_name", "description", "parameters"]
-                if not all(param in command.parameters for param in required_params):
+                required_params = [
+                    "methodology_name",
+                    "description",
+                    "parameters"]
+                if not all(
+                        param in command.parameters for param in required_params):
                     return False
 
             elif command.command_type == AICommandType.ADJUST_PARAMETERS:
@@ -674,7 +725,8 @@ class AIMLCoachingInterface:
             "interface_health": "OPERATIONAL",
         }
 
-    def get_ai_coach_performance(self, coach_id: str) -> Optional[Dict[str, Any]]:
+    def get_ai_coach_performance(
+            self, coach_id: str) -> Optional[Dict[str, Any]]:
         """Get performance metrics for specific AI coach"""
         if coach_id not in self.registered_ai_coaches:
             return None
@@ -682,10 +734,12 @@ class AIMLCoachingInterface:
         coach_info = self.registered_ai_coaches[coach_id]
 
         # Calculate success rate from coaching sessions
-        coach_sessions = [s for s in self.coaching_performance_history if s.ai_coach_id == coach_id]
+        coach_sessions = [
+            s for s in self.coaching_performance_history if s.ai_coach_id == coach_id]
 
         if coach_sessions:
-            avg_success = np.mean([s.success_metrics.get("overall_improvement", 0) for s in coach_sessions])
+            avg_success = np.mean([s.success_metrics.get(
+                "overall_improvement", 0) for s in coach_sessions])
         else:
             avg_success = 0.0
 
@@ -704,7 +758,8 @@ class AIMLCoachingInterface:
     # HELPER FUNCTIONS
     # ================================
 
-    def _update_ai_coach_stats(self, ai_source: str, execution_result: Dict[str, Any]):
+    def _update_ai_coach_stats(
+            self, ai_source: str, execution_result: Dict[str, Any]):
         """Update statistics for AI coach performance"""
         if ai_source in self.registered_ai_coaches:
             coach_info = self.registered_ai_coaches[ai_source]
@@ -716,10 +771,12 @@ class AIMLCoachingInterface:
                 total_commands = coach_info["commands_executed"]
 
                 # Calculate new success rate
-                new_success_rate = ((current_success_rate * (total_commands - 1)) + 1.0) / total_commands
+                new_success_rate = (
+                    (current_success_rate * (total_commands - 1)) + 1.0) / total_commands
                 coach_info["success_rate"] = new_success_rate
 
-    def _store_command_result(self, command: AICommand, result: Dict[str, Any]):
+    def _store_command_result(
+            self, command: AICommand, result: Dict[str, Any]):
         """Store command execution result for analysis"""
         # Store in coaching session if active
         for session in list(self.active_sessions.values()):
@@ -728,7 +785,8 @@ class AIMLCoachingInterface:
                 # Could also store the result for detailed analysis
                 break
 
-    def _wait_for_ai_response(self, feedback_id: str, timeout: int) -> Optional[Dict[str, Any]]:
+    def _wait_for_ai_response(self, feedback_id: str,
+                              timeout: int) -> Optional[Dict[str, Any]]:
         """Wait for AI response to ML feedback with timeout"""
         # This would implement waiting for AI response
         # For now, return a to_be_implemented response
@@ -743,7 +801,8 @@ class AIMLCoachingInterface:
             "confidence": 0.8,
         }
 
-    def _calculate_coaching_success(self, session: CoachingSession) -> Dict[str, float]:
+    def _calculate_coaching_success(
+            self, session: CoachingSession) -> Dict[str, float]:
         """Calculate success metrics for coaching session"""
         # Calculate improvement metrics
         performance_before = session.performance_before
@@ -766,7 +825,8 @@ class AIMLCoachingInterface:
             "overall_improvement": overall_improvement,
             "commands_success_rate": 1.0 if session.commands_issued else 0.0,
             "session_efficiency": len(session.commands_issued)
-            / max(1, (datetime.now() - session.start_time).total_seconds() / 60),  # commands per minute
+            # commands per minute
+            / max(1, (datetime.now() - session.start_time).total_seconds() / 60),
             "coaching_effectiveness": min(1.0, max(0.0, overall_improvement)),
         }
 
@@ -803,7 +863,9 @@ class AICommandExecutor:
             elif command.command_type == AICommandType.REAL_TIME_COACH:
                 return self._execute_real_time_coach(command)
             else:
-                return {"status": "UNKNOWN_COMMAND", "command_type": command.command_type.value}
+                return {
+                    "status": "UNKNOWN_COMMAND",
+                    "command_type": command.command_type.value}
 
         except Exception as e:
             return {"status": "EXECUTION_ERROR", "error": str(e)}
@@ -843,7 +905,8 @@ class AICommandExecutor:
             if hasattr(self.ml_engine, param_name):
                 old_value = getattr(self.ml_engine, param_name)
                 setattr(self.ml_engine, param_name, new_value)
-                applied_adjustments[param_name] = {"old_value": old_value, "new_value": new_value}
+                applied_adjustments[param_name] = {
+                    "old_value": old_value, "new_value": new_value}
 
         return {
             "status": "SUCCESS",
@@ -851,7 +914,8 @@ class AICommandExecutor:
             "message": f"AI adjusted {len(applied_adjustments)} parameters",
         }
 
-    def _execute_override_selection(self, command: AICommand) -> Dict[str, Any]:
+    def _execute_override_selection(
+            self, command: AICommand) -> Dict[str, Any]:
         """Execute model selection override"""
         forced_model = command.parameters["forced_model"]
         reason = command.parameters.get("override_reason", "AI_override")
@@ -862,7 +926,8 @@ class AICommandExecutor:
 
         # Store override in meta-knowledge for tracking
         if "ai_overrides" not in self.ml_engine.meta_knowledge.learning_patterns:
-            self.ml_engine.meta_knowledge.learning_patterns["ai_overrides"] = {}
+            self.ml_engine.meta_knowledge.learning_patterns["ai_overrides"] = {
+            }
 
         self.ml_engine.meta_knowledge.learning_patterns["ai_overrides"][override_id] = {
             "forced_model": forced_model,
@@ -937,7 +1002,8 @@ class MLFeedbackProcessor:
     """Processes ML engine feedback for AI coaches"""
 
     def __init__(self):
-        self.feedback_routes: Dict[str, List[str]] = {}  # feedback_type -> ai_coaches
+        # feedback_type -> ai_coaches
+        self.feedback_routes: Dict[str, List[str]] = {}
         self.ai_response_callbacks: Dict[str, Callable] = {}
 
     def route_feedback(self, feedback: MLFeedback, ai_coaches: List[str]):
@@ -952,7 +1018,8 @@ class MLFeedbackProcessor:
 # ================================
 
 
-def initialize_ai_ml_coaching_interface(ml_engine: SelfLearningEngine) -> AIMLCoachingInterface:
+def initialize_ai_ml_coaching_interface(
+        ml_engine: SelfLearningEngine) -> AIMLCoachingInterface:
     """Initialize AI-ML coaching interface"""
     try:
         interface = AIMLCoachingInterface(ml_engine)
@@ -971,7 +1038,8 @@ def initialize_ai_ml_coaching_interface(ml_engine: SelfLearningEngine) -> AIMLCo
             },
         )
 
-        logger.info("🤝 AI-ML Coaching Interface fully initialized and operational")
+        logger.info(
+            "🤝 AI-ML Coaching Interface fully initialized and operational")
         return interface
 
     except Exception as e:

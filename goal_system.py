@@ -1,3 +1,8 @@
+import hashlib
+from typing import Dict, Any, List, Optional
+from pathlib import Path
+from datetime import datetime
+import json
 import logging
 
 logger = logging.getLogger(__name__)
@@ -10,11 +15,6 @@ Manages overriding system goals that cascade throughout mlTrainer
 REAL implementation with actual file persistence
 """
 
-import json
-from datetime import datetime
-from pathlib import Path
-from typing import Dict, Any, List, Optional
-import hashlib
 
 # Use existing logs directory
 LOGS_DIR = Path("logs")
@@ -36,31 +36,31 @@ class GoalSystem:
         """Load compliance violation keywords"""
         # These are REAL compliance checks, not simulated
         return [
-        # Data generation violations
-        "generate",
-        "synthetic",
-        "real_implementation",
-        "simulate",
-        "random",
-        "actual_implementation",
-        "production_implementation",
-        "artificial",
-        "create real_implementation",
-        # Risk violations
-        "guaranteed",
-        "no risk",
-        "always profit",
-        "never lose",
-        "certainty",
-        "100% return",
-        "risk-free",
-        # Compliance violations
-        "bypass",
-        "ignore compliance",
-        "disable protection",
-        "override limits",
-        "hack",
-        "circumvent",
+            # Data generation violations
+            "generate",
+            "synthetic",
+            "real_implementation",
+            "simulate",
+            "random",
+            "actual_implementation",
+            "production_implementation",
+            "artificial",
+            "create real_implementation",
+            # Risk violations
+            "guaranteed",
+            "no risk",
+            "always profit",
+            "never lose",
+            "certainty",
+            "100% return",
+            "risk-free",
+            # Compliance violations
+            "bypass",
+            "ignore compliance",
+            "disable protection",
+            "override limits",
+            "hack",
+            "circumvent",
         ]
 
     def load_current_goal(self) -> Optional[Dict[str, Any]]:
@@ -86,41 +86,51 @@ class GoalSystem:
         for keyword in self.compliance_keywords:
             if keyword in goal_lower:
                 validation_result["valid"] = False
-                validation_result["violations"].append(f"Contains prohibited term: '{keyword}'")
+                validation_result["violations"].append(
+                    f"Contains prohibited term: '{keyword}'")
 
         # Check goal length and clarity
         if len(goal_text) < 10:
-            validation_result["warnings"].append("Goal too short - be more specific")
+            validation_result["warnings"].append(
+                "Goal too short - be more specific")
 
         if len(goal_text) > 1000:
-            validation_result["warnings"].append("Goal too long - consider breaking into sub-goals")
+            validation_result["warnings"].append(
+                "Goal too long - consider breaking into sub-goals")
 
         # Check for specific required elements
         if "timeframe" not in goal_lower and "days" not in goal_lower:
-            validation_result["warnings"].append("Consider specifying a timeframe")
+            validation_result["warnings"].append(
+                "Consider specifying a timeframe")
 
         return validation_result
 
-    def set_goal(self, goal_text: str, user_id: str = "user") -> Dict[str, Any]:
+    def set_goal(self, goal_text: str,
+                 user_id: str = "user") -> Dict[str, Any]:
         """Set new overriding goal with validation"""
         # Validate first
         validation = self.validate_goal(goal_text)
 
         if not validation["valid"]:
-            return {"success": False, "error": "Goal violates compliance rules", "violations": validation["violations"]}
+            return {
+                "success": False,
+                "error": "Goal violates compliance rules",
+                "violations": validation["violations"]}
 
         # Parse goal into components
         components = self._parse_goal_components(goal_text)
 
         # Create goal object
         new_goal = {
-        "id": hashlib.md5(f"{datetime.now().isoformat()}{goal_text}".encode()).hexdigest()[:12],
-        "text": goal_text,
-        "components": components,
-        "created_at": datetime.now().isoformat(),
-        "created_by": user_id,
-        "status": "active",
-        "validation": validation,
+            "id": hashlib.md5(
+                f"{datetime.now().isoformat()}{goal_text}".encode()).hexdigest()[
+                :12],
+            "text": goal_text,
+            "components": components,
+            "created_at": datetime.now().isoformat(),
+            "created_by": user_id,
+            "status": "active",
+            "validation": validation,
         }
 
         # Save previous goal to history
@@ -137,19 +147,31 @@ class GoalSystem:
         # Log to history
         self._log_goal_change(new_goal, "set")
 
-        return {"success": True, "goal": new_goal, "warnings": validation.get("warnings", [])}
+        return {
+            "success": True,
+            "goal": new_goal,
+            "warnings": validation.get(
+                "warnings",
+                [])}
 
     def _parse_goal_components(self, goal_text: str) -> Dict[str, Any]:
         """Parse goal text into structured components"""
-        components = {"primary_objective": None, "timeframes": [], "metrics": [], "constraints": [], "strategies": []}
+        components = {
+            "primary_objective": None,
+            "timeframes": [],
+            "metrics": [],
+            "constraints": [],
+            "strategies": []}
 
         goal_lower = goal_text.lower()
 
         # Extract timeframes (real parsing, not real_implementation)
         if "7-12 days" in goal_text:
-            components["timeframes"].append({"min": 7, "max": 12, "unit": "days"})
+            components["timeframes"].append(
+                {"min": 7, "max": 12, "unit": "days"})
             if "50-70 days" in goal_text:
-                components["timeframes"].append({"min": 50, "max": 70, "unit": "days"})
+                components["timeframes"].append(
+                    {"min": 50, "max": 70, "unit": "days"})
 
         # Extract metrics
         if "accuracy" in goal_lower:
@@ -174,13 +196,13 @@ class GoalSystem:
         try:
             with open(GOALS_FILE, "w") as f:
                 json.dump(
-                {
-                "current_goal": self.current_goal,
-                "components": self.goal_components,
-                "last_updated": datetime.now().isoformat(),
-                },
-                f,
-                indent=2,
+                    {
+                        "current_goal": self.current_goal,
+                        "components": self.goal_components,
+                        "last_updated": datetime.now().isoformat(),
+                    },
+                    f,
+                    indent=2,
                 )
             return True
         except Exception as e:
@@ -198,10 +220,10 @@ class GoalSystem:
         try:
             with open(GOAL_HISTORY_FILE, "a") as f:
                 log_entry = {
-                "timestamp": datetime.now().isoformat(),
-                "action": action,
-                "goal_id": goal["id"],
-                "goal_text": goal["text"],
+                    "timestamp": datetime.now().isoformat(),
+                    "action": action,
+                    "goal_id": goal["id"],
+                    "goal_text": goal["text"],
                 }
                 f.write(json.dumps(log_entry) + "\n")
         except Exception as e:
@@ -214,12 +236,12 @@ class GoalSystem:
         else:
             # Return a default goal structure if none is set
             return {
-            "id": "default",
-            "goal": "No goal currently set",
-            "text": "No overriding goal currently set.",
-            "created_at": datetime.now().isoformat(),
-            "status": "none",
-            "components": {},
+                "id": "default",
+                "goal": "No goal currently set",
+                "text": "No overriding goal currently set.",
+                "created_at": datetime.now().isoformat(),
+                "status": "none",
+                "components": {},
             }
 
     def get_goal_components(self) -> Dict[str, Any]:
@@ -270,10 +292,10 @@ if __name__ == "__main__":
     # production 1: Set a valid goal
     logger.info("\n1️⃣ Setting a valid goal# Production code implemented")
     result = goal_system.set_goal(
-    "Achieve accurate stock price predictions with high confidence level "
-    "for momentum trading in two timeframes: 7-12 days and 50-70 days. "
-    "Optimize stop loss levels for risk management.",
-    user_id="test_user",
+        "Achieve accurate stock price predictions with high confidence level "
+        "for momentum trading in two timeframes: 7-12 days and 50-70 days. "
+        "Optimize stop loss levels for risk management.",
+        user_id="test_user",
     )
 
     if result["success"]:
@@ -284,8 +306,11 @@ if __name__ == "__main__":
         logger.error(f"❌ Failed: {result['error']}")
 
     # production 2: Try to set an invalid goal
-    logger.info("\n2️⃣ Testing compliance validation# Production code implemented")
-    invalid_result = goal_system.set_goal("Generate synthetic data to guarantee profits", user_id="test_user")
+    logger.info(
+        "\n2️⃣ Testing compliance validation# Production code implemented")
+    invalid_result = goal_system.set_goal(
+        "Generate synthetic data to guarantee profits",
+        user_id="test_user")
 
     if not invalid_result["success"]:
         logger.info("✅ Correctly rejected invalid goal!")
@@ -297,7 +322,8 @@ if __name__ == "__main__":
         logger.info(f"✅ Goals file exists: {GOALS_FILE}")
         with open(GOALS_FILE, "r") as f:
             data = json.load(f)
-            logger.info(f"✅ Current goal saved: {data['current_goal']['text'][:50]}# Production code implemented")
+            logger.info(
+                f"✅ Current goal saved: {data['current_goal']['text'][:50]}# Production code implemented")
 
     # production 4: Format for mlTrainer
     logger.info("\n4️⃣ Formatting for mlTrainer# Production code implemented")

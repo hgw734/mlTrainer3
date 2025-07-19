@@ -19,37 +19,37 @@ def find_mltrainer_directories():
     # Common project locations
     home = Path.home()
     common_paths = [
-    home / "Documents",
-    home / "Projects",
-    home / "projects",
-    home / "Code",
-    home / "code",
-    home / "Development",
-    home / "dev",
-    home / "workspace",
-    home / "repos",
-    home / "github",
-    home / "Desktop",
-    home / "Downloads",
+        home / "Documents",
+        home / "Projects",
+        home / "projects",
+        home / "Code",
+        home / "code",
+        home / "Development",
+        home / "dev",
+        home / "workspace",
+        home / "repos",
+        home / "github",
+        home / "Desktop",
+        home / "Downloads",
     ]
 
     # Add Windows-specific paths
     if platform.system() == "Windows":
-        common_paths.extend(
-        [
-        Path("C:/") / "Projects",
-        Path("C:/") / "Code",
-        Path("C:/") / "Users" / os.environ.get("USERNAME", "") / "source" / "repos",
-        ]
-        )
+        common_paths.extend([Path("C:/") /
+                             "Projects", Path("C:/") /
+                             "Code", Path("C:/") /
+                             "Users" /
+                             os.environ.get("USERNAME", "") /
+                             "source" /
+                             "repos", ])
 
         # Add Mac-specific paths
         if platform.system() == "Darwin":
             common_paths.extend(
-            [
-            home / "Developer",
-            Path("/") / "Users" / "Shared" / "Projects",
-            ]
+                [
+                    home / "Developer",
+                    Path("/") / "Users" / "Shared" / "Projects",
+                ]
             )
 
             print("🔍 Searching for mlTrainer directories# Production code implemented")
@@ -63,7 +63,8 @@ def find_mltrainer_directories():
                     # Look for mlTrainer directory
                     mltrainer_path = base_path / "mlTrainer"
                     if mltrainer_path.exists() and mltrainer_path.is_dir():
-                        # Verify it's the right project by checking for key files
+                        # Verify it's the right project by checking for key
+                        # files
                         if is_mltrainer_project(mltrainer_path):
                             found_dirs.append(mltrainer_path)
 
@@ -89,11 +90,11 @@ def find_mltrainer_directories():
 def is_mltrainer_project(path):
     """Verify if a directory is the mlTrainer project"""
     key_files = [
-    "config/models_config.py",
-    "config/immutable_compliance_gateway.py",
-    "requirements.txt",
-    ".git",
-    "custom",
+        "config/models_config.py",
+        "config/immutable_compliance_gateway.py",
+        "requirements.txt",
+        ".git",
+        "custom",
     ]
 
     matches = 0
@@ -111,7 +112,14 @@ def find_via_git():
     try:
         # Get list of all git repositories
         if platform.system() == "Windows":
-            cmd = ["wsl", "find", str(Path.home()), "-name", ".git", "-type", "d", "2>/dev/null"]
+            cmd = ["wsl",
+                   "find",
+                   str(Path.home()),
+                   "-name",
+                   ".git",
+                   "-type",
+                   "d",
+                   "2>/dev/null"]
         else:
             cmd = ["find", str(Path.home()), "-name", ".git", "-type", "d"]
 
@@ -123,7 +131,8 @@ def find_via_git():
             for git_dir in git_dirs:
                 if git_dir:
                     repo_dir = Path(git_dir).parent
-                    if repo_dir.name == "mlTrainer" and is_mltrainer_project(repo_dir):
+                    if repo_dir.name == "mlTrainer" and is_mltrainer_project(
+                            repo_dir):
                         found_dirs.append(repo_dir)
     except Exception:
         pass
@@ -138,18 +147,26 @@ def check_cursor_recent_projects():
     # Cursor config locations
     if platform.system() == "Windows":
         cursor_paths = [
-        Path.home() / "AppData" / "Roaming" / "Cursor" / "User" / "globalStorage",
-        Path.home() / "AppData" / "Local" / "Cursor",
+            Path.home() /
+            "AppData" /
+            "Roaming" /
+            "Cursor" /
+            "User" /
+            "globalStorage",
+            Path.home() /
+            "AppData" /
+            "Local" /
+            "Cursor",
         ]
     elif platform.system() == "Darwin":  # macOS
         cursor_paths = [
-        Path.home() / "Library" / "Application Support" / "Cursor",
-        Path.home() / ".cursor",
+            Path.home() / "Library" / "Application Support" / "Cursor",
+            Path.home() / ".cursor",
         ]
     else:  # Linux
         cursor_paths = [
-        Path.home() / ".config" / "Cursor",
-        Path.home() / ".cursor",
+            Path.home() / ".config" / "Cursor",
+            Path.home() / ".cursor",
         ]
 
     for cursor_path in cursor_paths:
@@ -182,7 +199,8 @@ def display_results(found_dirs):
             # Check git status
             try:
                 os.chdir(dir_path)
-                result = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
+                result = subprocess.run(
+                    ["git", "status", "--porcelain"], capture_output=True, text=True)
                 if result.returncode == 0:
                     if result.stdout.strip():
                         print(f"   ⚠️  Has uncommitted changes")
@@ -190,7 +208,8 @@ def display_results(found_dirs):
                         print(f"   ✅ Clean working directory")
 
                     # Get last commit
-                    result = subprocess.run(["git", "log", "-1", "--oneline"], capture_output=True, text=True)
+                    result = subprocess.run(
+                        ["git", "log", "-1", "--oneline"], capture_output=True, text=True)
                     if result.returncode == 0:
                         print(f"   📝 Last commit: {result.stdout.strip()}")
             except Exception:
@@ -217,7 +236,8 @@ def display_results(found_dirs):
                 print("2. File → Open Folder")
                 print(f"3. Navigate to: {found_dirs[0]}")
                 print("\nOption 3 - Drag and Drop:")
-                print(f"Drag the folder {found_dirs[0]} onto the Cursor app icon")
+                print(
+                    f"Drag the folder {found_dirs[0]} onto the Cursor app icon")
             else:
                 print("First, clone the repository:")
                 print("git clone https://github.com/hgw734/mlTrainer.git")
@@ -238,10 +258,10 @@ def main():
 
     # Save results to file for reference
     results = {
-    "search_time": str(Path.cwd()),
-    "system": platform.system(),
-    "found_directories": [str(d) for d in found_dirs],
-    "cursor_command": f"cursor {found_dirs[0]}" if found_dirs else None,
+        "search_time": str(Path.cwd()),
+        "system": platform.system(),
+        "found_directories": [str(d) for d in found_dirs],
+        "cursor_command": f"cursor {found_dirs[0]}" if found_dirs else None,
     }
 
     with open("mltrainer_locations.json", "w") as f:

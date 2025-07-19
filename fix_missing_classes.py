@@ -7,35 +7,37 @@ import os
 import re
 from typing import Dict, Any
 
+
 def add_class_to_file(filepath: str, class_name: str, class_code: str):
     """Add a class to a file"""
     if not os.path.exists(filepath):
         print(f"⚠️  File {filepath} does not exist, skipping...")
         return
-    
+
     try:
         with open(filepath, "r") as f:
             content = f.read()
-        
+
         # Check if class already exists
         if class_name in content:
             print(f"✅ Class {class_name} already exists in {filepath}")
             return
-        
+
         # Add class to end of file
         with open(filepath, "a") as f:
             f.write(f"\n\n{class_code}\n")
-        
+
         print(f"✅ Added {class_name} to {filepath}")
-        
+
     except Exception as e:
         print(f"❌ Error adding {class_name} to {filepath}: {e}")
+
 
 def implement_missing_classes():
     """Implement all missing classes"""
     print("🔧 Implementing Missing Classes")
     print("=" * 50)
-    
+
     # Define missing classes
     missing_classes = {
         "custom/momentum.py": {
@@ -58,16 +60,16 @@ class MomentumBreakout:
         if not self.is_fitted:
             raise ValueError("Model must be fitted before prediction")
         signals = pd.Series(0, index=data.index)
-        
+
         for i in range(self.window, len(data)):
             window_data = data.iloc[i-self.window:i+1]
             momentum = (data.iloc[i] - window_data.iloc[0]) / window_data.iloc[0]
-            
+
             if momentum > self.threshold:
                 signals.iloc[i] = 1
             elif momentum < -self.threshold:
                 signals.iloc[i] = -1
-        
+
         return signals
 
     def get_parameters(self) -> Dict[str, Any]:
@@ -122,16 +124,16 @@ class MomentumBreakout:
         if not self.is_fitted:
             raise ValueError("Model must be fitted before prediction")
         signals = pd.Series(0, index=data.index)
-        
+
         for i in range(self.window, len(data)):
             window_data = data.iloc[i-self.window:i+1]
             momentum = (data.iloc[i] - window_data.iloc[0]) / window_data.iloc[0]
-            
+
             if momentum > self.threshold:
                 signals.iloc[i] = 1
             elif momentum < -self.threshold:
                 signals.iloc[i] = -1
-        
+
         return signals
 
     def get_parameters(self) -> Dict[str, Any]:
@@ -186,15 +188,15 @@ class InformationRatio:
             raise ValueError("Model must be fitted before prediction")
         returns = data.pct_change().dropna()
         info_ratios = pd.Series(0.0, index=data.index)
-        
+
         for i in range(50, len(returns)):
             window_returns = returns.iloc[i-50:i+1]
             excess_return = window_returns.mean() - self.benchmark_return
             tracking_error = window_returns.std()
-            
+
             if tracking_error > 0:
                 info_ratios.iloc[i] = excess_return / tracking_error
-        
+
         return info_ratios
 
     def get_parameters(self) -> Dict[str, Any]:
@@ -219,15 +221,15 @@ class ExpectedShortfall:
             raise ValueError("Model must be fitted before prediction")
         returns = data.pct_change().dropna()
         es_values = pd.Series(0.0, index=data.index)
-        
+
         for i in range(50, len(returns)):
             window_returns = returns.iloc[i-50:i+1]
             var_threshold = np.percentile(window_returns, (1 - self.confidence_level) * 100)
             tail_returns = window_returns[window_returns <= var_threshold]
-            
+
             if len(tail_returns) > 0:
                 es_values.iloc[i] = tail_returns.mean()
-        
+
         return es_values
 
     def get_parameters(self) -> Dict[str, Any]:
@@ -251,14 +253,14 @@ class MaximumDrawdown:
         if not self.is_fitted:
             raise ValueError("Model must be fitted before prediction")
         drawdowns = pd.Series(0.0, index=data.index)
-        
+
         for i in range(self.window, len(data)):
             window_data = data.iloc[i-self.window:i+1]
             peak = window_data.expanding().max()
             drawdown = (window_data - peak) / peak
             max_drawdown = drawdown.min()
             drawdowns.iloc[i] = max_drawdown
-        
+
         return drawdowns
 
     def get_parameters(self) -> Dict[str, Any]:
@@ -285,11 +287,11 @@ class RegimeSwitchingVolatility:
             raise ValueError("Model must be fitted before prediction")
         returns = data.pct_change().dropna()
         regime_vol = pd.Series(0.0, index=data.index)
-        
+
         for i in range(self.window, len(returns)):
             window_returns = returns.iloc[i-self.window:i+1]
             vol = window_returns.std()
-            
+
             # Simple regime classification
             if vol > 0.02:
                 regime_vol.iloc[i] = 2.0  # High volatility regime
@@ -297,7 +299,7 @@ class RegimeSwitchingVolatility:
                 regime_vol.iloc[i] = 1.0  # Medium volatility regime
             else:
                 regime_vol.iloc[i] = 0.0  # Low volatility regime
-        
+
         return regime_vol
 
     def get_parameters(self) -> Dict[str, Any]:
@@ -321,15 +323,15 @@ class VolatilitySurface:
         if not self.is_fitted:
             raise ValueError("Model must be fitted before prediction")
         vol_surface = pd.Series(0.0, index=data.index)
-        
+
         for i in range(50, len(data)):
             window_data = data.iloc[i-50:i+1]
             returns = window_data.pct_change().dropna()
-            
+
             # Simple volatility surface approximation
             base_vol = returns.std()
             vol_surface.iloc[i] = base_vol * (1 + 0.1 * np.sin(i / 10))  # Time-varying vol
-        
+
         return vol_surface
 
     def get_parameters(self) -> Dict[str, Any]:
@@ -355,13 +357,13 @@ class LempelZivComplexity:
         if not self.is_fitted:
             raise ValueError("Model must be fitted before prediction")
         complexity_values = pd.Series(0.0, index=data.index)
-        
+
         for i in range(self.window, len(data)):
             window_data = data.iloc[i-self.window:i+1]
             # Simplified Lempel-Ziv complexity
             binary_sequence = (window_data > window_data.mean()).astype(int)
             complexity_values.iloc[i] = self._calculate_lz_complexity(binary_sequence)
-        
+
         return complexity_values
 
     def _calculate_lz_complexity(self, sequence) -> float:
@@ -369,11 +371,11 @@ class LempelZivComplexity:
         n = len(sequence)
         if n == 0:
             return 0
-        
+
         c = 1
         l = 1
         i = 0
-        
+
         while i + l < n:
             if sequence[i:i+l] in sequence[:i]:
                 l += 1
@@ -381,7 +383,7 @@ class LempelZivComplexity:
                 c += 1
                 i += l
                 l = 1
-        
+
         return c * np.log2(n) / n
 
     def get_parameters(self) -> Dict[str, Any]:
@@ -389,12 +391,12 @@ class LempelZivComplexity:
 '''
         }
     }
-    
+
     # Add missing classes to files
     for filepath, classes in missing_classes.items():
         for class_name, class_code in classes.items():
             add_class_to_file(filepath, class_name, class_code)
-    
+
     # Add imports to files that need them
     files_needing_imports = [
         "custom/momentum.py",
@@ -406,21 +408,21 @@ class LempelZivComplexity:
         "custom/volatility.py",
         "custom/complexity.py",
     ]
-    
+
     for filepath in files_needing_imports:
         if os.path.exists(filepath):
             with open(filepath, "r") as f:
                 content = f.read()
-            
+
             # Add missing imports
             if "from dataclasses import dataclass" not in content:
                 with open(filepath, "w") as f:
                     f.write(
-                        "from dataclasses import dataclass\nfrom typing import Dict, Any\nimport logging\n\nlogger = logging.getLogger(__name__)\n\n"
-                        + content
-                    )
+                        "from dataclasses import dataclass\nfrom typing import Dict, Any\nimport logging\n\nlogger = logging.getLogger(__name__)\n\n" +
+                        content)
                 print(f"✅ Added imports to {filepath}")
+
 
 if __name__ == "__main__":
     implement_missing_classes()
-    print("\n🎉 All missing classes implemented!") 
+    print("\n🎉 All missing classes implemented!")

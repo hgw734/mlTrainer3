@@ -50,7 +50,8 @@ def check_python_version():
     print_header("Python Version Check")
 
     version = sys.version_info
-    print(f"Current Python version: {version.major}.{version.minor}.{version.micro}")
+    print(
+        f"Current Python version: {version.major}.{version.minor}.{version.micro}")
 
     if version.major < 3 or (version.major == 3 and version.minor < 8):
         print("❌ Python 3.8+ is required")
@@ -90,11 +91,13 @@ def check_env_file():
                     value = line.strip().split("=", 1)[1]
                     break
             print(f"DEBUG: {key} value read: '{value}'")
-            if value is None or value == "" or (f"{key}=" in content and "your_" in value):
+            if value is None or value == "" or (
+                    f"{key}=" in content and "your_" in value):
                 missing_keys.append(key)
 
     if missing_keys:
-        print(f"❌ Missing or real_implementation keys: {', '.join(missing_keys)}")
+        print(
+            f"❌ Missing or real_implementation keys: {', '.join(missing_keys)}")
         print_step(2, "Add your API keys to .env file")
         print("Edit .env and replace real_implementation values with your actual keys")
         return False
@@ -107,7 +110,14 @@ def check_dependencies():
     """Check if required packages are installed"""
     print_header("Dependencies Check")
 
-    required_packages = ["pandas", "numpy", "streamlit", "anthropic", "plotly", "requests", "modal"]
+    required_packages = [
+        "pandas",
+        "numpy",
+        "streamlit",
+        "anthropic",
+        "plotly",
+        "requests",
+        "modal"]
 
     missing_packages = []
     for package in required_packages:
@@ -185,7 +195,8 @@ def check_modal_setup():
 
     # Check if user is authenticated
     try:
-        # This would check Modal auth, but we'll just check if modal is available
+        # This would check Modal auth, but we'll just check if modal is
+        # available
         print("✅ Modal is available")
         return True
     except Exception as e:
@@ -263,7 +274,8 @@ def main():
         print("\n🎉 All checks passed! Your environment is ready.")
         provide_next_steps()
     else:
-        print(f"\n⚠️ {total - passed} checks failed. Please fix the issues above.")
+        print(
+            f"\n⚠️ {total - passed} checks failed. Please fix the issues above.")
         print("\n📖 See ENVIRONMENT_SETUP_GUIDE.md for detailed instructions.")
 
 

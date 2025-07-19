@@ -15,6 +15,7 @@ import subprocess
 import sys
 import os
 
+
 def install_modal():
     """Install Modal if not already installed"""
     try:
@@ -22,14 +23,16 @@ def install_modal():
         print("✅ Modal is already installed")
     except ImportError:
         print("📦 Installing Modal...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "modal"])
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", "modal"])
         print("✅ Modal installed successfully")
+
 
 def check_modal_auth():
     """Check if Modal is authenticated"""
     try:
-        result = subprocess.run(["modal", "profile", "current"], 
-                              capture_output=True, text=True)
+        result = subprocess.run(["modal", "profile", "current"],
+                                capture_output=True, text=True)
         if result.returncode == 0:
             print(f"✅ Authenticated as: {result.stdout.strip()}")
             return True
@@ -41,12 +44,13 @@ def check_modal_auth():
         print(f"❌ Error checking Modal auth: {e}")
         return False
 
+
 def deploy_from_github():
     """Deploy mlTrainer directly from GitHub"""
     print("\n🚀 Deploying mlTrainer from GitHub to Modal...")
     print("📦 Repository: https://github.com/hgw734/mlTrainer3")
     print("⏳ This will take 3-5 minutes on first deploy...\n")
-    
+
     # Create the deployment script content
     deployment_script = '''
 import modal
@@ -92,16 +96,16 @@ def run():
 def main():
     print("Deploying mlTrainer...")
 '''
-    
+
     # Write temporary deployment file
     with open("temp_deploy.py", "w") as f:
         f.write(deployment_script)
-    
+
     try:
         # Run the deployment
-        result = subprocess.run([sys.executable, "temp_deploy.py"], 
-                              capture_output=True, text=True)
-        
+        result = subprocess.run([sys.executable, "temp_deploy.py"],
+                                capture_output=True, text=True)
+
         if result.returncode == 0:
             print("\n✅ Deployment successful!")
             print("\n🌐 Your mlTrainer3 is now live at:")
@@ -115,27 +119,29 @@ def main():
             print("      - ANTHROPIC_API_KEY")
         else:
             print(f"\n❌ Deployment failed: {result.stderr}")
-            
+
     finally:
         # Clean up
         if os.path.exists("temp_deploy.py"):
             os.remove("temp_deploy.py")
 
+
 def main():
     """Main deployment process"""
     print("🎯 mlTrainer Modal Deployment Tool")
     print("=" * 50)
-    
+
     # Step 1: Install Modal
     install_modal()
-    
+
     # Step 2: Check authentication
     if not check_modal_auth():
         print("❌ Modal authentication failed. Please try again.")
         return
-    
+
     # Step 3: Deploy from GitHub
     deploy_from_github()
+
 
 if __name__ == "__main__":
     main()

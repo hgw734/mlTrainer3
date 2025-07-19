@@ -33,7 +33,6 @@ class EconomicData:
     last_updated: datetime
     source: str = "fred"
 
-
     class FREDConnector:
         """FRED API connector"""
 
@@ -46,7 +45,10 @@ class EconomicData:
 
                 logger.info("FRED connector initialized")
 
-                def _make_request(self, endpoint: str, params: Optional[Dict] = None) -> Optional[Dict]:
+                def _make_request(
+                        self,
+                        endpoint: str,
+                        params: Optional[Dict] = None) -> Optional[Dict]:
                     """Make API request to FRED"""
                     url = f"{self.base_url}/{endpoint}"
 
@@ -57,93 +59,118 @@ class EconomicData:
                         params["file_type"] = "json"
 
                         try:
-                            response = requests.get(url, params=params, timeout=30)
+                            response = requests.get(
+                                url, params=params, timeout=30)
                             response.raise_for_status()
                             return response.json()
                             except Exception as e:
                                 logger.error(f"FRED API request failed: {e}")
                                 return None
 
-                                def get_series_info(self, series_id: str) -> Optional[Dict]:
+                                def get_series_info(
+                                        self, series_id: str) -> Optional[Dict]:
                                     """Get information about a series"""
-                                    data = self._make_request("series", params={"series_id": series_id})
+                                    data = self._make_request(
+                                        "series", params={"series_id": series_id})
                                     if data and "seriess" in data and data["seriess"]:
                                         return data["seriess"][0]
                                         return None
 
                                         def get_series_data(
-                                        self, series_id: str, start_date: Optional[str] = None, end_date: Optional[str] = None, limit: int = 10000
-                                        ) -> Optional[EconomicData]:
+                                                self,
+                                                series_id: str,
+                                                start_date: Optional[str] = None,
+                                                end_date: Optional[str] = None,
+                                                limit: int = 10000) -> Optional[EconomicData]:
                                             """Get time series data"""
                                             try:
                                                 # Get series info first
-                                                info = self.get_series_info(series_id)
+                                                info = self.get_series_info(
+                                                    series_id)
                                                 if not info:
-                                                    logger.error(f"Series {series_id} not found")
+                                                    logger.error(
+                                                        f"Series {series_id} not found")
                                                     return None
 
-                                                    # Default date range (5 years)
+                                                    # Default date range (5
+                                                    # years)
                                                     if not end_date:
                                                         end_date = datetime.now().strftime("%Y-%m-%d")
                                                         if not start_date:
-                                                            start_date = (datetime.now() - timedelta(days=1825)).strftime("%Y-%m-%d")
+                                                            start_date = (
+                                                                datetime.now() -
+                                                                timedelta(
+                                                                    days=1825)).strftime("%Y-%m-%d")
 
                                                             # Get observations
                                                             params = {
-                                                            "series_id": series_id,
-                                                            "observation_start": start_date,
-                                                            "observation_end": end_date,
-                                                            "limit": limit,
+                                                                "series_id": series_id,
+                                                                "observation_start": start_date,
+                                                                "observation_end": end_date,
+                                                                "limit": limit,
                                                             }
 
-                                                            data = self._make_request("series/observations", params=params)
+                                                            data = self._make_request(
+                                                                "series/observations", params=params)
 
                                                             if not data or "observations" not in data:
                                                                 return None
 
-                                                                # Convert to DataFrame
+                                                                # Convert to
+                                                                # DataFrame
                                                                 observations = data["observations"]
                                                                 if not observations:
                                                                     return None
 
-                                                                    df = pd.DataFrame(observations)
-                                                                    df["date"] = pd.to_datetime(df["date"])
-                                                                    df["value"] = pd.to_numeric(df["value"], errors="coerce")
-                                                                    df = df[["date", "value"]].dropna()
-                                                                    df = df.set_index("date")
+                                                                    df = pd.DataFrame(
+                                                                        observations)
+                                                                    df["date"] = pd.to_datetime(
+                                                                        df["date"])
+                                                                    df["value"] = pd.to_numeric(
+                                                                        df["value"], errors="coerce")
+                                                                    df = df[[
+                                                                        "date", "value"]].dropna()
+                                                                    df = df.set_index(
+                                                                        "date")
 
                                                                     return EconomicData(
-                                                                    series_id=series_id,
-                                                                    name=info["title"],
-                                                                    data=df,
-                                                                    units=info["units"],
-                                                                    frequency=info["frequency"],
-                                                                    last_updated=datetime.strptime(info["last_updated"], "%Y-%m-%d %H:%M:%S%z"),
+                                                                        series_id=series_id,
+                                                                        name=info["title"],
+                                                                        data=df,
+                                                                        units=info["units"],
+                                                                        frequency=info["frequency"],
+                                                                        last_updated=datetime.strptime(
+                                                                            info["last_updated"],
+                                                                            "%Y-%m-%d %H:%M:%S%z"),
                                                                     )
 
                                                                     except Exception as e:
-                                                                        logger.error(f"Error getting data for {series_id}: {e}")
+                                                                        logger.error(
+                                                                            f"Error getting data for {series_id}: {e}")
                                                                         return None
 
-                                                                        def get_popular_series(self) -> Dict[str, str]:
+                                                                        def get_popular_series(
+                                                                                self) -> Dict[str, str]:
                                                                             """Get popular economic series"""
                                                                             return {
-                                                                            "GDP": "GDP",
-                                                                            "UNRATE": "Unemployment Rate",
-                                                                            "CPIAUCSL": "Consumer Price Index",
-                                                                            "DFF": "Federal Funds Rate",
-                                                                            "DGS10": "10-Year Treasury Rate",
-                                                                            "DEXUSEU": "USD/EUR Exchange Rate",
-                                                                            "HOUST": "Housing Starts",
-                                                                            "INDPRO": "Industrial Production Index",
-                                                                            "PAYEMS": "Nonfarm Payrolls",
-                                                                            "UMCSENT": "Consumer Sentiment",
+                                                                                "GDP": "GDP",
+                                                                                "UNRATE": "Unemployment Rate",
+                                                                                "CPIAUCSL": "Consumer Price Index",
+                                                                                "DFF": "Federal Funds Rate",
+                                                                                "DGS10": "10-Year Treasury Rate",
+                                                                                "DEXUSEU": "USD/EUR Exchange Rate",
+                                                                                "HOUST": "Housing Starts",
+                                                                                "INDPRO": "Industrial Production Index",
+                                                                                "PAYEMS": "Nonfarm Payrolls",
+                                                                                "UMCSENT": "Consumer Sentiment",
                                                                             }
 
-                                                                            def search_series(self, query: str, limit: int = 10) -> List[Dict]:
+                                                                            def search_series(
+                                                                                    self, query: str, limit: int = 10) -> List[Dict]:
                                                                                 """Search for series by text"""
                                                                                 try:
-                                                                                    data = self._make_request("series/search", params={"search_text": query, "limit": limit})
+                                                                                    data = self._make_request(
+                                                                                        "series/search", params={"search_text": query, "limit": limit})
 
                                                                                     if not data or "seriess" not in data:
                                                                                         return []
@@ -151,26 +178,27 @@ class EconomicData:
                                                                                         results = []
                                                                                         for series in data["seriess"]:
                                                                                             results.append(
-                                                                                            {
-                                                                                            "id": series["id"],
-                                                                                            "title": series["title"],
-                                                                                            "units": series["units"],
-                                                                                            "frequency": series["frequency"],
-                                                                                            "observation_start": series["observation_start"],
-                                                                                            "observation_end": series["observation_end"],
-                                                                                            }
+                                                                                                {
+                                                                                                    "id": series["id"],
+                                                                                                    "title": series["title"],
+                                                                                                    "units": series["units"],
+                                                                                                    "frequency": series["frequency"],
+                                                                                                    "observation_start": series["observation_start"],
+                                                                                                    "observation_end": series["observation_end"],
+                                                                                                }
                                                                                             )
 
                                                                                             return results
 
                                                                                             except Exception as e:
-                                                                                                logger.error(f"Error searching series: {e}")
+                                                                                                logger.error(
+                                                                                                    f"Error searching series: {e}")
                                                                                                 return []
 
-
-                                                                                                # Global connector instance
+                                                                                                # Global
+                                                                                                # connector
+                                                                                                # instance
                                                                                                 _fred_connector = None
-
 
                                                                                                 def get_fred_connector() -> FREDConnector:
                                                                                                     """Get global FRED connector instance"""

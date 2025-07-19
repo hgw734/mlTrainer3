@@ -77,7 +77,8 @@ class MetaKnowledge:
     """Meta-learning knowledge base"""
     model_performance_history: Dict[str, List[ModelPerformanceRecord]]
     optimal_model_mappings: Dict[str, str]  # context -> best model
-    ensemble_strategies: Dict[str, Dict[str, float]]  # context -> model weights
+    # context -> model weights
+    ensemble_strategies: Dict[str, Dict[str, float]]
     hyperparameter_memory: Dict[str, Dict[str, Any]]
     learning_patterns: Dict[str, Any]
     correction_strategies: Dict[str, Callable]
@@ -140,8 +141,14 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
         try:
             # For now, create a basic model catalog
             system_models = {
-                "all_models": ["linear_regression", "random_forest", "xgboost", "neural_network"],
-                "institutional_models": ["linear_regression", "random_forest"],
+                "all_models": [
+                    "linear_regression",
+                    "random_forest",
+                    "xgboost",
+                    "neural_network"],
+                "institutional_models": [
+                    "linear_regression",
+                    "random_forest"],
                 "model_configs": {},
                 "instantiated_models": {},
                 "model_capabilities": {},
@@ -161,13 +168,16 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
                     }
 
                     # Determine model capabilities
-                    capabilities = self._analyze_model_capabilities(system_models["model_configs"][model_name])
+                    capabilities = self._analyze_model_capabilities(
+                        system_models["model_configs"][model_name])
                     system_models["model_capabilities"][model_name] = capabilities
 
                 except Exception as e:
-                    logger.warning(f"Could not load config for {model_name}: {e}")
+                    logger.warning(
+                        f"Could not load config for {model_name}: {e}")
 
-            logger.info(f"✅ Loaded {len(system_models['all_models'])} mathematical models")
+            logger.info(
+                f"✅ Loaded {len(system_models['all_models'])} mathematical models")
             return system_models
 
         except Exception as e:
@@ -272,12 +282,17 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
         logger.info(f"Meta Learning Threshold: {self.meta_learning_threshold}")
         logger.info(f"Correction Sensitivity: {self.correction_sensitivity}")
 
-    def learn_from_prediction(self, model_name: str, prediction: float, actual: float, context: LearningContext):
+    def learn_from_prediction(
+            self,
+            model_name: str,
+            prediction: float,
+            actual: float,
+            context: LearningContext):
         """Learn from a single prediction"""
         try:
             # Calculate prediction accuracy
             accuracy = self._calculate_prediction_accuracy(prediction, actual)
-            
+
             # Update performance record
             performance_record = ModelPerformanceRecord(
                 model_name=model_name,
@@ -293,14 +308,16 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
             # Store performance record
             if model_name not in self.meta_knowledge.model_performance_history:
                 self.meta_knowledge.model_performance_history[model_name] = []
-            self.meta_knowledge.model_performance_history[model_name].append(performance_record)
+            self.meta_knowledge.model_performance_history[model_name].append(
+                performance_record)
 
             # Update learning memory
             self._update_learning_memory(model_name, accuracy, context)
 
             # Check for performance degradation
             if self._detect_performance_degradation(model_name):
-                self._apply_correction("performance_degradation", model_name, context)
+                self._apply_correction(
+                    "performance_degradation", model_name, context)
 
             # Update meta-knowledge
             self._update_meta_knowledge(model_name, context)
@@ -308,12 +325,16 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
             self.learning_iterations += 1
             self.total_predictions += 1
 
-            logger.info(f"Learned from prediction: {model_name} accuracy={accuracy:.4f}")
+            logger.info(
+                f"Learned from prediction: {model_name} accuracy={accuracy:.4f}")
 
         except Exception as e:
             logger.error(f"Error in learn_from_prediction: {e}")
 
-    def _calculate_prediction_accuracy(self, prediction: float, actual: float) -> float:
+    def _calculate_prediction_accuracy(
+            self,
+            prediction: float,
+            actual: float) -> float:
         """Calculate prediction accuracy"""
         if actual == 0:
             return 0.0
@@ -327,9 +348,14 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
 
     def _get_model_parameters(self, model_name: str) -> Dict[str, Any]:
         """Get current model parameters"""
-        return self.system_models["model_configs"].get(model_name, {}).get("parameters", {})
+        return self.system_models["model_configs"].get(
+            model_name, {}).get("parameters", {})
 
-    def _update_learning_memory(self, model_name: str, accuracy: float, context: LearningContext):
+    def _update_learning_memory(
+            self,
+            model_name: str,
+            accuracy: float,
+            context: LearningContext):
         """Update learning memory with new information"""
         memory_entry = {
             "timestamp": datetime.now().isoformat(),
@@ -351,11 +377,13 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
 
     def _detect_performance_degradation(self, model_name: str) -> bool:
         """Detect if model performance is degrading"""
-        history = self.meta_knowledge.model_performance_history.get(model_name, [])
+        history = self.meta_knowledge.model_performance_history.get(
+            model_name, [])
         if len(history) < 10:
             return False
 
-        recent_accuracies = [record.prediction_accuracy for record in history[-10:]]
+        recent_accuracies = [
+            record.prediction_accuracy for record in history[-10:]]
         if len(recent_accuracies) < 5:
             return False
 
@@ -366,10 +394,15 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
         degradation_threshold = 0.1
         return (previous_avg - recent_avg) > degradation_threshold
 
-    def _apply_correction(self, correction_type: str, model_name: str, context: LearningContext):
+    def _apply_correction(
+            self,
+            correction_type: str,
+            model_name: str,
+            context: LearningContext):
         """Apply appropriate correction strategy"""
         try:
-            correction_strategy = self.correction_engine["correction_strategies"].get(correction_type)
+            correction_strategy = self.correction_engine["correction_strategies"].get(
+                correction_type)
             if correction_strategy:
                 correction_result = correction_strategy(model_name, context)
                 self.correction_engine["correction_history"].append({
@@ -379,14 +412,17 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
                     "result": correction_result,
                 })
                 self.successful_corrections += 1
-                logger.info(f"Applied {correction_type} correction to {model_name}")
+                logger.info(
+                    f"Applied {correction_type} correction to {model_name}")
             else:
-                logger.warning(f"No correction strategy found for {correction_type}")
+                logger.warning(
+                    f"No correction strategy found for {correction_type}")
 
         except Exception as e:
             logger.error(f"Error applying correction {correction_type}: {e}")
 
-    def _correct_performance_degradation(self, model_name: str, context: LearningContext) -> Dict[str, Any]:
+    def _correct_performance_degradation(
+            self, model_name: str, context: LearningContext) -> Dict[str, Any]:
         """Correct performance degradation"""
         return {
             "action": "retrain_model",
@@ -395,7 +431,8 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
             "confidence": 0.8,
         }
 
-    def _correct_distribution_drift(self, model_name: str, context: LearningContext) -> Dict[str, Any]:
+    def _correct_distribution_drift(
+            self, model_name: str, context: LearningContext) -> Dict[str, Any]:
         """Correct distribution drift"""
         return {
             "action": "adapt_model",
@@ -404,7 +441,8 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
             "confidence": 0.7,
         }
 
-    def _correct_prediction_bias(self, model_name: str, context: LearningContext) -> Dict[str, Any]:
+    def _correct_prediction_bias(
+            self, model_name: str, context: LearningContext) -> Dict[str, Any]:
         """Correct prediction bias"""
         return {
             "action": "adjust_bias",
@@ -413,7 +451,8 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
             "confidence": 0.6,
         }
 
-    def _correct_ensemble_imbalance(self, model_name: str, context: LearningContext) -> Dict[str, Any]:
+    def _correct_ensemble_imbalance(
+            self, model_name: str, context: LearningContext) -> Dict[str, Any]:
         """Correct ensemble imbalance"""
         return {
             "action": "rebalance_ensemble",
@@ -422,7 +461,8 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
             "confidence": 0.9,
         }
 
-    def _correct_hyperparameters(self, model_name: str, context: LearningContext) -> Dict[str, Any]:
+    def _correct_hyperparameters(
+            self, model_name: str, context: LearningContext) -> Dict[str, Any]:
         """Correct suboptimal hyperparameters"""
         return {
             "action": "optimize_hyperparameters",
@@ -431,7 +471,8 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
             "confidence": 0.8,
         }
 
-    def _correct_model_selection(self, model_name: str, context: LearningContext) -> Dict[str, Any]:
+    def _correct_model_selection(
+            self, model_name: str, context: LearningContext) -> Dict[str, Any]:
         """Correct model selection error"""
         return {
             "action": "switch_model",
@@ -440,55 +481,68 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
             "confidence": 0.7,
         }
 
-    def _update_meta_knowledge(self, model_name: str, context: LearningContext):
+    def _update_meta_knowledge(
+            self,
+            model_name: str,
+            context: LearningContext):
         """Update meta-knowledge with new information"""
         # Update optimal model mappings
         context_key = f"{context.market_regime}_{context.volatility_level}"
-        current_best = self.meta_knowledge.optimal_model_mappings.get(context_key)
-        
-        if not current_best or self._is_better_model(model_name, current_best, context):
+        current_best = self.meta_knowledge.optimal_model_mappings.get(
+            context_key)
+
+        if not current_best or self._is_better_model(
+                model_name, current_best, context):
             self.meta_knowledge.optimal_model_mappings[context_key] = model_name
 
         # Update ensemble strategies
         if context_key not in self.meta_knowledge.ensemble_strategies:
             self.meta_knowledge.ensemble_strategies[context_key] = {}
-        
-        # Simple weight update
-        current_weight = self.meta_knowledge.ensemble_strategies[context_key].get(model_name, 0.0)
-        new_weight = current_weight + self.learning_rate
-        self.meta_knowledge.ensemble_strategies[context_key][model_name] = min(new_weight, 1.0)
 
-    def _is_better_model(self, model1: str, model2: str, context: LearningContext) -> bool:
+        # Simple weight update
+        current_weight = self.meta_knowledge.ensemble_strategies[context_key].get(
+            model_name, 0.0)
+        new_weight = current_weight + self.learning_rate
+        self.meta_knowledge.ensemble_strategies[context_key][model_name] = min(
+            new_weight, 1.0)
+
+    def _is_better_model(self, model1: str, model2: str,
+                         context: LearningContext) -> bool:
         """Determine if model1 is better than model2 in given context"""
-        history1 = self.meta_knowledge.model_performance_history.get(model1, [])
-        history2 = self.meta_knowledge.model_performance_history.get(model2, [])
-        
+        history1 = self.meta_knowledge.model_performance_history.get(
+            model1, [])
+        history2 = self.meta_knowledge.model_performance_history.get(
+            model2, [])
+
         if not history1 or not history2:
             return False
 
-        recent_accuracy1 = np.mean([record.prediction_accuracy for record in history1[-5:]])
-        recent_accuracy2 = np.mean([record.prediction_accuracy for record in history2[-5:]])
+        recent_accuracy1 = np.mean(
+            [record.prediction_accuracy for record in history1[-5:]])
+        recent_accuracy2 = np.mean(
+            [record.prediction_accuracy for record in history2[-5:]])
 
         return recent_accuracy1 > recent_accuracy2
 
     def get_best_model_for_context(self, context: LearningContext) -> str:
         """Get the best model for the given context"""
         context_key = f"{context.market_regime}_{context.volatility_level}"
-        
+
         # Check if we have a known optimal model for this context
         if context_key in self.meta_knowledge.optimal_model_mappings:
             return self.meta_knowledge.optimal_model_mappings[context_key]
-        
+
         # Fallback to default model
         return "linear_regression"
 
-    def get_ensemble_for_context(self, context: LearningContext) -> Dict[str, float]:
+    def get_ensemble_for_context(
+            self, context: LearningContext) -> Dict[str, float]:
         """Get ensemble weights for the given context"""
         context_key = f"{context.market_regime}_{context.volatility_level}"
-        
+
         if context_key in self.meta_knowledge.ensemble_strategies:
             return self.meta_knowledge.ensemble_strategies[context_key]
-        
+
         # Default ensemble
         return {"linear_regression": 0.5, "random_forest": 0.5}
 
@@ -509,7 +563,7 @@ class SelfLearningEngine(SelfLearningEngineHelpers):
 
             state_file = Path("logs/learning_state.json")
             state_file.parent.mkdir(exist_ok=True)
-            
+
             with open(state_file, "w") as f:
                 json.dump(state, f, indent=2, default=str)
 

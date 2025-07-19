@@ -15,15 +15,15 @@ from datetime import datetime
 class MockUnifiedExecutor:
     def __init__(self):
         self.registered_actions = {
-        f"train_{model}": {"function": lambda: None, "description": f"Train {model}"}
-        for model in ["random_forest_10", "gradient_boosting_50", "neural_network_100"]
+            f"train_{model}": {"function": lambda: None, "description": f"Train {model}"}
+            for model in ["random_forest_10", "gradient_boosting_50", "neural_network_100"]
         }
         self.registered_actions.update(
-        {
-        "momentum_screening": {"function": lambda: None},
-        "regime_detection": {"function": lambda: None},
-        "portfolio_optimization": {"function": lambda: None},
-        }
+            {
+                "momentum_screening": {"function": lambda: None},
+                "regime_detection": {"function": lambda: None},
+                "portfolio_optimization": {"function": lambda: None},
+            }
         )
         self.execution_history = []
 
@@ -35,20 +35,21 @@ class MockUnifiedExecutor:
                     actions.append("momentum_screening")
 
                     return {
-                    "executable": len(actions) > 0,
-                    "actions": actions,
-                    "trial_suggestions": ["Comprehensive market analysis"],
-                    "models_mentioned": ["random_forest", "gradient_boosting"],
+                        "executable": len(actions) > 0,
+                        "actions": actions,
+                        "trial_suggestions": ["Comprehensive market analysis"],
+                        "models_mentioned": [
+                            "random_forest",
+                            "gradient_boosting"],
                     }
 
                     def get_execution_summary(self):
                         return {
-                        "registered_actions": len(self.registered_actions),
-                        "total_executions": len(self.execution_history),
-                        "successful": 0,
-                        "failed": 0,
+                            "registered_actions": len(self.registered_actions),
+                            "total_executions": len(self.execution_history),
+                            "successful": 0,
+                            "failed": 0,
                         }
-
 
                         def demonstrate_architecture():
                             """Demonstrate the unified system architecture"""
@@ -81,7 +82,7 @@ class MockUnifiedExecutor:
                             # Demonstrate component interaction
                             print("\n🔄 Component Interaction Flow:")
                             print(
-                            """
+                                """
                             1. User Input → Unified Chat UI
                             ↓
                             2. mlTrainer Claude API → Natural Language Response
@@ -114,103 +115,113 @@ class MockUnifiedExecutor:
                                 3. Calculate optimal portfolio weights
                                 """
 
-                                # Parse response
-                                parsed = executor.parse_mltrainer_response(mltrainer_response)
-                                print(f"\nParsed Response:")
-                                print((json.dumps(parsed, indent=2)))
+                            # Parse response
+                            parsed = executor.parse_mltrainer_response(
+                                mltrainer_response)
+                            print(f"\nParsed Response:")
+                            print((json.dumps(parsed, indent=2)))
 
-                                # Show how trial would be created
-                                trial_structure = {
+                            # Show how trial would be created
+                            trial_structure = {
                                 "trial_id": f"trial_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
                                 "status": "pending_approval",
-                                "total_steps": len(parsed["actions"]),
+                                "total_steps": len(
+                                    parsed["actions"]),
                                 "actions": parsed["actions"],
                                 "compliance_checks": [],
-                                "goal_context": {"goal": "Maximize returns with ML models"},
-                                }
+                                "goal_context": {
+                                    "goal": "Maximize returns with ML models"},
+                            }
 
-                                print(f"\nTrial Structure:")
-                                print((json.dumps(trial_structure, indent=2)))
+                            print(f"\nTrial Structure:")
+                            print((json.dumps(trial_structure, indent=2)))
 
-                                # Show memory structure
-                                memory_entry = {
+                            # Show memory structure
+                            memory_entry = {
                                 "id": "abc123def456",
                                 "timestamp": datetime.now().isoformat(),
                                 "role": "assistant",
                                 "content": mltrainer_response,
-                                "topics": ["random forest", "momentum", "portfolio", "action:train"],
+                                "topics": [
+                                        "random forest",
+                                        "momentum",
+                                        "portfolio",
+                                        "action:train"],
                                 "importance": 0.75,
-                                "metadata": {"executable": True, "models_mentioned": parsed["models_mentioned"]},
-                                }
+                                "metadata": {
+                                    "executable": True,
+                                    "models_mentioned": parsed["models_mentioned"]},
+                            }
 
-                                print(f"\nMemory Entry Structure:")
-                                print((json.dumps(memory_entry, indent=2)))
+                            print(f"\nMemory Entry Structure:")
+                            print((json.dumps(memory_entry, indent=2)))
 
-                                return True
+                            return True
 
+                            def show_unified_features():
+                                """Show the unified features from both systems"""
+                                print(("\n" + "=" * 60))
+                                print("✨ Unified System Features")
+                                print(("=" * 60))
 
-                                def show_unified_features():
-                                    """Show the unified features from both systems"""
-                                    print(("\n" + "=" * 60))
-                                    print("✨ Unified System Features")
-                                    print(("=" * 60))
-
-                                    features = {
+                                features = {
                                     "From Advanced Version": [
-                                    "Mobile-optimized Streamlit UI",
-                                    "Background trial execution",
-                                    "Autonomous mlTrainer ↔ ML Agent loops",
-                                    "Real-time progress tracking",
-                                    "Enhanced memory with importance scoring",
-                                    "Topic extraction and indexing",
-                                    "Dynamic action registration",
+                                        "Mobile-optimized Streamlit UI",
+                                        "Background trial execution",
+                                        "Autonomous mlTrainer ↔ ML Agent loops",
+                                        "Real-time progress tracking",
+                                        "Enhanced memory with importance scoring",
+                                        "Topic extraction and indexing",
+                                        "Dynamic action registration",
                                     ],
                                     "From Current Version": [
-                                    "140+ ML models integrated",
-                                    "Financial models (Black-Scholes, etc.)",
-                                    "Compliance gateway with rules",
-                                    "Goal system integration",
-                                    "Polygon/FRED API connections",
-                                    "Anti-drift protection",
-                                    "Full audit trail",
+                                        "140+ ML models integrated",
+                                        "Financial models (Black-Scholes, etc.)",
+                                        "Compliance gateway with rules",
+                                        "Goal system integration",
+                                        "Polygon/FRED API connections",
+                                        "Anti-drift protection",
+                                        "Full audit trail",
                                     ],
                                     "New in Unified": [
-                                    "Unified executor bridging both systems",
-                                    "Enhanced background manager with compliance",
-                                    "Unified memory with compliance tracking",
-                                    "Integrated chat UI with goal display",
-                                    "Model execution through compliance",
-                                    "Topic-based memory search",
-                                    "Comprehensive test suite",
+                                        "Unified executor bridging both systems",
+                                        "Enhanced background manager with compliance",
+                                        "Unified memory with compliance tracking",
+                                        "Integrated chat UI with goal display",
+                                        "Model execution through compliance",
+                                        "Topic-based memory search",
+                                        "Comprehensive test suite",
                                     ],
-                                    }
+                                }
 
-                                    for category, items in list(features.items()):
-                                        print(f"\n{category}:")
-                                        for item in items:
-                                            print(f"  ✓ {item}")
+                                for category, items in list(
+                                        features.items()):
+                                    print(f"\n{category}:")
+                                    for item in items:
+                                        print(f"  ✓ {item}")
 
-                                            return True
+                                        return True
 
+                                        def show_api_comparison():
+                                            """Show how APIs are unified"""
+                                            print(("\n" + "=" * 60))
+                                            print("🔌 API Unification")
+                                            print(("=" * 60))
 
-                                            def show_api_comparison():
-                                                """Show how APIs are unified"""
-                                                print(("\n" + "=" * 60))
-                                                print("🔌 API Unification")
-                                                print(("=" * 60))
-
-                                                print("\n📝 Original Advanced Version API:")
-                                                print(
+                                            print(
+                                                "\n📝 Original Advanced Version API:")
+                                            print(
                                                 """
                                                 # Dynamic executor
                                                 executor = MLTrainerExecutor()
                                                 executor.register_action("custom_action", func)
                                                 result = executor.execute_trial_step(trial_id, action, params)
                                                 """
-                                                )
+                                            )
 
-                                                print("\n📝 Original Current Version API:")
-                                                print(
+                                            print(
+                                                "\n📝 Original Current Version API:")
+                                            print(
                                                 """
                                                 # Model integration
                                                 integration = MLAgentModelIntegration()
@@ -220,10 +231,10 @@ class MockUnifiedExecutor:
                                                 'parameters': {...}
                                                 })
                                                 """
-                                                )
+                                            )
 
-                                                print("\n✨ Unified API:")
-                                                print(
+                                            print("\n✨ Unified API:")
+                                            print(
                                                 """
                                                 # Unified executor combines both
                                                 executor = get_unified_executor()
@@ -239,33 +250,38 @@ class MockUnifiedExecutor:
                                                 manager = get_enhanced_background_manager()
                                                 trial_id = manager.start_trial(response, auto_approve=False)
                                                 """
-                                                )
+                                            )
 
-                                                return True
+                                            return True
 
-
-                                                def main():
-                                                    """Run architecture demonstration"""
-                                                    tests = [
+                                            def main():
+                                                """Run architecture demonstration"""
+                                                tests = [
                                                     ("Architecture Overview", demonstrate_architecture),
                                                     ("Unified Features", show_unified_features),
                                                     ("API Comparison", show_api_comparison),
-                                                    ]
+                                                ]
 
-                                                    print("\n🤖 Unified mlTrainer System Architecture Demo\n")
+                                                print(
+                                                    "\n🤖 Unified mlTrainer System Architecture Demo\n")
 
-                                                    for test_name, test_func in tests:
-                                                        try:
-                                                            success = test_func()
-                                                            print(f"\n✅ {test_name} demonstrated successfully")
-                                                            except Exception as e:
-                                                                print(f"\n❌ Error in {test_name}: {e}")
+                                                for test_name, test_func in tests:
+                                                    try:
+                                                        success = test_func()
+                                                        print(
+                                                            f"\n✅ {test_name} demonstrated successfully")
+                                                        except Exception as e:
+                                                            print(
+                                                                f"\n❌ Error in {test_name}: {e}")
 
-                                                                # Final summary
-                                                                print(("\n" + "=" * 60))
-                                                                print("🎯 Deployment Instructions")
-                                                                print(("=" * 60))
-                                                                print(
+                                                            # Final summary
+                                                            print(
+                                                                ("\n" + "=" * 60))
+                                                            print(
+                                                                "🎯 Deployment Instructions")
+                                                            print(
+                                                                ("=" * 60))
+                                                            print(
                                                                 """
                                                                 1. Install dependencies:
                                                                     pip install -r requirements_unified.txt
@@ -287,10 +303,10 @@ class MockUnifiedExecutor:
                                                                                     - Create necessary directories
                                                                                     - Start background trial manager
                                                                                     """
-                                                                                    )
+                                                            )
 
-                                                                                    print("\n✨ Unified mlTrainer System Architecture Complete! ✨\n")
+                                                            print(
+                                                                "\n✨ Unified mlTrainer System Architecture Complete! ✨\n")
 
-
-                                                                                    if __name__ == "__main__":
-                                                                                        main()
+                                                            if __name__ == "__main__":
+                                                                main()

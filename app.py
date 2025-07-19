@@ -36,7 +36,11 @@ except ImportError:
     st.stop()
 
 # Page configuration
-st.set_page_config(page_title="mlTrainer Platform", page_icon="🚀", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(
+    page_title="mlTrainer Platform",
+    page_icon="🚀",
+    layout="wide",
+    initial_sidebar_state="expanded")
 
 # Custom CSS for better styling
 st.markdown(
@@ -134,7 +138,10 @@ def show_dashboard():
         st.metric("🔧 Python Environments", "2", delta="Dual Setup")
 
     with col4:
-        st.metric("🔒 Compliance Status", "Compliant", delta="Institutional Grade")
+        st.metric(
+            "🔒 Compliance Status",
+            "Compliant",
+            delta="Institutional Grade")
 
     # System status overview
     st.subheader("📈 System Status Overview")
@@ -173,7 +180,12 @@ def show_dashboard():
                 "Count": [len(models), len(institutional_models)],
             }
 
-            fig = px.bar(model_data, x="Category", y="Count", title="Model Distribution", color="Category")
+            fig = px.bar(
+                model_data,
+                x="Category",
+                y="Count",
+                title="Model Distribution",
+                color="Category")
             st.plotly_chart(fig, use_container_width=True)
 
         except Exception as e:
@@ -189,10 +201,12 @@ def show_mathematical_models():
         institutional_models = config.get_institutional_models()
 
         st.success(f"✅ **{len(all_models)} Mathematical Models Available**")
-        st.info(f"🏛️ **{len(institutional_models)} Institutional Grade Models**")
+        st.info(
+            f"🏛️ **{len(institutional_models)} Institutional Grade Models**")
 
         # Display models in tabs
-        tab1, tab2, tab3 = st.tabs(["📋 All Models", "🏛️ Institutional", "🔍 Model Details"])
+        tab1, tab2, tab3 = st.tabs(
+            ["📋 All Models", "🏛️ Institutional", "🔍 Model Details"])
 
         with tab1:
             st.subheader("Complete Models Catalog")
@@ -221,18 +235,23 @@ def show_mathematical_models():
         with tab3:
             st.subheader("Model Configuration Details")
             if all_models:
-                selected_model = st.selectbox("Select a model to view details:", all_models)
+                selected_model = st.selectbox(
+                    "Select a model to view details:", all_models)
 
                 # Validate model configuration
-                is_valid = config.validate_mathematical_model_config(selected_model)
+                is_valid = config.validate_mathematical_model_config(
+                    selected_model)
 
                 if is_valid:
-                    st.success(f"✅ Model '{selected_model}' configuration is valid")
+                    st.success(
+                        f"✅ Model '{selected_model}' configuration is valid")
                 else:
-                    st.error(f"❌ Model '{selected_model}' configuration has issues")
+                    st.error(
+                        f"❌ Model '{selected_model}' configuration has issues")
 
                 # Show model info (would come from actual model config)
-                st.info(f"📋 **Model:** {selected_model}\n📊 **Type:** Mathematical Model\n🔧 **Status:** Configured")
+                st.info(
+                    f"📋 **Model:** {selected_model}\n📊 **Type:** Mathematical Model\n🔧 **Status:** Configured")
 
     except Exception as e:
         st.error(f"Error loading mathematical models: {str(e)}")
@@ -245,7 +264,8 @@ def show_drift_protection():
         st.success("✅ Drift Protection System Active")
 
         # Tabs for different monitoring aspects
-        tab1, tab2, tab3, tab4 = st.tabs(["📊 Dashboard", "🚨 Alerts", "📈 Performance", "⚙️ Settings"])
+        tab1, tab2, tab3, tab4 = st.tabs(
+            ["📊 Dashboard", "🚨 Alerts", "📈 Performance", "⚙️ Settings"])
 
         with tab1:
             st.subheader("Monitoring Dashboard")
@@ -261,16 +281,39 @@ def show_drift_protection():
                 st.metric("🔍 Models Monitored", "5", delta="2")
 
             # Sample drift monitoring chart
-            dates = pd.date_range(start=datetime.now() - timedelta(days=30), end=datetime.now(), freq="D")
-            # Use deterministic values for UI display only - not used in actual models
-            drift_scores = [0.1 + 0.05 * np.sin(i/5) for i in range(len(dates))]
+            dates = pd.date_range(
+                start=datetime.now() -
+                timedelta(
+                    days=30),
+                end=datetime.now(),
+                freq="D")
+            # Use deterministic values for UI display only - not used in actual
+            # models
+            drift_scores = [
+                0.1 +
+                0.05 *
+                np.sin(
+                    i /
+                    5) for i in range(
+                    len(dates))]
 
             fig = go.Figure()
             fig.add_trace(
-                go.Scatter(x=dates, y=drift_scores, mode="lines+markers", name="Drift Score", line=dict(color="blue"))
-            )
-            fig.add_hline(y=0.2, line_dash="dash", line_color="red", annotation_text="Alert Threshold")
-            fig.update_layout(title="Model Drift Monitoring (30 Days)", yaxis_title="Drift Score")
+                go.Scatter(
+                    x=dates,
+                    y=drift_scores,
+                    mode="lines+markers",
+                    name="Drift Score",
+                    line=dict(
+                        color="blue")))
+            fig.add_hline(
+                y=0.2,
+                line_dash="dash",
+                line_color="red",
+                annotation_text="Alert Threshold")
+            fig.update_layout(
+                title="Model Drift Monitoring (30 Days)",
+                yaxis_title="Drift Score")
 
             st.plotly_chart(fig, use_container_width=True)
 
@@ -282,10 +325,22 @@ def show_drift_protection():
 
             # Show alert history table
             alert_data = {
-                "Timestamp": [datetime.now() - timedelta(hours=24), datetime.now() - timedelta(hours=48)],
-                "Type": ["Data Drift", "Performance Drift"],
-                "Severity": ["LOW", "MEDIUM"],
-                "Status": ["Resolved", "Resolved"],
+                "Timestamp": [
+                    datetime.now() -
+                    timedelta(
+                        hours=24),
+                    datetime.now() -
+                    timedelta(
+                        hours=48)],
+                "Type": [
+                    "Data Drift",
+                    "Performance Drift"],
+                "Severity": [
+                    "LOW",
+                    "MEDIUM"],
+                "Status": [
+                    "Resolved",
+                    "Resolved"],
             }
             alert_df = pd.DataFrame(alert_data)
             st.dataframe(alert_df, use_container_width=True)
@@ -295,19 +350,29 @@ def show_drift_protection():
 
             # Performance metrics
             metrics_data = {
-                "Metric": ["MSE", "RMSE", "MAE", "R²"],
-                "Current": [0.025, 0.158, 0.121, 0.892],
-                "Baseline": [0.030, 0.173, 0.135, 0.875],
-                "Status": ["✅ Improved", "✅ Improved", "✅ Improved", "✅ Improved"],
-            }
+                "Metric": [
+                    "MSE", "RMSE", "MAE", "R²"], "Current": [
+                    0.025, 0.158, 0.121, 0.892], "Baseline": [
+                    0.030, 0.173, 0.135, 0.875], "Status": [
+                    "✅ Improved", "✅ Improved", "✅ Improved", "✅ Improved"], }
             metrics_df = pd.DataFrame(metrics_data)
             st.dataframe(metrics_df, use_container_width=True)
 
         with tab4:
             st.subheader("Drift Protection Settings")
 
-            st.slider("Data Drift Threshold", min_value=0.1, max_value=1.0, value=0.2, step=0.05)
-            st.slider("Performance Drift Threshold", min_value=0.05, max_value=0.5, value=0.15, step=0.01)
+            st.slider(
+                "Data Drift Threshold",
+                min_value=0.1,
+                max_value=1.0,
+                value=0.2,
+                step=0.05)
+            st.slider(
+                "Performance Drift Threshold",
+                min_value=0.05,
+                max_value=0.5,
+                value=0.15,
+                step=0.01)
 
             st.checkbox("Enable Real-time Monitoring", value=True)
             st.checkbox("Send Email Alerts", value=False)
@@ -322,7 +387,8 @@ def show_configuration():
 
     try:
         # Configuration overview tabs
-        tab1, tab2, tab3, tab4 = st.tabs(["🔗 API Config", "🤖 AI Config", "📊 Models", "🔒 Compliance"])
+        tab1, tab2, tab3, tab4 = st.tabs(
+            ["🔗 API Config", "🤖 AI Config", "📊 Models", "🔒 Compliance"])
 
         with tab1:
             st.subheader("API Configuration")
@@ -367,8 +433,11 @@ def show_configuration():
             with col2:
                 # Sample model validation
                 sample_model = models[0] if models else "xgboost"
-                is_valid = config.validate_mathematical_model_config(sample_model)
-                st.metric("Configuration Valid", "✅ Yes" if is_valid else "❌ No")
+                is_valid = config.validate_mathematical_model_config(
+                    sample_model)
+                st.metric(
+                    "Configuration Valid",
+                    "✅ Yes" if is_valid else "❌ No")
 
         with tab4:
             st.subheader("Compliance Gateway")
@@ -440,8 +509,20 @@ def show_environment_status():
             "Main Application Interface",
             "Python 3.11 Legacy Environment",
         ],
-        "Status": ["✅ Complete", "✅ Complete", "✅ Complete", "✅ Complete", "✅ Complete", "⚠️ 90% Complete"],
-        "Progress": [100, 100, 100, 100, 100, 90],
+        "Status": [
+            "✅ Complete",
+            "✅ Complete",
+            "✅ Complete",
+            "✅ Complete",
+            "✅ Complete",
+            "⚠️ 90% Complete"],
+        "Progress": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            90],
     }
 
     progress_df = pd.DataFrame(progress_data)
@@ -460,13 +541,17 @@ def show_environment_status():
 
     # Overall status
     overall_progress = progress_df["Progress"].mean()
-    st.metric("Overall Project Completion", f"{overall_progress:.1f}%", delta="Ready for Production")
+    st.metric(
+        "Overall Project Completion",
+        f"{overall_progress:.1f}%",
+        delta="Ready for Production")
 
 
 def show_model_training():
     st.header("📈 Model Training Interface")
 
-    st.info("🚀 **Ready for Model Training** - All infrastructure components are in place")
+    st.info(
+        "🚀 **Ready for Model Training** - All infrastructure components are in place")
 
     # Training configuration
     col1, col2 = st.columns(2)
@@ -477,18 +562,25 @@ def show_model_training():
         # Model selection
         try:
             models = config.get_all_models()
-            selected_model = st.selectbox("Select Model", models if models else ["xgboost", "lightgbm"])
-        except:
-            selected_model = st.selectbox("Select Model", ["xgboost", "lightgbm", "random_forest"])
+            selected_model = st.selectbox(
+                "Select Model", models if models else [
+                    "xgboost", "lightgbm"])
+        except BaseException:
+            selected_model = st.selectbox(
+                "Select Model", [
+                    "xgboost", "lightgbm", "random_forest"])
 
         # Data source selection
         try:
             api_sources = config.get_all_approved_sources()
             data_source = st.selectbox(
-                "Data Source", [s.value for s in api_sources] if api_sources else ["polygon", "fred"]
-            )
-        except:
-            data_source = st.selectbox("Data Source", ["polygon", "fred", "alpha_vantage"])
+                "Data Source", [
+                    s.value for s in api_sources] if api_sources else [
+                    "polygon", "fred"])
+        except BaseException:
+            data_source = st.selectbox(
+                "Data Source", [
+                    "polygon", "fred", "alpha_vantage"])
 
         # Training parameters
         train_size = st.slider("Training Size (%)", 60, 90, 80)
@@ -497,7 +589,8 @@ def show_model_training():
         with col2:
             st.subheader("Drift Protection Settings")
 
-            enable_monitoring = st.checkbox("Enable Drift Monitoring", value=True)
+            enable_monitoring = st.checkbox(
+                "Enable Drift Monitoring", value=True)
             drift_threshold = st.slider("Drift Alert Threshold", 0.1, 1.0, 0.2)
 
             st.subheader("Environment Selection")
@@ -510,13 +603,15 @@ def show_model_training():
             # Training action
             if st.button("🚀 Start Training", type="primary"):
                 if environment == "Python 3.11 (Legacy)":
-                    st.warning("⚠️ Legacy environment setup required. Please complete Python 3.11 installation first.")
+                    st.warning(
+                        "⚠️ Legacy environment setup required. Please complete Python 3.11 installation first.")
                 else:
                     with st.spinner("Preparing training environment# Production code implemented"):
                         st.success(f"✅ Training environment ready!")
                         st.info(f"📊 Selected Model: {selected_model}")
                         st.info(f"🔗 Data Source: {data_source}")
-                        st.info(f"🛡️ Drift Monitoring: {'Enabled' if enable_monitoring else 'Disabled'}")
+                        st.info(
+                            f"🛡️ Drift Monitoring: {'Enabled' if enable_monitoring else 'Disabled'}")
 
                         # Would integrate with actual training pipeline here
                         st.balloons()
@@ -525,7 +620,8 @@ def show_model_training():
 def show_self_learning_engine():
     """Display the self-learning engine interface"""
     st.header("🧠 Self-Learning & Self-Correcting ML Engine")
-    st.write("Advanced meta-learning system with adaptive model selection and continuous improvement")
+    st.write(
+        "Advanced meta-learning system with adaptive model selection and continuous improvement")
 
     # Initialize engine in session state
     if "self_learning_engine" not in st.session_state:
@@ -536,7 +632,8 @@ def show_self_learning_engine():
             st.success("🧠 Self-Learning Engine initialized successfully!")
         except Exception as e:
             st.error(f"Failed to initialize self-learning engine: {e}")
-            st.info("The self-learning engine requires additional dependencies. Please install them first.")
+            st.info(
+                "The self-learning engine requires additional dependencies. Please install them first.")
             return
 
     engine = st.session_state.self_learning_engine
@@ -568,16 +665,27 @@ def show_self_learning_engine():
                 st.metric("Total Predictions", status["total_predictions"])
 
                 with col2:
-                    st.metric("Successful Corrections", status["successful_corrections"])
-                    st.metric("Correction Success Rate", f"{status['correction_success_rate']:.2%}")
+                    st.metric(
+                        "Successful Corrections",
+                        status["successful_corrections"])
+                    st.metric(
+                        "Correction Success Rate",
+                        f"{status['correction_success_rate']:.2%}")
 
                     with col3:
-                        st.metric("Models in System", status["models_in_system"])
-                        st.metric("Meta-Knowledge Entries", status["meta_knowledge_entries"])
+                        st.metric(
+                            "Models in System",
+                            status["models_in_system"])
+                        st.metric(
+                            "Meta-Knowledge Entries",
+                            status["meta_knowledge_entries"])
 
                         with col4:
-                            st.metric("Ensemble Strategies", status["ensemble_strategies_learned"])
-                            st.metric("Engine Health", status["learning_engine_health"])
+                            st.metric(
+                                "Ensemble Strategies",
+                                status["ensemble_strategies_learned"])
+                            st.metric(
+                                "Engine Health", status["learning_engine_health"])
 
                             # Engine capabilities overview
                             st.subheader("🎯 Engine Capabilities")
@@ -608,12 +716,18 @@ def show_self_learning_engine():
 
         col1, col2 = st.columns(2)
         with col1:
-            market_regime = st.selectbox("Market Regime", ["normal", "volatile", "trending", "sideways"])
-            volatility_level = st.selectbox("Volatility Level", ["low", "medium", "high"])
+            market_regime = st.selectbox(
+                "Market Regime", [
+                    "normal", "volatile", "trending", "sideways"])
+            volatility_level = st.selectbox(
+                "Volatility Level", [
+                    "low", "medium", "high"])
 
             with col2:
-                data_quality_score = st.slider("Data Quality Score", 0.0, 1.0, 0.8)
-                prediction_horizon = st.slider("Prediction Horizon (minutes)", 5, 1440, 60)
+                data_quality_score = st.slider(
+                    "Data Quality Score", 0.0, 1.0, 0.8)
+                prediction_horizon = st.slider(
+                    "Prediction Horizon (minutes)", 5, 1440, 60)
 
                 if st.button("🎯 Get Adaptive Model Recommendation"):
                     try:
@@ -625,18 +739,22 @@ def show_self_learning_engine():
                             "prediction_horizon": prediction_horizon,
                         }
 
-                        # Simulate model selection (would use actual engine method)
+                        # Simulate model selection (would use actual engine
+                        # method)
                         st.success("🎯 Model selection completed!")
 
                         # Simulate results based on context
                         if volatility_level == "high":
-                            recommended_models = ["random_forest", "gradient_boosting", "xgboost"]
+                            recommended_models = [
+                                "random_forest", "gradient_boosting", "xgboost"]
                             strategy = "ensemble"
                         elif data_quality_score > 0.8:
-                            recommended_models = ["linear_regression", "ridge_regression"]
+                            recommended_models = [
+                                "linear_regression", "ridge_regression"]
                             strategy = "single_model"
                         else:
-                            recommended_models = ["random_forest", "isolation_forest"]
+                            recommended_models = [
+                                "random_forest", "isolation_forest"]
                             strategy = "robust_ensemble"
 
                         if strategy == "ensemble":
@@ -648,10 +766,12 @@ def show_self_learning_engine():
                             st.metric("Selection Confidence", "0.892")
                         else:
                             st.subheader("🎯 Single Model Recommended")
-                            st.write(f"**Best Model:** {recommended_models[0]}")
+                            st.write(
+                                f"**Best Model:** {recommended_models[0]}")
                             st.metric("Model Confidence", "0.847")
 
-                        st.info(f"Context: {market_regime} market, {volatility_level} volatility")
+                        st.info(
+                            f"Context: {market_regime} market, {volatility_level} volatility")
 
                     except Exception as e:
                         st.error(f"Model selection failed: {e}")
@@ -667,41 +787,47 @@ def show_self_learning_engine():
                 st.success("🔄 Self-correction analysis completed!")
 
                 # Simulate corrections
-                corrections = [
-                    {
-                        "action": "hyperparameter_adjustment",
-                        "reason": "performance_degradation_detected",
-                        "expected_improvement": 0.08,
-                        "parameters": {"learning_rate": 0.05, "n_estimators": 200},
-                    },
-                    {
-                        "action": "ensemble_rebalancing",
-                        "reason": "model_weight_imbalance",
-                        "expected_improvement": 0.03,
-                        "weights": {"random_forest": 0.45, "xgboost": 0.35, "lightgbm": 0.20},
-                    },
-                ]
+                corrections = [{"action": "hyperparameter_adjustment",
+                                "reason": "performance_degradation_detected",
+                                "expected_improvement": 0.08,
+                                "parameters": {"learning_rate": 0.05,
+                                               "n_estimators": 200},
+                                },
+                               {"action": "ensemble_rebalancing",
+                                "reason": "model_weight_imbalance",
+                                "expected_improvement": 0.03,
+                                "weights": {"random_forest": 0.45,
+                                            "xgboost": 0.35,
+                                            "lightgbm": 0.20},
+                                },
+                               ]
 
                 st.subheader("Corrections Applied")
 
                 for i, correction in enumerate(corrections, 1):
                     with st.expander(f"Correction {i}: {correction['action'].replace('_', ' ').title()}"):
                         st.write(f"**Action:** {correction['action']}")
-                        st.write(f"**Reason:** {correction['reason'].replace('_', ' ').title()}")
-                        st.write(f"**Expected Improvement:** {correction['expected_improvement']:.2%}")
+                        st.write(
+                            f"**Reason:** {correction['reason'].replace('_', ' ').title()}")
+                        st.write(
+                            f"**Expected Improvement:** {correction['expected_improvement']:.2%}")
 
                         if "parameters" in correction:
                             st.write("**Parameter Changes:**")
-                            for param, value in list(correction["parameters"].items()):
+                            for param, value in list(
+                                    correction["parameters"].items()):
                                 st.write(f"- {param}: {value}")
 
                         if "weights" in correction:
                             st.write("**New Weights:**")
-                            for model, weight in list(correction["weights"].items()):
+                            for model, weight in list(
+                                    correction["weights"].items()):
                                 st.write(f"- {model}: {weight}")
 
                 st.metric("Total Corrections", len(corrections))
-                st.metric("Expected Total Improvement", f"{sum(c['expected_improvement'] for c in corrections):.2%}")
+                st.metric(
+                    "Expected Total Improvement",
+                    f"{sum(c['expected_improvement'] for c in corrections):.2%}")
 
             except Exception as e:
                 st.error(f"Self-correction failed: {e}")
@@ -712,8 +838,14 @@ def show_self_learning_engine():
         st.write("Evolve hyperparameters using meta-learning")
 
         # Model selection for hyperparameter tuning
-        available_models = ["ridge_regression", "random_forest", "gradient_boosting", "xgboost"]
-        selected_model = st.selectbox("Select Model for Hyperparameter Evolution", available_models)
+        available_models = [
+            "ridge_regression",
+            "random_forest",
+            "gradient_boosting",
+            "xgboost"]
+        selected_model = st.selectbox(
+            "Select Model for Hyperparameter Evolution",
+            available_models)
 
         if st.button("🎛️ Evolve Hyperparameters"):
             try:
@@ -730,7 +862,11 @@ def show_self_learning_engine():
                     best_score = 0.876
                     improvement = 0.034
                 elif selected_model == "gradient_boosting":
-                    optimized_params = {"n_estimators": 180, "learning_rate": 0.08, "max_depth": 8, "subsample": 0.9}
+                    optimized_params = {
+                        "n_estimators": 180,
+                        "learning_rate": 0.08,
+                        "max_depth": 8,
+                        "subsample": 0.9}
                     best_score = 0.891
                     improvement = 0.027
                 else:
@@ -765,7 +901,10 @@ def show_self_learning_engine():
 
                 # Simulate ensemble creation
                 ensemble_models = ["random_forest", "xgboost", "lightgbm"]
-                weights = {"random_forest": 0.40, "xgboost": 0.35, "lightgbm": 0.25}
+                weights = {
+                    "random_forest": 0.40,
+                    "xgboost": 0.35,
+                    "lightgbm": 0.25}
 
                 # Display ensemble details
                 st.subheader("Ensemble Composition")
@@ -787,16 +926,17 @@ def show_self_learning_engine():
                 # Individual model performances
                 st.subheader("Individual Model Performances")
                 performances = {
-                    "random_forest": {"r2_score": 0.847, "rmse": 0.124, "mae": 0.091},
-                    "xgboost": {"r2_score": 0.863, "rmse": 0.117, "mae": 0.088},
-                    "lightgbm": {"r2_score": 0.851, "rmse": 0.122, "mae": 0.093},
-                }
+                    "random_forest": {
+                        "r2_score": 0.847, "rmse": 0.124, "mae": 0.091}, "xgboost": {
+                        "r2_score": 0.863, "rmse": 0.117, "mae": 0.088}, "lightgbm": {
+                        "r2_score": 0.851, "rmse": 0.122, "mae": 0.093}, }
 
                 for model_name, performance in list(performances.items()):
                     with st.expander(f"Performance: {model_name}"):
                         col1, col2, col3 = st.columns(3)
                         with col1:
-                            st.metric("R² Score", f"{performance['r2_score']:.4f}")
+                            st.metric(
+                                "R² Score", f"{performance['r2_score']:.4f}")
                         with col2:
                             st.metric("RMSE", f"{performance['rmse']:.4f}")
                         with col3:
@@ -809,7 +949,8 @@ def show_self_learning_engine():
 def show_ai_ml_coaching():
     """Display the AI-ML coaching interface"""
     st.header("🤝 AI-ML Coaching Interface")
-    st.write("Revolutionary system enabling direct AI control, teaching, and direction of the ML engine")
+    st.write(
+        "Revolutionary system enabling direct AI control, teaching, and direction of the ML engine")
 
     # Initialize coaching interface in session state
     if "ai_ml_coaching_interface" not in st.session_state:
@@ -822,7 +963,8 @@ def show_ai_ml_coaching():
                 st.session_state.self_learning_engine = initialize_self_learning_engine()
 
             ml_engine = st.session_state.self_learning_engine
-            st.session_state.ai_ml_coaching_interface = initialize_ai_ml_coaching_interface(ml_engine)
+            st.session_state.ai_ml_coaching_interface = initialize_ai_ml_coaching_interface(
+                ml_engine)
             st.success("🤝 AI-ML Coaching Interface initialized successfully!")
 
         except Exception as e:
@@ -854,20 +996,33 @@ def show_ai_ml_coaching():
             col1, col2, col3, col4 = st.columns(4)
 
             with col1:
-                st.metric("Communication Status", "ACTIVE" if status["communication_active"] else "INACTIVE")
-                st.metric("Registered AI Coaches", status["registered_ai_coaches"])
+                st.metric(
+                    "Communication Status",
+                    "ACTIVE" if status["communication_active"] else "INACTIVE")
+                st.metric(
+                    "Registered AI Coaches",
+                    status["registered_ai_coaches"])
 
                 with col2:
-                    st.metric("Active Coaching Sessions", status["active_coaching_sessions"])
+                    st.metric(
+                        "Active Coaching Sessions",
+                        status["active_coaching_sessions"])
                     st.metric("Commands in Queue", status["commands_in_queue"])
 
                     with col3:
-                        st.metric("Feedback in Queue", status["feedback_in_queue"])
-                        st.metric("Total Sessions", status["total_coaching_sessions"])
+                        st.metric(
+                            "Feedback in Queue",
+                            status["feedback_in_queue"])
+                        st.metric(
+                            "Total Sessions",
+                            status["total_coaching_sessions"])
 
                         with col4:
-                            st.metric("Real-Time Coaching", "ACTIVE" if status["real_time_coaching_active"] else "INACTIVE")
-                            st.metric("Interface Health", status["interface_health"])
+                            st.metric(
+                                "Real-Time Coaching",
+                                "ACTIVE" if status["real_time_coaching_active"] else "INACTIVE")
+                            st.metric(
+                                "Interface Health", status["interface_health"])
 
                             # Interface capabilities overview
                             st.subheader("🎯 Breakthrough Capabilities")
@@ -898,7 +1053,9 @@ def show_ai_ml_coaching():
 
         col1, col2 = st.columns(2)
         with col1:
-            coach_id = st.text_input("AI Coach ID", real_implementation="e.g., gpt4_research_coach")
+            coach_id = st.text_input(
+                "AI Coach ID",
+                real_implementation="e.g., gpt4_research_coach")
             trust_level = st.slider("Trust Level (1-10)", 1, 10, 5)
 
             with col2:
@@ -935,12 +1092,15 @@ def show_ai_ml_coaching():
                             "registration_source": "streamlit_interface",
                         }
 
-                        success = interface.register_ai_coach(coach_id, coach_config)
+                        success = interface.register_ai_coach(
+                            coach_id, coach_config)
 
                         if success:
-                            st.success(f"✅ AI Coach '{coach_id}' registered successfully!")
+                            st.success(
+                                f"✅ AI Coach '{coach_id}' registered successfully!")
                         else:
-                            st.error(f"❌ Failed to register AI Coach '{coach_id}'")
+                            st.error(
+                                f"❌ Failed to register AI Coach '{coach_id}'")
 
                     except Exception as e:
                         st.error(f"Registration failed: {e}")
@@ -948,20 +1108,28 @@ def show_ai_ml_coaching():
         # Display registered coaches
         st.subheader("Registered AI Coaches")
 
-        if hasattr(interface, "registered_ai_coaches") and interface.registered_ai_coaches:
+        if hasattr(
+                interface,
+                "registered_ai_coaches") and interface.registered_ai_coaches:
             for coach_id in list(interface.registered_ai_coaches.keys()):
                 coach_perf = interface.get_ai_coach_performance(coach_id)
                 if coach_perf:
                     with st.expander(f"Coach: {coach_id}"):
                         col1, col2 = st.columns(2)
                         with col1:
-                            st.write(f"**Trust Level:** {coach_perf['trust_level']}/10")
-                            st.write(f"**Commands Executed:** {coach_perf['commands_executed']}")
-                            st.write(f"**Success Rate:** {coach_perf['success_rate']:.2%}")
+                            st.write(
+                                f"**Trust Level:** {coach_perf['trust_level']}/10")
+                            st.write(
+                                f"**Commands Executed:** {coach_perf['commands_executed']}")
+                            st.write(
+                                f"**Success Rate:** {coach_perf['success_rate']:.2%}")
                         with col2:
-                            st.write(f"**Specializations:** {', '.join(coach_perf['specializations'])}")
-                            st.write(f"**Coaching Sessions:** {coach_perf['coaching_sessions']}")
-                            st.write(f"**Avg Improvement:** {coach_perf['average_improvement']:.3f}")
+                            st.write(
+                                f"**Specializations:** {', '.join(coach_perf['specializations'])}")
+                            st.write(
+                                f"**Coaching Sessions:** {coach_perf['coaching_sessions']}")
+                            st.write(
+                                f"**Avg Improvement:** {coach_perf['average_improvement']:.3f}")
         else:
             st.info("No AI coaches registered yet.")
 
@@ -974,9 +1142,13 @@ def show_ai_ml_coaching():
         st.subheader("🎓 AI Teach New Methodology")
 
         if interface.registered_ai_coaches:
-            selected_coach = st.selectbox("Select AI Coach", list(interface.registered_ai_coaches.keys()))
+            selected_coach = st.selectbox(
+                "Select AI Coach", list(
+                    interface.registered_ai_coaches.keys()))
 
-            methodology_name = st.text_input("Methodology Name", real_implementation="e.g., enhanced_gradient_boosting")
+            methodology_name = st.text_input(
+                "Methodology Name",
+                real_implementation="e.g., enhanced_gradient_boosting")
             methodology_description = st.text_area(
                 "Description",
                 real_implementation="Describe the methodology and its benefits# Production code implemented",
@@ -986,7 +1158,8 @@ def show_ai_ml_coaching():
             st.write("**Methodology Parameters:**")
             param_cols = st.columns(3)
             with param_cols[0]:
-                learning_rate = st.number_input("Learning Rate", 0.001, 1.0, 0.1)
+                learning_rate = st.number_input(
+                    "Learning Rate", 0.001, 1.0, 0.1)
             with param_cols[1]:
                 n_estimators = st.number_input("N Estimators", 10, 1000, 100)
             with param_cols[2]:
@@ -994,8 +1167,8 @@ def show_ai_ml_coaching():
 
             # Applicability
             market_applicability = st.multiselect(
-                "Market Applicability", ["high_volatility", "low_volatility", "bull_market", "bear_market", "crisis"]
-            )
+                "Market Applicability", [
+                    "high_volatility", "low_volatility", "bull_market", "bear_market", "crisis"])
 
             if st.button("🎓 AI Teach Methodology"):
                 try:
@@ -1007,14 +1180,18 @@ def show_ai_ml_coaching():
                             "n_estimators": n_estimators,
                             "max_depth": max_depth,
                         },
-                        "applicability": {"market_regimes": market_applicability},
-                        "performance": {"expected_accuracy": 0.85},
+                        "applicability": {
+                            "market_regimes": market_applicability},
+                        "performance": {
+                            "expected_accuracy": 0.85},
                     }
 
-                    result = interface.ai_teach_methodology(selected_coach, methodology_data)
+                    result = interface.ai_teach_methodology(
+                        selected_coach, methodology_data)
 
                     if result.get("status") == "SUCCESS":
-                        st.success("🎓 AI successfully taught new methodology to ML engine!")
+                        st.success(
+                            "🎓 AI successfully taught new methodology to ML engine!")
                         st.json(result)
                     else:
                         st.error(f"Teaching failed: {result}")
@@ -1030,7 +1207,10 @@ def show_ai_ml_coaching():
         st.write("AI provides real-time coaching and guidance to the ML engine")
 
         if interface.registered_ai_coaches:
-            coach_id = st.selectbox("Select Coach for Real-Time Coaching", list(interface.registered_ai_coaches.keys()))
+            coach_id = st.selectbox(
+                "Select Coach for Real-Time Coaching",
+                list(
+                    interface.registered_ai_coaches.keys()))
 
             coaching_type = st.selectbox(
                 "Coaching Type",
@@ -1046,11 +1226,14 @@ def show_ai_ml_coaching():
             # Coaching parameters
             col1, col2 = st.columns(2)
             with col1:
-                target_accuracy = st.number_input("Target Accuracy", 0.5, 1.0, 0.85)
-                adjustment_magnitude = st.slider("Adjustment Magnitude", 0.01, 0.5, 0.1)
+                target_accuracy = st.number_input(
+                    "Target Accuracy", 0.5, 1.0, 0.85)
+                adjustment_magnitude = st.slider(
+                    "Adjustment Magnitude", 0.01, 0.5, 0.1)
 
                 with col2:
-                    coaching_duration = st.number_input("Duration (seconds)", 60, 3600, 300)
+                    coaching_duration = st.number_input(
+                        "Duration (seconds)", 60, 3600, 300)
 
                     recommendations = st.text_area(
                         "AI Recommendations",
@@ -1062,18 +1245,22 @@ def show_ai_ml_coaching():
                             coaching_data = {
                                 "type": coaching_type,
                                 "recommendations": recommendations,
-                                "target_metrics": {"accuracy": target_accuracy},
+                                "target_metrics": {
+                                    "accuracy": target_accuracy},
                                 "magnitude": adjustment_magnitude,
                                 "duration": coaching_duration,
                             }
 
-                            result = interface.ai_real_time_coach(coach_id, coaching_data)
+                            result = interface.ai_real_time_coach(
+                                coach_id, coaching_data)
 
                             if result.get("status") == "SUCCESS":
-                                st.success("⚡ Real-time AI coaching activated!")
+                                st.success(
+                                    "⚡ Real-time AI coaching activated!")
                                 st.json(result)
                             else:
-                                st.error(f"Coaching activation failed: {result}")
+                                st.error(
+                                    f"Coaching activation failed: {result}")
 
                         except Exception as e:
                             st.error(f"Real-time coaching failed: {e}")
@@ -1092,7 +1279,9 @@ def show_ai_ml_coaching():
             st.subheader("🎯 Start New Coaching Session")
 
             if interface.registered_ai_coaches:
-                session_coach = st.selectbox("Coach for Session", list(interface.registered_ai_coaches.keys()))
+                session_coach = st.selectbox(
+                    "Coach for Session", list(
+                        interface.registered_ai_coaches.keys()))
                 focus_area = st.selectbox(
                     "Focus Area",
                     [
@@ -1107,7 +1296,8 @@ def show_ai_ml_coaching():
 
                 if st.button("🎯 Start Coaching Session"):
                     try:
-                        session_id = interface.start_coaching_session(session_coach, focus_area)
+                        session_id = interface.start_coaching_session(
+                            session_coach, focus_area)
                         st.success(f"🎯 Coaching session started: {session_id}")
 
                         # Store in session state for later reference
@@ -1123,18 +1313,22 @@ def show_ai_ml_coaching():
                     st.subheader("🏁 End Active Session")
 
                     if hasattr(st.session_state, "active_coaching_session"):
-                        st.write(f"**Active Session:** {st.session_state.active_coaching_session}")
+                        st.write(
+                            f"**Active Session:** {st.session_state.active_coaching_session}")
 
                         if st.button("🏁 End Coaching Session"):
                             try:
-                                result = interface.end_coaching_session(st.session_state.active_coaching_session)
+                                result = interface.end_coaching_session(
+                                    st.session_state.active_coaching_session)
 
                                 if "error" not in result:
-                                    st.success("🏁 Coaching session ended successfully!")
+                                    st.success(
+                                        "🏁 Coaching session ended successfully!")
                                     st.json(result)
                                     del st.session_state.active_coaching_session
                                 else:
-                                    st.error(f"Error ending session: {result['error']}")
+                                    st.error(
+                                        f"Error ending session: {result['error']}")
 
                             except Exception as e:
                                 st.error(f"Failed to end session: {e}")
@@ -1144,8 +1338,11 @@ def show_ai_ml_coaching():
     # Coaching session history
     st.subheader("📈 Coaching Session History")
 
-    if hasattr(interface, "coaching_performance_history") and interface.coaching_performance_history:
-        for session in interface.coaching_performance_history[-5:]:  # Show last 5 sessions
+    if hasattr(
+            interface,
+            "coaching_performance_history") and interface.coaching_performance_history:
+        # Show last 5 sessions
+        for session in interface.coaching_performance_history[-5:]:
             with st.expander(f"Session {session.session_id} - {session.focus_area}"):
                 col1, col2 = st.columns(2)
                 with col1:
@@ -1154,7 +1351,8 @@ def show_ai_ml_coaching():
                         f"**Duration:** {(session.performance_after.get('timestamp', datetime.now()) - session.start_time).total_seconds():.0f}s"
                     )
                 with col2:
-                    st.write(f"**Commands Issued:** {len(session.commands_issued)}")
+                    st.write(
+                        f"**Commands Issued:** {len(session.commands_issued)}")
                     st.write(f"**Success Metrics:** {session.success_metrics}")
     else:
         st.info("No coaching session history available.")

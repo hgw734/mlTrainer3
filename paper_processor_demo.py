@@ -17,16 +17,16 @@ import logging
 "import re
 "import hashlib
 "
-"# Create directories
+"  # Create directories
 "PAPERS_DIR = Path("papers")
 "PAPERS_DIR.mkdir(exist_ok=True)
 "PROCESSED_DIR = PAPERS_DIR / "processed"
 "PROCESSED_DIR.mkdir(exist_ok=True)
 "
 "logger.info("📚 PAPER PROCESSOR DEMO - Showing Real Functionality")
-"logger.info("=" * 50)
+"logger.info(" =" * 50)
 "
-"# production the extraction logic with sample paper text
+"  # production the extraction logic with sample paper text
 "sample_paper = """
 "TITLE: Deep Learning for Financial Time Series Prediction
 "
@@ -35,31 +35,28 @@ import logging
 "
 "1. Introduction
 "Financial markets present unique challenges for machine learning due to their
-"non-stationary nature and high noise-to-signal ratio.
+"non - stationary nature and high noise - to - signal ratio.
 "
 "2. Methodology
-"We employed a dual-model approach:
-    "- LSTM with attention mechanisms for short-term predictions (7-12 days)
-    "- Transformer architecture for medium-term predictions (50-70 days)
+"We employed a dual - model approach:     " - LSTM with attention mechanisms for short - term predictions(7 - 12 days)
+    "- Transformer architecture for medium - term predictions(50 - 70 days)
     "
     "The models were trained on 5 years of historical data with a train ratio of 0.8.
     "Learning rate was set to 0.001 with adaptive scheduling.
     "
     "3. Results
-    "Our experiments yielded the following results:
-        "- LSTM accuracy: 73.5% for 7-12 day predictions
-        "- Transformer accuracy: 68.2% for 50-70 day predictions
+    "Our experiments yielded the following results:         " - LSTM accuracy: 73.5 % for 7 - 12 day predictions
+        "- Transformer accuracy: 68.2 % for 50 - 70 day predictions
         "- Combined model Sharpe ratio: 1.92
-        "- Annual returns: 18.7% with maximum drawdown of 12.3%
-        "
+        "- Annual returns: 18.7 % with maximum drawdown of 12.3 %         "
         "4. Conclusion
-        "The hybrid LSTM-Transformer approach significantly outperformed baseline models.
-        "The LSTM excelled at capturing short-term momentum patterns while the Transformer
-        "better understood longer-term market regimes. Future work should explore
+        "The hybrid LSTM - Transformer approach significantly outperformed baseline models.
+        "The LSTM excelled at capturing short - term momentum patterns while the Transformer
+        "better understood longer - term market regimes. Future work should explore
         "reinforcement learning approaches.
         "
         "References
-        "[1] Hochreiter, S., & Schmidhuber, J. (1997). Long short-term memory.
+        "[1] Hochreiter, S., & Schmidhuber, J. (1997). Long short - term memory.
         """"
         "
         "# Extract patterns

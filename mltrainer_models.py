@@ -6,6 +6,36 @@ Comprehensive ML model management system integrated with mlTrainer infrastructur
 Provides 140+ mathematical models with compliance verification and mlAgent integration.
 """
 
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.model_selection import TimeSeriesSplit, train_test_split
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.kernel_ridge import KernelRidge
+from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
+from sklearn.gaussian_process.kernels import RBF, Matern, RationalQuadratic
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.svm import SVR, NuSVR, LinearSVR
+from sklearn.neural_network import MLPRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import (
+    RandomForestRegressor, ExtraTreesRegressor, GradientBoostingRegressor,
+    AdaBoostRegressor, BaggingRegressor, VotingRegressor, StackingRegressor,
+    HistGradientBoostingRegressor, IsolationForest
+)
+from sklearn.linear_model import (
+    LinearRegression,
+    Ridge,
+    Lasso,
+    ElasticNet,
+    BayesianRidge,
+    HuberRegressor,
+    TheilSenRegressor,
+    RANSACRegressor,
+    OrthogonalMatchingPursuit,
+    LassoLars,
+    PassiveAggressiveRegressor,
+    SGDRegressor)
 import numpy as np
 import pandas as pd
 from typing import Dict, List, Any, Optional, Union, Tuple
@@ -25,28 +55,6 @@ warnings.filterwarnings("ignore")
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # ML Model Imports
-from sklearn.linear_model import (
-    LinearRegression, Ridge, Lasso, ElasticNet, BayesianRidge,
-    HuberRegressor, TheilSenRegressor, RANSACRegressor,
-    OrthogonalMatchingPursuit, LassoLars, PassiveAggressiveRegressor, SGDRegressor
-)
-from sklearn.ensemble import (
-    RandomForestRegressor, ExtraTreesRegressor, GradientBoostingRegressor,
-    AdaBoostRegressor, BaggingRegressor, VotingRegressor, StackingRegressor,
-    HistGradientBoostingRegressor, IsolationForest
-)
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.neural_network import MLPRegressor
-from sklearn.svm import SVR, NuSVR, LinearSVR
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import RBF, Matern, RationalQuadratic
-from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
-from sklearn.kernel_ridge import KernelRidge
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import PolynomialFeatures, StandardScaler
-from sklearn.model_selection import TimeSeriesSplit, train_test_split
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 logger = logging.getLogger(__name__)
 
@@ -83,7 +91,7 @@ class MLTrainerModelManager:
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
-        
+
         # Model storage
         self.trained_models: Dict[str, ModelResult] = {}
         self.model_registry = self._initialize_model_registry()
@@ -96,7 +104,8 @@ class MLTrainerModelManager:
         self.polygon_connector = None
         self.fred_connector = None
 
-        self.logger.info(f"MLTrainerModelManager initialized with {len(self.model_registry)} models")
+        self.logger.info(
+            f"MLTrainerModelManager initialized with {len(self.model_registry)} models")
         self._log_model_summary()
 
     def _initialize_model_registry(self) -> Dict[str, Dict[str, Any]]:
@@ -511,7 +520,8 @@ class MLTrainerModelManager:
 
     def get_models_by_category(self, category: str) -> List[str]:
         """Get models filtered by category"""
-        return [model_id for model_id, info in list(self.model_registry.items()) if info.get("category") == category]
+        return [model_id for model_id, info in list(
+            self.model_registry.items()) if info.get("category") == category]
 
     def get_model_info(self, model_id: str) -> Dict[str, Any]:
         """Get detailed information about a model"""
@@ -529,29 +539,33 @@ class MLTrainerModelManager:
 
         return info
 
-    def prepare_data(self, symbol: str = None, data_source: str = "polygon", lookback_days: int = 365) -> Tuple[np.ndarray, np.ndarray]:
+    def prepare_data(self,
+                     symbol: str = None,
+                     data_source: str = "polygon",
+                     lookback_days: int = 365) -> Tuple[np.ndarray,
+                                                        np.ndarray]:
         """Prepare data from approved sources"""
         try:
             # Get real data from Polygon API
             from data_fetcher import DataFetcher
             fetcher = DataFetcher()
-            
+
             if symbol is None:
                 symbol = "SPY"  # Default to SPY if no symbol provided
-                
+
             # Fetch real market data
             df = fetcher.fetch_stock_data(symbol, lookback_days=lookback_days)
-            
+
             if df is None or df.empty:
                 raise ValueError(f"No data available for {symbol}")
-                
+
             # Create features from real data
             X = self._create_features(df)
-            
+
             # Create target (next day returns)
             y = df['close'].pct_change().shift(-1).fillna(0).values[:-1]
             X = X[:-1]  # Align features with target
-            
+
             return X, y
         except Exception as e:
             self.logger.error(f"Data preparation failed: {e}")
@@ -575,17 +589,22 @@ class MLTrainerModelManager:
         # Moving averages
         for period in [5, 10, 20, 50]:
             if len(df) >= period:
-                features.append(df[price_col].rolling(period).mean().fillna(method="bfill"))
+                features.append(
+                    df[price_col].rolling(period).mean().fillna(
+                        method="bfill"))
 
         # Volatility
         for period in [5, 20]:
             if len(df) >= period:
-                features.append(df[price_col].pct_change().rolling(period).std().fillna(0))
+                features.append(
+                    df[price_col].pct_change().rolling(period).std().fillna(0))
 
         # Volume if available
         if "volume" in df.columns:
             features.append(df["volume"].fillna(0))
-            features.append(df["volume"].rolling(10).mean().fillna(method="bfill"))
+            features.append(
+                df["volume"].rolling(10).mean().fillna(
+                    method="bfill"))
 
         # Stack features
         X = np.column_stack(features)
@@ -594,8 +613,14 @@ class MLTrainerModelManager:
         mask = ~np.any(np.isnan(X), axis=1)
         return X[mask]
 
-    def train_model(self, model_id: str, X: np.ndarray = None, y: np.ndarray = None, 
-                   symbol: str = None, data_source: str = "polygon", validation_split: float = 0.2) -> ModelResult:
+    def train_model(
+            self,
+            model_id: str,
+            X: np.ndarray = None,
+            y: np.ndarray = None,
+            symbol: str = None,
+            data_source: str = "polygon",
+            validation_split: float = 0.2) -> ModelResult:
         """Train a single model with compliance verification"""
         try:
             start_time = datetime.now()
@@ -609,7 +634,8 @@ class MLTrainerModelManager:
                 X, y = self.prepare_data(symbol, data_source)
 
             # Split data
-            X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=validation_split, random_state=42)
+            X_train, X_val, y_train, y_val = train_test_split(
+                X, y, test_size=validation_split, random_state=42)
 
             # Scale data
             scaler = StandardScaler()
@@ -633,7 +659,8 @@ class MLTrainerModelManager:
             else:
                 # Handle clustering or other unsupervised models
                 model.fit(X_train_scaled)
-                predictions = self._handle_unsupervised_prediction(model, X_val_scaled, y_val)
+                predictions = self._handle_unsupervised_prediction(
+                    model, X_val_scaled, y_val)
 
             # Calculate metrics
             metrics = self._calculate_metrics(y_val, predictions)
@@ -665,7 +692,8 @@ class MLTrainerModelManager:
             # Log to history
             self._log_training_history(result)
 
-            self.logger.info(f"Successfully trained {model_id} - R²: {metrics.get('r2_score', 0):.4f}")
+            self.logger.info(
+                f"Successfully trained {model_id} - R²: {metrics.get('r2_score', 0):.4f}")
 
             return result
 
@@ -673,8 +701,13 @@ class MLTrainerModelManager:
             self.logger.error(f"Error training {model_id}: {e}")
             raise
 
-    def train_multiple_models(self, model_ids: List[str], X: np.ndarray = None, y: np.ndarray = None,
-                            symbol: str = None, data_source: str = "polygon") -> Dict[str, ModelResult]:
+    def train_multiple_models(self,
+                              model_ids: List[str],
+                              X: np.ndarray = None,
+                              y: np.ndarray = None,
+                              symbol: str = None,
+                              data_source: str = "polygon") -> Dict[str,
+                                                                    ModelResult]:
         """Train multiple models in parallel"""
         results = {}
 
@@ -692,11 +725,17 @@ class MLTrainerModelManager:
 
         return results
 
-    def train_category(self, category: str, X: np.ndarray = None, y: np.ndarray = None,
-                      symbol: str = None, data_source: str = "polygon") -> Dict[str, ModelResult]:
+    def train_category(self,
+                       category: str,
+                       X: np.ndarray = None,
+                       y: np.ndarray = None,
+                       symbol: str = None,
+                       data_source: str = "polygon") -> Dict[str,
+                                                             ModelResult]:
         """Train all models in a category"""
         model_ids = self.get_models_by_category(category)
-        self.logger.info(f"Training {len(model_ids)} models in category: {category}")
+        self.logger.info(
+            f"Training {len(model_ids)} models in category: {category}")
         return self.train_multiple_models(model_ids, X, y, symbol, data_source)
 
     def predict(self, model_id: str, X: np.ndarray) -> np.ndarray:
@@ -715,7 +754,11 @@ class MLTrainerModelManager:
 
         return model.predict(X_scaled)
 
-    def get_ensemble_prediction(self, model_ids: List[str], X: np.ndarray, method: str = "weighted") -> np.ndarray:
+    def get_ensemble_prediction(
+            self,
+            model_ids: List[str],
+            X: np.ndarray,
+            method: str = "weighted") -> np.ndarray:
         """Get ensemble prediction from multiple models"""
         predictions = []
         weights = []
@@ -726,7 +769,8 @@ class MLTrainerModelManager:
                 predictions.append(pred)
 
                 # Use R² score as weight
-                r2 = self.trained_models[model_id].performance_metrics.get("r2_score", 0)
+                r2 = self.trained_models[model_id].performance_metrics.get(
+                    "r2_score", 0)
                 weights.append(max(r2, 0))
 
         if not predictions:
@@ -741,12 +785,14 @@ class MLTrainerModelManager:
         else:
             return np.mean(predictions, axis=0)
 
-    def get_best_models(self, metric: str = "r2_score", top_n: int = 5, category: str = None) -> List[Tuple[str, float]]:
+    def get_best_models(self, metric: str = "r2_score", top_n: int = 5,
+                        category: str = None) -> List[Tuple[str, float]]:
         """Get best performing models"""
         model_scores = []
 
         for model_id, result in list(self.trained_models.items()):
-            if category and self.model_registry[model_id].get("category") != category:
+            if category and self.model_registry[model_id].get(
+                    "category") != category:
                 continue
 
             score = result.performance_metrics.get(metric, -float("inf"))
@@ -758,7 +804,8 @@ class MLTrainerModelManager:
 
         return model_scores[:top_n]
 
-    def _calculate_metrics(self, y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
+    def _calculate_metrics(self, y_true: np.ndarray,
+                           y_pred: np.ndarray) -> Dict[str, float]:
         """Calculate comprehensive metrics"""
         try:
             return {
@@ -772,7 +819,10 @@ class MLTrainerModelManager:
             self.logger.error(f"Metric calculation error: {e}")
             return {"error": str(e)}
 
-    def _calculate_directional_accuracy(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+    def _calculate_directional_accuracy(
+            self,
+            y_true: np.ndarray,
+            y_pred: np.ndarray) -> float:
         """Calculate directional accuracy for financial predictions"""
         if len(y_true) < 2:
             return 0.0
@@ -794,10 +844,14 @@ class MLTrainerModelManager:
                 final_estimator = list(model.named_steps.values())[-1]
                 return self._extract_feature_importance(final_estimator)
             return None
-        except:
+        except BaseException:
             return None
 
-    def _handle_unsupervised_prediction(self, model, X: np.ndarray, y: np.ndarray) -> np.ndarray:
+    def _handle_unsupervised_prediction(
+            self,
+            model,
+            X: np.ndarray,
+            y: np.ndarray) -> np.ndarray:
         """Handle prediction for unsupervised models"""
         # For clustering, map clusters to mean target values
         labels = model.predict(X)
@@ -858,7 +912,8 @@ class MLTrainerModelManager:
             with open(save_path / "metadata.json", "w") as f:
                 json.dump(metadata, f, indent=2)
 
-            self.logger.info(f"Saved {len(self.trained_models)} models to {directory}")
+            self.logger.info(
+                f"Saved {len(self.trained_models)} models to {directory}")
 
         except Exception as e:
             self.logger.error(f"Failed to save models: {e}")
@@ -911,7 +966,8 @@ class MLTrainerModelManager:
         """Get summary by category"""
         summary = {}
 
-        categories = set(model_info.get("category", "unknown") for model_info in list(self.model_registry.values()))
+        categories = set(model_info.get("category", "unknown")
+                         for model_info in list(self.model_registry.values()))
         for category in categories:
             available = len(self.get_models_by_category(category))
             trained = sum(

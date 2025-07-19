@@ -30,7 +30,6 @@ def ask_cursor(prompt: str) -> None:
                 print(f"❌ Failed due to error: {err}")
                 sys.exit(1)
 
-
                 def interactive_mode():
                     """Run in interactive mode"""
                     print("🔒 CURSOR AI - COMPLIANCE MODE ACTIVE")
@@ -57,7 +56,6 @@ def ask_cursor(prompt: str) -> None:
                             except Exception as e:
                                 print(f"❌ Error: {e}")
 
-
                                 def main():
                                     """Main entry point"""
                                     if len(sys.argv) > 1:
@@ -68,8 +66,8 @@ def ask_cursor(prompt: str) -> None:
                                             # Interactive mode
                                             interactive_mode()
 
-
                                             if __name__ == "__main__":
-                                                # Ensure compliance mode is enforced
+                                                # Ensure compliance mode is
+                                                # enforced
                                                 os.environ["COMPLIANCE_MODE"] = "STRICT"
                                                 main()

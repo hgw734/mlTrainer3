@@ -10,7 +10,7 @@ import os
 from datetime import datetime
 
 print(
-"""
+    """
 ╔══════════════════════════════════════════════════════════╗
 ║         mlTrainer System - Working Components Test       ║
 ╚══════════════════════════════════════════════════════════╝
@@ -24,8 +24,10 @@ try:
     from config.models_config import MATHEMATICAL_MODELS
 
     print("✅ Configuration loaded successfully")
-    print(f"  - Found {len(MATHEMATICAL_MODELS)} mathematical models in config")
-    print(f"  - Polygon API Key: {POLYGON_API_KEY[:10]}...{POLYGON_API_KEY[-4:]}")
+    print(
+        f"  - Found {len(MATHEMATICAL_MODELS)} mathematical models in config")
+    print(
+        f"  - Polygon API Key: {POLYGON_API_KEY[:10]}...{POLYGON_API_KEY[-4:]}")
     print(f"  - FRED API Key: {FRED_API_KEY[:10]}...{FRED_API_KEY[-4:]}")
 except Exception as e:
     print(f"❌ Configuration error: {e}")
@@ -36,7 +38,8 @@ try:
     from goal_system import GoalSystem
 
     goal_system = GoalSystem()
-    result = goal_system.set_goal("Maximize returns using only real market data")  # Fixed method name
+    result = goal_system.set_goal(
+        "Maximize returns using only real market data")  # Fixed method name
     print(f"✅ Goal system working: Goal set successfully")
     current = goal_system.get_current_goal()
     if current:
@@ -121,7 +124,10 @@ except Exception as e:
 # Test 8: File System
 print("\n8️⃣ File System & Persistence:")
 try:
-    log_files = ["logs/chat_history.json", "logs/system_goals.json", "logs/mlagent_state.json"]
+    log_files = [
+        "logs/chat_history.json",
+        "logs/system_goals.json",
+        "logs/mlagent_state.json"]
 
     existing = []
     for f in log_files:

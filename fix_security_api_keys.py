@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+from datetime import datetime
+import shutil
+import sys
+import re
 import logging
 
 logger = logging.getLogger(__name__)
@@ -7,10 +11,6 @@ logger = logging.getLogger(__name__)
 """
 Security Fix: Remove hardcoded API keys from config/api_config.py
 """
-import re
-import sys
-import shutil
-from datetime import datetime
 
 
 def remove_hardcoded_keys(filepath="config/api_config.py"):
@@ -27,14 +27,12 @@ def remove_hardcoded_keys(filepath="config/api_config.py"):
 
         # Patterns to replace hardcoded keys
         replacements = [
-        (
-        r'POLYGON_API_KEY = os\.getenv\("POLYGON_API_KEY", "[^"]+"\)',
-        'POLYGON_API_KEY = os.getenv("POLYGON_API_KEY")\nif not POLYGON_API_KEY:\n    raise ValueError("POLYGON_API_KEY environment variable is required")',
-        ),
-        (
-        r'FRED_API_KEY = os\.getenv\("FRED_API_KEY", "[^"]+"\)',
-        'FRED_API_KEY = os.getenv("FRED_API_KEY")\nif not FRED_API_KEY:\n    raise ValueError("FRED_API_KEY environment variable is required")',
-        ),
+            (r'POLYGON_API_KEY = os\.getenv\("POLYGON_API_KEY", "[^"]+"\)',
+             'POLYGON_API_KEY = os.getenv("POLYGON_API_KEY")\nif not POLYGON_API_KEY:\n    raise ValueError("POLYGON_API_KEY environment variable is required")',
+             ),
+            (r'FRED_API_KEY = os\.getenv\("FRED_API_KEY", "[^"]+"\)',
+             'FRED_API_KEY = os.getenv("FRED_API_KEY")\nif not FRED_API_KEY:\n    raise ValueError("FRED_API_KEY environment variable is required")',
+             ),
         ]
 
         # Apply replacements
@@ -43,19 +41,22 @@ def remove_hardcoded_keys(filepath="config/api_config.py"):
             if re.search(pattern, content):
                 content = re.sub(pattern, replacement, content)
                 modified = True
-                logger.info(f"✅ Removed hardcoded key pattern: {pattern[:40]}# Production code implemented")
+                logger.info(
+                    f"✅ Removed hardcoded key pattern: {pattern[:40]}# Production code implemented")
 
                 if modified:
                     # Write updated content
                     with open(filepath, "w") as f:
                         f.write(content)
-                        logger.info(f"✅ Updated {filepath} - hardcoded keys removed")
-                        logger.info("⚠️  IMPORTANT: Rotate these API keys immediately if they were real!")
+                        logger.info(
+                            f"✅ Updated {filepath} - hardcoded keys removed")
+                        logger.info(
+                            "⚠️  IMPORTANT: Rotate these API keys immediately if they were real!")
                         else:
-                            logger.info("ℹ️  No hardcoded keys found to remove")
+                            logger.info(
+                                "ℹ️  No hardcoded keys found to remove")
 
                             return modified
-
 
                             if __name__ == "__main__":
                                 success = remove_hardcoded_keys()

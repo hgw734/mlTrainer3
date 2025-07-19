@@ -2,6 +2,17 @@
 Cursor Agent Wrapper - Intercepts all AI requests for compliance verification
 """
 
+from config.immutable_compliance_gateway import compliance_logger
+from core.immutable_runtime_enforcer import (
+    get_system_prompt,
+    build_prompt,
+    detect_drift,
+    verify_response as verify_runtime_response,
+    SystemState,
+    save_system_state,
+    load_system_state,
+)
+from core.compliance_mode import verify_prompt, verify_response, compliance_enforcer
 import json
 import os
 import sys
@@ -10,18 +21,6 @@ from datetime import datetime
 
 # Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from core.compliance_mode import verify_prompt, verify_response, compliance_enforcer
-from core.immutable_runtime_enforcer import (
-get_system_prompt,
-build_prompt,
-detect_drift,
-verify_response as verify_runtime_response,
-SystemState,
-save_system_state,
-load_system_state,
-)
-from config.immutable_compliance_gateway import compliance_logger
 
 
 class CursorAgentWrapper:
@@ -57,18 +56,19 @@ class CursorAgentWrapper:
 
                     # Then check for drift
                     if detect_drift(response):
-                        compliance_logger.error("🚨 Drift detected in AI response")
-                        raise SystemExit("AI response shows signs of drift/hallucination")
+                        compliance_logger.error(
+                            "🚨 Drift detected in AI response")
+                        raise SystemExit(
+                            "AI response shows signs of drift/hallucination")
 
                         # Runtime verification
-                        verified_response = verify_runtime_response(response, "cursor_agent")
+                        verified_response = verify_runtime_response(
+                            response, "cursor_agent")
 
                         return verified_response
 
-
                         # Global wrapper instance
                         cursor_wrapper = CursorAgentWrapper()
-
 
                         def guarded_completion(user_input: str) -> str:
                             """
@@ -77,42 +77,50 @@ class CursorAgentWrapper:
                             """
                             try:
                                 # Build compliant prompt
-                                full_prompt = cursor_wrapper.build_compliant_prompt(user_input)
+                                full_prompt = cursor_wrapper.build_compliant_prompt(
+                                    user_input)
 
-                                # Call the AI (this would be replaced with actual API call)
+                                # Call the AI (this would be replaced with
+                                # actual API call)
                                 response = call_ai_api(full_prompt)
 
                                 # Verify and clean response
-                                verified_response = cursor_wrapper.verify_and_clean_response(response)
+                                verified_response = cursor_wrapper.verify_and_clean_response(
+                                    response)
 
-                                compliance_logger.info("✅ AI interaction completed successfully")
+                                compliance_logger.info(
+                                    "✅ AI interaction completed successfully")
                                 return verified_response
 
                                 except ValueError as e:
                                     # Prompt validation failed
-                                    compliance_logger.error(f"Prompt validation failed: {e}")
+                                    compliance_logger.error(
+                                        f"Prompt validation failed: {e}")
                                     return "🚫 This cannot be completed under current compliance rules. Request denied."
 
                                     except SystemExit as e:
                                         # Response validation failed
-                                        compliance_logger.error(f"Response validation failed: {e}")
+                                        compliance_logger.error(
+                                            f"Response validation failed: {e}")
                                         return "🚫 AI response violated compliance rules. Request denied."
 
                                         except Exception as e:
                                             # Unexpected error
-                                            compliance_logger.error(f"Unexpected error in guarded completion: {e}")
+                                            compliance_logger.error(
+                                                f"Unexpected error in guarded completion: {e}")
                                             return "NA"
 
-
-                                            def call_ai_api(prompt: str) -> str:
+                                            def call_ai_api(
+                                                    prompt: str) -> str:
                                                 """
                                                 real_implementation for actual AI API call
                                                 In production, this would call Claude/GPT/etc with the compliance-wrapped prompt
                                                 """
                                                 # This is where you'd integrate with the actual AI API
-                                                # For now, we'll return a compliant response
+                                                # For now, we'll return a
+                                                # compliant response
                                                 return "I understand your request. However, I cannot provide implementation without the actual AI API integration."
 
-
                                                 # Export key functions
-                                                __all__ = ["guarded_completion", "cursor_wrapper"]
+                                                __all__ = [
+                                                    "guarded_completion", "cursor_wrapper"]
