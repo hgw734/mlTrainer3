@@ -1,0 +1,7 @@
+{
+  "flask_port": 5000,
+  "streamlit_port": 8501,
+  "main_interface": 8501,
+  "backend_api": 5000,
+  "timestamp": 1751130463.145273
+}

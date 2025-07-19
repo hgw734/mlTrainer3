@@ -1,0 +1,71 @@
+
+entrypoint = "main.py"
+modules = ["python-3.11"]
+
+[nix]
+packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "glibcLocales", "gobject-introspection", "gtk3", "libxcrypt", "libyaml", "ocl-icd", "opencl-headers", "pkg-config", "qhull", "tcl", "tk", "xsimd"]
+channel = "stable-24_05"
+
+[[ports]]
+localPort = 3000
+externalPort = 3002
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3001
+
+[[ports]]
+localPort = 8501
+externalPort = 3000
+
+[workflows]
+runButton = "mlTrainer Fixed Ports"
+
+[[workflows.workflow]]
+name = "mlTrainer Chat Interface"
+author = 39258935
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "bash start_system.sh"
+
+[[workflows.workflow]]
+name = "mlTrainer Unified System"
+author = 39258935
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "bash start_system_full.sh"
+
+[[workflows.workflow]]
+name = "Simple Python Start"
+author = 39258935
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py"
+
+[[workflows.workflow]]
+name = "mlTrainer Unified Launch"
+author = 39258935
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 unified_port_launcher.py"
+
+[[workflows.workflow]]
+name = "mlTrainer Fixed Ports"
+author = 39258935
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 fix_ports_replit.py && bash start_system.sh"

@@ -1,0 +1,58 @@
+# Core ML / AI
+scikit-learn
+xgboost
+lightgbm
+tensorflow==2.14.0
+torch
+transformers
+
+# Quantitative & Time Series
+pandas
+numpy<2
+scipy
+statsmodels
+pmdarima
+prophet
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Financial & Market Data
+yfinance
+ccxt
+
+# APIs & Async Data
+requests
+aiohttp
+websockets
+beautifulsoup4
+
+# NLP & AI Integration
+openai
+anthropic
+nltk
+spacy
+sentence-transformers
+
+# Utilities
+python-dotenv
+tqdm
+joblib
+pydantic
+uvicorn
+streamlit
+flask
+psutil
+catboost
+Pillow
+pyyaml
+websocket
+websocket-client
+websocket-client
+autoflake
+autopep8
+flake8
+mypy
+werkzeug
