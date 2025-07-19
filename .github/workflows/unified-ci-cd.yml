@@ -47,6 +47,29 @@ jobs:
         # Copy main file to app.py
         cp mltrainer_unified_chat.py app.py
         
+        # Create README with HF config
+        cat > README.md << 'EOF'
+---
+title: MLTrainer3
+emoji: 📈
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+sdk_version: 1.28.0
+app_file: app.py
+pinned: false
+---
+
+# MLTrainer3
+AI-powered trading system with 140+ models for institutional-grade analysis.
+
+## Features
+- Real-time market analysis
+- Multiple trading strategies  
+- Risk management
+- Portfolio optimization
+EOF
+        
         # Use HF CLI to upload files directly
         huggingface-cli upload hgw734/mltrainer3 . . --repo-type=space --token=$HF_TOKEN
         
