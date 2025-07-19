@@ -57,7 +57,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         
         # Add HF remote (replace YOUR_HF_USERNAME with your actual username)
-        git remote add hf https://hgw734:$HF_TOKEN@huggingface.co/spaces/YOUR_HF_USERNAME/mltrainer3 || true
+        git remote add hf https://hgw734:$HF_TOKEN@huggingface.co/spaces/hgw734/mltrainer3 || true
         
         # Create a temporary branch for HF
         git checkout -b hf-deploy
