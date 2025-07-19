@@ -197,24 +197,24 @@ def init_components():
                                                                 st.metric("Active Trials", len(active_trials))
 
                                                                 for trial in active_trials[:3]:  # Show top 3
-                                                                with st.container():
-                                                                    col1, col2 = st.columns([3, 1])
-                                                                    with col1:
-                                                                        st.caption(f"**{trial['trial_id']}**")
-                                                                        progress = trial.get("progress", {})
-                                                                        st.progress(
-                                                                        progress.get("percentage", 0) / 100,
-                                                                        text=f"{progress.get('completed', 0)}/{progress.get('total', 0)} steps",
-                                                                        )
+                                                                    with st.container():
+                                                                        col1, col2 = st.columns([3, 1])
+                                                                        with col1:
+                                                                            st.caption(f"**{trial['trial_id']}**")
+                                                                            progress = trial.get("progress", {})
+                                                                            st.progress(
+                                                                                progress.get("percentage", 0) / 100,
+                                                                                text=f"{progress.get('completed', 0)}/{progress.get('total', 0)} steps",
+                                                                            )
                                                                         with col2:
                                                                             if trial["status"] == "pending_approval":
                                                                                 if st.button("✓", key=f"approve_{trial['trial_id']}"):
                                                                                     components["background_manager"].approve_trial(trial["trial_id"])
                                                                                     st.rerun()
-                                                                                    else:
-                                                                                        st.info("No active trials")
+                                                            else:
+                                                                st.info("No active trials")
 
-                                                                                        st.divider()
+                                                            st.divider()
 
                                                                                         # Trading Recommendations Section
                                                                                         st.subheader("💡 Trading Recommendations")
