@@ -63,7 +63,7 @@ jobs:
         
         # Login to HF
         echo "Logging in to Hugging Face..."
-        huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential
+        huggingface-cli login --token "$HF_TOKEN"
         
         # Clone HF space
         echo "Cloning HF space..."
