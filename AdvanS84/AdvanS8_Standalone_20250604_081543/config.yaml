@@ -1,0 +1,83 @@
+# Meta-Enhanced TPE-ML Trading System Configuration
+
+# Stock Universe - Top 8 tech stocks for momentum analysis
+universe:
+  - AAPL
+  - MSFT
+  - GOOGL
+  - NVDA
+  - TSLA
+  - META
+  - AMZN
+  - NFLX
+
+# Parameter Search Space for TPE Optimization
+param_space:
+  momentum_threshold:
+    min: 0.01
+    max: 0.08
+    description: "Minimum momentum required for entry signal"
+  
+  volume_multiplier:
+    min: 1.2
+    max: 3.0
+    description: "Volume spike requirement vs 20-day average"
+  
+  hold_period:
+    min: 8
+    max: 20
+    description: "Base holding period in days"
+  
+  adaptation_strength:
+    min: 0.1
+    max: 0.9
+    description: "Market regime adaptation intensity"
+  
+  risk_tolerance:
+    min: 0.015
+    max: 0.045
+    description: "Maximum ATR percentage for position sizing"
+
+# Optimization Settings
+optimization:
+  trials: 30
+  objective: "sharpe_enhanced"
+  validation_split: 0.3
+
+# Data Settings
+data:
+  start_date: "2022-01-01"
+  end_date: "2024-11-30"
+  polygon_api_required: true
+  fred_api_key: "c2a2b890bd1ea280e5786eafabecafc5"
+
+# ML Model Settings
+ml_models:
+  exit_predictor:
+    type: "xgboost_fallback_rf"
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+  
+  lstm_model:
+    sequence_length: 10
+    hidden_units: 50
+    dropout_rate: 0.2
+
+# Market Regime Classification
+regime_detection:
+  vix_thresholds:
+    low: 15
+    moderate: 25
+    high: 30
+  
+  adaptation_factors:
+    crisis_regime: 0.6
+    high_volatility: 0.8
+    low_volatility: 1.2
+
+# Performance Tracking
+performance:
+  benchmark: "SPY"
+  risk_free_rate: 0.02
+  transaction_costs: 0.001

@@ -1,0 +1,226 @@
+{
+  "AAPL": {
+    "symbol": "AAPL",
+    "data_period": "2024-04-29 to 2025-05-30",
+    "strategies": {
+      "8_day_fixed": {
+        "total_trades": 2,
+        "win_rate": 0.5,
+        "avg_return": -0.0007217330986894446,
+        "avg_winner": 0.004779145546705193,
+        "avg_loser": -0.006222611744084082,
+        "avg_missed_opportunity": 0.08547784253126349,
+        "avg_winner_missed_opp": 0.12818295378110892,
+        "total_missed_value": 0.17095568506252698,
+        "avg_days_held": 8.0,
+        "max_return": 0.004779145546705193,
+        "min_return": -0.006222611744084082,
+        "opportunity_cost": 1.0085154109069105
+      },
+      "15_day_fixed": {
+        "total_trades": 2,
+        "win_rate": 0.5,
+        "avg_return": 0.0333332328502318,
+        "avg_winner": 0.06951484431571328,
+        "avg_loser": -0.0028483786152496814,
+        "avg_missed_opportunity": 0.04957015406674396,
+        "avg_winner_missed_opp": 0.05989618596253659,
+        "total_missed_value": 0.09914030813348793,
+        "avg_days_held": 15.0,
+        "max_return": 0.06951484431571328,
+        "min_return": -0.0028483786152496814,
+        "opportunity_cost": 0.5979267664466636
+      },
+      "momentum_based": {
+        "total_trades": 2,
+        "win_rate": 0.5,
+        "avg_return": 0.002970084805622303,
+        "avg_winner": 0.034467776973207756,
+        "avg_loser": -0.02852760736196315,
+        "avg_missed_opportunity": 0.08125976623715603,
+        "avg_winner_missed_opp": 0.09580475057165524,
+        "total_missed_value": 0.16251953247431206,
+        "avg_days_held": 8.0,
+        "max_return": 0.034467776973207756,
+        "min_return": -0.02852760736196315,
+        "opportunity_cost": 0.9647383348201118
+      },
+      "trailing_stop": {
+        "total_trades": 2,
+        "win_rate": 0.5,
+        "avg_return": 0.023755809938638524,
+        "avg_winner": 0.056964260064389975,
+        "avg_loser": -0.009452640187112931,
+        "avg_missed_opportunity": 0.07323409757400368,
+        "avg_winner_missed_opp": 0.0495083182281912,
+        "total_missed_value": 0.14646819514800735,
+        "avg_days_held": 29.0,
+        "max_return": 0.056964260064389975,
+        "min_return": -0.009452640187112931,
+        "opportunity_cost": 0.7550692587727021
+      }
+    },
+    "recommendation": "15_day_fixed"
+  },
+  "NVDA": {
+    "symbol": "NVDA",
+    "data_period": "2024-04-29 to 2025-05-30",
+    "strategies": {
+      "8_day_fixed": {
+        "total_trades": 1,
+        "win_rate": 1.0,
+        "avg_return": 0.0011822077730160824,
+        "avg_winner": 0.0011822077730160824,
+        "avg_loser": 0,
+        "avg_missed_opportunity": 0.02723247232472323,
+        "avg_winner_missed_opp": 0.02723247232472323,
+        "total_missed_value": 0.02723247232472323,
+        "avg_days_held": 8.0,
+        "max_return": 0.0011822077730160824,
+        "min_return": 0.0011822077730160824,
+        "opportunity_cost": 0.958394471838163
+      },
+      "15_day_fixed": null,
+      "momentum_based": null,
+      "trailing_stop": null
+    },
+    "recommendation": "8_day_fixed"
+  },
+  "TSLA": {
+    "symbol": "TSLA",
+    "data_period": "2024-04-29 to 2025-05-30",
+    "strategies": {
+      "8_day_fixed": {
+        "total_trades": 5,
+        "win_rate": 0.6,
+        "avg_return": -0.019408325916957438,
+        "avg_winner": 0.06747964440715089,
+        "avg_loser": -0.1497402814031199,
+        "avg_missed_opportunity": 0.28295152840842414,
+        "avg_winner_missed_opp": 0.2746673647294736,
+        "total_missed_value": 1.4147576420421206,
+        "avg_days_held": 8.0,
+        "max_return": 0.09245005621378534,
+        "min_return": -0.16904976747414446,
+        "opportunity_cost": 1.0736438114642166
+      },
+      "15_day_fixed": {
+        "total_trades": 5,
+        "win_rate": 0.2,
+        "avg_return": -0.04991396647808668,
+        "avg_winner": 0.111668015690181,
+        "avg_loser": -0.09030946202015361,
+        "avg_missed_opportunity": 0.306767269498267,
+        "avg_winner_missed_opp": 0.3438068834187461,
+        "total_missed_value": 1.533836347491335,
+        "avg_days_held": 15.0,
+        "max_return": 0.111668015690181,
+        "min_return": -0.11810231137641415,
+        "opportunity_cost": 1.194328692258106
+      },
+      "momentum_based": {
+        "total_trades": 5,
+        "win_rate": 0.6,
+        "avg_return": -0.002668940722119789,
+        "avg_winner": 0.09537861973188029,
+        "avg_loser": -0.1497402814031199,
+        "avg_missed_opportunity": 0.2294605930384582,
+        "avg_winner_missed_opp": 0.18551580577953045,
+        "total_missed_value": 1.147302965192291,
+        "avg_days_held": 6.4,
+        "max_return": 0.1383723947072559,
+        "min_return": -0.16904976747414446,
+        "opportunity_cost": 1.0117682493815823
+      },
+      "trailing_stop": {
+        "total_trades": 5,
+        "win_rate": 0.2,
+        "avg_return": -0.025278254851558983,
+        "avg_winner": 0.2140751992672327,
+        "avg_loser": -0.0851166183812569,
+        "avg_missed_opportunity": 0.23913480299182743,
+        "avg_winner_missed_opp": 0.09804156929560053,
+        "total_missed_value": 1.1956740149591372,
+        "avg_days_held": 16.4,
+        "max_return": 0.2140751992672327,
+        "min_return": -0.11999999999999998,
+        "opportunity_cost": 1.118201921200837
+      }
+    },
+    "recommendation": "momentum_based"
+  },
+  "MSFT": {
+    "symbol": "MSFT",
+    "data_period": "2024-04-29 to 2025-05-30",
+    "strategies": {
+      "8_day_fixed": null,
+      "15_day_fixed": null,
+      "momentum_based": null,
+      "trailing_stop": null
+    },
+    "recommendation": null
+  },
+  "GOOGL": {
+    "symbol": "GOOGL",
+    "data_period": "2024-04-29 to 2025-05-30",
+    "strategies": {
+      "8_day_fixed": {
+        "total_trades": 5,
+        "win_rate": 1.0,
+        "avg_return": 0.03226604340468787,
+        "avg_winner": 0.03226604340468787,
+        "avg_loser": 0,
+        "avg_missed_opportunity": 0.05850187199574308,
+        "avg_winner_missed_opp": 0.05850187199574308,
+        "total_missed_value": 0.2925093599787154,
+        "avg_days_held": 8.0,
+        "max_return": 0.04553425651569209,
+        "min_return": 0.013876153799132039,
+        "opportunity_cost": 0.6445214890928885
+      },
+      "15_day_fixed": {
+        "total_trades": 4,
+        "win_rate": 0.75,
+        "avg_return": 0.016997820553370582,
+        "avg_winner": 0.023376925764214535,
+        "avg_loser": -0.002139495079161283,
+        "avg_missed_opportunity": 0.0798968173033007,
+        "avg_winner_missed_opp": 0.06899743899853637,
+        "total_missed_value": 0.3195872692132028,
+        "avg_days_held": 15.0,
+        "max_return": 0.038412291933418725,
+        "min_return": -0.002139495079161283,
+        "opportunity_cost": 0.8245741877015512
+      },
+      "momentum_based": {
+        "total_trades": 4,
+        "win_rate": 1.0,
+        "avg_return": 0.032593921073733205,
+        "avg_winner": 0.032593921073733205,
+        "avg_loser": 0,
+        "avg_missed_opportunity": 0.0659197258905557,
+        "avg_winner_missed_opp": 0.0659197258905557,
+        "total_missed_value": 0.2636789035622228,
+        "avg_days_held": 6.0,
+        "max_return": 0.06106997717530479,
+        "min_return": 0.002200623509994408,
+        "opportunity_cost": 0.6691430874998621
+      },
+      "trailing_stop": {
+        "total_trades": 4,
+        "win_rate": 0.75,
+        "avg_return": 0.012975654986592595,
+        "avg_winner": 0.025872405131091014,
+        "avg_loser": -0.025714595446902664,
+        "avg_missed_opportunity": 0.07958231454998393,
+        "avg_winner_missed_opp": 0.05336404857385,
+        "total_missed_value": 0.31832925819993574,
+        "avg_days_held": 29.0,
+        "max_return": 0.037361921853471605,
+        "min_return": -0.025714595446902664,
+        "opportunity_cost": 0.8598105052265117
+      }
+    },
+    "recommendation": "8_day_fixed"
+  }
+}

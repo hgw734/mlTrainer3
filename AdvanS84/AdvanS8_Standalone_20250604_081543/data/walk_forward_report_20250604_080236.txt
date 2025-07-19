@@ -1,0 +1,87 @@
+
+COMPREHENSIVE WALK FORWARD OPTIMIZATION REPORT
+============================================================
+
+ANALYSIS OVERVIEW:
+- Total Periods Analyzed: 13
+- Average Test Sharpe Ratio: 0.0473
+- Sharpe Standard Deviation: 0.3186
+- Positive Performance Periods: 7/13
+- Consistency Ratio: 0.538
+
+DEGRADATION ANALYSIS:
+- Average Optimization-to-Test Degradation: 0.1282
+- Degradation Standard Deviation: 0.3664
+
+STATISTICAL SIGNIFICANCE:
+- Performance Consistency: 53.8%
+- Data Integrity Status: VERIFIED
+
+PERIOD-BY-PERIOD BREAKDOWN:
+
+Period 1: 2022-06-05 to 2023-02-11 → 2023-02-12 to 2023-04-15
+  Optimization Sharpe: -0.0689
+  Test Sharpe: 0.1873
+  Degradation: -0.2562
+
+Period 2: 2022-08-07 to 2023-04-15 → 2023-04-16 to 2023-06-17
+  Optimization Sharpe: 0.1029
+  Test Sharpe: -0.2216
+  Degradation: 0.3245
+
+Period 3: 2022-10-09 to 2023-06-17 → 2023-06-18 to 2023-08-19
+  Optimization Sharpe: 0.0881
+  Test Sharpe: 0.7675
+  Degradation: -0.6794
+
+Period 4: 2022-12-11 to 2023-08-19 → 2023-08-20 to 2023-10-21
+  Optimization Sharpe: 0.1989
+  Test Sharpe: -0.1193
+  Degradation: 0.3182
+
+Period 5: 2023-02-12 to 2023-10-21 → 2023-10-22 to 2023-12-23
+  Optimization Sharpe: 0.1480
+  Test Sharpe: 0.1800
+  Degradation: -0.0320
+
+Period 6: 2023-04-16 to 2023-12-23 → 2023-12-24 to 2024-02-24
+  Optimization Sharpe: 0.1418
+  Test Sharpe: 0.1201
+  Degradation: 0.0217
+
+Period 7: 2023-06-18 to 2024-02-24 → 2024-02-25 to 2024-04-27
+  Optimization Sharpe: 0.2757
+  Test Sharpe: 0.4564
+  Degradation: -0.1807
+
+Period 8: 2023-08-20 to 2024-04-27 → 2024-04-28 to 2024-06-29
+  Optimization Sharpe: 0.3668
+  Test Sharpe: -0.4097
+  Degradation: 0.7765
+
+Period 9: 2023-10-22 to 2024-06-29 → 2024-06-30 to 2024-08-31
+  Optimization Sharpe: 0.2982
+  Test Sharpe: 0.0637
+  Degradation: 0.2345
+
+Period 10: 2023-12-24 to 2024-08-31 → 2024-09-01 to 2024-11-02
+  Optimization Sharpe: 0.1741
+  Test Sharpe: -0.0508
+  Degradation: 0.2249
+
+Period 11: 2024-02-25 to 2024-11-02 → 2024-11-03 to 2025-01-04
+  Optimization Sharpe: 0.1707
+  Test Sharpe: 0.2335
+  Degradation: -0.0628
+
+Period 12: 2024-04-28 to 2025-01-04 → 2025-01-05 to 2025-03-08
+  Optimization Sharpe: 0.2033
+  Test Sharpe: -0.2649
+  Degradation: 0.4682
+
+Period 13: 2024-06-30 to 2025-03-08 → 2025-03-09 to 2025-05-10
+  Optimization Sharpe: 0.1824
+  Test Sharpe: -0.3271
+  Degradation: 0.5095
+
+Analysis completed: 2025-06-04T08:02:36.433656

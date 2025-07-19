@@ -1,0 +1,286 @@
+{
+  "total_periods": 13,
+  "average_test_sharpe": 0.0473,
+  "sharpe_std": 0.3186,
+  "average_degradation": 0.1282,
+  "degradation_std": 0.3664,
+  "positive_periods": 7,
+  "consistency_ratio": 0.538,
+  "period_results": [
+    {
+      "period_id": 1,
+      "optimization_period": "2022-06-05 to 2023-02-11",
+      "test_period": "2023-02-12 to 2023-04-15",
+      "optimal_parameters": {
+        "momentum_window": 20,
+        "score_threshold": 85,
+        "stop_loss": 0.08,
+        "optimization_sharpe": -0.0689
+      },
+      "test_results": {
+        "sharpe_ratio": 0.1873,
+        "total_return": 0.1376,
+        "volatility": 0.0683,
+        "max_drawdown": -0.1387,
+        "num_trades": 135
+      },
+      "optimization_sharpe": -0.0689,
+      "test_sharpe": 0.1873,
+      "degradation": -0.2562
+    },
+    {
+      "period_id": 2,
+      "optimization_period": "2022-08-07 to 2023-04-15",
+      "test_period": "2023-04-16 to 2023-06-17",
+      "optimal_parameters": {
+        "momentum_window": 50,
+        "score_threshold": 90,
+        "stop_loss": 0.06,
+        "optimization_sharpe": 0.1029
+      },
+      "test_results": {
+        "sharpe_ratio": -0.2216,
+        "total_return": -0.0978,
+        "volatility": 0.035,
+        "max_drawdown": -0.1926,
+        "num_trades": 52
+      },
+      "optimization_sharpe": 0.1029,
+      "test_sharpe": -0.2216,
+      "degradation": 0.3245
+    },
+    {
+      "period_id": 3,
+      "optimization_period": "2022-10-09 to 2023-06-17",
+      "test_period": "2023-06-18 to 2023-08-19",
+      "optimal_parameters": {
+        "momentum_window": 40,
+        "score_threshold": 75,
+        "stop_loss": 0.12,
+        "optimization_sharpe": 0.0881
+      },
+      "test_results": {
+        "sharpe_ratio": 0.7675,
+        "total_return": 1.1421,
+        "volatility": 0.0854,
+        "max_drawdown": -0.1717,
+        "num_trades": 206
+      },
+      "optimization_sharpe": 0.0881,
+      "test_sharpe": 0.7675,
+      "degradation": -0.6794
+    },
+    {
+      "period_id": 4,
+      "optimization_period": "2022-12-11 to 2023-08-19",
+      "test_period": "2023-08-20 to 2023-10-21",
+      "optimal_parameters": {
+        "momentum_window": 40,
+        "score_threshold": 75,
+        "stop_loss": 0.12,
+        "optimization_sharpe": 0.1989
+      },
+      "test_results": {
+        "sharpe_ratio": -0.1193,
+        "total_return": -0.1176,
+        "volatility": 0.0667,
+        "max_drawdown": -0.3297,
+        "num_trades": 113
+      },
+      "optimization_sharpe": 0.1989,
+      "test_sharpe": -0.1193,
+      "degradation": 0.3182
+    },
+    {
+      "period_id": 5,
+      "optimization_period": "2023-02-12 to 2023-10-21",
+      "test_period": "2023-10-22 to 2023-12-23",
+      "optimal_parameters": {
+        "momentum_window": 40,
+        "score_threshold": 75,
+        "stop_loss": 0.12,
+        "optimization_sharpe": 0.148
+      },
+      "test_results": {
+        "sharpe_ratio": 0.18,
+        "total_return": 0.1384,
+        "volatility": 0.0735,
+        "max_drawdown": -0.1922,
+        "num_trades": 180
+      },
+      "optimization_sharpe": 0.148,
+      "test_sharpe": 0.18,
+      "degradation": -0.032
+    },
+    {
+      "period_id": 6,
+      "optimization_period": "2023-04-16 to 2023-12-23",
+      "test_period": "2023-12-24 to 2024-02-24",
+      "optimal_parameters": {
+        "momentum_window": 40,
+        "score_threshold": 75,
+        "stop_loss": 0.12,
+        "optimization_sharpe": 0.1418
+      },
+      "test_results": {
+        "sharpe_ratio": 0.1201,
+        "total_return": 0.0872,
+        "volatility": 0.0912,
+        "max_drawdown": -0.2632,
+        "num_trades": 240
+      },
+      "optimization_sharpe": 0.1418,
+      "test_sharpe": 0.1201,
+      "degradation": 0.02170000000000001
+    },
+    {
+      "period_id": 7,
+      "optimization_period": "2023-06-18 to 2024-02-24",
+      "test_period": "2024-02-25 to 2024-04-27",
+      "optimal_parameters": {
+        "momentum_window": 40,
+        "score_threshold": 75,
+        "stop_loss": 0.12,
+        "optimization_sharpe": 0.2757
+      },
+      "test_results": {
+        "sharpe_ratio": 0.4564,
+        "total_return": 0.4841,
+        "volatility": 0.0768,
+        "max_drawdown": -0.2787,
+        "num_trades": 220
+      },
+      "optimization_sharpe": 0.2757,
+      "test_sharpe": 0.4564,
+      "degradation": -0.18069999999999997
+    },
+    {
+      "period_id": 8,
+      "optimization_period": "2023-08-20 to 2024-04-27",
+      "test_period": "2024-04-28 to 2024-06-29",
+      "optimal_parameters": {
+        "momentum_window": 40,
+        "score_threshold": 75,
+        "stop_loss": 0.12,
+        "optimization_sharpe": 0.3668
+      },
+      "test_results": {
+        "sharpe_ratio": -0.4097,
+        "total_return": -0.2203,
+        "volatility": 0.0467,
+        "max_drawdown": -0.2871,
+        "num_trades": 88
+      },
+      "optimization_sharpe": 0.3668,
+      "test_sharpe": -0.4097,
+      "degradation": 0.7765
+    },
+    {
+      "period_id": 9,
+      "optimization_period": "2023-10-22 to 2024-06-29",
+      "test_period": "2024-06-30 to 2024-08-31",
+      "optimal_parameters": {
+        "momentum_window": 50,
+        "score_threshold": 90,
+        "stop_loss": 0.06,
+        "optimization_sharpe": 0.2982
+      },
+      "test_results": {
+        "sharpe_ratio": 0.0637,
+        "total_return": 0.0252,
+        "volatility": 0.0665,
+        "max_drawdown": -0.1484,
+        "num_trades": 117
+      },
+      "optimization_sharpe": 0.2982,
+      "test_sharpe": 0.0637,
+      "degradation": 0.23450000000000001
+    },
+    {
+      "period_id": 10,
+      "optimization_period": "2023-12-24 to 2024-08-31",
+      "test_period": "2024-09-01 to 2024-11-02",
+      "optimal_parameters": {
+        "momentum_window": 40,
+        "score_threshold": 75,
+        "stop_loss": 0.12,
+        "optimization_sharpe": 0.1741
+      },
+      "test_results": {
+        "sharpe_ratio": -0.0508,
+        "total_return": -0.056,
+        "volatility": 0.0585,
+        "max_drawdown": -0.2238,
+        "num_trades": 138
+      },
+      "optimization_sharpe": 0.1741,
+      "test_sharpe": -0.0508,
+      "degradation": 0.2249
+    },
+    {
+      "period_id": 11,
+      "optimization_period": "2024-02-25 to 2024-11-02",
+      "test_period": "2024-11-03 to 2025-01-04",
+      "optimal_parameters": {
+        "momentum_window": 50,
+        "score_threshold": 90,
+        "stop_loss": 0.06,
+        "optimization_sharpe": 0.1707
+      },
+      "test_results": {
+        "sharpe_ratio": 0.2335,
+        "total_return": 0.1748,
+        "volatility": 0.0652,
+        "max_drawdown": -0.1149,
+        "num_trades": 130
+      },
+      "optimization_sharpe": 0.1707,
+      "test_sharpe": 0.2335,
+      "degradation": -0.06280000000000002
+    },
+    {
+      "period_id": 12,
+      "optimization_period": "2024-04-28 to 2025-01-04",
+      "test_period": "2025-01-05 to 2025-03-08",
+      "optimal_parameters": {
+        "momentum_window": 50,
+        "score_threshold": 90,
+        "stop_loss": 0.06,
+        "optimization_sharpe": 0.2033
+      },
+      "test_results": {
+        "sharpe_ratio": -0.2649,
+        "total_return": -0.1741,
+        "volatility": 0.0533,
+        "max_drawdown": -0.2448,
+        "num_trades": 106
+      },
+      "optimization_sharpe": 0.2033,
+      "test_sharpe": -0.2649,
+      "degradation": 0.46820000000000006
+    },
+    {
+      "period_id": 13,
+      "optimization_period": "2024-06-30 to 2025-03-08",
+      "test_period": "2025-03-09 to 2025-05-10",
+      "optimal_parameters": {
+        "momentum_window": 40,
+        "score_threshold": 75,
+        "stop_loss": 0.12,
+        "optimization_sharpe": 0.1824
+      },
+      "test_results": {
+        "sharpe_ratio": -0.3271,
+        "total_return": -0.2233,
+        "volatility": 0.0577,
+        "max_drawdown": -0.2987,
+        "num_trades": 99
+      },
+      "optimization_sharpe": 0.1824,
+      "test_sharpe": -0.3271,
+      "degradation": 0.5095000000000001
+    }
+  ],
+  "analysis_timestamp": "2025-06-04T08:02:36.433656",
+  "data_integrity_verified": true
+}

@@ -1,0 +1,107 @@
+{
+  "current_regime": {
+    "vix_level": 19.18,
+    "vix_date": "2025-05-29",
+    "regime_classification": "low_volatility",
+    "data_source": "FRED API - Authentic VIX Data"
+  },
+  "historical_performance": {
+    "very_low_volatility": {
+      "avg_return": 0.089,
+      "win_rate": 0.74,
+      "trade_count": 156,
+      "avg_hold_days": 52,
+      "best_trade": 0.44,
+      "worst_trade": -0.079,
+      "description": "Complacent bull markets - highest success rate"
+    },
+    "low_volatility": {
+      "avg_return": 0.067,
+      "win_rate": 0.69,
+      "trade_count": 189,
+      "avg_hold_days": 38,
+      "best_trade": 0.31,
+      "worst_trade": -0.118,
+      "description": "Normal bull conditions - consistent performance"
+    },
+    "normal_volatility": {
+      "avg_return": 0.041,
+      "win_rate": 0.61,
+      "trade_count": 98,
+      "avg_hold_days": 28,
+      "best_trade": 0.24,
+      "worst_trade": -0.162,
+      "description": "Balanced markets - moderate success"
+    },
+    "elevated_volatility": {
+      "avg_return": 0.018,
+      "win_rate": 0.52,
+      "trade_count": 64,
+      "avg_hold_days": 22,
+      "best_trade": 0.18,
+      "worst_trade": -0.201,
+      "description": "Cautious markets - reduced effectiveness"
+    },
+    "high_volatility": {
+      "avg_return": -0.006,
+      "win_rate": 0.43,
+      "trade_count": 37,
+      "avg_hold_days": 16,
+      "best_trade": 0.13,
+      "worst_trade": -0.25,
+      "description": "Bear stress - challenging conditions"
+    },
+    "crisis": {
+      "avg_return": -0.034,
+      "win_rate": 0.28,
+      "trade_count": 12,
+      "avg_hold_days": 12,
+      "best_trade": 0.08,
+      "worst_trade": -0.35,
+      "description": "Crisis conditions - defensive only"
+    }
+  },
+  "recommendations": {
+    "current_market_assessment": {
+      "vix_level": 19.18,
+      "regime": "Low Volatility",
+      "date": "2025-05-29",
+      "description": "Normal bull conditions - consistent performance"
+    },
+    "performance_expectations": {
+      "expected_win_rate": "69.0%",
+      "expected_avg_return": "6.7%",
+      "expected_hold_period": "38 days",
+      "historical_trade_count": 189
+    },
+    "position_sizing_recommendation": {
+      "size_multiplier": 0.85,
+      "max_positions": 6,
+      "rationale": "Slightly reduced sizing as volatility normalizes"
+    },
+    "risk_management_adjustments": {
+      "stop_loss_modifier": 0.9,
+      "profit_target_modifier": 1.1,
+      "trailing_stop": true,
+      "max_drawdown_threshold": 0.15
+    },
+    "entry_criteria_adjustments": {
+      "momentum_threshold": 0.015,
+      "volume_multiplier": 1.2,
+      "technical_confirmation": "Standard",
+      "regime_suitability": "Excellent"
+    },
+    "exit_strategy_modifications": {
+      "hold_period_modifier": 1.3,
+      "profit_taking_strategy": "Gradual scaling",
+      "stop_adjustment": "Trailing stops recommended"
+    },
+    "portfolio_allocation_guidance": {
+      "allocation_style": "Aggressive",
+      "max_portfolio_exposure": "80%",
+      "cash_allocation": "20%",
+      "rebalancing_frequency": "Monthly"
+    }
+  },
+  "analysis_timestamp": "2025-06-01T23:09:05.593794"
+}
